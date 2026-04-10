@@ -1,0 +1,14 @@
+---
+description: Next.js App Router and React conventions for TS/TSX source
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Next.js / React
+
+- Use the **App Router** layout: `app/` (or `src/app/`) with `page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx` as appropriate.
+- Prefer **named exports** for components when the file already follows that pattern; stay consistent with neighboring files.
+- **Data fetching**: Prefer server-side fetching in Server Components; use `fetch` caching defaults intentionally. For client mutations, use patterns already present in the repo (e.g. Server Actions, route handlers).
+- **Metadata**: Use the Metadata API (`export const metadata` or `generateMetadata`) for SEO and social cards instead of ad-hoc `<head>` manipulation where possible.
+- **Imports**: Use path aliases if `tsconfig` defines them; otherwise relative imports — match existing style.
+- Run **`yarn lint`** and **`yarn build`** (or project-documented equivalents) after non-trivial changes; see skill `nextjs-change-checklist`.

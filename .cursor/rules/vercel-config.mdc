@@ -1,0 +1,13 @@
+---
+description: Vercel deployment configuration and env handling
+globs: "**/vercel.json"
+alwaysApply: false
+---
+
+# Vercel
+
+- **Default**: Next.js on Vercel should work with **zero or minimal** `vercel.json`. Add config only for headers, redirects, rewrites, or regions when product needs require it.
+- **Environment variables**: Define secrets in the Vercel project (Production / Preview / Development). Reference them in Next.js via `process.env.NEXT_PUBLIC_*` only for values that must be public in the browser.
+- **Build command**: Should match CI (`yarn build` or repo standard). Output: Next.js default (no custom `dist` unless documented).
+- Do not commit **`.vercel` project linking** if the team treats it as personal; follow `.gitignore` conventions already in the repo.
+- Broader release/check steps: skill **`vercel-deploy`**.

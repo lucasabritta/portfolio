@@ -1,0 +1,11 @@
+---
+description: .dockerignore patterns for smaller builds and fewer cache busts
+globs: "**/.dockerignore"
+alwaysApply: false
+---
+
+# .dockerignore
+
+- Exclude: `.git`, `**/.next`, `**/node_modules`, `**/.env*`, editor folders, coverage output, and large assets not needed for `yarn build`.
+- Do **not** ignore files required for the Docker build context (e.g. `package.json`, `yarn.lock`, `next.config.*`, source under `app/` or `src/`).
+- After edits, run a **compose build** to ensure the image still has all files needed for `next build`.

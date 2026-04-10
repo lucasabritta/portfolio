@@ -1,0 +1,15 @@
+---
+description: Dockerfile conventions for local and CI images
+globs: "**/Dockerfile*"
+alwaysApply: false
+---
+
+# Docker (Dockerfile)
+
+- **Goal**: Reproducible local runs; parity with CI where practical.
+- Prefer **multi-stage** builds for Next.js: deps → build → minimal runtime image.
+- Do not bake **secrets** into images. Use build args only for non-sensitive values; runtime config via env (compose `env_file`, Vercel env, etc.).
+- **`.dockerignore`**: Exclude `.git`, `node_modules`, `.next`, and local env files to keep context small and builds fast.
+- Expose the **port** documented in README/AGENTS; bind Next to `0.0.0.0` when serving inside containers.
+- For compose services and commands, use skill **`docker-local-dev`**.
+
