@@ -7,8 +7,8 @@ import { CvPdfDocument } from "@/components/cv-pdf-document";
 export const runtime = "nodejs";
 
 export async function GET() {
-  const pdfBuffer = await renderToBuffer(createElement(CvPdfDocument));
-  const pdfBytes = new Uint8Array(pdfBuffer);
+  const generatedPdf = await renderToBuffer(createElement(CvPdfDocument));
+  const pdfBytes = new Uint8Array(generatedPdf);
 
   return new NextResponse(pdfBytes, {
     headers: {
