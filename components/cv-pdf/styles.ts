@@ -57,10 +57,11 @@ export const cvPdfStyles = StyleSheet.create({
   },
   externalLink: {
     color: "#1155cc",
-    textDecoration: "none",
+    textDecoration: "underline",
   },
   dividerLine: {
     borderTop: "1 solid #9ca3af",
+    alignSelf: "flex-start",
     marginBottom: 8,
     marginTop: 6,
     width: 16,
@@ -71,16 +72,28 @@ export const cvPdfStyles = StyleSheet.create({
     fontWeight: 700,
     marginBottom: 6,
   },
+  workHistoryTitle: {
+    marginBottom: 10,
+  },
   leftEntry: {
     marginBottom: 10,
   },
   leftMain: {
     fontSize: 10,
     fontWeight: 700,
+    marginTop: 4,
   },
   leftSub: {
-    color: "#4b5563",
+    color: "#666666",
     fontSize: 9,
+  },
+  degreeText: {
+    fontSize: 10,
+    marginTop: 8,
+  },
+  degreePrefix: {
+    fontSize: 10,
+    fontWeight: 700,
   },
   paragraph: {
     fontSize: 10,
@@ -90,14 +103,15 @@ export const cvPdfStyles = StyleSheet.create({
     marginBottom: 3,
   },
   summaryDivider: {
-    borderTop: "1 solid #9ca3af",
+    borderTop: "2 solid #000000",
+    alignSelf: "flex-start",
     marginBottom: 8,
     marginTop: 6,
-    width: 16,
+    width: "100%",
   },
   bulletRow: {
     flexDirection: "row",
-    marginBottom: 4,
+    marginBottom: 2,
     paddingLeft: 17,
   },
   bullet: {
@@ -119,12 +133,12 @@ export const cvPdfStyles = StyleSheet.create({
     marginBottom: 2,
   },
   rightMeta: {
-    color: "#4b5563",
+    color: "#666666",
     fontSize: 9,
     marginBottom: 4,
   },
   workSection: {
-    marginTop: 14,
+    marginTop: 22,
   },
   /** Space beside Professional Summary so Education aligns with Work History (reference layout). */
   leftSections: {
@@ -136,5 +150,9 @@ export const cvPdfStyles = StyleSheet.create({
   certificationText: {
     fontSize: 10,
     marginBottom: 2,
+  },
+  projectLink: {
+    fontSize: 8,
+    lineHeight: 1.2,
   },
 });

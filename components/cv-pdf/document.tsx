@@ -33,7 +33,7 @@ export function CvPdfDocument() {
 
             <View style={cvPdfStyles.workSection}>
               <View style={cvPdfStyles.summaryDivider} />
-              <Text style={cvPdfStyles.sectionTitle}>Work History</Text>
+              <Text style={[cvPdfStyles.sectionTitle, cvPdfStyles.workHistoryTitle]}>Work History</Text>
               {firstEntry ? <WorkEntry entry={firstEntry} /> : null}
               {secondEntry ? <WorkEntry entry={secondEntry} /> : null}
               {thirdEntry ? <WorkEntry entry={thirdEntry} showAchievements={false} /> : null}
