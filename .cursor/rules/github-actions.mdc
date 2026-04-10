@@ -1,0 +1,14 @@
+---
+description: GitHub Actions CI conventions
+globs: ".github/workflows/**/*"
+alwaysApply: false
+---
+
+# GitHub Actions
+
+- Use **pinned or versioned** actions where the repo already does; match existing YAML style (indentation, job naming).
+- CI should validate the **same package manager** as local dev: **yarn** (`cache: yarn` or official setup patterns).
+- Typical stages: install → **lint** → **typecheck** (if configured) → **test** (if present) → **build**. Align with `package.json` scripts.
+- Prefer **Node LTS** or the version specified in `package.json` / `.nvmrc` / `.node-version` if present.
+- Do not disable failing steps to pass CI; fix the underlying issue or split workflows with clear ownership.
+- For workflow debugging steps, see skill **`ci-github-actions`**.

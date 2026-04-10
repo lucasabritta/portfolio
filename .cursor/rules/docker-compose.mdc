@@ -1,0 +1,13 @@
+---
+description: Compose file conventions for the local Docker stack
+globs: "**/compose*.yml"
+alwaysApply: false
+---
+
+# Docker Compose
+
+- Define **services** with clear names (`web`, `app`, `db`); document the **default port** in `AGENTS.md` or `README.md` when adding services.
+- Use **`env_file: .env.local`** (or repo-standard env file) only for non-committed templates; never commit real secrets.
+- Prefer **healthchecks** for services that the app depends on (DB, cache) so `depends_on` with condition is meaningful where compose version supports it.
+- Keep **volumes** minimal; avoid mounting the whole repo over `node_modules` unless the team standard requires it for hot reload.
+- After edits, verify with the **`docker-local-dev`** skill (build, up, logs).
