@@ -22,7 +22,7 @@ export const cvPdfWorkHistoryStyles = {
   },
   bullet: {
     color: "#000000",
-    fontFamily: "ArialMT",
+    fontFamily: "Lato",
     fontSize: 10,
     marginRight: 5,
     width: 11,

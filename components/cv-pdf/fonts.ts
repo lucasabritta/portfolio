@@ -32,9 +32,4 @@ Font.register({
   ],
 });
 
-Font.register({
-  family: "ArialMT",
-  src: "C:/Windows/Fonts/arial.ttf",
-});
-
 Font.registerHyphenationCallback((word) => [word]);
