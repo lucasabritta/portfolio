@@ -78,9 +78,12 @@ Triggers on pushes to `main` and `master`, plus pull requests. Uses Node 22, Yar
 
 1. Import this repository in the [Vercel dashboard](https://vercel.com/new).
 2. Framework preset: **Next.js**. Install command: `yarn install`. Build command: `yarn build`. Output: default (Vercel handles Next.js).
-3. Set any required environment variables under **Project → Settings → Environment Variables** (this template does not require secrets for the static landing content).
+3. Enable **Analytics** and **Speed Insights** in the Vercel project dashboard if you want first-party traffic and performance reporting for deployed environments.
+4. Set any required environment variables under **Project → Settings → Environment Variables** (this template does not require secrets for the static landing content).
 
 Preview deployments are created automatically for pull requests when the Git integration is enabled.
+
+This repo includes `@vercel/analytics` and `@vercel/speed-insights` through a shared `components/observability.tsx` wrapper rendered from the root layout, so the integration stays centralized and automatically covers all routes. Metrics appear after a Vercel deployment receives traffic.
 
 ## Project layout
 
