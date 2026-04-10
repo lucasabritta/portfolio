@@ -12,7 +12,7 @@ Open only the document that matches the task.
 ## Rules
 
 - [`.cursor/rules/project-core.mdc`](.cursor/rules/project-core.mdc)
-- [`.cursor/rules/nextjs-react.mdc`](.cursor/rules/nextjs-react.mdc)
+- [`.cursor/rules/nextjs-react.mdc`](.cursor/rules/nextjs-react.mdc) - includes frontend view/logic/style separation and CV PDF styling constraints
 - [`.cursor/rules/docker-local.mdc`](.cursor/rules/docker-local.mdc)
 - [`.cursor/rules/docker-compose.mdc`](.cursor/rules/docker-compose.mdc)
 - [`.cursor/rules/dockerignore.mdc`](.cursor/rules/dockerignore.mdc)

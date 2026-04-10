@@ -64,7 +64,7 @@ docker compose run --rm web yarn lint
 ## Linting and tests
 
 - **Lint**: `yarn lint` uses the flat ESLint config from `eslint.config.mjs` (Next.js presets).
-- **Tests**: `yarn test` runs a small [Vitest](https://vitest.dev/) suite with [Testing Library](https://testing-library.com/) for a focused UI smoke test (`components/portfolio-hero.test.tsx`).
+- **Tests**: `yarn test` runs [Vitest](https://vitest.dev/) tests focused on extracted logic modules (for example: `*.test.ts` for helper modules under `app/` and `components/`).
 
 CI runs install, lint, typecheck, test, and build in that order.
 
@@ -88,7 +88,21 @@ This repo includes `@vercel/analytics` and `@vercel/speed-insights` through a sh
 ## Project layout
 
 - `app/` — App Router routes, layout, and global styles
-- `components/` — Shared UI (including the hero component covered by tests)
+- `components/` — Shared UI plus colocated logic and logic tests (`*.ts`, `*.test.ts`)
 - `public/` — Static assets
 - `Dockerfile` / `compose.yml` — Container workflows
 - `.github/workflows/` — CI
+
+## Frontend layering convention
+
+All frontend changes should keep a clear separation of responsibilities:
+
+- **View (`.tsx`)**: JSX markup and composition only.
+- **Logic (`.ts`)**: pure helpers, formatters, selectors, and assembly logic.
+- **Styles (`.css` / `.module.css`)**: web UI styling.
+
+For CV PDF generation (`components/cv-pdf/**`), keep this equivalent split:
+
+- **View (`.tsx`)** for react-pdf render trees (`Document`, `Page`, `View`, `Text`).
+- **Logic (`.ts`)** for pagination/data partition helpers.
+- **Styles (`styles.ts`)** with `@react-pdf/renderer` `StyleSheet` (do not replace with web CSS).

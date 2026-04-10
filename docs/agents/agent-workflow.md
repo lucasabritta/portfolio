@@ -18,6 +18,8 @@ Use this file for repository-specific working conventions.
 
 - Prefer small, focused changes.
 - Match nearby patterns before introducing new ones.
+- Keep frontend separation explicit: `.tsx` for views, `.ts` for logic, and `.css`/`.module.css` for web styles.
+- For `components/cv-pdf/**`, use react-pdf `StyleSheet` (`styles.ts`) instead of web CSS while still extracting reusable logic into `.ts` files.
 - Do not commit secrets; use Vercel or GitHub environment configuration for deploy-time values.
 
 ## Validation

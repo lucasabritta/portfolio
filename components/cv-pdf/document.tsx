@@ -1,6 +1,10 @@
 import { Document, Page, Text, View } from "@react-pdf/renderer";
 
 import "@/components/cv-pdf/fonts";
+import {
+  buildWorkEntryKey,
+  buildWorkHistoryPartitions,
+} from "@/components/cv-pdf/work-history";
 import { BulletList } from "@/components/cv-pdf/sections/bullet-list";
 import { LeftColumn } from "@/components/cv-pdf/sections/left-column";
 import { WorkEntry } from "@/components/cv-pdf/sections/work-entry";
@@ -8,12 +12,8 @@ import { cvPdfStyles } from "@/components/cv-pdf/styles";
 import { cvData } from "@/lib/cv-data";
 
 export function CvPdfDocument() {
-  const firstEntry = cvData.workHistory[0];
-  const secondEntry = cvData.workHistory[1];
-  const thirdEntry = cvData.workHistory[2];
-  const remainingEntries = cvData.workHistory.slice(3);
-
-  const summaryBullets = [...cvData.summaryHighlights];
+  const { firstEntry, secondEntry, thirdEntry, remainingEntries, summaryBullets } =
+    buildWorkHistoryPartitions(cvData);
 
   return (
     <Document
@@ -51,7 +51,7 @@ export function CvPdfDocument() {
               <BulletList items={thirdEntry.achievements} />
             ) : null}
             {remainingEntries.map((entry) => (
-              <WorkEntry key={`${entry.company}-${entry.role}-${entry.period}`} entry={entry} />
+              <WorkEntry key={buildWorkEntryKey(entry)} entry={entry} />
             ))}
           </View>
         </View>

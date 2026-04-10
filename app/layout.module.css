@@ -1,0 +1,11 @@
+.htmlRoot {
+  height: 100%;
+  scroll-behavior: smooth;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bodyRoot {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  min-height: 100%;
+}
