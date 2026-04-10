@@ -1,23 +1,34 @@
 import type { CvData, ExperienceEntry } from "@/lib/cv-data";
 
-type WorkHistoryPartitions = {
-  firstEntry: ExperienceEntry | undefined;
-  secondEntry: ExperienceEntry | undefined;
-  thirdEntry: ExperienceEntry | undefined;
+type FirstPageEntry = {
+  entry: ExperienceEntry;
+  showAchievements: boolean;
+};
+
+type WorkHistoryLayout = {
+  firstPageEntries: readonly FirstPageEntry[];
+  firstOverflowAchievements: readonly string[];
   remainingEntries: readonly ExperienceEntry[];
   summaryBullets: readonly string[];
 };
 
-export function buildWorkHistoryPartitions(cvData: CvData): WorkHistoryPartitions {
+export function buildWorkHistoryLayout(cvData: CvData): WorkHistoryLayout {
+  const firstPageEntries = cvData.workHistory.slice(0, 3).map((entry, index) => ({
+    entry,
+    showAchievements: index < 2,
+  }));
+  const finalFirstPageEntry = firstPageEntries[firstPageEntries.length - 1];
+
   return {
-    firstEntry: cvData.workHistory[0],
-    secondEntry: cvData.workHistory[1],
-    thirdEntry: cvData.workHistory[2],
+    firstPageEntries,
+    firstOverflowAchievements: finalFirstPageEntry?.showAchievements
+      ? []
+      : [...finalFirstPageEntry.entry.achievements],
     remainingEntries: cvData.workHistory.slice(3),
     summaryBullets: [...cvData.summaryHighlights],
   };
 }
 
-export function buildWorkEntryKey(entry: ExperienceEntry): string {
+export function buildPdfWorkEntryKey(entry: ExperienceEntry): string {
   return `${entry.company}-${entry.role}-${entry.period}`;
 }

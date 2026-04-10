@@ -1,19 +1,26 @@
-import { Document, Page, Text, View } from "@react-pdf/renderer";
+import { Document, Page, View } from "@react-pdf/renderer";
 
 import "@/components/cv-pdf/fonts";
 import {
-  buildWorkEntryKey,
-  buildWorkHistoryPartitions,
+  buildPdfWorkEntryKey,
+  buildWorkHistoryLayout,
 } from "@/components/cv-pdf/work-history";
 import { BulletList } from "@/components/cv-pdf/sections/bullet-list";
+import { ContactsSection } from "@/components/cv-pdf/sections/contacts-section";
 import { LeftColumn } from "@/components/cv-pdf/sections/left-column";
+import { SummarySection } from "@/components/cv-pdf/sections/summary-section";
 import { WorkEntry } from "@/components/cv-pdf/sections/work-entry";
+import { WorkHistorySection } from "@/components/cv-pdf/sections/work-history-section";
 import { cvPdfStyles } from "@/components/cv-pdf/styles";
 import { cvData } from "@/lib/cv-data";
 
 export function CvPdfDocument() {
-  const { firstEntry, secondEntry, thirdEntry, remainingEntries, summaryBullets } =
-    buildWorkHistoryPartitions(cvData);
+  const {
+    firstPageEntries,
+    firstOverflowAchievements,
+    remainingEntries,
+    summaryBullets,
+  } = buildWorkHistoryLayout(cvData);
 
   return (
     <Document
@@ -27,18 +34,14 @@ export function CvPdfDocument() {
         <View style={cvPdfStyles.row}>
           <LeftColumn cvData={cvData} />
           <View style={cvPdfStyles.rightColumn}>
-            <Text style={cvPdfStyles.sectionTitle}>Professional Summary</Text>
-            <Text style={cvPdfStyles.paragraph}>{cvData.summary}</Text>
-            <BulletList items={summaryBullets} />
-
-            <View style={cvPdfStyles.workSection}>
-              <View style={cvPdfStyles.summaryDivider} />
-              <Text style={[cvPdfStyles.sectionTitle, cvPdfStyles.workHistoryTitle]}>Work History</Text>
-              {firstEntry ? <WorkEntry entry={firstEntry} /> : null}
-              {secondEntry ? <WorkEntry entry={secondEntry} /> : null}
-              {thirdEntry ? <WorkEntry entry={thirdEntry} showAchievements={false} /> : null}
-              {thirdEntry ? <Text style={cvPdfStyles.achievementsTitle}>Key achievements:</Text> : null}
-            </View>
+            <SummarySection summary={cvData.summary} highlights={summaryBullets} />
+            <ContactsSection
+              phone={cvData.phone}
+              email={cvData.email}
+              location={cvData.location}
+              contactLinks={cvData.contactLinks}
+            />
+            <WorkHistorySection entries={firstPageEntries} />
           </View>
         </View>
       </Page>
@@ -47,11 +50,9 @@ export function CvPdfDocument() {
         <View style={cvPdfStyles.row}>
           <View style={cvPdfStyles.leftColumn} />
           <View style={cvPdfStyles.rightColumn}>
-            {thirdEntry && thirdEntry.achievements.length > 0 ? (
-              <BulletList items={thirdEntry.achievements} />
-            ) : null}
+            <BulletList items={firstOverflowAchievements} />
             {remainingEntries.map((entry) => (
-              <WorkEntry key={buildWorkEntryKey(entry)} entry={entry} />
+              <WorkEntry key={buildPdfWorkEntryKey(entry)} entry={entry} />
             ))}
           </View>
         </View>

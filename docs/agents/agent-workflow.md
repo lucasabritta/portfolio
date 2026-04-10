@@ -25,3 +25,11 @@ Use this file for repository-specific working conventions.
 ## Validation
 
 When code or config changes need verification, use the `nextjs-change-checklist` skill for the expected lint, typecheck, test, and build flow.
+
+Before saying a task is complete, run at minimum:
+
+1. `yarn lint`
+2. `yarn typecheck`
+3. `yarn test`
+
+Do not mark the task done until these pass, unless the user explicitly accepts a documented exception.

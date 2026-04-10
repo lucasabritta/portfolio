@@ -1,7 +1,7 @@
 import type { ContactLink } from "@/lib/cv-data";
+import { buildPhoneHref } from "@/lib/contact";
 
-import { buildPhoneHref } from "@/components/portfolio-hero-phone";
-import styles from "@/components/portfolio-hero.module.css";
+import styles from "@/components/hero/hero.module.css";
 
 type PortfolioHeroProps = {
   name: string;
@@ -14,7 +14,7 @@ type PortfolioHeroProps = {
   downloadHref: string;
 };
 
-export function PortfolioHeroView({
+export function PortfolioHero({
   name,
   role,
   summary,

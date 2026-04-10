@@ -36,5 +36,6 @@ Execute in order; **skip** any script absent from `package.json`:
 
 ## Done when
 
+- `yarn lint`, `yarn typecheck`, and `yarn test` have all been run and passed before reporting completion.
 - All existing scripts invoked above complete successfully, or the user accepts a documented exception (e.g. known flaky test tracked elsewhere).
 - No new secrets or `.env` files are committed.
