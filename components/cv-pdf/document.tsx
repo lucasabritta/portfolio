@@ -1,5 +1,6 @@
 import { Document, Page, Text, View } from "@react-pdf/renderer";
 
+import "@/components/cv-pdf/fonts";
 import { BulletList } from "@/components/cv-pdf/sections/bullet-list";
 import { LeftColumn } from "@/components/cv-pdf/sections/left-column";
 import { WorkEntry } from "@/components/cv-pdf/sections/work-entry";
@@ -12,7 +13,7 @@ export function CvPdfDocument() {
   const thirdEntry = cvData.workHistory[2];
   const remainingEntries = cvData.workHistory.slice(3);
 
-  const summaryBullets = [...cvData.summaryHighlights, `Tech stack: ${cvData.techStack.join(", ")}`];
+  const summaryBullets = [...cvData.summaryHighlights];
 
   return (
     <Document

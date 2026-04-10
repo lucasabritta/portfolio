@@ -2,10 +2,10 @@ import type { EducationEntry } from "./types";
 
 export const cvEducation = [
   {
-    institution: "Universidade Federal de Itajuba",
+    institution: "Universidade Federal de Itajubá",
     location: "Itabira, Brazil",
     date: "12/2025",
-    degree: "Bachelor's degree: Computer Engineering",
+    degree: "Bachelor’s degree: Computer Engineering",
   },
   {
     institution: "Universidad de Salamanca",
@@ -14,7 +14,7 @@ export const cvEducation = [
     degree: "Exchange: Computer Engineering",
   },
   {
-    institution: "Centro Federal de Educacao Tecnologica de Minas Gerais",
+    institution: "Centro Federal de Educação Tecnológica de Minas Gerais",
     location: "Leopoldina, Brazil",
     date: "12/2009",
     degree: "Technical: Informatics",

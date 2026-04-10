@@ -13,7 +13,7 @@ export function LeftColumn({ cvData }: LeftColumnProps) {
       <Text style={cvPdfStyles.headerName}>{cvData.name}</Text>
       <Text style={cvPdfStyles.headerRole}>{cvData.role}</Text>
       <Text style={cvPdfStyles.contactLine}>{cvData.phone}</Text>
-      <Link src={cvData.linkedin} style={[cvPdfStyles.contactLine, cvPdfStyles.link]}>
+      <Link src={cvData.linkedin} style={[cvPdfStyles.linkedinLine, cvPdfStyles.link]}>
         {cvData.linkedin}
       </Link>
       <Link src={`mailto:${cvData.email}`} style={[cvPdfStyles.contactLine, cvPdfStyles.link]}>

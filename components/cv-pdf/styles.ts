@@ -3,12 +3,13 @@ import { StyleSheet } from "@react-pdf/renderer";
 export const cvPdfStyles = StyleSheet.create({
   page: {
     backgroundColor: "#ffffff",
-    color: "#111827",
-    fontFamily: "Helvetica",
+    color: "#000000",
+    fontFamily: "Lato",
     fontSize: 10,
-    lineHeight: 1.35,
+    lineHeight: 1.22,
+    paddingBottom: 20,
     paddingHorizontal: 18,
-    paddingVertical: 20,
+    paddingTop: 20,
   },
   row: {
     flexDirection: "row",
@@ -19,86 +20,100 @@ export const cvPdfStyles = StyleSheet.create({
   },
   rightColumn: {
     flex: 1,
-    paddingTop: 7,
+    paddingTop: 4,
   },
   headerName: {
-    fontSize: 17,
+    fontFamily: "Raleway",
+    fontSize: 19,
     fontWeight: 700,
-    marginBottom: 2,
+    lineHeight: 1.2,
+    marginBottom: 0,
     textTransform: "uppercase",
   },
   headerRole: {
-    color: "#374151",
-    fontSize: 10,
-    marginBottom: 12,
+    color: "#4b5563",
+    fontFamily: "Raleway",
+    fontSize: 12,
+    fontWeight: 700,
+    lineHeight: 1.2,
+    marginBottom: 10,
     textTransform: "uppercase",
   },
   contactLine: {
     fontSize: 10,
-    marginBottom: 8,
+    marginBottom: 6,
+  },
+  linkedinLine: {
+    fontSize: 8,
+    marginBottom: 6,
   },
   link: {
-    color: "#111827",
+    color: "#000000",
     textDecoration: "none",
   },
   dividerLine: {
     borderTop: "1 solid #9ca3af",
-    marginBottom: 10,
-    marginTop: 8,
+    marginBottom: 8,
+    marginTop: 6,
     width: 16,
   },
   sectionTitle: {
-    fontSize: 14,
+    fontFamily: "Raleway",
+    fontSize: 12,
     fontWeight: 700,
-    marginBottom: 8,
+    marginBottom: 6,
   },
   leftEntry: {
-    marginBottom: 14,
+    marginBottom: 10,
   },
   leftMain: {
     fontSize: 10,
     fontWeight: 700,
   },
   leftSub: {
-    color: "#374151",
+    color: "#4b5563",
     fontSize: 9,
   },
   paragraph: {
     fontSize: 10,
-    marginBottom: 8,
+    marginBottom: 6,
   },
   achievementsTitle: {
-    marginBottom: 4,
+    marginBottom: 3,
   },
   bulletRow: {
     flexDirection: "row",
-    marginBottom: 5,
+    marginBottom: 3,
   },
   bullet: {
+    color: "#000000",
+    fontFamily: "ArialMT",
+    fontSize: 10,
     marginRight: 5,
-    width: 12,
+    width: 11,
   },
   bulletText: {
     flex: 1,
   },
   entry: {
-    marginBottom: 8,
+    marginBottom: 6,
   },
   rightTitle: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: 700,
     marginBottom: 2,
   },
   rightMeta: {
-    color: "#374151",
-    fontSize: 10,
-    marginBottom: 5,
+    color: "#4b5563",
+    fontSize: 9,
+    marginBottom: 4,
   },
   workSection: {
-    marginTop: 6,
+    marginTop: 34,
   },
+  /** Space beside Professional Summary so Education aligns with Work History (reference layout). */
   leftSections: {
-    marginTop: 40,
+    marginTop: 72,
   },
   certificationsSection: {
     marginTop: 15,

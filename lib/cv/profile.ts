@@ -7,12 +7,12 @@ export const cvProfile = {
   phone: "+34 604 809 476",
   email: "lucasabritta@gmail.com",
   linkedin: "https://www.linkedin.com/in/lucas-abritta",
-  summary:
-    "Engineering Manager with experience in rapid startup growth, platform excellence, and building reliable teams, systems, and delivery practices.",
+  summary: "Engineering Manager with experience in rapid startup growth.",
   summaryHighlights: [
-    "Played a key role in growing a startup from Seed to Series A and B, contributing to its about $200M valuation while leading engineering quality and platform excellence.",
-    "Hands-on background in software development and automation, with expertise in cloud infrastructure, CI/CD, observability, and performance.",
-    "Leads recruiting, onboarding, and performance development through structured 360 feedback cycles while fostering ownership, technical excellence, and cross-team collaboration.",
+    "Played a key role in growing a Startup from Seed to Series A and B, contributing to its ~$200 M valuation while leading engineering quality and platform excellence.",
+    "Hands-on background in software development and automation, with expertise in cloud infrastructure, CI/CD, observability and performance.",
+    "Leading recruiting, onboarding, and performance development through structured 360° feedback cycles; Fostering a culture of ownership, technical excellence, and cross-team collaboration.",
+    "Tech stack: TypeScript, Angular, MongoDB, SQL, AWS, Java, LLMs, Node.js, React Cypress, C#, GitHub Actions, Datadog, Python, Postgres, Playwright.",
   ],
   techStack: [
     "TypeScript",

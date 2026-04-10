@@ -11,7 +11,7 @@ export function BulletList({ items }: BulletListProps) {
     <View>
       {items.map((item) => (
         <View key={item} style={cvPdfStyles.bulletRow}>
-          <Text style={cvPdfStyles.bullet}>●​</Text>
+          <Text style={cvPdfStyles.bullet}>{"\u25CF\u200B"}</Text>
           <Text style={cvPdfStyles.bulletText}>{item}</Text>
         </View>
       ))}
