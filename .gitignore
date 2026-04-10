@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+tmp-cv-compare/
 
 # debug
 npm-debug.log*
