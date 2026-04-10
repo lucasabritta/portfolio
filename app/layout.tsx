@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Observability } from "@/components/observability";
+import { siteMetadata } from "@/app/layout.metadata";
 import "./globals.css";
+import styles from "@/app/layout.module.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,11 +15,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Lucas Abritta | Engineering Manager",
-  description:
-    "Engineering Manager portfolio and CV for Lucas Abritta, covering startup growth, platform excellence, and software delivery leadership.",
-};
+export const metadata: Metadata = siteMetadata;
 
 export default function RootLayout({
   children,
@@ -27,9 +25,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${styles.htmlRoot}`}
     >
-      <body className="min-h-full font-sans">
+      <body className={styles.bodyRoot}>
         {children}
         <Observability />
       </body>

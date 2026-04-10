@@ -1,5 +1,9 @@
 import { Link, Text, View } from "@react-pdf/renderer";
 
+import {
+  splitDegree,
+  wrapLongUrl,
+} from "@/components/cv-pdf/sections/text-format";
 import { cvPdfStyles } from "@/components/cv-pdf/styles";
 import type { CvData } from "@/lib/cv-data";
 
@@ -8,25 +12,6 @@ type LeftColumnProps = {
 };
 
 export function LeftColumn({ cvData }: LeftColumnProps) {
-  const splitDegree = (degree: string) => {
-    const separatorIndex = degree.indexOf(":");
-    if (separatorIndex < 0) {
-      return { prefix: degree, suffix: "" };
-    }
-
-    return {
-      prefix: degree.slice(0, separatorIndex),
-      suffix: degree.slice(separatorIndex),
-    };
-  };
-
-  const wrapLongUrl = (url: string) =>
-    url
-      .replaceAll("/", "/\u200b")
-      .replaceAll("?", "?\u200b")
-      .replaceAll("&", "&\u200b")
-      .replaceAll("=", "=\u200b");
-
   return (
     <View style={cvPdfStyles.leftColumn}>
       <Text style={cvPdfStyles.headerName}>{cvData.name}</Text>
