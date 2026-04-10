@@ -32,6 +32,7 @@ export function CvPdfDocument() {
             <BulletList items={summaryBullets} />
 
             <View style={cvPdfStyles.workSection}>
+              <View style={cvPdfStyles.summaryDivider} />
               <Text style={cvPdfStyles.sectionTitle}>Work History</Text>
               {firstEntry ? <WorkEntry entry={firstEntry} /> : null}
               {secondEntry ? <WorkEntry entry={secondEntry} /> : null}

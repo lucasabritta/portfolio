@@ -13,10 +13,10 @@ export function LeftColumn({ cvData }: LeftColumnProps) {
       <Text style={cvPdfStyles.headerName}>{cvData.name}</Text>
       <Text style={cvPdfStyles.headerRole}>{cvData.role}</Text>
       <Text style={cvPdfStyles.contactLine}>{cvData.phone}</Text>
-      <Link src={cvData.linkedin} style={[cvPdfStyles.linkedinLine, cvPdfStyles.link]}>
+      <Link src={cvData.linkedin} style={[cvPdfStyles.linkedinLine, cvPdfStyles.externalLink]}>
         {cvData.linkedin}
       </Link>
-      <Link src={`mailto:${cvData.email}`} style={[cvPdfStyles.contactLine, cvPdfStyles.link]}>
+      <Link src={`mailto:${cvData.email}`} style={[cvPdfStyles.emailLine, cvPdfStyles.link]}>
         {cvData.email}
       </Link>
       <Text style={cvPdfStyles.contactLine}>{cvData.location}</Text>
@@ -49,7 +49,7 @@ export function LeftColumn({ cvData }: LeftColumnProps) {
         {cvData.personalProjects.map((project) => (
           <View key={project.title}>
             <Text style={cvPdfStyles.paragraph}>{project.description}</Text>
-            <Link src={project.href} style={cvPdfStyles.link}>
+            <Link src={project.href} style={cvPdfStyles.externalLink}>
               {project.href}
             </Link>
           </View>

@@ -27,11 +27,11 @@ export const cvPdfStyles = StyleSheet.create({
     fontSize: 19,
     fontWeight: 700,
     lineHeight: 1.2,
-    marginBottom: 0,
+    marginBottom: 2,
     textTransform: "uppercase",
   },
   headerRole: {
-    color: "#4b5563",
+    color: "#f2511b",
     fontFamily: "Raleway",
     fontSize: 12,
     fontWeight: 700,
@@ -41,14 +41,22 @@ export const cvPdfStyles = StyleSheet.create({
   },
   contactLine: {
     fontSize: 10,
-    marginBottom: 6,
+    marginBottom: 9,
+  },
+  emailLine: {
+    fontSize: 10,
+    marginBottom: 12,
   },
   linkedinLine: {
     fontSize: 8,
-    marginBottom: 6,
+    marginBottom: 9,
   },
   link: {
     color: "#000000",
+    textDecoration: "none",
+  },
+  externalLink: {
+    color: "#1155cc",
     textDecoration: "none",
   },
   dividerLine: {
@@ -76,14 +84,21 @@ export const cvPdfStyles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 10,
-    marginBottom: 6,
+    marginBottom: 7,
   },
   achievementsTitle: {
     marginBottom: 3,
   },
+  summaryDivider: {
+    borderTop: "1 solid #9ca3af",
+    marginBottom: 8,
+    marginTop: 6,
+    width: 16,
+  },
   bulletRow: {
     flexDirection: "row",
-    marginBottom: 3,
+    marginBottom: 4,
+    paddingLeft: 17,
   },
   bullet: {
     color: "#000000",
@@ -109,11 +124,11 @@ export const cvPdfStyles = StyleSheet.create({
     marginBottom: 4,
   },
   workSection: {
-    marginTop: 34,
+    marginTop: 14,
   },
   /** Space beside Professional Summary so Education aligns with Work History (reference layout). */
   leftSections: {
-    marginTop: 72,
+    marginTop: 45,
   },
   certificationsSection: {
     marginTop: 15,
