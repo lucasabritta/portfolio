@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "A minimal portfolio site built with Next.js.",
+  title: "Lucas Abritta | Engineering Manager",
+  description:
+    "Engineering Manager portfolio and CV for Lucas Abritta, covering startup growth, platform excellence, and software delivery leadership.",
 };
 
 export default function RootLayout({
