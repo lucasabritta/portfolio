@@ -4,30 +4,6 @@
   padding-top: 2rem;
 }
 
-.role {
-  color: var(--muted);
-  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-  font-size: 0.875rem;
-}
-
-.name {
-  color: var(--foreground);
-  font-size: clamp(2.25rem, 5vw, 3rem);
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-  margin-top: 0.5rem;
-}
-
-.summary {
-  color: var(--muted);
-  font-size: 1.125rem;
-  line-height: 1.65;
-  margin-top: 1rem;
-  max-width: 42rem;
-}
-
 .contactRow {
   color: var(--muted);
   display: flex;
@@ -37,57 +13,11 @@
   margin-top: 1.5rem;
 }
 
-.contactLink {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.contactLink:hover {
-  color: var(--foreground);
-}
-
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 1.5rem;
-}
-
-.downloadAction {
-  align-items: center;
-  background: var(--accent);
-  border-radius: 0.5rem;
-  color: #ffffff;
-  display: inline-flex;
-  font-size: 0.875rem;
-  font-weight: 500;
-  opacity: 1;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.downloadAction:hover {
-  opacity: 0.9;
-}
-
-.externalAction {
-  align-items: center;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  color: var(--foreground);
-  display: inline-flex;
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
-}
-
-.externalAction:hover {
-  background: var(--background);
 }
 
 @media (min-width: 768px) {

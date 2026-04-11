@@ -1,0 +1,23 @@
+.role {
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+}
+
+.name {
+  color: var(--foreground);
+  font-size: clamp(2.25rem, 5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-top: 0.5rem;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  margin-top: 1rem;
+  max-width: 42rem;
+}

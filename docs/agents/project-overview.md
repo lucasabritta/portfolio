@@ -19,11 +19,11 @@ The portfolio uses **one git root**, **Yarn workspaces** (`apps/*`, `packages/*`
 | `apps/web` (`@portfolio/web`) | Next.js App Router: routes, layouts, `lib/cv-pdf/`, `public/` |
 | `packages/web-ui` (`@portfolio/web-ui`) | Shared DOM components, Storybook (`.storybook/`), web CSS; consumed by the app via **`@portfolio/web-ui`** |
 | `packages/cv` (`@portfolio/cv`) | CV types, `cvData`, PDF text helpers, small shared formatters (`buildPhoneHref`, work-history keys) |
-| `tools/` | Repo-local tooling (e.g. ESLint plugin enforcing UI boundaries) |
+| `tools/` | Repo-local tooling |
 
 **Agent expectations:**
 
-- Respect **import direction** and **layer boundaries** (see [`docs/agents/repository-map.md`](repository-map.md) and ESLint `portfolio/storybook-ui-boundary`). The UI package must not import from `apps/web/app/**`.
+- Respect **import direction** and **layer boundaries** (see [`docs/agents/repository-map.md`](repository-map.md)). The UI package must not import from `apps/web/app/**`.
 - When validating changes, prefer the **narrowest** meaningful checks: e.g. `yarn test:unit` vs `yarn test:storybook`, or targeted Vitest paths under `apps/web/lib/cv-pdf/` when only PDF code moved. CI already runs unit and Storybook tests in **separate jobs** to keep those surfaces decoupled.
 - Sibling **product** repos (Frontend, Backend, `vectorization_pipeline`) remain **outside** this tree; do not assume their packages are linked here unless files prove it.
 

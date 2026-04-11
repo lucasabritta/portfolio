@@ -1,0 +1,9 @@
+.chip {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  color: var(--muted);
+  display: inline-block;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.75rem;
+}

@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   output: "standalone",
   transpilePackages: ["@portfolio/cv", "@portfolio/web-ui"],
   outputFileTracingRoot: path.join(__dirname, "../.."),
+  outputFileTracingIncludes: {
+    "/api/cv": ["./public/cv-fonts/**/*"],
+  },
   async rewrites() {
     return {
       beforeFiles: [

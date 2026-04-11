@@ -1,26 +1,19 @@
+.emptyState {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
+}
+
 .educationList {
   display: grid;
   gap: 1rem;
   margin-top: 1.5rem;
 }
 
-.educationCard {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  padding: 1.25rem;
-}
-
 .educationHeader {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-}
-
-.educationName {
-  color: var(--foreground);
-  font-size: 1.125rem;
-  font-weight: 600;
 }
 
 .educationLocation {

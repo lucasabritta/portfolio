@@ -1,27 +1,19 @@
+.emptyState {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
+}
+
 .workList {
   display: grid;
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
 
-.workCard {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
-  padding: 1.5rem;
-}
-
 .workHeader {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-}
-
-.workTitle {
-  color: var(--foreground);
-  font-size: 1.25rem;
-  font-weight: 600;
 }
 
 .workLocation {

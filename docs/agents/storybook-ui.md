@@ -53,6 +53,9 @@ docker compose run --rm web yarn build-storybook
 
 - **CSF3 only**: `satisfies Meta<typeof Component>`, **`tags: ['autodocs']`** on every `meta`, and **`Default`** plus semantic variants — see **`packages/web-ui/src/fixtures/cv-story-args.ts`** for **`narrowMobileStory`**.
 - Co-locate **`*.stories.tsx`** next to the component under **`packages/web-ui/src/`**.
+- **Interaction tests (`play`)** live in a sibling **`*.stories.test.ts`** file (same basename prefix as the CSF file). Each named export is a **`StoryPlayFn`** (see **`packages/web-ui/src/storybook-play-types.ts`**); **`*.stories.tsx`** imports them and sets **`play: somePlay`**. Every story that renders meaningful UI (sections, hero, primitives, pages) should wire a **`play`** so **`@storybook/addon-vitest`** exercises it. (These are not root **`yarn test`** unit files; root Vitest only includes **`apps/web`** and **`packages/cv`**.)
+- **Story `title` groups**: **`Foundations/<Category>/<Component>`** for design primitives under **`packages/web-ui/src/primitives/`** (Typography, Buttons, Surfaces); **`UI/Sections/<Name>`** for homepage section stories; **`UI/Hero/<Name>`** for the hero; **`Pages/<Route>`** for full-page stories (e.g. **`Pages/Home`**).
+- **Primitives** (`Card`, `Chip`, `ActionLink`, `SectionHeading`, `Title`, hero typography) live in **`packages/web-ui/src/primitives/`** and are re-exported from **`@portfolio/web-ui`** for consumers that need them; feature code inside the package typically imports via **`../primitives`** or **`../../primitives`** (the **`@ui/*`** path maps to **`./src/*`** and does not resolve **`@ui/primitives`** to the folder index).
 - **Full-page stories** import **`HomePageView`** from the same package (`@ui/home/home-page-view` in stories; public API is **`@portfolio/web-ui`**).
 
 ## Testing (Vitest + Storybook)
@@ -65,16 +68,7 @@ docker compose run --rm web yarn build-storybook
 
 ## Preview governance
 
-[`packages/web-ui/.storybook/preview.tsx`](../../packages/web-ui/.storybook/preview.tsx) applies Geist fonts, globals, viewports, Home section width decorator, and **`a11y.test: 'error'`**.
-
-## ESLint boundary
-
-Rule **`portfolio/storybook-ui-boundary`** allows JSX in:
-
-- **`packages/web-ui/src/`**
-- **`apps/web/app/`**
-- **`apps/web/lib/cv-pdf/`**
-- **`packages/web-ui/.storybook/`**
+[`packages/web-ui/.storybook/preview.tsx`](../../packages/web-ui/.storybook/preview.tsx) applies Geist fonts, globals, viewports, layout decorators (**`Foundations/*`** padded full width; **`UI/Sections/*`** max-width column), and **`a11y.test: 'error'`**.
 
 ## Framework
 

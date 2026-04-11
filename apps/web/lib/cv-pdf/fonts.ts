@@ -1,13 +1,45 @@
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { Font } from "@react-pdf/renderer";
 
+const FONT_MARKER = "Lato-Regular.ttf";
+
 /**
- * Local TTFs under `apps/web/public/cv-fonts/` (Word CV uses Lato + Raleway).
- * Populate with: `docker compose --profile cv run --rm cv-tools python scripts/download_cv_fonts.py`
+ * Resolve `apps/web/public/cv-fonts` for dev, Docker, and Vercel.
+ * Bundled modules often live under `.next/server/**`, so `import.meta.url` + `../..` no longer
+ * reaches `public/` — use `process.cwd()` (monorepo root or `apps/web`) first.
+ *
+ * Populate fonts with: `docker compose --profile cv run --rm cv-tools python scripts/download_cv_fonts.py`
  */
-const cvFontDir = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "public", "cv-fonts");
+function resolveCvFontDir(): string {
+  const fromSourceFile = path.join(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "..",
+    "..",
+    "public",
+    "cv-fonts",
+  );
+
+  const candidates = [
+    path.join(process.cwd(), "public", "cv-fonts"),
+    path.join(process.cwd(), "apps", "web", "public", "cv-fonts"),
+    fromSourceFile,
+  ];
+
+  for (const dir of candidates) {
+    if (fs.existsSync(path.join(dir, FONT_MARKER))) {
+      return dir;
+    }
+  }
+
+  throw new Error(
+    `CV fonts not found (expected ${FONT_MARKER} in one of): ${candidates.join(", ")}`,
+  );
+}
+
+const cvFontDir = resolveCvFontDir();
 
 Font.register({
   family: "Lato",

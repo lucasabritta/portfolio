@@ -3,7 +3,7 @@ name: storybook-ui
 description: >-
   Develops and validates shared DOM UI in packages/web-ui (@portfolio/web-ui):
   Storybook dev/build, co-located stories, Vitest + @storybook/addon-vitest,
-  fixtures, and the portfolio/storybook-ui-boundary ESLint rule.
+  fixtures, and ESLint boundaries from the root config.
   Use when adding or moving React components, configuring Storybook, or fixing
   UI library boundaries.
 ---
@@ -22,9 +22,10 @@ description: >-
 
 - Put reusable DOM components in **`packages/web-ui/src/`**; the Next app imports from **`@portfolio/web-ui`** (public API in `src/index.ts`). **`HomePageView`** uses **relative** imports inside the package so Next does not need a `@ui` alias.
 - Put shared story args and viewport helpers in **`packages/web-ui/src/fixtures/`**; stories must not duplicate large `cvData` shapes.
-- Add **`*.stories.tsx`** next to the component; titles **`UI/<Area>/<Name>`** or **`Pages/<Route>`**.
+- Add **`*.stories.tsx`** next to the component; titles **`Foundations/<Category>/<Name>`** (primitives), **`UI/Sections/<Name>`** / **`UI/Hero/<Name>`**, or **`Pages/<Route>`**.
+- Put Storybook **`play`** functions in a co-located **`*.stories.test.ts`** file; use **`StoryPlayFn`** from **`packages/web-ui/src/storybook-play-types.ts`** and assign **`play: exportedPlay`** in **`*.stories.tsx`**. Every story with non-trivial rendered output should have a **`play`**.
 - Every story file: **`tags: ['autodocs']`**, **`Default`**, semantic variants (`Empty`, `LongContent`, `ManyItems`, `NarrowViewport`, …), **`narrowMobileStory`** from fixtures where responsive coverage is required.
-- Use **`play`** + **`storybook/test`** when the story renders focusable elements (links, buttons).
+- Use **`play`** + **`storybook/test`** when the story renders focusable elements (links, buttons) or when asserting structure (headings, **`role="status"`**, visible copy).
 - Share cross-page styles via co-located modules under **`packages/web-ui/src/`**, not `apps/web/app/*.module.css`.
 - Résumé PDF stays in **`apps/web/lib/cv-pdf/**`** (react-pdf); do not move PDF sections into Storybook.
 
@@ -50,10 +51,6 @@ docker compose run --rm --service-ports web yarn storybook
 ```
 
 After UI changes, also run the **`nextjs-change-checklist`** skill where applicable.
-
-## ESLint
-
-If `yarn lint` reports **`portfolio/storybook-ui-boundary`**, the file contains JSX but is outside **`packages/web-ui/src/`**, **`apps/web/app/`**, **`apps/web/lib/cv-pdf/`**, or **`packages/web-ui/.storybook/`**. Move the component or split JSX into an allowed path.
 
 ## Done when
 

@@ -1,5 +1,7 @@
 import { buildPhoneHref } from "@portfolio/cv";
-import heading from "../shared/section-heading.module.css";
+
+import { ActionLink, Card, SectionHeading } from "../../primitives";
+
 import styles from "./contact-section.module.css";
 
 type ContactSectionProps = {
@@ -12,42 +14,45 @@ type ContactSectionProps = {
 export function ContactSection({ location, phone, email, linkedin }: ContactSectionProps) {
   const phoneTrim = phone.trim();
   const emailTrim = email.trim();
+  const linkedinTrim = linkedin.trim();
 
   return (
     <section aria-labelledby="contact-heading">
-      <h2 id="contact-heading" className={heading.sectionTitle}>
-        Contact
-      </h2>
-      <div className={styles.contactCard}>
+      <SectionHeading id="contact-heading">Contact</SectionHeading>
+      <Card as="div" className={styles.contactShell} radius="lg" padding="comfortable">
         <p className={styles.contactLocation}>
           Based in {location.trim() ? location.trim() : "—"}
         </p>
         <ul className={styles.contactLinks}>
           <li>
-            <a
-              className={styles.contactLink}
-              href={phoneTrim ? buildPhoneHref(phone) : "tel:"}
-              aria-label={phoneTrim ? undefined : "Phone not provided"}
-            >
-              {phoneTrim ? phoneTrim : "—"}
-            </a>
+            {phoneTrim ? (
+              <ActionLink variant="inlineAccent" href={buildPhoneHref(phone)}>
+                {phoneTrim}
+              </ActionLink>
+            ) : (
+              <span aria-label="Phone not provided">—</span>
+            )}
           </li>
           <li>
-            <a
-              className={styles.contactLink}
-              href={emailTrim ? `mailto:${emailTrim}` : "mailto:"}
-              aria-label={emailTrim ? undefined : "Email not provided"}
-            >
-              {emailTrim ? emailTrim : "—"}
-            </a>
+            {emailTrim ? (
+              <ActionLink variant="inlineAccent" href={`mailto:${emailTrim}`}>
+                {emailTrim}
+              </ActionLink>
+            ) : (
+              <span aria-label="Email not provided">—</span>
+            )}
           </li>
           <li>
-            <a className={styles.contactLink} href={linkedin} rel="noopener noreferrer" target="_blank">
-              LinkedIn
-            </a>
+            {linkedinTrim ? (
+              <ActionLink variant="inlineAccent" href={linkedinTrim} rel="noopener noreferrer" target="_blank">
+                LinkedIn
+              </ActionLink>
+            ) : (
+              <span aria-label="LinkedIn not provided">—</span>
+            )}
           </li>
         </ul>
-      </div>
+      </Card>
     </section>
   );
 }

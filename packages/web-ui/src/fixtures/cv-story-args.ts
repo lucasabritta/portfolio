@@ -232,13 +232,13 @@ export function contactSectionArgs(
   };
 }
 
-/** Empty phone/email/location; LinkedIn kept so the third list item stays a normal external link. */
+/** Empty location, phone, email, and LinkedIn — contact card shows placeholders only (no links). */
 export function contactSectionEmptyArgs() {
   return contactSectionArgs({
     location: "",
     phone: "",
     email: "",
-    linkedin: "https://www.linkedin.com",
+    linkedin: "",
   });
 }
 

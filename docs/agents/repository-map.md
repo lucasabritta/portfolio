@@ -16,6 +16,8 @@ This repository is a **Yarn workspaces monorepo**: a root `package.json` with **
 | `packages/web-ui/` | Shared DOM UI, co-located CSS, Storybook config (`.storybook/`), Vitest Storybook project — package **`@portfolio/web-ui`** |
 | `packages/web-ui/src/` | Components, `*.stories.tsx`, `globals.css`, `layout.module.css` |
 | `packages/web-ui/src/fixtures/` | Typed Storybook args helpers (CV-derived defaults, viewport globals) |
+| `packages/web-ui/src/primitives/` | Shared presentation primitives (`Card`, `Chip`, `ActionLink`, typography); **`Foundations/*`** Storybook titles; re-exported from **`@portfolio/web-ui`** |
+| `packages/web-ui/src/**/*.stories.test.ts` | Storybook interaction tests (`play`); typed as **`StoryPlayFn`** in **`storybook-play-types.ts`** |
 | `packages/cv/` | CV types, `cvData`, PDF text helpers, `buildPhoneHref`, `buildHomepageWorkEntryKey` — package **`@portfolio/cv`** |
 | `packages/web-ui/.storybook/` | Storybook `main.ts`, `preview.tsx` |
 | Root `vitest.config.mjs` | Vitest **unit** project: `apps/web/**` and `packages/cv/**` tests |
@@ -23,13 +25,12 @@ This repository is a **Yarn workspaces monorepo**: a root `package.json` with **
 | `apps/web/postcss.config.cjs` | PostCSS (Tailwind v4) for Next |
 | `apps/web/lib/cv-pdf/` | CV PDF (react-pdf document, sections, pdf.js helpers, Vitest) |
 | `**/*.tsx` in `apps/web/app/` | Next views and route modules |
-| `tools/eslint-plugin-portfolio/` | Local ESLint plugin (`portfolio/storybook-ui-boundary`) |
 | `apps/web/next.config.*` | Next.js configuration (`transpilePackages`, `outputFileTracingRoot` for monorepo) |
 | `Dockerfile` | Container image for local or deploy-related workflows |
 | `docker-compose.yml` | Local Docker Compose stack (`web`, `cv-tools` profile) |
 | `.github/workflows/` | CI pipelines for lint, test, typecheck, and build |
 | `vercel.json` | Vercel build/install commands for the workspace |
 | `.cursor/rules/`, `.cursor/skills/` | Cursor rules and skills |
-| `.cursor/mcp.json` | Project-local MCP server configuration |
+| User `~/.cursor/mcp.json` | MCP servers (e.g. Vercel OAuth); keep out of the repo — see [`docs/agents/cursor-mcp.md`](cursor-mcp.md) |
 
 If a path is missing, prefer the active rules and skills for guidance before scaffolding new structure.

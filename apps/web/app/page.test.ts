@@ -7,7 +7,7 @@ describe("page data", () => {
     expect(buildPhoneHref("+55 11 99999 0000")).toBe("tel:+5511999990000");
   });
 
-  it("buildHomepageWorkEntryKey combines company and role", () => {
+  it("buildHomepageWorkEntryKey combines company, role, and period", () => {
     const key = buildHomepageWorkEntryKey({
       company: "Example Corp",
       role: "Engineering Manager",
@@ -17,6 +17,6 @@ describe("page data", () => {
       achievements: [],
     });
 
-    expect(key).toBe("Example Corp-Engineering Manager");
+    expect(key).toBe("Example Corp-Engineering Manager-2020-2024");
   });
 });

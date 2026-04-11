@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { Preview } from "@storybook/react";
 import { INITIAL_VIEWPORTS } from "storybook/viewport";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -18,8 +19,15 @@ const preview: Preview = {
   decorators: [
     (Story, context) => {
       const title = String(context.title ?? "");
-      const sectionShell =
-        title.startsWith("UI/Home/") ? (
+      let wrapped: ReactNode = <Story />;
+      if (title.startsWith("Foundations/")) {
+        wrapped = (
+          <div style={{ padding: "1.5rem", width: "100%" }}>
+            <Story />
+          </div>
+        );
+      } else if (title.startsWith("UI/Sections/")) {
+        wrapped = (
           <div
             style={{
               maxWidth: "42rem",
@@ -30,12 +38,11 @@ const preview: Preview = {
           >
             <Story />
           </div>
-        ) : (
-          <Story />
         );
+      }
 
       return (
-        <div className={`${geistSans.variable} ${geistMono.variable}`}>{sectionShell}</div>
+        <div className={`${geistSans.variable} ${geistMono.variable}`}>{wrapped}</div>
       );
     },
   ],
