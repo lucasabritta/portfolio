@@ -1,4 +1,5 @@
-import styles from "@/storybook/ui/portfolio-page.module.css";
+import heading from "./section-heading.module.css";
+import styles from "./certifications-section.module.css";
 
 type CertificationsSectionProps = {
   certifications: readonly string[];
@@ -7,7 +8,7 @@ type CertificationsSectionProps = {
 export function CertificationsSection({ certifications }: CertificationsSectionProps) {
   return (
     <section aria-labelledby="certifications-heading">
-      <h2 id="certifications-heading" className={styles.sectionTitle}>
+      <h2 id="certifications-heading" className={heading.sectionTitle}>
         Certifications
       </h2>
       <ul className={styles.certificationList}>

@@ -20,6 +20,8 @@ Open only the document that matches the task.
 - [`.cursor/rules/dockerignore.mdc`](.cursor/rules/dockerignore.mdc)
 - [`.cursor/rules/github-actions.mdc`](.cursor/rules/github-actions.mdc)
 - [`.cursor/rules/vercel-config.mdc`](.cursor/rules/vercel-config.mdc)
+- [`.cursor/rules/subagent-plan-review.mdc`](.cursor/rules/subagent-plan-review.mdc)
+- [`.cursor/rules/subagent-code-review.mdc`](.cursor/rules/subagent-code-review.mdc)
 
 ## Skills
 
@@ -28,6 +30,8 @@ Open only the document that matches the task.
 - [`.cursor/skills/ci-github-actions/SKILL.md`](.cursor/skills/ci-github-actions/SKILL.md)
 - [`.cursor/skills/nextjs-change-checklist/SKILL.md`](.cursor/skills/nextjs-change-checklist/SKILL.md)
 - [`.cursor/skills/storybook-ui/SKILL.md`](.cursor/skills/storybook-ui/SKILL.md)
+- [`.cursor/skills/subagent-plan-review/SKILL.md`](.cursor/skills/subagent-plan-review/SKILL.md) — parallel subagents for plan and feature design validation
+- [`.cursor/skills/subagent-code-review/SKILL.md`](.cursor/skills/subagent-code-review/SKILL.md) — parallel subagents for code / PR / pre-merge review
 
 ## Other references
 

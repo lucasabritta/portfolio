@@ -1,4 +1,5 @@
-import styles from "@/storybook/ui/portfolio-page.module.css";
+import heading from "./section-heading.module.css";
+import styles from "./projects-section.module.css";
 import type { PersonalProject } from "@/lib/cv-data";
 
 type ProjectsSectionProps = {
@@ -8,7 +9,7 @@ type ProjectsSectionProps = {
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
   return (
     <section aria-labelledby="projects-heading">
-      <h2 id="projects-heading" className={styles.sectionTitle}>
+      <h2 id="projects-heading" className={heading.sectionTitle}>
         Personal projects
       </h2>
       <div className={styles.projectList}>

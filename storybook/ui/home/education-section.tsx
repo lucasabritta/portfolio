@@ -1,4 +1,5 @@
-import styles from "@/storybook/ui/portfolio-page.module.css";
+import heading from "./section-heading.module.css";
+import styles from "./education-section.module.css";
 import type { EducationEntry } from "@/lib/cv-data";
 
 type EducationSectionProps = {
@@ -8,7 +9,7 @@ type EducationSectionProps = {
 export function EducationSection({ education }: EducationSectionProps) {
   return (
     <section aria-labelledby="education-heading">
-      <h2 id="education-heading" className={styles.sectionTitle}>
+      <h2 id="education-heading" className={heading.sectionTitle}>
         Education
       </h2>
       <div className={styles.educationList}>

@@ -18,7 +18,7 @@ description: >-
 
 - Put reusable DOM components in **`storybook/ui/`**; import from pages as `@/storybook/ui/...`.
 - Add **`*.stories.tsx`** next to the component; prefer **`UI/<Area>/<Name>`** titles (see existing stories).
-- Share cross-page styles via modules under **`storybook/ui/`** (for example `portfolio-page.module.css`), not `app/*.module.css`.
+- Share cross-page styles via co-located modules under **`storybook/ui/`** (per component or thin shared files like `section-heading.module.css`), not `app/*.module.css`.
 - Résumé PDF stays in **`lib/cv-pdf/**`** (react-pdf); do not move PDF sections into Storybook.
 
 ## Commands

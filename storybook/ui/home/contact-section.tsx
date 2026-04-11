@@ -1,4 +1,5 @@
-import styles from "@/storybook/ui/portfolio-page.module.css";
+import heading from "./section-heading.module.css";
+import styles from "./contact-section.module.css";
 import { buildPhoneHref } from "@/lib/contact";
 
 type ContactSectionProps = {
@@ -11,7 +12,7 @@ type ContactSectionProps = {
 export function ContactSection({ location, phone, email, linkedin }: ContactSectionProps) {
   return (
     <section aria-labelledby="contact-heading">
-      <h2 id="contact-heading" className={styles.sectionTitle}>
+      <h2 id="contact-heading" className={heading.sectionTitle}>
         Contact
       </h2>
       <div className={styles.contactCard}>

@@ -1,5 +1,5 @@
 import { cvData } from "@/lib/cv-data";
-import styles from "@/storybook/ui/portfolio-page.module.css";
+import styles from "@/storybook/ui/home/page-shell.module.css";
 import { CertificationsSection } from "@/storybook/ui/home/certifications-section";
 import { ContactSection } from "@/storybook/ui/home/contact-section";
 import { EducationSection } from "@/storybook/ui/home/education-section";

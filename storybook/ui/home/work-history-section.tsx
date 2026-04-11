@@ -1,5 +1,6 @@
 import { buildHomepageWorkEntryKey } from "@/app/page-data";
-import styles from "@/storybook/ui/portfolio-page.module.css";
+import heading from "./section-heading.module.css";
+import styles from "./work-history-section.module.css";
 import type { ExperienceEntry } from "@/lib/cv-data";
 
 type WorkHistorySectionProps = {
@@ -9,7 +10,7 @@ type WorkHistorySectionProps = {
 export function WorkHistorySection({ workHistory }: WorkHistorySectionProps) {
   return (
     <section aria-labelledby="experience-heading">
-      <h2 id="experience-heading" className={styles.sectionTitle}>
+      <h2 id="experience-heading" className={heading.sectionTitle}>
         Work history
       </h2>
       <div className={styles.workList}>

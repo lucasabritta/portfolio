@@ -98,7 +98,7 @@ Triggers on pushes to `main` and `master`, plus pull requests. Uses Node 22, Yar
 
 Preview deployments are created automatically for pull requests when the Git integration is enabled.
 
-This repo includes `@vercel/analytics` and `@vercel/speed-insights` through a shared `storybook/ui/observability.tsx` wrapper rendered from the root layout, so the integration stays centralized and automatically covers all routes. Metrics appear after a Vercel deployment receives traffic.
+This repo includes `@vercel/analytics` and `@vercel/speed-insights` through `app/observability.tsx`, rendered from the root layout, so the integration stays centralized and automatically covers all routes. Metrics appear after a Vercel deployment receives traffic.
 
 ## Project layout
 

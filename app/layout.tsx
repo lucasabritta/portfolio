@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Observability } from "@/storybook/ui/observability";
+import { Observability } from "@/app/observability";
 import { siteMetadata } from "@/app/layout.metadata";
-import "./globals.css";
-import styles from "@/app/layout.module.css";
+import "@/storybook/ui/globals.css";
+import styles from "@/storybook/ui/layout.module.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
