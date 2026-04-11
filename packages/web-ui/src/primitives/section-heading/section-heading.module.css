@@ -1,4 +1,3 @@
-/* Shared <h2> label for homepage sections — mono caps, small size */
 .sectionTitle {
   color: var(--muted);
   font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,

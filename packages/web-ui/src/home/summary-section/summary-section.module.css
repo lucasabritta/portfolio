@@ -1,3 +1,17 @@
+.emptyState,
+.emptyStateTech {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.emptyState {
+  margin-top: 1.5rem;
+}
+
+.emptyStateTech {
+  margin-top: 1.5rem;
+}
+
 .summaryList {
   color: var(--foreground);
   display: grid;
@@ -7,13 +21,9 @@
   padding: 0;
 }
 
-.summaryCard {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
+.summaryItem {
   font-size: 1rem;
   line-height: 1.7;
-  padding: 1.25rem;
 }
 
 .techList {
@@ -23,13 +33,4 @@
   list-style: none;
   margin-top: 1.5rem;
   padding: 0;
-}
-
-.techItem {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 9999px;
-  color: var(--muted);
-  font-size: 0.875rem;
-  padding: 0.25rem 0.75rem;
 }

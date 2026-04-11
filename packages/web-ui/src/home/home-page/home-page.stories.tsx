@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect, within } from "storybook/test";
 
 import { narrowMobileStory } from "@ui/fixtures/cv-story-args";
 import { HomePageView } from "@ui/home/home-page-view";
+
+import { homePageDefaultPlay, homePageNarrowViewportPlay } from "./home-page.stories.test";
 
 const meta = {
   title: "Pages/Home",
@@ -20,20 +21,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const skip = canvas.getByRole("link", { name: /skip to content/i });
-    skip.focus();
-    expect(skip).toHaveFocus();
-  },
+  play: homePageDefaultPlay,
 };
 
 export const NarrowViewport: Story = {
   ...narrowMobileStory,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const skip = canvas.getByRole("link", { name: /skip to content/i });
-    skip.focus();
-    expect(skip).toHaveFocus();
-  },
+  play: homePageNarrowViewportPlay,
 };
