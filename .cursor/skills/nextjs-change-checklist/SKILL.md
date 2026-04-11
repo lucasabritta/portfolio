@@ -9,6 +9,10 @@ description: >-
 
 # Next.js change checklist
 
+## Logical monorepo (not a monolith)
+
+This repo uses **Yarn workspaces** (`apps/web`, `packages/web-ui`, `packages/cv`, `tools/`). Validate the **parts you touched**: use **`yarn test:unit`** and **`yarn test:storybook`** as appropriate; for PDF-only edits, run targeted Vitest under `apps/web/lib/cv-pdf/` per project docs.
+
 ## Preconditions
 
 - Dependencies installed: `yarn install` (from repo root).
@@ -20,7 +24,7 @@ Execute in order; **skip** any script absent from `package.json`:
 
 1. `yarn lint` — ESLint / Next lint per project config.
 2. `yarn typecheck` or `yarn tsc --noEmit` — if defined or if `typescript` is a dependency and the team uses explicit typecheck.
-3. `yarn test` — if present (Jest, Vitest, Playwright, etc.).
+3. `yarn test:unit` and `yarn test:storybook` — unit covers `apps/web` + `packages/cv`; Storybook tests run in **`@portfolio/web-ui`** (needs Chromium; CI runs them in a **separate** job; Docker `web` image includes Playwright system libs).
 4. `yarn build` — production Next.js build; must pass before merge for application changes.
 
 ## App Router specifics to double-check
@@ -32,15 +36,15 @@ Execute in order; **skip** any script absent from `package.json`:
 ## Docker / CI parity
 
 - If CI runs in Linux, avoid macOS-only assumptions in scripts or path separators.
-- If the team is Docker-first, optionally smoke-test with `docker compose up --build` after large dependency or config changes.
+- Docker-first: prefer **`docker compose run --rm web yarn lint`**, **`typecheck`**, **`test:unit`**, **`test:storybook`**, **`build`**, **`build-storybook`** so Node, Playwright, and Linux match CI (see `Dockerfile` / `docs/agents/storybook-ui.md`).
 
 ## CV PDF (this repo)
 
-- After edits under `lib/cv-pdf/**` or `lib/cv/**` used by the résumé PDF, run **`yarn vitest run lib/cv-pdf/`** (includes `cv-pdf-integrity.test.ts` and the Docker dump test when enabled).
-- After edits under `storybook/ui/**` or `.storybook/**`, run **`yarn build-storybook`** in addition to the usual checks.
+- After edits under `apps/web/lib/cv-pdf/**` or `packages/cv/**` used by the résumé PDF, run **`yarn vitest run apps/web/lib/cv-pdf/`** (includes `cv-pdf-integrity.test.ts` and the Docker dump test when enabled).
+- After edits under `packages/web-ui/**`, run **`yarn build-storybook`** in addition to the usual checks.
 
 ## Done when
 
-- `yarn lint`, `yarn typecheck`, and `yarn test` have all been run and passed before reporting completion.
+- `yarn lint`, `yarn typecheck`, and both `yarn test:unit` and `yarn test:storybook` have been run and passed before reporting completion.
 - All existing scripts invoked above complete successfully, or the user accepts a documented exception (e.g. known flaky test tracked elsewhere).
 - No new secrets or `.env` files are committed.

@@ -4,8 +4,8 @@ Frontend-only portfolio site built with **Next.js** (App Router), **React**, and
 
 ## Requirements
 
-- **Node.js** 20.19 or newer (`package.json` `engines`). **Node 22** matches Docker, CI, and `.nvmrc`.
-- **Yarn** classic (v1). The committed `.yarnrc` enables `ignore-engines` so installs are not blocked when a transitive package’s `engines` field is stricter than your local Node patch; use Node 22 when you can for parity with CI.
+- **Node.js** **22.12 or newer** (`package.json` `engines`). Storybook 10 and Vitest (including `@storybook/addon-vitest`) expect a current Node 22 runtime; **`.nvmrc`** pins `22`.
+- **Yarn** classic (v1). The committed `.yarnrc` may enable `ignore-engines` for edge transitive packages; still use **Node 22.12+** locally so `yarn storybook`, `yarn test:storybook`, and `yarn build-storybook` match CI (plus `yarn test:unit` for app/lib tests).
 
 ## Local development (host)
 
@@ -25,12 +25,18 @@ Open [http://localhost:3000](http://localhost:3000).
 | `yarn start`  | Serve production build locally                   |
 | `yarn lint`   | ESLint (Next core-web-vitals + TypeScript)       |
 | `yarn typecheck` | `tsc --noEmit`                              |
-| `yarn test`   | Vitest + Testing Library (single run)            |
+| `yarn test`   | Vitest **unit** project (same as `test:unit`) |
+| `yarn test:unit` | Vitest **`apps/web`** + **`packages/cv`** tests (Node) |
+| `yarn test:storybook` | Vitest Storybook project in **`@portfolio/web-ui`** (`@storybook/addon-vitest`, Chromium) |
 | `yarn test:watch` | Vitest watch mode                          |
+| `yarn storybook` | Storybook dev server on port **6006** (`--host 0.0.0.0` for Docker) |
+| `yarn build-storybook` | Static Storybook build for **`@portfolio/web-ui`** |
 
 ## Docker-first workflow
 
 The default local path uses **Docker Compose** (`docker-compose.yml`) so installs and Node version match CI and production images. The `web` image prepares **Yarn 1.22.22** at build time (`Dockerfile`), so container commands do not prompt for a Corepack/Yarn download.
+
+The `Dockerfile` defaults to **AWS Public ECR**’s mirror of the official Node image (`public.ecr.aws/docker/library/node:22-bookworm-slim`) so image pulls work when Docker Hub’s CDN hits TLS issues on some networks. The dev stage extends the **deps** stage so **Playwright**’s Chromium has required system libraries for **`yarn test:storybook`** (and **`yarn test`**) inside the container.
 
 ### Development (hot reload, bind mount)
 
@@ -38,7 +44,13 @@ The default local path uses **Docker Compose** (`docker-compose.yml`) so install
 docker compose up --build web
 ```
 
-The app listens on [http://localhost:3000](http://localhost:3000). Source is mounted from the host; `node_modules` live in a named volume.
+The app listens on [http://localhost:3000](http://localhost:3000). Storybook is available on **6006** inside the container; run it with published ports, for example:
+
+```bash
+docker compose run --rm --service-ports web yarn storybook
+```
+
+Then open [http://localhost:6006](http://localhost:6006). Source is mounted from the host; `node_modules` live in a named volume. Playwright browsers for component tests are baked into the image at **`PLAYWRIGHT_BROWSERS_PATH=/ms-playwright`** (see `Dockerfile`).
 
 ### Production-like image (standalone output)
 
@@ -78,34 +90,33 @@ docker compose --profile cv run --rm -v "$HOME/Downloads:/docs:ro" cv-tools \
 ## Linting and tests
 
 - **Lint**: `yarn lint` uses the flat ESLint config from `eslint.config.mjs` (Next.js presets).
-- **Tests**: `yarn test` runs [Vitest](https://vitest.dev/) tests focused on extracted logic modules (for example: `*.test.ts` under `app/`, `lib/`, and `storybook/ui/`).
-- **Storybook**: `yarn storybook` for local UI development; `yarn build-storybook` for a static build (see `docs/agents/storybook-ui.md`).
+- **Tests**: **`yarn test:unit`** runs `apps/web` and `packages/cv` specs in Node only. **`yarn test:storybook`** runs stories in **`packages/web-ui`** via headless Chromium (Playwright). **`yarn test`** runs the unit suite. CI uses **separate jobs** for unit vs Storybook tests (see `.github/workflows/ci.yml`).
+- **Storybook**: design-system package **`packages/web-ui`** (`@portfolio/web-ui`), fixtures under `packages/web-ui/src/fixtures/`, full notes in [`docs/agents/storybook-ui.md`](docs/agents/storybook-ui.md).
 
-CI runs install, lint, typecheck, test, and build in that order.
+CI runs install, lint, typecheck, unit tests, Storybook Vitest tests (with Playwright), production build, and Storybook static build.
 
 ## GitHub Actions
 
 Workflow: `.github/workflows/ci.yml`
 
-Triggers on pushes to `main` and `master`, plus pull requests. Uses Node 22, Yarn cache, and `yarn install --frozen-lockfile`.
+Triggers on pushes to `main` and on pull requests. Uses Node 22, Yarn cache, and `yarn install --frozen-lockfile`.
 
 ## Deploying on Vercel
 
 1. Import this repository in the [Vercel dashboard](https://vercel.com/new).
-2. Framework preset: **Next.js**. Install command: `yarn install`. Build command: `yarn build`. Output: default (Vercel handles Next.js).
+2. Framework preset: **Next.js**. Install command: `yarn install`. Build command: `yarn workspace @portfolio/web build` (or rely on root **`vercel.json`**). Set the Vercel project **root directory** to the **repository root** so workspaces resolve.
 3. Enable **Analytics** and **Speed Insights** in the Vercel project dashboard if you want first-party traffic and performance reporting for deployed environments.
 4. Set any required environment variables under **Project → Settings → Environment Variables** (this template does not require secrets for the static landing content).
 
 Preview deployments are created automatically for pull requests when the Git integration is enabled.
 
-This repo includes `@vercel/analytics` and `@vercel/speed-insights` through `app/observability.tsx`, rendered from the root layout, so the integration stays centralized and automatically covers all routes. Metrics appear after a Vercel deployment receives traffic.
+This repo includes `@vercel/analytics` and `@vercel/speed-insights` through `apps/web/app/observability.tsx`, rendered from the root layout, so the integration stays centralized and automatically covers all routes. Metrics appear after a Vercel deployment receives traffic.
 
 ## Project layout
 
-- `app/` — App Router routes, layout, global styles, and page views (`*.view.tsx`)
-- `storybook/ui/` — Shared DOM components, CSS modules, and Storybook stories
-- `lib/cv-pdf/` — Résumé PDF (react-pdf) and related tests
-- `public/` — Static assets
+- `apps/web/` — Next.js app (`app/`, `public/`, `lib/cv-pdf/`)
+- `packages/web-ui/` — Shared DOM UI (`@portfolio/web-ui`), Storybook, web CSS
+- `packages/cv/` — CV data and types (`@portfolio/cv`)
 - `Dockerfile` / `docker-compose.yml` — Container workflows
 - `.github/workflows/` — CI
 

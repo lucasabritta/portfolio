@@ -15,15 +15,26 @@ const eslintConfig = defineConfig([
       "portfolio/storybook-ui-boundary": "error",
     },
   },
+  {
+    settings: {
+      next: {
+        rootDir: "apps/web",
+      },
+    },
+  },
   globalIgnores([
+    "apps/web/.next/**",
     ".next/**",
     "out/**",
     "build/**",
     "node_modules/**",
+    "apps/web/next-env.d.ts",
     "next-env.d.ts",
     "vitest.config.mjs",
+    "packages/web-ui/vitest.config.mjs",
     "vitest.setup.ts",
-    "storybook-static/**",
+    "**/storybook-static/**",
+    "apps/web/public/storybook/**",
   ]),
 ]);
 

@@ -83,7 +83,7 @@ The parent agent: resolves **blockers**, triages **should fix**, and only then m
 Subagents should check, when relevant:
 
 - **Next.js**: App Router, Server vs Client components, data fetching patterns (`docs/agents/agent-workflow.md`).
-- **UI boundary**: Shared DOM under `storybook/ui/**`; ESLint `portfolio/storybook-ui-boundary` (see `storybook-ui` skill).
+- **UI boundary**: Shared DOM under `packages/web-ui/src/**`; ESLint `portfolio/storybook-ui-boundary` (see `storybook-ui` skill).
 - **CV PDF**: `lib/cv-pdf/**` uses react-pdf `StyleSheet`, not web CSS.
 - **Validation**: After code changes, `yarn lint`, `yarn typecheck`, `yarn test`, `yarn build` per `nextjs-change-checklist` skill (reviewer may cite; executor runs).
 

@@ -3,15 +3,15 @@ import path from "node:path";
 /** @typedef {import('eslint').Rule.RuleModule} RuleModule */
 
 const ALLOWED_TSX_PREFIXES = [
-  `${path.sep}storybook${path.sep}ui${path.sep}`,
-  `${path.sep}app${path.sep}`,
-  `${path.sep}lib${path.sep}cv-pdf${path.sep}`,
-  `${path.sep}.storybook${path.sep}`,
+  `${path.sep}packages${path.sep}web-ui${path.sep}src${path.sep}`,
+  `${path.sep}apps${path.sep}web${path.sep}app${path.sep}`,
+  `${path.sep}apps${path.sep}web${path.sep}lib${path.sep}cv-pdf${path.sep}`,
+  `${path.sep}packages${path.sep}web-ui${path.sep}.storybook${path.sep}`,
 ];
 
 /**
- * TSX that contains JSX must live under storybook/ui (web UI), app (views),
- * lib/cv-pdf (react-pdf), or .storybook (preview).
+ * TSX that contains JSX must live under packages/web-ui/src (design system),
+ * apps/web/app (Next views), apps/web/lib/cv-pdf (react-pdf), or web-ui .storybook (preview).
  * @type {RuleModule}
  */
 const rule = {
@@ -19,12 +19,12 @@ const rule = {
     type: "problem",
     docs: {
       description:
-        "Require DOM-oriented React components to live under storybook/ui (or allowed app / react-pdf paths).",
+        "Require DOM-oriented React components to live under `packages/web-ui/src/` (or allowed app / react-pdf paths).",
     },
     schema: [],
     messages: {
       forbidden:
-        "TSX with JSX must live under `storybook/ui/`, `app/`, `lib/cv-pdf/`, or `.storybook/`. Move this file or split view vs logic.",
+        "TSX with JSX must live under `packages/web-ui/src/`, `apps/web/app/`, `apps/web/lib/cv-pdf/`, or `packages/web-ui/.storybook/`. Move this file or split view vs logic.",
     },
   },
 

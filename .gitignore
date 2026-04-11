@@ -1,7 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
+# dependencies (root + any workspace that materializes its own node_modules)
+node_modules/
+
+# yarn / pnp
 /.pnp
 .pnp.*
 .yarn/*
@@ -11,17 +13,23 @@
 !.yarn/versions
 
 # testing
-/coverage
+coverage/
+**/coverage/
 
-# next.js
-/.next/
-/out/
+# next.js — apps/web (and any future apps/*)
+**/.next/
+out/
 
-# storybook
-storybook-static/
+# storybook — packages/web-ui (and any package that runs storybook build)
+**/storybook-static/
+# Storybook static bundle embedded in Next (`yarn build` / Vercel)
+apps/web/public/storybook/
 
-# production
-/build
+# optional package build outputs (if a workspace starts emitting to dist/)
+**/dist/
+
+# production / misc build dirs
+build/
 
 # misc
 .DS_Store
