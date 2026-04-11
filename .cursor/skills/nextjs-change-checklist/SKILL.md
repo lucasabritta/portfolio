@@ -36,7 +36,8 @@ Execute in order; **skip** any script absent from `package.json`:
 
 ## CV PDF (this repo)
 
-- After edits under `components/cv-pdf/**` or `lib/cv/**` used by the résumé PDF, run **`yarn vitest run components/cv-pdf/`** (includes `cv-pdf-integrity.test.ts` and the Docker dump test when enabled).
+- After edits under `lib/cv-pdf/**` or `lib/cv/**` used by the résumé PDF, run **`yarn vitest run lib/cv-pdf/`** (includes `cv-pdf-integrity.test.ts` and the Docker dump test when enabled).
+- After edits under `storybook/ui/**` or `.storybook/**`, run **`yarn build-storybook`** in addition to the usual checks.
 
 ## Done when
 

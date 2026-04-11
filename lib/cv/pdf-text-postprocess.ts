@@ -1,6 +1,6 @@
 /**
  * CV-specific fixes after generic PDF text normalization (template / line-break quirks).
- * Keeps `components/cv-pdf/pdf-text-normalize.ts` free of résumé-only string hacks.
+ * Keeps `lib/cv-pdf/pdf-text-normalize.ts` free of résumé-only string hacks.
  */
 export function finalizeCvPdfExtractLines(lines: string[]): string[] {
   const out = [...lines];

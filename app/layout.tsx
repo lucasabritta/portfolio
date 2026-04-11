@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Observability } from "@/components/observability";
+import { Observability } from "@/storybook/ui/observability";
 import { siteMetadata } from "@/app/layout.metadata";
 import "./globals.css";
 import styles from "@/app/layout.module.css";
