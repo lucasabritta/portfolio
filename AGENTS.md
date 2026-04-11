@@ -9,6 +9,7 @@ Open only the document that matches the task.
 3. [`docs/agents/cursor-mcp.md`](docs/agents/cursor-mcp.md) - project MCP setup and Vercel MCP notes
 4. [`docs/agents/agent-workflow.md`](docs/agents/agent-workflow.md) - how to use rules, skills, and validation
 5. [`docs/agents/cv-pdf-docker.md`](docs/agents/cv-pdf-docker.md) - CV PDF dumps, previews, and docx extract via **Docker Compose** (preferred over host Node/Python)
+6. [`docs/agents/storybook-ui.md`](docs/agents/storybook-ui.md) - shared DOM UI in `storybook/ui/`, Storybook commands, ESLint boundary
 
 ## Rules
 
@@ -26,6 +27,7 @@ Open only the document that matches the task.
 - [`.cursor/skills/vercel-deploy/SKILL.md`](.cursor/skills/vercel-deploy/SKILL.md)
 - [`.cursor/skills/ci-github-actions/SKILL.md`](.cursor/skills/ci-github-actions/SKILL.md)
 - [`.cursor/skills/nextjs-change-checklist/SKILL.md`](.cursor/skills/nextjs-change-checklist/SKILL.md)
+- [`.cursor/skills/storybook-ui/SKILL.md`](.cursor/skills/storybook-ui/SKILL.md)
 
 ## Other references
 

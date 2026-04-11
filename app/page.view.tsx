@@ -1,12 +1,12 @@
 import { cvData } from "@/lib/cv-data";
-import styles from "@/app/page.module.css";
-import { CertificationsSection } from "@/components/home/certifications-section";
-import { ContactSection } from "@/components/home/contact-section";
-import { EducationSection } from "@/components/home/education-section";
-import { ProjectsSection } from "@/components/home/projects-section";
-import { SummarySection } from "@/components/home/summary-section";
-import { WorkHistorySection } from "@/components/home/work-history-section";
-import { PortfolioHero } from "@/components/hero";
+import styles from "@/storybook/ui/portfolio-page.module.css";
+import { CertificationsSection } from "@/storybook/ui/home/certifications-section";
+import { ContactSection } from "@/storybook/ui/home/contact-section";
+import { EducationSection } from "@/storybook/ui/home/education-section";
+import { ProjectsSection } from "@/storybook/ui/home/projects-section";
+import { SummarySection } from "@/storybook/ui/home/summary-section";
+import { WorkHistorySection } from "@/storybook/ui/home/work-history-section";
+import { PortfolioHero } from "@/storybook/ui/hero";
 
 export function HomePageView() {
   return (

@@ -2,7 +2,7 @@ import { createElement } from "react";
 import { NextResponse } from "next/server";
 import { renderToBuffer } from "@react-pdf/renderer";
 
-import { CvPdfDocument } from "@/components/cv-pdf-document";
+import { CvPdfDocument } from "@/lib/cv-pdf/document";
 
 export async function generateCvPdfResponse(): Promise<NextResponse> {
   const generatedPdf = await renderToBuffer(createElement(CvPdfDocument));

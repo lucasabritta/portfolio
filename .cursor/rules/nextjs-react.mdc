@@ -12,7 +12,8 @@ alwaysApply: false
   - `.tsx` files are for view structure/composition.
   - `.ts` files are for reusable logic/helpers (formatters, selectors, mappers).
   - Web styles live in `.css`/`.module.css`.
-- For `components/cv-pdf/**`, keep styles in react-pdf `StyleSheet` files (`styles.ts`) and do not migrate PDF styles to web CSS.
+- **Web UI**: Shared DOM components live under `storybook/ui/**` (import via `@/storybook/ui/...`). Do not add new `components/` for web UI; ESLint enforces this.
+- For `lib/cv-pdf/**`, keep styles in react-pdf `StyleSheet` files (`styles.ts`) and do not migrate PDF styles to web CSS.
 - **Data fetching**: Prefer server-side fetching in Server Components; use `fetch` caching defaults intentionally. For client mutations, use patterns already present in the repo (e.g. Server Actions, route handlers).
 - **Metadata**: Use the Metadata API (`export const metadata` or `generateMetadata`) for SEO and social cards instead of ad-hoc `<head>` manipulation where possible.
 - **Imports**: Use path aliases if `tsconfig` defines them; otherwise relative imports — match existing style.

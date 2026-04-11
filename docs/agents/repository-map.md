@@ -6,15 +6,18 @@ Use this file when you need to locate common code or configuration.
 |------|---------|
 | `package.json` | Scripts, dependencies, and Node/Yarn metadata |
 | `app/` or `src/app/` | App Router routes, layouts, and server/client boundaries |
-| `components/` | Reusable UI components when present |
+| `storybook/ui/` | Shared DOM components, co-located CSS modules, and `*.stories.tsx` |
+| `.storybook/` | Storybook config (`main.ts`, `preview.tsx`) |
+| `lib/cv-pdf/` | CV PDF (react-pdf document, sections, pdf.js helpers, Vitest) |
 | `**/*.view.tsx` (or route `page.tsx` / `layout.tsx`) | View layer: JSX structure and composition |
 | `**/*.ts` (non-route/component files) | Logic layer: pure helpers, selectors, mappers, formatters |
 | `**/*.module.css` and `app/globals.css` | Web style layer |
-| `components/cv-pdf/styles.ts` | PDF style layer (`@react-pdf/renderer` `StyleSheet`) |
-| `components/cv-pdf/cv-pdf-integrity.test.ts` | CV PDF: required text fragments + sidebar URL geometry (pdf.js) |
-| `components/cv-pdf/cv-pdf-pdfjs.ts` | Bundled pdf.js + `pdf-parse` implementation (text + positioned runs) |
-| `components/cv-pdf/cv-pdf-vitest-helpers.ts` | Shared `renderToBuffer(CvPdfDocument)` for Vitest |
-| `components/cv-pdf/pdf-text-normalize.ts` | Generic `normalizePdfExtractLines` + CV `normalizeCvPdfExtractedText` |
+| `lib/cv-pdf/styles.ts` | PDF style layer (`@react-pdf/renderer` `StyleSheet`) |
+| `lib/cv-pdf/cv-pdf-integrity.test.ts` | CV PDF: required text fragments + sidebar URL geometry (pdf.js) |
+| `lib/cv-pdf/cv-pdf-pdfjs.ts` | Bundled pdf.js + `pdf-parse` implementation (text + positioned runs) |
+| `lib/cv-pdf/cv-pdf-vitest-helpers.ts` | Shared `renderToBuffer(CvPdfDocument)` for Vitest |
+| `lib/cv-pdf/pdf-text-normalize.ts` | Generic `normalizePdfExtractLines` + CV `normalizeCvPdfExtractedText` |
+| `tools/eslint-plugin-portfolio/` | Local ESLint plugin (`portfolio/storybook-ui-boundary`) |
 | `lib/cv/pdf-text-expectations.ts` | Substrings the integrity test expects from `cvData` |
 | `lib/cv/pdf-text-postprocess.ts` | CV-only tweaks after generic PDF text normalization |
 | `next.config.*` | Next.js configuration |

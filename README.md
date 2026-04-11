@@ -78,7 +78,8 @@ docker compose --profile cv run --rm -v "$HOME/Downloads:/docs:ro" cv-tools \
 ## Linting and tests
 
 - **Lint**: `yarn lint` uses the flat ESLint config from `eslint.config.mjs` (Next.js presets).
-- **Tests**: `yarn test` runs [Vitest](https://vitest.dev/) tests focused on extracted logic modules (for example: `*.test.ts` for helper modules under `app/` and `components/`).
+- **Tests**: `yarn test` runs [Vitest](https://vitest.dev/) tests focused on extracted logic modules (for example: `*.test.ts` under `app/`, `lib/`, and `storybook/ui/`).
+- **Storybook**: `yarn storybook` for local UI development; `yarn build-storybook` for a static build (see `docs/agents/storybook-ui.md`).
 
 CI runs install, lint, typecheck, test, and build in that order.
 
@@ -97,12 +98,13 @@ Triggers on pushes to `main` and `master`, plus pull requests. Uses Node 22, Yar
 
 Preview deployments are created automatically for pull requests when the Git integration is enabled.
 
-This repo includes `@vercel/analytics` and `@vercel/speed-insights` through a shared `components/observability.tsx` wrapper rendered from the root layout, so the integration stays centralized and automatically covers all routes. Metrics appear after a Vercel deployment receives traffic.
+This repo includes `@vercel/analytics` and `@vercel/speed-insights` through a shared `storybook/ui/observability.tsx` wrapper rendered from the root layout, so the integration stays centralized and automatically covers all routes. Metrics appear after a Vercel deployment receives traffic.
 
 ## Project layout
 
-- `app/` — App Router routes, layout, and global styles
-- `components/` — Shared UI plus colocated logic and logic tests (`*.ts`, `*.test.ts`)
+- `app/` — App Router routes, layout, global styles, and page views (`*.view.tsx`)
+- `storybook/ui/` — Shared DOM components, CSS modules, and Storybook stories
+- `lib/cv-pdf/` — Résumé PDF (react-pdf) and related tests
 - `public/` — Static assets
 - `Dockerfile` / `docker-compose.yml` — Container workflows
 - `.github/workflows/` — CI
@@ -115,7 +117,7 @@ All frontend changes should keep a clear separation of responsibilities:
 - **Logic (`.ts`)**: pure helpers, formatters, selectors, and assembly logic.
 - **Styles (`.css` / `.module.css`)**: web UI styling.
 
-For CV PDF generation (`components/cv-pdf/**`), keep this equivalent split:
+For CV PDF generation (`lib/cv-pdf/**`), keep this equivalent split:
 
 - **View (`.tsx`)** for react-pdf render trees (`Document`, `Page`, `View`, `Text`).
 - **Logic (`.ts`)** for pagination/data partition helpers.
