@@ -6,8 +6,10 @@ import {
   buildWorkHistoryLayout,
 } from "@/components/cv-pdf/work-history";
 import { BulletList } from "@/components/cv-pdf/sections/bullet-list";
-import { ContactsSection } from "@/components/cv-pdf/sections/contacts-section";
-import { LeftColumn } from "@/components/cv-pdf/sections/left-column";
+import {
+  LeftColumnLowerBand,
+  LeftColumnSummaryBand,
+} from "@/components/cv-pdf/sections/left-column";
 import { SummarySection } from "@/components/cv-pdf/sections/summary-section";
 import { WorkEntry } from "@/components/cv-pdf/sections/work-entry";
 import { WorkHistorySection } from "@/components/cv-pdf/sections/work-history-section";
@@ -31,16 +33,15 @@ export function CvPdfDocument() {
       title={`${cvData.name} CV`}
     >
       <Page size="LETTER" style={cvPdfStyles.page}>
-        <View style={cvPdfStyles.row}>
-          <LeftColumn cvData={cvData} />
+        <View style={[cvPdfStyles.row, cvPdfStyles.summaryBandRow]}>
+          <LeftColumnSummaryBand cvData={cvData} />
           <View style={cvPdfStyles.rightColumn}>
             <SummarySection summary={cvData.summary} highlights={summaryBullets} />
-            <ContactsSection
-              phone={cvData.phone}
-              email={cvData.email}
-              location={cvData.location}
-              contactLinks={cvData.contactLinks}
-            />
+          </View>
+        </View>
+        <View style={[cvPdfStyles.row, cvPdfStyles.lowerBandRow]}>
+          <LeftColumnLowerBand cvData={cvData} />
+          <View style={cvPdfStyles.rightColumn}>
             <WorkHistorySection entries={firstPageEntries} />
           </View>
         </View>
@@ -51,8 +52,14 @@ export function CvPdfDocument() {
           <View style={cvPdfStyles.leftColumn} />
           <View style={cvPdfStyles.rightColumn}>
             <BulletList items={firstOverflowAchievements} />
-            {remainingEntries.map((entry) => (
-              <WorkEntry key={buildPdfWorkEntryKey(entry)} entry={entry} />
+            {remainingEntries.map((entry, index) => (
+              <WorkEntry
+                key={buildPdfWorkEntryKey(entry)}
+                entry={entry}
+                stackPosition={
+                  index === 0 && firstOverflowAchievements.length === 0 ? "first" : "continued"
+                }
+              />
             ))}
           </View>
         </View>

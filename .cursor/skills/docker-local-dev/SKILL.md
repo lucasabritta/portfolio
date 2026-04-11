@@ -14,9 +14,13 @@ description: >-
 - Read `AGENTS.md` and any `README.md` sections that document compose service names and ports.
 - Confirm **Docker Desktop** (or compatible engine) is running on the machine.
 
+## CV PDF (this repo)
+
+- Prefer **`yarn cv:dump:docker`** or [`docs/agents/cv-pdf-docker.md`](../../../docs/agents/cv-pdf-docker.md) for rendering and comparing the résumé PDF (Vitest dump, Python raster/PNG, docx extract). Do not rely on host Python for those steps.
+
 ## Default procedure
 
-1. **Discover entrypoints**: Locate `Dockerfile`, `docker-compose.yml` / `docker-compose.yaml`, and `.env.example` (if present).
+1. **Discover entrypoints**: Locate `Dockerfile`, `docker-compose.yml` (this repo), and `.env.example` (if present).
 2. **Environment**: Copy `.env.example` → `.env` or `.env.local` as documented; never invent secret values—ask the user for missing credentials.
 3. **Build**: `docker compose build` (or `docker-compose build` if the repo uses v1 syntax—match existing docs).
 4. **Run**: `docker compose up` (add `-d` for detached). Watch logs for the Next.js ready URL.

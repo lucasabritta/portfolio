@@ -10,7 +10,7 @@ export function LeftColumnCertifications({
   certifications,
 }: LeftColumnCertificationsProps) {
   return (
-    <View style={cvPdfStyles.certificationsSection}>
+    <View style={[cvPdfStyles.certificationsSection, cvPdfStyles.sidebarTextColumn]}>
       <View style={cvPdfStyles.dividerLine} />
       <Text style={cvPdfStyles.sectionTitle}>Certifications</Text>
       {certifications.map((certification) => (

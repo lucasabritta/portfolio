@@ -1,6 +1,6 @@
 ---
 description: Compose file conventions for the local Docker stack
-globs: "**/compose*.yml"
+globs: "**/docker-compose*.yml"
 alwaysApply: false
 ---
 

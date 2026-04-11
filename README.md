@@ -30,7 +30,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Docker-first workflow
 
-The default local path uses **Docker Compose** so installs and Node version match CI and production images.
+The default local path uses **Docker Compose** (`docker-compose.yml`) so installs and Node version match CI and production images. The `web` image prepares **Yarn 1.22.22** at build time (`Dockerfile`), so container commands do not prompt for a Corepack/Yarn download.
 
 ### Development (hot reload, bind mount)
 
@@ -59,6 +59,20 @@ Override the dev command if needed, for example:
 
 ```bash
 docker compose run --rm web yarn lint
+```
+
+### CV PDF (Docker-first)
+
+- **Dump the CV PDF** (same Node as the `web` service): `yarn cv:dump:docker` → `tmp-cv-compare/docker-latest-cv.pdf`
+- **Full notes** (Python compare, PNG preview, fonts, docx extract): [`docs/agents/cv-pdf-docker.md`](docs/agents/cv-pdf-docker.md)
+- **Shell equivalent**: `scripts/cv/docker-dump.sh`
+
+Profile `cv` runs a slim Python image with the repo mounted (no Node). Examples:
+
+```bash
+docker compose --profile cv run --rm cv-tools python scripts/download_cv_fonts.py
+docker compose --profile cv run --rm -v "$HOME/Downloads:/docs:ro" cv-tools \
+  python scripts/extract_docx_cv_styles.py /docs/Lucas_Abritta_EM.docx
 ```
 
 ## Linting and tests
@@ -90,7 +104,7 @@ This repo includes `@vercel/analytics` and `@vercel/speed-insights` through a sh
 - `app/` — App Router routes, layout, and global styles
 - `components/` — Shared UI plus colocated logic and logic tests (`*.ts`, `*.test.ts`)
 - `public/` — Static assets
-- `Dockerfile` / `compose.yml` — Container workflows
+- `Dockerfile` / `docker-compose.yml` — Container workflows
 - `.github/workflows/` — CI
 
 ## Frontend layering convention

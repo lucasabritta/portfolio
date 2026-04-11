@@ -34,6 +34,10 @@ Execute in order; **skip** any script absent from `package.json`:
 - If CI runs in Linux, avoid macOS-only assumptions in scripts or path separators.
 - If the team is Docker-first, optionally smoke-test with `docker compose up --build` after large dependency or config changes.
 
+## CV PDF (this repo)
+
+- After edits under `components/cv-pdf/**` or `lib/cv/**` used by the résumé PDF, run **`yarn vitest run components/cv-pdf/`** (includes `cv-pdf-integrity.test.ts` and the Docker dump test when enabled).
+
 ## Done when
 
 - `yarn lint`, `yarn typecheck`, and `yarn test` have all been run and passed before reporting completion.

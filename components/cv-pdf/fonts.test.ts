@@ -1,3 +1,5 @@
+import path from "node:path";
+
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const registerMock = vi.fn();
@@ -16,7 +18,7 @@ describe("cv pdf font registration", () => {
     registerHyphenationCallbackMock.mockClear();
   });
 
-  it("registers only web font sources to stay platform-agnostic", async () => {
+  it("registers bundled TTFs under public/cv-fonts (Word/Lato+Raleway parity)", async () => {
     await import("@/components/cv-pdf/fonts");
 
     const fontSources = registerMock.mock.calls.flatMap(([definition]) => {
@@ -32,6 +34,9 @@ describe("cv pdf font registration", () => {
     });
 
     expect(fontSources.length).toBeGreaterThan(0);
-    expect(fontSources.every((src) => /^https?:\/\//.test(src))).toBe(true);
+    expect(fontSources.every((src) => src.endsWith(".ttf"))).toBe(true);
+    expect(fontSources.every((src) => src.includes(`${path.sep}public${path.sep}cv-fonts${path.sep}`))).toBe(
+      true,
+    );
   });
 });

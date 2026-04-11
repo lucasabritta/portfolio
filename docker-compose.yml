@@ -25,5 +25,17 @@ services:
     profiles:
       - prod
 
+  # Python tools: extract docx styles, download fonts, raster-compare PDFs (no Node).
+  # Example: docker compose --profile cv run --rm cv-tools python scripts/download_cv_fonts.py
+  # Example: docker compose --profile cv run --rm -v "C:/Users/Lucas/Downloads:/docs:ro" cv-tools \
+  #   python scripts/extract_docx_cv_styles.py /docs/Lucas_Abritta_EM.docx
+  cv-tools:
+    image: python:3.12-slim-bookworm
+    working_dir: /app
+    volumes:
+      - .:/app
+    profiles:
+      - cv
+
 volumes:
   web_node_modules:

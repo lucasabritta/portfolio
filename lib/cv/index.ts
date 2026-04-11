@@ -13,6 +13,9 @@ export const cvData = {
   workHistory: [...cvWorkHistory],
 } satisfies CvData;
 
+export { buildCvPdfRequiredSubstrings } from "./pdf-text-expectations";
+export { finalizeCvPdfExtractLines } from "./pdf-text-postprocess";
+
 export type {
   ContactLink,
   CvData,

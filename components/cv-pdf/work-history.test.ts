@@ -14,7 +14,10 @@ describe("work-history helper", () => {
     ]);
     expect(layout.firstOverflowAchievements).toEqual(cvData.workHistory[2]?.achievements ?? []);
     expect(layout.remainingEntries).toEqual(cvData.workHistory.slice(3));
-    expect(layout.summaryBullets).toEqual(cvData.summaryHighlights);
+    expect(layout.summaryBullets).toEqual([
+      ...cvData.summaryHighlights,
+      `Tech stack: ${cvData.techStack.join(", ")}.`,
+    ]);
     expect(layout.summaryBullets).not.toBe(cvData.summaryHighlights);
   });
 

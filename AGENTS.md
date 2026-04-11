@@ -8,6 +8,7 @@ Open only the document that matches the task.
 2. [`docs/agents/repository-map.md`](docs/agents/repository-map.md) - where common code and config live
 3. [`docs/agents/cursor-mcp.md`](docs/agents/cursor-mcp.md) - project MCP setup and Vercel MCP notes
 4. [`docs/agents/agent-workflow.md`](docs/agents/agent-workflow.md) - how to use rules, skills, and validation
+5. [`docs/agents/cv-pdf-docker.md`](docs/agents/cv-pdf-docker.md) - CV PDF dumps, previews, and docx extract via **Docker Compose** (preferred over host Node/Python)
 
 ## Rules
 

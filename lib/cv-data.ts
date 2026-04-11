@@ -1,4 +1,4 @@
-export { cvData } from "@/lib/cv";
+export { buildCvPdfRequiredSubstrings, cvData } from "@/lib/cv";
 export type {
   ContactLink,
   CvData,

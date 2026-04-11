@@ -7,7 +7,7 @@ export const cvWorkHistory = [
     location: "Miami, USA (Remote)",
     period: "01/2026 - present",
     summary:
-      "Leading the engineering team responsible to make the company enterprise ready, focusing on scalability, reliability, and delivery speed.",
+      "Leading the engineering team responsible for making the company enterprise-ready, focusing on scalability, reliability, and delivery speed.",
     achievements: [
       "Established clear ownership and processes across teams, improving delivery predictability and reducing cycle time.",
       "Improved system observability and incident response, reducing downtime and increasing reliability.",

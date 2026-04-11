@@ -25,7 +25,10 @@ export function buildWorkHistoryLayout(cvData: CvData): WorkHistoryLayout {
       ? []
       : [...finalFirstPageEntry.entry.achievements],
     remainingEntries: cvData.workHistory.slice(3),
-    summaryBullets: [...cvData.summaryHighlights],
+    summaryBullets: [
+      ...cvData.summaryHighlights,
+      `Tech stack: ${cvData.techStack.join(", ")}.`,
+    ],
   };
 }
 
