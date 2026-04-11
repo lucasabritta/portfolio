@@ -1,40 +1,61 @@
 ---
 name: storybook-ui
 description: >-
-  Develops and validates shared DOM UI in storybook/ui: Storybook dev/build,
-  co-located stories, and the portfolio/storybook-ui-boundary ESLint rule.
+  Develops and validates shared DOM UI in packages/web-ui (@portfolio/web-ui):
+  Storybook dev/build, co-located stories, Vitest + @storybook/addon-vitest,
+  fixtures, and the portfolio/storybook-ui-boundary ESLint rule.
   Use when adding or moving React components, configuring Storybook, or fixing
   UI library boundaries.
 ---
 
 # Storybook UI workflow
 
+**`@portfolio/web-ui`** is a **Yarn workspace package** (not a folder inside the Next app): keep DOM components, stories, and web CSS here; **do not** import `apps/web/app/**` from this package. CV data/types come from **`@portfolio/cv`** only.
+
 ## Read first
 
-- [`docs/agents/storybook-ui.md`](../../../docs/agents/storybook-ui.md) — layout, imports, ESLint boundary
+- [`docs/agents/project-overview.md`](../../../docs/agents/project-overview.md) — workspaces monorepo vs monolith
+- [`docs/agents/storybook-ui.md`](../../../docs/agents/storybook-ui.md) — layout, fixtures, stories contract, Vitest, Docker, PR checklist
 - [`docs/agents/repository-map.md`](../../../docs/agents/repository-map.md) — path reference
 
 ## Conventions
 
-- Put reusable DOM components in **`storybook/ui/`**; import from pages as `@/storybook/ui/...`.
-- Add **`*.stories.tsx`** next to the component; prefer **`UI/<Area>/<Name>`** titles (see existing stories).
-- Share cross-page styles via modules under **`storybook/ui/`** (for example `portfolio-page.module.css`), not `app/*.module.css`.
-- Résumé PDF stays in **`lib/cv-pdf/**`** (react-pdf); do not move PDF sections into Storybook.
+- Put reusable DOM components in **`packages/web-ui/src/`**; the Next app imports from **`@portfolio/web-ui`** (public API in `src/index.ts`). **`HomePageView`** uses **relative** imports inside the package so Next does not need a `@ui` alias.
+- Put shared story args and viewport helpers in **`packages/web-ui/src/fixtures/`**; stories must not duplicate large `cvData` shapes.
+- Add **`*.stories.tsx`** next to the component; titles **`UI/<Area>/<Name>`** or **`Pages/<Route>`**.
+- Every story file: **`tags: ['autodocs']`**, **`Default`**, semantic variants (`Empty`, `LongContent`, `ManyItems`, `NarrowViewport`, …), **`narrowMobileStory`** from fixtures where responsive coverage is required.
+- Use **`play`** + **`storybook/test`** when the story renders focusable elements (links, buttons).
+- Share cross-page styles via co-located modules under **`packages/web-ui/src/`**, not `apps/web/app/*.module.css`.
+- Résumé PDF stays in **`apps/web/lib/cv-pdf/**`** (react-pdf); do not move PDF sections into Storybook.
 
 ## Commands
+
+**Host** (requires Node **22.12+** per `package.json` `engines` for Storybook CLI / CI parity):
 
 ```bash
 yarn storybook
 yarn build-storybook
+yarn test:storybook
 ```
 
-After UI changes, also run the **`nextjs-change-checklist`** skill (`yarn lint`, `yarn typecheck`, `yarn test`, `yarn build`).
+**Docker** (same scripts as CI; Playwright browsers live in the image at `PLAYWRIGHT_BROWSERS_PATH`):
+
+```bash
+docker compose run --rm web yarn lint
+docker compose run --rm web yarn typecheck
+docker compose run --rm web yarn test:storybook
+docker compose run --rm web yarn build
+docker compose run --rm web yarn build-storybook
+docker compose run --rm --service-ports web yarn storybook
+```
+
+After UI changes, also run the **`nextjs-change-checklist`** skill where applicable.
 
 ## ESLint
 
-If `yarn lint` reports **`portfolio/storybook-ui-boundary`**, the file contains JSX but is outside `storybook/ui/`, `app/`, `lib/cv-pdf/`, or `.storybook/`. Move the component or split JSX into an allowed path.
+If `yarn lint` reports **`portfolio/storybook-ui-boundary`**, the file contains JSX but is outside **`packages/web-ui/src/`**, **`apps/web/app/`**, **`apps/web/lib/cv-pdf/`**, or **`packages/web-ui/.storybook/`**. Move the component or split JSX into an allowed path.
 
 ## Done when
 
-- `yarn lint` and `yarn build-storybook` pass for Storybook-affecting changes.
-- New components have stories (or a documented exception for non-visual glue).
+- `yarn lint`, `yarn typecheck`, `yarn test:storybook`, and `yarn build-storybook` pass (prefer Docker `web` service for parity with CI); app changes also need `yarn test:unit`.
+- New components follow the PR checklist in `docs/agents/storybook-ui.md`.

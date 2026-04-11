@@ -18,6 +18,7 @@ description: >-
 - **Package manager**: Use **yarn** in CI (`yarn install --frozen-lockfile` when `yarn.lock` exists; otherwise follow lockfile policy the repo uses).
 - **Node version**: Match `package.json` `engines`, `.nvmrc`, or `.node-version` if present; otherwise use active LTS and document changes.
 - **Steps order**: checkout → setup Node → cache yarn (optional) → install → lint → typecheck → test → build (skip stages that do not exist yet).
+- **Storybook Vitest** (this repo): CI splits **`yarn test:unit`** (no Playwright) and **`yarn test:storybook`** (after **`yarn playwright install chromium --with-deps`**) into separate jobs so the **`@portfolio/web-ui`** package stays **decoupled** from app unit tests—consistent with this repo’s **Yarn workspaces** layout. Prefer **separate jobs or clear `needs:`** when adding new checks so unrelated packages do not false-fail each other.
 
 ## Fixing failures
 

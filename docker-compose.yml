@@ -6,11 +6,15 @@ services:
       target: development
     ports:
       - "3000:3000"
+      - "6006:6006"
     volumes:
       - .:/app
       - web_node_modules:/app/node_modules
+      # Keep dev build output off the bind mount (avoids Turbopack/.next lock issues on Windows + Docker Desktop).
+      - web_apps_web_next:/app/apps/web/.next
     environment:
       NEXT_TELEMETRY_DISABLED: "1"
+      PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
 
   web-prod:
     build:
@@ -39,3 +43,4 @@ services:
 
 volumes:
   web_node_modules:
+  web_apps_web_next:

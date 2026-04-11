@@ -1,0 +1,10 @@
+---
+description: Use subagents for plan and feature design validation when the user asks or before large implementation
+alwaysApply: true
+---
+
+# Subagent plan validation and code review
+
+- When the user asks to **validate a plan**, **review a feature or design**, or to **use subagents** for **plan** validation, read and follow **`.cursor/skills/subagent-plan-review/SKILL.md`**. For **code review** / **PR review** / **diff review**, read **`.cursor/skills/subagent-code-review/SKILL.md`** (`.cursor/rules/subagent-code-review.mdc`).
+- For **large or cross-cutting** plans (new routes, new `packages/web-ui` surfaces, CI/config, or multi-package refactors) while still in **design or planning**, prefer a **readonly `explore`** subagent pass per this skill—even if the user did not say “subagent,” unless they want a single-agent pass.
+- Do **not** spawn subagents for trivial one-line fixes unless the user asks.

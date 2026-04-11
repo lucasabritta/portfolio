@@ -1,0 +1,53 @@
+.educationList {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.educationCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+.educationHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.educationName {
+  color: var(--foreground);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.educationLocation {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.educationDate {
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.educationDegree {
+  color: var(--foreground);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .educationHeader {
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

@@ -17,11 +17,20 @@ Use this file for repository-specific working conventions.
 ## Agent expectations
 
 - Prefer small, focused changes.
+- Treat the repository as a **workspaces monorepo, not a monolith**: **`apps/web`**, **`packages/web-ui`**, **`packages/cv`**, and **`tools/`** are separate concerns. Preserve boundaries (imports, ESLint, CI job split for unit vs Storybook tests); do not merge layers or add cross-cutting shortcuts. See [`docs/agents/project-overview.md`](project-overview.md).
 - Match nearby patterns before introducing new ones.
 - Keep frontend separation explicit: `.tsx` for views, `.ts` for logic, and `.css`/`.module.css` for web styles.
-- For **`storybook/ui/**`**, keep shared DOM components documented with Storybook; do not add ad-hoc `components/` folders for web UI (ESLint enforces this).
+- For **`packages/web-ui/**`**, keep shared DOM components documented with Storybook; do not add ad-hoc `components/` folders for web UI (ESLint enforces this).
 - For **`lib/cv-pdf/**`**, use react-pdf `StyleSheet` (`styles.ts`) instead of web CSS while still extracting reusable logic into `.ts` files.
 - Do not commit secrets; use Vercel or GitHub environment configuration for deploy-time values.
+
+## Subagent plan validation
+
+When you need an **independent** pass over a **plan or feature design**, use the **`subagent-plan-review`** skill: spawn readonly `explore` subagents via the Task tool; parallel plan + implementation review when both apply. See `.cursor/skills/subagent-plan-review/SKILL.md` and `.cursor/rules/subagent-plan-review.mdc`.
+
+## Subagent code review
+
+When you need an **independent** pass over **implementation** (PR, diff, pre-merge), use the **`subagent-code-review`** skill: default to readonly `explore` reviewers; use a command-running subagent only when `yarn` checks are required. Optional **two parallel** reviewers (e.g. general + security/a11y). See `.cursor/skills/subagent-code-review/SKILL.md` and `.cursor/rules/subagent-code-review.mdc`.
 
 ## Validation
 
@@ -31,6 +40,6 @@ Before saying a task is complete, run at minimum:
 
 1. `yarn lint`
 2. `yarn typecheck`
-3. `yarn test`
+3. `yarn test:unit` and `yarn test:storybook` (or `yarn test`)
 
 Do not mark the task done until these pass, unless the user explicitly accepts a documented exception.
