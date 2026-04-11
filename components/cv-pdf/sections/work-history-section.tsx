@@ -17,9 +17,14 @@ export function WorkHistorySection({ entries }: WorkHistorySectionProps) {
   return (
     <View style={cvPdfStyles.workSection}>
       <View style={cvPdfStyles.summaryDivider} />
-      <Text style={[cvPdfStyles.sectionTitle, cvPdfStyles.workHistoryTitle]}>Work Experience</Text>
-      {entries.map(({ entry, showAchievements }) => (
-        <WorkEntry key={`${entry.company}-${entry.role}-${entry.period}`} entry={entry} showAchievements={showAchievements} />
+      <Text style={[cvPdfStyles.sectionTitle, cvPdfStyles.workHistoryTitle]}>Work History</Text>
+      {entries.map(({ entry, showAchievements }, index) => (
+        <WorkEntry
+          key={`${entry.company}-${entry.role}-${entry.period}`}
+          entry={entry}
+          showAchievements={showAchievements}
+          stackPosition={index === 0 ? "first" : "continued"}
+        />
       ))}
       {entries.length > 0 && !entries[entries.length - 1].showAchievements ? (
         <Text style={cvPdfStyles.achievementsTitle}>Key achievements:</Text>

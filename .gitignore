@@ -24,6 +24,7 @@
 .DS_Store
 *.pem
 tmp-cv-compare/
+cv-compare-generated.pdf
 
 # debug
 npm-debug.log*

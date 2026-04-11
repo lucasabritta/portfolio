@@ -1,19 +1,23 @@
+import path from "node:path";
+
 import { Font } from "@react-pdf/renderer";
 
 /**
- * Match reference CV typography (Lato body, Raleway headings).
- * Fonts load from Google Fonts at PDF render time (API route / Node).
+ * Local TTFs under `public/cv-fonts/` (Word CV uses Lato + Raleway).
+ * Populate with: `docker compose --profile cv run --rm cv-tools python scripts/download_cv_fonts.py`
  */
+const cvFontDir = path.join(process.cwd(), "public", "cv-fonts");
+
 Font.register({
   family: "Lato",
   fonts: [
     {
       fontWeight: 400,
-      src: "https://fonts.gstatic.com/s/lato/v25/S6uyw4BMUTPHvxk.ttf",
+      src: path.join(cvFontDir, "Lato-Regular.ttf"),
     },
     {
       fontWeight: 700,
-      src: "https://fonts.gstatic.com/s/lato/v25/S6u9w4BMUTPHh6UVew8.ttf",
+      src: path.join(cvFontDir, "Lato-Bold.ttf"),
     },
   ],
 });
@@ -23,11 +27,11 @@ Font.register({
   fonts: [
     {
       fontWeight: 400,
-      src: "https://fonts.gstatic.com/s/raleway/v37/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaooCP.ttf",
+      src: path.join(cvFontDir, "Raleway-Regular.ttf"),
     },
     {
       fontWeight: 700,
-      src: "https://fonts.gstatic.com/s/raleway/v37/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVs9pYCP.ttf",
+      src: path.join(cvFontDir, "Raleway-Bold.ttf"),
     },
   ],
 });

@@ -7,7 +7,7 @@ alwaysApply: true
 
 - **Package manager**: Use **yarn** only (`yarn install`, `yarn add`, `yarn <script>`). Do not use npm or pnpm unless the team explicitly migrates.
 - **Framework**: **Next.js** (App Router) and **latest stable React**. Prefer Server Components by default; add `"use client"` only when needed (browser APIs, state, effects).
-- **Local dev**: Prefer **Docker** (Dockerfile / compose) as the documented way to run the app locally. If both raw `yarn dev` and Docker exist, follow README or the `docker-local-dev` skill for the canonical path.
+- **Local dev**: Prefer **Docker Compose** for installs and commands (`docker compose up web`, `docker compose run --rm web yarn <script>`) so Node/yarn match CI. Use host `yarn` only when Docker is unavailable. For **CV PDF** dumps, raster previews, and docx style extraction, use Docker only — see [`docs/agents/cv-pdf-docker.md`](docs/agents/cv-pdf-docker.md) and `yarn cv:dump:docker`.
 - **CI**: **GitHub Actions** in `.github/workflows/` owns automated checks. Do not weaken checks to greenwash; fix or discuss.
 - **Deploy**: Treat **Vercel** as the production target. Respect Vercel env vars and preview URLs; avoid hardcoding production domains in code.
 - **Changes**: Keep diffs focused; do not refactor unrelated code. Preserve unrelated files and behavior unless the task requires otherwise.
