@@ -1,0 +1,27 @@
+{
+  "name": "@portfolio/frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev:docker": "next dev --hostname 0.0.0.0 --port 3000",
+    "build": "yarn workspace @portfolio/storybook build-storybook && next build",
+    "start": "next start",
+    "start:docker": "next start --hostname 0.0.0.0 --port 3000"
+  },
+  "dependencies": {
+    "@portfolio/backend": "*",
+    "@portfolio/resume-content": "*",
+    "@portfolio/storybook": "*",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
+    "next": "16.2.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/react": "^16.3.0",
+    "tailwindcss": "^4"
+  }
+}

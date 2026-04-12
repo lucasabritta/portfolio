@@ -6,13 +6,13 @@
 node_modules
 **/node_modules
 
-# Next.js — apps/web (and any future App Router apps)
+# Next.js — apps/frontend (and any future App Router apps)
 **/.next
 **/out
 
-# Storybook static export — packages/web-ui / embedded under Next public
+# Storybook static export — packages/storybook / embedded under Next public
 **/storybook-static
-apps/web/public/storybook
+apps/frontend/public/storybook
 
 # Test / coverage artifacts
 coverage

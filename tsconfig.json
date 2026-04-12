@@ -14,23 +14,25 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./apps/web/*"],
-      "@portfolio/cv": ["./packages/cv/src/index.ts"],
-      "@portfolio/web-ui": ["./packages/web-ui/src/index.ts"],
-      "@ui/*": ["./packages/web-ui/src/*"]
+      "@/*": ["./apps/frontend/*"],
+      "@portfolio/resume-content": ["./packages/resume-content/src/index.ts"],
+      "@portfolio/storybook": ["./packages/storybook/src/index.ts"],
+      "@ui/*": ["./packages/storybook/src/*"]
     }
   },
   "include": [
-    "apps/web/**/*.ts",
-    "apps/web/**/*.tsx",
-    "packages/cv/**/*.ts",
-    "packages/web-ui/**/*.ts",
-    "packages/web-ui/**/*.tsx",
-    "packages/web-ui/.storybook/**/*.ts",
-    "packages/web-ui/.storybook/**/*.tsx",
+    "apps/frontend/**/*.ts",
+    "apps/frontend/**/*.tsx",
+    "apps/backend/**/*.ts",
+    "apps/backend/**/*.tsx",
+    "packages/resume-content/**/*.ts",
+    "packages/storybook/**/*.ts",
+    "packages/storybook/**/*.tsx",
+    "packages/storybook/.storybook/**/*.ts",
+    "packages/storybook/.storybook/**/*.tsx",
     "vitest.setup.ts",
     "vitest.shims.d.ts",
     "tools/**/*.mjs"
   ],
-  "exclude": ["node_modules", "apps/web/.next", "**/storybook-static"]
+  "exclude": ["node_modules", "apps/frontend/.next", "**/storybook-static"]
 }

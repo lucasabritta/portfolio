@@ -12,19 +12,20 @@ Related product work may live in separate repositories:
 
 ## Yarn workspaces monorepo, not a monolith
 
-The portfolio uses **one git root**, **Yarn workspaces** (`apps/*`, `packages/*`), and **one lockfile** so the **Next app**, **web UI library**, and **CV package** stay **separately versioned and importable** — not a monolith where every feature reaches into every layer.
+The portfolio uses **one git root**, **Yarn workspaces** (`apps/*`, `packages/*`), and **one lockfile** so the **Next app**, **Storybook library**, **résumé data**, and **PDF backend** stay **separately versioned and importable** — not a monolith where every feature reaches into every layer.
 
 | Surface | Role |
 |---------|------|
-| `apps/web` (`@portfolio/web`) | Next.js App Router: routes, layouts, `lib/cv-pdf/`, `public/` |
-| `packages/web-ui` (`@portfolio/web-ui`) | Shared DOM components, Storybook (`.storybook/`), web CSS; consumed by the app via **`@portfolio/web-ui`** |
-| `packages/cv` (`@portfolio/cv`) | CV types, `cvData`, PDF text helpers, small shared formatters (`buildPhoneHref`, work-history keys) |
+| `apps/frontend` (`@portfolio/frontend`) | Next.js App Router: routes, layouts, `public/` |
+| `packages/storybook` (`@portfolio/storybook`) | Shared DOM components, Storybook (`.storybook/`), web CSS; consumed by the app via **`@portfolio/storybook`** |
+| `packages/resume-content` (`@portfolio/resume-content`) | Résumé types, `resumeData`, small shared formatters (`buildPhoneHref`, work-history keys) |
+| `apps/backend` (`@portfolio/backend`) | CV PDF generation (react-pdf, pdf.js); consumed by the Next API route |
 | `tools/` | Repo-local tooling |
 
 **Agent expectations:**
 
-- Respect **import direction** and **layer boundaries** (see [`docs/agents/repository-map.md`](repository-map.md)). The UI package must not import from `apps/web/app/**`.
-- When validating changes, prefer the **narrowest** meaningful checks: e.g. `yarn test:unit` vs `yarn test:storybook`, or targeted Vitest paths under `apps/web/lib/cv-pdf/` when only PDF code moved. CI already runs unit and Storybook tests in **separate jobs** to keep those surfaces decoupled.
+- Respect **import direction** and **layer boundaries** (see [`docs/agents/repository-map.md`](repository-map.md)). The Storybook package must not import from `apps/frontend/app/**` or from **`@portfolio/resume-content`**.
+- When validating changes, prefer the **narrowest** meaningful checks: e.g. `yarn test:unit:frontend` vs `yarn test:unit:backend` vs `yarn test:storybook`, or targeted Vitest paths under `apps/backend/src/cv-pdf/` when only PDF code moved. CI runs unit and Storybook tests in **separate jobs** to keep those surfaces decoupled.
 - Sibling **product** repos (Frontend, Backend, `vectorization_pipeline`) remain **outside** this tree; do not assume their packages are linked here unless files prove it.
 
 ## Intended stack

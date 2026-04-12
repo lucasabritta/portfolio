@@ -1,29 +1,62 @@
-// Unit tests only: app (`apps/web`) and shared CV package (`packages/cv`).
-// Storybook browser tests run via `yarn workspace @portfolio/web-ui test:storybook`.
+// Unit tests: apps/frontend (jsdom), apps/backend (node), packages/resume-content (node).
+// Storybook browser tests: `yarn workspace @portfolio/storybook test:storybook`.
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { defineConfig } from "vitest/config";
+import { defineConfig, defineProject } from "vitest/config";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const sharedResolve = {
+  alias: {
+    "@portfolio/resume-content": path.resolve(dirname, "packages/resume-content/src/index.ts"),
+  },
+};
+
 export default defineConfig({
-  resolve: {
-    alias: {
-      "@": path.resolve(dirname, "apps/web"),
-      "@portfolio/cv": path.resolve(dirname, "packages/cv/src/index.ts"),
-    },
-  },
-  esbuild: {
-    jsx: "automatic",
-  },
   test: {
-    name: "unit",
-    environment: "node",
-    include: [
-      "apps/web/**/*.{test,spec}.{ts,tsx}",
-      "packages/cv/**/*.{test,spec}.{ts,tsx}",
+    projects: [
+      defineProject({
+        resolve: {
+          alias: {
+            ...sharedResolve.alias,
+            "@": path.resolve(dirname, "apps/frontend"),
+          },
+        },
+        esbuild: { jsx: "automatic" },
+        test: {
+          name: "unit-frontend",
+          environment: "jsdom",
+          include: ["apps/frontend/**/*.{test,spec}.{ts,tsx}"],
+          exclude: ["**/node_modules/**", "**/.next/**"],
+          setupFiles: ["./vitest.setup.ts"],
+        },
+      }),
+      defineProject({
+        resolve: {
+          alias: {
+            ...sharedResolve.alias,
+            "@cv-pdf": path.resolve(dirname, "apps/backend/src/cv-pdf"),
+          },
+        },
+        esbuild: { jsx: "automatic" },
+        test: {
+          name: "unit-backend",
+          environment: "node",
+          include: ["apps/backend/**/*.{test,spec}.{ts,tsx}"],
+          exclude: ["**/node_modules/**"],
+          setupFiles: ["./vitest.setup.ts"],
+        },
+      }),
+      defineProject({
+        resolve: { alias: { ...sharedResolve.alias } },
+        test: {
+          name: "unit-resume-content",
+          environment: "node",
+          include: ["packages/resume-content/**/*.{test,spec}.ts"],
+          exclude: ["**/node_modules/**"],
+          setupFiles: ["./vitest.setup.ts"],
+        },
+      }),
     ],
-    exclude: ["**/node_modules/**", "**/.next/**", "**/storybook-static/**"],
-    setupFiles: ["./vitest.setup.ts"],
   },
 });

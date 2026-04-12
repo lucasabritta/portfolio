@@ -6,5 +6,5 @@ alwaysApply: true
 # Subagent code review
 
 - When the user asks for a **code review**, **PR review**, **diff review**, **pre-merge review**, a **second opinion** on code, or to **review changes** with **subagents**, read and follow **`.cursor/skills/subagent-code-review/SKILL.md`**.
-- For **substantive** change sets (multiple files, new behavior, routes, or `packages/web-ui` additions), prefer at least one **readonly `explore`** subagent review before calling the work **done** or **merge-ready**, unless the user explicitly wants a single-agent pass.
+- For **substantive** change sets (multiple files, new behavior, routes, or `packages/storybook` additions), prefer at least one **readonly `explore`** subagent review before calling the work **done** or **merge-ready**, unless the user explicitly wants a single-agent pass.
 - For **plan or design validation** (not implementation review), use **`subagent-plan-review`** instead or in parallel per that skill.

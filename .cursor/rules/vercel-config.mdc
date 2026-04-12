@@ -8,6 +8,6 @@ alwaysApply: false
 
 - **Default**: Next.js on Vercel should work with **zero or minimal** `vercel.json`. Add config only for headers, redirects, rewrites, or regions when product needs require it.
 - **Environment variables**: Define secrets in the Vercel project (Production / Preview / Development). Reference them in Next.js via `process.env.NEXT_PUBLIC_*` only for values that must be public in the browser.
-- **Build command**: Should match CI (`yarn build` or repo standard). Output: Next.js default (no custom `dist` unless documented).
+- **Build command**: Should match CI (`yarn build` / `yarn workspace @portfolio/frontend build` or repo standard). This monorepo sets **`outputDirectory`** to **`apps/frontend/.next`** in root `vercel.json` with the Vercel project root at the **repository root** so Yarn workspaces resolve.
 - Do not commit **`.vercel` project linking** if the team treats it as personal; follow `.gitignore` conventions already in the repo.
 - Broader release/check steps: skill **`vercel-deploy`**.

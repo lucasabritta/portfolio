@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
+    // When typechecking imports of `@portfolio/backend`, tsc follows into `cv-pdf/**`
+    // which uses `@cv-pdf/*` — mirror the backend package's path alias here.
+    "paths": {
+      "@/*": ["./*"],
+      "@cv-pdf/*": [
+        "../backend/src/cv-pdf/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "testing-library-vitest.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}

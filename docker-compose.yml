@@ -1,5 +1,5 @@
 services:
-  web:
+  frontend:
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,14 +9,13 @@ services:
       - "6006:6006"
     volumes:
       - .:/app
-      - web_node_modules:/app/node_modules
-      # Keep dev build output off the bind mount (avoids Turbopack/.next lock issues on Windows + Docker Desktop).
-      - web_apps_web_next:/app/apps/web/.next
+      - frontend_node_modules:/app/node_modules
+      - frontend_apps_next:/app/apps/frontend/.next
     environment:
       NEXT_TELEMETRY_DISABLED: "1"
       PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
 
-  web-prod:
+  frontend-prod:
     build:
       context: .
       dockerfile: Dockerfile
@@ -29,10 +28,6 @@ services:
     profiles:
       - prod
 
-  # Python tools: extract docx styles, download fonts, raster-compare PDFs (no Node).
-  # Example: docker compose --profile cv run --rm cv-tools python scripts/download_cv_fonts.py
-  # Example: docker compose --profile cv run --rm -v "C:/Users/Lucas/Downloads:/docs:ro" cv-tools \
-  #   python scripts/extract_docx_cv_styles.py /docs/Lucas_Abritta_EM.docx
   cv-tools:
     image: python:3.12-slim-bookworm
     working_dir: /app
@@ -42,5 +37,5 @@ services:
       - cv
 
 volumes:
-  web_node_modules:
-  web_apps_web_next:
+  frontend_node_modules:
+  frontend_apps_next:
