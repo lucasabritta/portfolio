@@ -11,7 +11,7 @@ description: >-
 
 ## Logical monorepo (not a monolith)
 
-This repo uses **Yarn workspaces** (`apps/web`, `packages/web-ui`, `packages/cv`, `tools/`). Validate the **parts you touched**: use **`yarn test:unit`** and **`yarn test:storybook`** as appropriate; for PDF-only edits, run targeted Vitest under `apps/web/lib/cv-pdf/` per project docs.
+This repo uses **Yarn workspaces** (`apps/frontend`, `apps/backend`, `packages/storybook`, `packages/resume-content`, `tools/`). Validate the **parts you touched**: use **`yarn test:unit`** (or **`yarn test:unit:frontend`**, **`yarn test:unit:backend`**, **`yarn test:unit:resume-content`**) and **`yarn test:storybook`** as appropriate; for PDF-only edits, run targeted Vitest under `apps/backend/src/cv-pdf/` per project docs.
 
 ## Preconditions
 
@@ -24,7 +24,7 @@ Execute in order; **skip** any script absent from `package.json`:
 
 1. `yarn lint` — ESLint / Next lint per project config.
 2. `yarn typecheck` or `yarn tsc --noEmit` — if defined or if `typescript` is a dependency and the team uses explicit typecheck.
-3. `yarn test:unit` and `yarn test:storybook` — unit covers `apps/web` + `packages/cv`; Storybook tests run in **`@portfolio/web-ui`** (needs Chromium; CI runs them in a **separate** job; Docker `web` image includes Playwright system libs).
+3. `yarn test:unit` and `yarn test:storybook` — unit covers **`apps/frontend`**, **`apps/backend`**, and **`packages/resume-content`**; Storybook tests run in **`@portfolio/storybook`** (needs Chromium; CI runs them in a **separate** job; Docker **`frontend`** image includes Playwright system libs).
 4. `yarn build` — production Next.js build; must pass before merge for application changes.
 
 ## App Router specifics to double-check
@@ -36,12 +36,12 @@ Execute in order; **skip** any script absent from `package.json`:
 ## Docker / CI parity
 
 - If CI runs in Linux, avoid macOS-only assumptions in scripts or path separators.
-- Docker-first: prefer **`docker compose run --rm web yarn lint`**, **`typecheck`**, **`test:unit`**, **`test:storybook`**, **`build`**, **`build-storybook`** so Node, Playwright, and Linux match CI (see `Dockerfile` / `docs/agents/storybook-ui.md`).
+- Docker-first: prefer **`docker compose run --rm frontend yarn lint`**, **`typecheck`**, **`test:unit`**, **`test:storybook`**, **`build`**, **`build-storybook`** so Node, Playwright, and Linux match CI (see `Dockerfile` / `docs/agents/storybook-ui.md`).
 
 ## CV PDF (this repo)
 
-- After edits under `apps/web/lib/cv-pdf/**` or `packages/cv/**` used by the résumé PDF, run **`yarn vitest run apps/web/lib/cv-pdf/`** (includes `cv-pdf-integrity.test.ts` and the Docker dump test when enabled).
-- After edits under `packages/web-ui/**`, run **`yarn build-storybook`** in addition to the usual checks.
+- After edits under `apps/backend/src/cv-pdf/**` or `packages/resume-content/**` used by the résumé PDF, run **`yarn test:unit:backend`** or **`yarn vitest run --project unit-backend apps/backend/src/cv-pdf/`** (includes `cv-pdf-integrity.test.ts` and the Docker dump test when enabled).
+- After edits under `packages/storybook/**`, run **`yarn build-storybook`** in addition to the usual checks.
 
 ## Done when
 

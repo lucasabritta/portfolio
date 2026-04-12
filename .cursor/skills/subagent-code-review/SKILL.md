@@ -46,7 +46,7 @@ Merge non-duplicative items under one verdict in the parent reply. Do **not** ne
 
 1. **Goal**: code review only; name the branch/PR or list paths.
 2. **Change summary**: bullet list of what changed; paste key diffs or say “read git diff / these files”.
-3. **Scope**: in/out of scope (e.g. “only `apps/web/app/` and `packages/web-ui/`”).
+3. **Scope**: in/out of scope (e.g. “only `apps/frontend/app/` and `packages/storybook/`”).
 4. **Constraints**: `AGENTS.md`, `.cursor/rules/project-core.mdc`, `nextjs-react.mdc`; `storybook-ui` skill if UI; `nextjs-change-checklist` for expected verification commands.
 5. **Output contract** (below).
 
@@ -55,8 +55,8 @@ Merge non-duplicative items under one verdict in the parent reply. Do **not** ne
 - **Correctness**: logic, edge cases, error paths, types.
 - **Next.js / React**: Server vs Client boundaries, hooks rules, data fetching, metadata.
 - **Security**: secrets, XSS, unsafe HTML, auth/session assumptions, env usage.
-- **UI / a11y**: semantics, labels, focus, contrast; shared DOM only under `packages/web-ui/src/**` per ESLint boundary.
-- **Styling**: view vs `.module.css`; CV PDF stays in `lib/cv-pdf/**` with react-pdf `StyleSheet`.
+- **UI / a11y**: semantics, labels, focus, contrast; shared DOM only under `packages/storybook/src/**` per ESLint boundary.
+- **Styling**: view vs `.module.css`; CV PDF stays in `apps/backend/src/cv-pdf/**` with react-pdf `StyleSheet`.
 - **Tests & CI**: coverage of new behavior; cite `yarn lint`, `yarn typecheck`, `yarn test`, `yarn build` as needed.
 - **Scope creep**: unrelated refactors, noisy diffs.
 

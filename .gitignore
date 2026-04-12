@@ -16,14 +16,14 @@ node_modules/
 coverage/
 **/coverage/
 
-# next.js — apps/web (and any future apps/*)
+# next.js — apps/frontend (and any future apps/*)
 **/.next/
 out/
 
-# storybook — packages/web-ui (and any package that runs storybook build)
+# storybook — packages/storybook (and any package that runs storybook build)
 **/storybook-static/
 # Storybook static bundle embedded in Next (`yarn build` / Vercel)
-apps/web/public/storybook/
+apps/frontend/public/storybook/
 
 # optional package build outputs (if a workspace starts emitting to dist/)
 **/dist/

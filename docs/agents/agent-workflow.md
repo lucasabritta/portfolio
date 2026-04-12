@@ -17,11 +17,11 @@ Use this file for repository-specific working conventions.
 ## Agent expectations
 
 - Prefer small, focused changes.
-- Treat the repository as a **workspaces monorepo, not a monolith**: **`apps/web`**, **`packages/web-ui`**, **`packages/cv`**, and **`tools/`** are separate concerns. Preserve boundaries (imports, ESLint, CI job split for unit vs Storybook tests); do not merge layers or add cross-cutting shortcuts. See [`docs/agents/project-overview.md`](project-overview.md).
+- Treat the repository as a **workspaces monorepo, not a monolith**: **`apps/frontend`**, **`packages/storybook`**, **`packages/resume-content`**, **`apps/backend`**, and **`tools/`** are separate concerns. Preserve boundaries (imports, ESLint, CI job split for unit vs Storybook tests); do not merge layers or add cross-cutting shortcuts. See [`docs/agents/project-overview.md`](project-overview.md).
 - Match nearby patterns before introducing new ones.
 - Keep frontend separation explicit: `.tsx` for views, `.ts` for logic, and `.css`/`.module.css` for web styles.
-- For **`packages/web-ui/**`**, keep shared DOM components documented with Storybook; do not add ad-hoc `components/` folders for web UI (ESLint enforces this).
-- For **`lib/cv-pdf/**`**, use react-pdf `StyleSheet` (`styles.ts`) instead of web CSS while still extracting reusable logic into `.ts` files.
+- For **`packages/storybook/**`**, keep shared DOM components documented with Storybook; do not add ad-hoc `components/` folders for web UI (ESLint enforces this).
+- For **`apps/backend/src/cv-pdf/**`**, use react-pdf `StyleSheet` (`styles.ts`) instead of web CSS while still extracting reusable logic into `.ts` files.
 - Do not commit secrets; use Vercel or GitHub environment configuration for deploy-time values.
 
 ## Subagent plan validation

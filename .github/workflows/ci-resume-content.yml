@@ -1,0 +1,32 @@
+name: CI — Resume content
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  resume_content:
+    name: Resume content
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint:resume-content
+
+      - name: Typecheck
+        run: yarn typecheck:resume-content
+
+      - name: Unit tests
+        run: yarn test:unit:resume-content

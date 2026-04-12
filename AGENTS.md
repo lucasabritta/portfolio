@@ -9,7 +9,7 @@ Open only the document that matches the task.
 3. [`docs/agents/cursor-mcp.md`](docs/agents/cursor-mcp.md) - Cursor MCP (Vercel and user-level config)
 4. [`docs/agents/agent-workflow.md`](docs/agents/agent-workflow.md) - how to use rules, skills, and validation
 5. [`docs/agents/cv-pdf-docker.md`](docs/agents/cv-pdf-docker.md) - CV PDF dumps, previews, and docx extract via **Docker Compose** (preferred over host Node/Python)
-6. [`docs/agents/storybook-ui.md`](docs/agents/storybook-ui.md) - shared DOM UI in `packages/web-ui` (`@portfolio/web-ui`), fixtures, Vitest + `@storybook/addon-vitest`, Docker/CI parity
+6. [`docs/agents/storybook-ui.md`](docs/agents/storybook-ui.md) - shared DOM UI in `packages/storybook` (`@portfolio/storybook`), fixtures, Vitest + `@storybook/addon-vitest`, Docker/CI parity
 
 ## Rules
 

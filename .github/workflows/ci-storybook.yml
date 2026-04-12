@@ -1,0 +1,35 @@
+name: CI — Storybook
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  storybook:
+    name: Storybook
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint:storybook
+
+      - name: Typecheck
+        run: yarn typecheck:storybook
+
+      - name: Install Playwright Chromium
+        run: yarn playwright install chromium --with-deps
+
+      - name: Storybook UI tests
+        run: yarn test:storybook

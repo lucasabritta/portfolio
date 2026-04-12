@@ -8,23 +8,47 @@ const eslintConfig = defineConfig([
   {
     settings: {
       next: {
-        rootDir: "apps/web",
+        rootDir: "apps/frontend",
       },
     },
   },
+  {
+    files: ["packages/storybook/**/*.{ts,tsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "@portfolio/resume-content",
+              message:
+                "Keep Storybook presentation-only: pass props from fixtures; do not import résumé data package.",
+            },
+          ],
+          patterns: [
+            {
+              group: ["**/packages/resume-content/**", "**/resume-content/src/**"],
+              message:
+                "Do not import résumé data by path from Storybook; use fixtures and presentation types.",
+            },
+          ],
+        },
+      ],
+    },
+  },
   globalIgnores([
-    "apps/web/.next/**",
+    "apps/frontend/.next/**",
     ".next/**",
     "out/**",
     "build/**",
     "node_modules/**",
-    "apps/web/next-env.d.ts",
+    "apps/frontend/next-env.d.ts",
     "next-env.d.ts",
     "vitest.config.mjs",
-    "packages/web-ui/vitest.config.mjs",
+    "packages/storybook/vitest.config.mjs",
     "vitest.setup.ts",
     "**/storybook-static/**",
-    "apps/web/public/storybook/**",
+    "apps/frontend/public/storybook/**",
   ]),
 ]);
 
