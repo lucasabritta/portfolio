@@ -24,6 +24,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `yarn build`  | Production build                                 |
 | `yarn start`  | Serve production build locally                   |
 | `yarn lint`   | ESLint (Next core-web-vitals + TypeScript)       |
+| `yarn lint:e2e` | ESLint scoped to **`apps/e2e`** Playwright specs |
 | `yarn typecheck` | `tsc --noEmit` across workspaces            |
 | `yarn test`   | Vitest **unit** projects (same as `test:unit`)   |
 | `yarn test:unit` | All Vitest unit projects (frontend, backend, resume-content) |
@@ -31,6 +32,8 @@ Open [http://localhost:3000](http://localhost:3000).
 | `yarn test:unit:backend` | Vitest **`apps/backend`** (node)          |
 | `yarn test:unit:resume-content` | Vitest **`packages/resume-content`** |
 | `yarn test:storybook` | Vitest Storybook project in **`@portfolio/storybook`** (`@storybook/addon-vitest`, Chromium) |
+| `yarn test:e2e` | Playwright e2e tests from **`apps/e2e`** (runner command used inside Docker) |
+| `yarn test:e2e:docker` | Docker-first e2e wrapper (`docker compose run --rm frontend yarn test:e2e`) |
 | `yarn test:watch` | Vitest watch mode                          |
 | `yarn storybook` | Storybook dev server on port **6006** (`--host 0.0.0.0` for Docker) |
 | `yarn build-storybook` | Static Storybook build for **`@portfolio/storybook`** |
@@ -76,6 +79,13 @@ Override the dev command if needed, for example:
 docker compose run --rm frontend yarn lint
 ```
 
+Run e2e in Docker only:
+
+```bash
+docker compose run --rm frontend yarn test:e2e
+docker compose run --rm frontend yarn test:e2e apps/e2e/cv-download.spec.ts
+```
+
 ### CV PDF (Docker-first)
 
 - **Dump the CV PDF** (same Node as the `frontend` service): `yarn cv:dump:docker` → `tmp-cv-compare/docker-latest-cv.pdf`
@@ -93,16 +103,16 @@ docker compose --profile cv run --rm -v "$HOME/Downloads:/docs:ro" cv-tools \
 ## Linting and tests
 
 - **Lint**: `yarn lint` uses the flat ESLint config from `eslint.config.mjs` (Next.js presets).
-- **Tests**: **`yarn test:unit`** runs **`apps/frontend`**, **`apps/backend`**, and **`packages/resume-content`** specs in Node (frontend project uses jsdom). **`yarn test:storybook`** runs stories in **`packages/storybook`** via headless Chromium (Playwright). **`yarn test`** runs the unit suite. CI uses **one workflow per workspace** (`ci-frontend`, `ci-backend`, `ci-resume-content`, `ci-storybook` under `.github/workflows/`), each running scoped **lint**, **typecheck**, and **unit tests** (plus Playwright for Storybook), and a separate **`ci-build.yml`** runs production **`yarn build`**.
+- **Tests**: **`yarn test:unit`** runs **`apps/frontend`**, **`apps/backend`**, and **`packages/resume-content`** specs in Node (frontend project uses jsdom). **`yarn test:storybook`** runs stories in **`packages/storybook`** via headless Chromium (Playwright). **`yarn test:e2e`** runs Playwright specs in **`apps/e2e`** and is intended to run via **`yarn test:e2e:docker`**. **`yarn test`** runs the unit suite. CI uses **one workflow per workspace/concern** (`ci-frontend`, `ci-backend`, `ci-resume-content`, `ci-storybook`, `ci-e2e` under `.github/workflows/`), each running scoped checks, and a separate **`ci-build.yml`** runs production **`yarn build`**.
 - **Storybook**: design-system package **`packages/storybook`** (`@portfolio/storybook`), fixtures under `packages/storybook/src/fixtures/`, full notes in [`docs/agents/storybook-ui.md`](docs/agents/storybook-ui.md).
 
 CI runs the same stages per module (install → lint → typecheck → tests); **`ci-build.yml`** runs **`yarn build`** (Storybook static bundle + Next production build).
 
 ## GitHub Actions
 
-Workflows: **`ci-frontend.yml`**, **`ci-backend.yml`**, **`ci-resume-content.yml`**, **`ci-storybook.yml`** (per package), plus **`ci-build.yml`** for the production build. Scoped lint/typecheck scripts live in root **`package.json`** (`lint:frontend`, `typecheck:backend`, etc.).
+Workflows: **`ci-frontend.yml`**, **`ci-backend.yml`**, **`ci-resume-content.yml`**, **`ci-storybook.yml`**, **`ci-e2e.yml`** (per package/concern), plus **`ci-build.yml`** for the production build. Scoped lint/typecheck scripts live in root **`package.json`** (`lint:frontend`, `typecheck:backend`, etc.).
 
-Triggers on pushes to `main` and on pull requests. Uses Node 22, Yarn cache, and `yarn install --frozen-lockfile`.
+Triggers on pushes to `main` and on pull requests. Workflows use Node 22, Yarn cache, and `yarn install --frozen-lockfile`; `ci-e2e.yml` installs Playwright Chromium on the runner, while Docker remains available for local e2e via `yarn test:e2e:docker`.
 
 ## Deploying on Vercel
 

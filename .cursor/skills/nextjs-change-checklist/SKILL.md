@@ -11,7 +11,7 @@ description: >-
 
 ## Logical monorepo (not a monolith)
 
-This repo uses **Yarn workspaces** (`apps/frontend`, `apps/backend`, `packages/storybook`, `packages/resume-content`, `tools/`). Validate the **parts you touched**: use **`yarn test:unit`** (or **`yarn test:unit:frontend`**, **`yarn test:unit:backend`**, **`yarn test:unit:resume-content`**) and **`yarn test:storybook`** as appropriate; for PDF-only edits, run targeted Vitest under `apps/backend/src/cv-pdf/` per project docs.
+This repo uses **Yarn workspaces** (`apps/frontend`, `apps/backend`, `packages/storybook`, `packages/resume-content`, `tools/`) and keeps Playwright specs under **`apps/e2e`**. Validate the **parts you touched**: use **`yarn test:unit`** (or **`yarn test:unit:frontend`**, **`yarn test:unit:backend`**, **`yarn test:unit:resume-content`**), **`yarn test:storybook`**, and **`yarn test:e2e:docker`** as appropriate; for PDF-only edits, run targeted Vitest under `apps/backend/src/cv-pdf/` per project docs.
 
 ## Preconditions
 
@@ -25,7 +25,8 @@ Execute in order; **skip** any script absent from `package.json`:
 1. `yarn lint` — ESLint / Next lint per project config.
 2. `yarn typecheck` or `yarn tsc --noEmit` — if defined or if `typescript` is a dependency and the team uses explicit typecheck.
 3. `yarn test:unit` and `yarn test:storybook` — unit covers **`apps/frontend`**, **`apps/backend`**, and **`packages/resume-content`**; Storybook tests run in **`@portfolio/storybook`** (needs Chromium; CI runs them in a **separate** job; Docker **`frontend`** image includes Playwright system libs).
-4. `yarn build` — production Next.js build; must pass before merge for application changes.
+4. `yarn test:e2e:docker` — Playwright end-to-end tests from **`apps/e2e`**. For one spec, pass a path: `yarn test:e2e:docker -- apps/e2e/<spec>.spec.ts`.
+5. `yarn build` — production Next.js build; must pass before merge for application changes.
 
 ## App Router specifics to double-check
 
@@ -36,7 +37,7 @@ Execute in order; **skip** any script absent from `package.json`:
 ## Docker / CI parity
 
 - If CI runs in Linux, avoid macOS-only assumptions in scripts or path separators.
-- Docker-first: prefer **`docker compose run --rm frontend yarn lint`**, **`typecheck`**, **`test:unit`**, **`test:storybook`**, **`build`**, **`build-storybook`** so Node, Playwright, and Linux match CI (see `Dockerfile` / `docs/agents/storybook-ui.md`).
+- Docker-first: prefer **`docker compose run --rm frontend yarn lint`**, **`typecheck`**, **`test:unit`**, **`test:storybook`**, **`test:e2e`**, **`build`**, **`build-storybook`** so Node, Playwright, and Linux match CI (see `Dockerfile` / `docs/agents/storybook-ui.md`).
 
 ## CV PDF (this repo)
 
@@ -45,6 +46,6 @@ Execute in order; **skip** any script absent from `package.json`:
 
 ## Done when
 
-- `yarn lint`, `yarn typecheck`, and both `yarn test:unit` and `yarn test:storybook` have been run and passed before reporting completion.
+- `yarn lint`, `yarn typecheck`, `yarn test:unit`, `yarn test:storybook`, and `yarn test:e2e:docker` have been run and passed before reporting completion when relevant to the change.
 - All existing scripts invoked above complete successfully, or the user accepts a documented exception (e.g. known flaky test tracked elsewhere).
 - No new secrets or `.env` files are committed.
