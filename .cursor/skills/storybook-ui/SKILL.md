@@ -10,7 +10,7 @@ description: >-
 
 # Storybook UI workflow
 
-**`@portfolio/storybook`** is a **Yarn workspace package** (not a folder inside the Next app): keep DOM components, stories, and web CSS here; **do not** import `apps/frontend/app/**` from this package. Do **not** import **`@portfolio/resume-content`** (presentation-only; ESLint enforces this). The app passes **`HomePageView`** props; stories use **fixtures**.
+**`@portfolio/storybook`** is a **Yarn workspace package** (not a folder inside the Next app): keep DOM components, stories, and web CSS here; **do not** import `apps/frontend/app/**` from this package. Do **not** import **`@portfolio/resume-content`** (presentation-only; ESLint enforces this). The app composes Storybook components with data from `@portfolio/resume-content`; stories use **fixtures**.
 
 ## Read first
 
@@ -20,8 +20,8 @@ description: >-
 
 ## Conventions
 
-- Put reusable DOM components in **`packages/storybook/src/`**; the Next app imports from **`@portfolio/storybook`** (public API in `src/index.ts`). **`HomePageView`** uses **relative** imports inside the package so Next does not need a `@ui` alias.
-- Put shared story args and viewport helpers in **`packages/storybook/src/fixtures/`**; stories must not duplicate large résumé-shaped props—use **`homePageViewArgs()`** and related helpers.
+- Put reusable DOM components in **`packages/storybook/src/`**; the Next app imports from **`@portfolio/storybook`** (public API in `src/index.ts`). Keep internal package imports relative where Next should not rely on Storybook-only `@ui` aliases.
+- Put shared story args and viewport helpers in **`packages/storybook/src/fixtures/`**; stories must not duplicate large résumé-shaped props—use helpers like **`homePageArgs()`** and related fixtures.
 - Add **`*.stories.tsx`** next to the component; titles **`Foundations/<Category>/<Name>`** (primitives), **`UI/Sections/<Name>`** / **`UI/Hero/<Name>`**, or **`Pages/<Route>`**.
 - Put Storybook **`play`** functions in a co-located **`*.stories.test.ts`** file; use **`StoryPlayFn`** from **`packages/storybook/src/storybook-play-types.ts`** and assign **`play: exportedPlay`** in **`*.stories.tsx`**. Every story with non-trivial rendered output should have a **`play`**.
 - Every story file: **`tags: ['autodocs']`**, **`Default`**, semantic variants (`Empty`, `LongContent`, `ManyItems`, `NarrowViewport`, …), **`narrowMobileStory`** from fixtures where responsive coverage is required.

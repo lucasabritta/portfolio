@@ -1,6 +1,26 @@
-export { HomePageView } from "./home/home-page-view";
-export type { HomePageViewProps } from "./home/presentation-types";
+export { HomePageShell } from "./home/home-page-shell";
+export { CertificationsSection } from "./home/certifications-section/certifications-section";
+export { ContactSection } from "./home/contact-section/contact-section";
+export { EducationSection } from "./home/education-section/education-section";
+export { ProjectsSection } from "./home/projects-section/projects-section";
+export { SummarySection } from "./home/summary-section/summary-section";
+export { WorkHistorySection } from "./home/work-history-section/work-history-section";
+export type {
+  HomePageProps,
+  PresentationContactLink,
+  PresentationEducationEntry,
+  PresentationPersonalProject,
+  PresentationWorkEntry,
+} from "./home/presentation-types";
 export { PortfolioHero } from "./hero";
+export type { PortfolioHeroProps } from "./hero/hero";
+export type { CertificationsSectionProps } from "./home/certifications-section/certifications-section";
+export type { ContactSectionProps } from "./home/contact-section/contact-section";
+export type { EducationSectionProps } from "./home/education-section/education-section";
+export type { HomePageShellProps } from "./home/home-page-shell";
+export type { ProjectsSectionProps } from "./home/projects-section/projects-section";
+export type { SummarySectionProps } from "./home/summary-section/summary-section";
+export type { WorkHistorySectionProps } from "./home/work-history-section/work-history-section";
 export {
   ActionLink,
   Card,

@@ -5,7 +5,7 @@ import type { PresentationWorkEntry } from "../presentation-types";
 
 import styles from "./work-history-section.module.css";
 
-type WorkHistorySectionProps = {
+export type WorkHistorySectionProps = {
   workHistory: readonly PresentationWorkEntry[];
 };
 

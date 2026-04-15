@@ -4,7 +4,7 @@ import styles from "./hero.module.css";
 
 import type { PresentationContactLink } from "../home/presentation-types";
 
-type PortfolioHeroProps = {
+export type PortfolioHeroProps = {
   name: string;
   role: string;
   summary: string;

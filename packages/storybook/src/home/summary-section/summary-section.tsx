@@ -2,7 +2,7 @@ import { Card, Chip, SectionHeading } from "../../primitives";
 
 import styles from "./summary-section.module.css";
 
-type SummarySectionProps = {
+export type SummarySectionProps = {
   summaryHighlights: readonly string[];
   techStack: readonly string[];
 };

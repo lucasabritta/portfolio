@@ -1,12 +1,12 @@
 # Storybook — shared web UI (`@portfolio/storybook`)
 
-The **`@portfolio/storybook`** package is a **separate workspace** from **`@portfolio/frontend`** (Next) and from **`@portfolio/resume-content`** (résumé data). Shared DOM UI must stay **library-owned** and **consumable by the app** via the package name — **no** imports from `apps/frontend/app/**` inside the UI package, and **no** `storybook/**` paths in the app. Storybook stays **presentation-only**: it must **not** import **`@portfolio/resume-content`** (ESLint enforces this); the app composes **`resumeData`** into **`HomePageView`** props and stories use **fixtures**.
+The **`@portfolio/storybook`** package is a **separate workspace** from **`@portfolio/frontend`** (Next) and from **`@portfolio/resume-content`** (résumé data). Shared DOM UI must stay **library-owned** and **consumable by the app** via the package name — **no** imports from `apps/frontend/app/**` inside the UI package, and **no** `storybook/**` paths in the app. Storybook stays **presentation-only**: it must **not** import **`@portfolio/resume-content`** (ESLint enforces this); the app composes **`resumeData`** into Storybook-presentational props while Storybook owns all classes/CSS.
 
 ## Where UI lives
 
-- **DOM components** (anything that renders browser JSX) belong in **`packages/storybook/src/`**. The Next app imports **`HomePageView`**, **`PortfolioHero`**, etc. from **`@portfolio/storybook`** (see `packages/storybook/src/index.ts`).
+- **DOM components** (anything that renders browser JSX) belong in **`packages/storybook/src/`**. The Next app imports composition pieces like **`HomePageShell`**, **`PortfolioHero`**, and section components from **`@portfolio/storybook`** (see `packages/storybook/src/index.ts`).
 - **Global web CSS** lives in **`packages/storybook/src/globals.css`**. Root layout classes use **`packages/storybook/src/layout.module.css`**, imported from **`apps/frontend/app/layout.tsx`** as **`@portfolio/storybook/globals.css`** and **`@portfolio/storybook/layout.module.css`** (package `exports`).
-- **Story fixtures** live in **`packages/storybook/src/fixtures/`**. Stories use **`@ui/...`** (Vite/TS path alias); **`HomePageView`** uses **relative** imports so Next/Turbopack does not need a duplicate `@ui` alias.
+- **Story fixtures** live in **`packages/storybook/src/fixtures/`**. Stories use **`@ui/...`** (Vite/TS path alias); package components consumed by Next should use relative imports internally where needed so Next/Turbopack does not require duplicate `@ui` aliases.
 - **Résumé PDF** (react-pdf) lives in **`apps/backend/src/cv-pdf/**`** — not in Storybook; it uses `StyleSheet`, not web CSS. It imports data/types from **`@portfolio/resume-content`**.
 
 ## Running Storybook
@@ -56,7 +56,7 @@ docker compose run --rm frontend yarn build-storybook
 - **Interaction tests (`play`)** live in a sibling **`*.stories.test.ts`** file (same basename prefix as the CSF file). Each named export is a **`StoryPlayFn`** (see **`packages/storybook/src/storybook-play-types.ts`**); **`*.stories.tsx`** imports them and sets **`play: somePlay`**. Every story that renders meaningful UI (sections, hero, primitives, pages) should wire a **`play`** so **`@storybook/addon-vitest`** exercises it. (These are not root **`yarn test`** unit files; root Vitest **unit** projects cover **`apps/frontend`**, **`apps/backend`**, and **`packages/resume-content`**.)
 - **Story `title` groups**: **`Foundations/<Category>/<Component>`** for design primitives under **`packages/storybook/src/primitives/`** (Typography, Buttons, Surfaces); **`UI/Sections/<Name>`** for homepage section stories; **`UI/Hero/<Name>`** for the hero; **`Pages/<Route>`** for full-page stories (e.g. **`Pages/Home`**).
 - **Primitives** (`Card`, `Chip`, `ActionLink`, `SectionHeading`, `Title`, hero typography) live in **`packages/storybook/src/primitives/`** and are re-exported from **`@portfolio/storybook`** for consumers that need them; feature code inside the package typically imports via **`../primitives`** or **`../../primitives`** (the **`@ui/*`** path maps to **`./src/*`** and does not resolve **`@ui/primitives`** to the folder index).
-- **Full-page stories** import **`HomePageView`** from the same package (`@ui/home/home-page-view` in stories; public API is **`@portfolio/storybook`**).
+- **Full-page stories** compose page-level views from Storybook exports such as **`HomePageShell`**, **`PortfolioHero`**, and home sections.
 
 ## Testing (Vitest + Storybook)
 

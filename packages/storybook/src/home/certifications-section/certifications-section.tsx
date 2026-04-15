@@ -2,7 +2,7 @@ import { Card, SectionHeading, Title } from "../../primitives";
 
 import styles from "./certifications-section.module.css";
 
-type CertificationsSectionProps = {
+export type CertificationsSectionProps = {
   certifications: readonly string[];
 };
 

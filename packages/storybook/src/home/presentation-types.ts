@@ -27,7 +27,7 @@ export type PresentationPersonalProject = {
   href: string;
 };
 
-export type HomePageViewProps = {
+export type HomePageProps = {
   downloadHref: string;
   name: string;
   role: string;
