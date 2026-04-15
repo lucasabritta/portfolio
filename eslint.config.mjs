@@ -1,6 +1,7 @@
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
+import playwright from "eslint-plugin-playwright";
 
 const eslintConfig = defineConfig([
   ...nextVitals,
@@ -36,6 +37,10 @@ const eslintConfig = defineConfig([
       ],
     },
   },
+  {
+    ...playwright.configs["flat/recommended"],
+    files: ["apps/e2e/**/*.ts"],
+  },
   globalIgnores([
     "apps/frontend/.next/**",
     ".next/**",
@@ -47,6 +52,8 @@ const eslintConfig = defineConfig([
     "vitest.config.mjs",
     "packages/storybook/vitest.config.mjs",
     "vitest.setup.ts",
+    "test-results/**",
+    "playwright-report/**",
     "**/storybook-static/**",
     "apps/frontend/public/storybook/**",
   ]),

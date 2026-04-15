@@ -2784,6 +2784,13 @@ eslint-plugin-jsx-a11y@^6.10.0:
     safe-regex-test "^1.0.3"
     string.prototype.includes "^2.0.1"
 
+eslint-plugin-playwright@^2.10.1:
+  version "2.10.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-playwright/-/eslint-plugin-playwright-2.10.1.tgz#94ad62ec05af5a85926ed249d50d1a02fae44b11"
+  integrity sha512-qea3UxBOb8fTwJ77FMApZKvRye5DOluDHcev0LDJwID3RELeun0JlqzrNIXAB/SXCyB/AesCW/6sZfcT9q3Edg==
+  dependencies:
+    globals "^17.3.0"
+
 eslint-plugin-react-hooks@^7.0.0:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-7.0.1.tgz#66e258db58ece50723ef20cc159f8aa908219169"
@@ -3182,6 +3189,11 @@ globals@^14.0.0:
   version "14.0.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-14.0.0.tgz#898d7413c29babcf6bafe56fcadded858ada724e"
   integrity sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==
+
+globals@^17.3.0:
+  version "17.5.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-17.5.0.tgz#a82c641d898f8dfbe0e81f66fdff7d0de43f88c6"
+  integrity sha512-qoV+HK2yFl/366t2/Cb3+xxPUo5BuMynomoDmiaZBIdbs+0pYbjfZU+twLhGKp4uCZ/+NbtpVepH5bGCxRyy2g==
 
 globalthis@^1.0.4:
   version "1.0.4"

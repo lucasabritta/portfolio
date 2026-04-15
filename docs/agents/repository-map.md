@@ -6,13 +6,14 @@ Use this file when you need to locate common code or configuration.
 
 This repository is a **Yarn workspaces monorepo**: a root `package.json` with **`apps/*`** and **`packages/*`** so the **Next app**, **Storybook UI library**, **résumé data**, and **PDF backend** stay **separate packages**—not a monolith where layers freely entangle.
 
-- **`apps/frontend/`**, **`packages/storybook/`**, **`packages/resume-content/`**, and **`apps/backend/src/cv-pdf/`** are distinct concerns: preserve **correct import direction** (app → `@portfolio/storybook` / `@portfolio/resume-content` / `@portfolio/backend`; storybook → **no** `@portfolio/resume-content`; backend → `@portfolio/resume-content`), **ESLint boundaries**, and **CI splits** (`yarn test:unit:*` vs `yarn test:storybook`).
+- **`apps/frontend/`**, the Playwright spec directory **`apps/e2e/`**, **`packages/storybook/`**, **`packages/resume-content/`**, and **`apps/backend/src/cv-pdf/`** are distinct concerns: preserve **correct import direction** (app → `@portfolio/storybook` / `@portfolio/resume-content` / `@portfolio/backend`; storybook → **no** `@portfolio/resume-content`; backend → `@portfolio/resume-content`), **ESLint boundaries**, and **CI splits** (`yarn test:unit:*` vs `yarn test:storybook` vs `yarn test:e2e`).
 - Avoid cross-layer shortcuts (web CSS or Storybook-only UI inside PDF code; **no** imports from `apps/frontend/app/**` inside `packages/storybook`).
 
 | Path | Purpose |
 |------|---------|
 | Root `package.json` | Workspaces, aggregate scripts, shared `devDependencies` (ESLint, Vitest, TypeScript, Playwright), `resolutions` |
 | `apps/frontend/` | Next.js App Router app (`app/`, `public/`, `next.config.ts`) — package **`@portfolio/frontend`** |
+| `apps/e2e/` | Playwright end-to-end spec directory (Docker-first execution via root scripts) |
 | `packages/storybook/` | Shared DOM UI, co-located CSS, Storybook config (`.storybook/`), Vitest Storybook project — package **`@portfolio/storybook`** |
 | `packages/storybook/src/` | Components, `*.stories.tsx`, `globals.css`, `layout.module.css` |
 | `packages/storybook/src/fixtures/` | Typed Storybook args helpers (synthetic presentation data, viewport globals) |
@@ -22,6 +23,7 @@ This repository is a **Yarn workspaces monorepo**: a root `package.json` with **
 | `apps/backend/` | CV PDF pipeline (react-pdf, pdf.js helpers, Vitest) — workspace **`@portfolio/backend`**; public API in `src/index.ts` |
 | `packages/storybook/.storybook/` | Storybook `main.ts`, `preview.tsx` |
 | Root `vitest.config.mjs` | Vitest **unit** projects: `apps/frontend`, `apps/backend`, `packages/resume-content` |
+| Root `playwright.config.ts` | Playwright runner configuration for `apps/e2e` and local web server boot |
 | `packages/storybook/vitest.config.mjs` | Vitest **storybook** project (`@storybook/addon-vitest`, Playwright Chromium) |
 | `apps/frontend/postcss.config.cjs` | PostCSS (Tailwind v4) for Next |
 | `apps/backend/src/cv-pdf/` | CV PDF (react-pdf document, sections, pdf.js helpers, Vitest) |
@@ -29,7 +31,7 @@ This repository is a **Yarn workspaces monorepo**: a root `package.json` with **
 | `apps/frontend/next.config.*` | Next.js configuration (`transpilePackages`, `outputFileTracingRoot` for monorepo) |
 | `Dockerfile` | Container image for local or deploy-related workflows |
 | `docker-compose.yml` | Local Docker Compose stack (`frontend`, `cv-tools` profile) |
-| `.github/workflows/` | CI pipelines for lint, test, typecheck, and build |
+| `.github/workflows/` | CI pipelines for lint, typecheck, unit, Storybook, e2e (`ci-e2e.yml`), and production build |
 | `vercel.json` | Vercel build/install commands for the workspace |
 | `.cursor/rules/`, `.cursor/skills/` | Cursor rules and skills |
 | User `~/.cursor/mcp.json` | MCP servers (e.g. Vercel OAuth); keep out of the repo — see [`docs/agents/cursor-mcp.md`](cursor-mcp.md) |
