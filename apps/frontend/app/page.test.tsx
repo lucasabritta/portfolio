@@ -25,4 +25,9 @@ describe("Home page", () => {
     expect(screen.getByRole("link", { name: /skip to content/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /professional summary/i })).toBeInTheDocument();
   });
+
+  it("keeps cv download path under /api", () => {
+    render(<Home />);
+    expect(screen.getByRole("link", { name: /download cv/i })).toHaveAttribute("href", "/api/cv");
+  });
 });

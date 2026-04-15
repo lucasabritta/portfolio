@@ -14,6 +14,10 @@ const FONT_MARKER = "Lato-Regular.ttf";
  * Populate fonts with: `docker compose --profile cv run --rm cv-tools python scripts/download_cv_fonts.py`
  */
 function resolveCvFontDir(): string {
+  if (process.env.CV_FONT_DIR) {
+    return process.env.CV_FONT_DIR;
+  }
+
   const fromSourceFile = path.join(
     path.dirname(fileURLToPath(import.meta.url)),
     "..",

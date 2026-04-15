@@ -10,10 +10,22 @@ export default defineConfig({
     baseURL: "http://localhost:3000",
     trace: "on-first-retry",
   },
-  webServer: {
-    command: "yarn dev:docker",
-    url: "http://localhost:3000",
-    reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
-  },
+  webServer: [
+    {
+      command: "yarn workspace @portfolio/backend dev",
+      url: "http://localhost:4000/api/health",
+      reuseExistingServer: !process.env.CI,
+      timeout: 120_000,
+    },
+    {
+      command: "yarn dev:docker",
+      url: "http://localhost:3000",
+      env: {
+        ...process.env,
+        BACKEND_ORIGIN: "http://localhost:4000",
+      },
+      reuseExistingServer: !process.env.CI,
+      timeout: 120_000,
+    },
+  ],
 });

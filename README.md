@@ -1,6 +1,6 @@
 # Portfolio
 
-Frontend-only portfolio site built with **Next.js** (App Router), **React**, and **TypeScript**. Package management uses **Yarn**.
+Portfolio site with a Next.js frontend and a small Fastify backend for CV PDF generation. Package management uses **Yarn**.
 
 ## Requirements
 
@@ -11,7 +11,8 @@ Frontend-only portfolio site built with **Next.js** (App Router), **React**, and
 
 ```bash
 yarn install
-yarn dev
+BACKEND_ORIGIN=http://localhost:4000 yarn dev
+yarn workspace @portfolio/backend dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -21,6 +22,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | Script        | Description                                      |
 |---------------|--------------------------------------------------|
 | `yarn dev`    | Next.js dev server                               |
+| `yarn workspace @portfolio/backend dev` | Fastify backend server on `:4000` |
 | `yarn build`  | Production build                                 |
 | `yarn start`  | Serve production build locally                   |
 | `yarn lint`   | ESLint (Next core-web-vitals + TypeScript)       |
@@ -58,13 +60,16 @@ docker compose run --rm --service-ports frontend yarn storybook
 
 Then open [http://localhost:6006](http://localhost:6006). Source is mounted from the host; `node_modules` live in a named volume. Playwright browsers for component tests are baked into the image at **`PLAYWRIGHT_BROWSERS_PATH=/ms-playwright`** (see `Dockerfile`).
 
+The frontend proxies CV downloads through `/api/cv` and expects `BACKEND_ORIGIN` to point at the backend API service (`http://backend:4000` in Docker Compose).
+Set `BACKEND_ORIGIN` as an origin only (scheme + host + optional port), without a path segment.
+
 ### Production-like image (standalone output)
 
 ```bash
 docker compose --profile prod up --build frontend-prod
 ```
 
-Serve on [http://localhost:3001](http://localhost:3001).
+Serve on [http://localhost:3001](http://localhost:3001). This profile also starts the `backend` service so `/api/cv` can resolve `BACKEND_ORIGIN=http://backend:4000`.
 
 ### Docker build targets
 
@@ -119,7 +124,7 @@ Triggers on pushes to `main` and on pull requests. Workflows use Node 22, Yarn c
 1. Import this repository in the [Vercel dashboard](https://vercel.com/new).
 2. Framework preset: **Next.js**. Install command: `yarn install`. Build command: `yarn workspace @portfolio/frontend build` (or rely on root **`vercel.json`**). Set the Vercel project **root directory** to the **repository root** so workspaces resolve.
 3. Enable **Analytics** and **Speed Insights** in the Vercel project dashboard if you want first-party traffic and performance reporting for deployed environments.
-4. Set any required environment variables under **Project → Settings → Environment Variables** (this template does not require secrets for the static landing content).
+4. Set any required environment variables under **Project → Settings → Environment Variables**. The frontend API route for CV download requires **`BACKEND_ORIGIN`** (for example `https://your-backend-host`) so `/api/cv` can fetch `GET /api/cv` from the backend service.
 
 Preview deployments are created automatically for pull requests when the Git integration is enabled.
 
@@ -130,7 +135,7 @@ This repo includes `@vercel/analytics` and `@vercel/speed-insights` through `app
 - `apps/frontend/` — Next.js app (`app/`, `public/`)
 - `packages/storybook/` — Shared DOM UI (`@portfolio/storybook`), Storybook, web CSS
 - `packages/resume-content/` — Résumé data and types (`@portfolio/resume-content`)
-- `apps/backend/` — CV PDF pipeline (`@portfolio/backend`), consumed by the Next API route
+- `apps/backend/` — Fastify API + CV PDF pipeline (`@portfolio/backend`)
 - `Dockerfile` / `docker-compose.yml` — Container workflows
 - `.github/workflows/` — CI
 

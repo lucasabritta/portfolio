@@ -14,13 +14,8 @@
     "jsx": "react-jsx",
     "incremental": true,
     "plugins": [{ "name": "next" }],
-    // When typechecking imports of `@portfolio/backend`, tsc follows into `cv-pdf/**`
-    // which uses `@cv-pdf/*` — mirror the backend package's path alias here.
     "paths": {
-      "@/*": ["./*"],
-      "@cv-pdf/*": [
-        "../backend/src/cv-pdf/*"
-      ]
+      "@/*": ["./*"]
     }
   },
   "include": [

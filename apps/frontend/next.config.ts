@@ -3,15 +3,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
-  transpilePackages: [
-    "@portfolio/resume-content",
-    "@portfolio/storybook",
-    "@portfolio/backend",
-  ],
+  transpilePackages: ["@portfolio/resume-content", "@portfolio/storybook"],
   outputFileTracingRoot: path.join(__dirname, "../.."),
-  outputFileTracingIncludes: {
-    "/api/cv": ["./public/cv-fonts/**/*"],
-  },
   async rewrites() {
     return {
       beforeFiles: [
