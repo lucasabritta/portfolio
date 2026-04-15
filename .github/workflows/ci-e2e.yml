@@ -22,13 +22,3 @@ jobs:
 
       - name: Run Playwright e2e tests
         run: docker compose run --rm frontend yarn test:e2e
-
-      - name: Upload Playwright artifacts on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-artifacts
-          path: |
-            playwright-report
-            test-results
-          if-no-files-found: ignore
