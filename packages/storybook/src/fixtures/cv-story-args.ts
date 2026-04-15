@@ -1,5 +1,5 @@
 import type {
-  HomePageViewProps,
+  HomePageProps,
   PresentationContactLink,
   PresentationEducationEntry,
   PresentationPersonalProject,
@@ -294,7 +294,7 @@ export function contactSectionLongContentArgs() {
   });
 }
 
-export function homePageViewArgs(overrides: Partial<HomePageViewProps> = {}): HomePageViewProps {
+export function homePageArgs(overrides: Partial<HomePageProps> = {}): HomePageProps {
   return {
     downloadHref: "/api/cv",
     name: SYNTH_NAME,

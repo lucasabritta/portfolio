@@ -1,13 +1,16 @@
 /**
  * @vitest-environment jsdom
  */
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
 
 import { buildPhoneHref, resumeData } from "@portfolio/resume-content";
-import { HomePageView } from "@portfolio/storybook";
 
 import Home from "./page";
+
+afterEach(() => {
+  cleanup();
+});
 
 describe("Home page", () => {
   it("renders résumé copy from resumeData", () => {
@@ -17,27 +20,9 @@ describe("Home page", () => {
     expect(phoneLinks[0]).toHaveAttribute("href", buildPhoneHref(resumeData.phone));
   });
 
-  it("composes HomePageView with the same props as the default export", () => {
-    render(
-      <HomePageView
-        downloadHref="/api/cv"
-        name={resumeData.name}
-        role={resumeData.role}
-        summary={resumeData.summary}
-        location={resumeData.location}
-        phone={resumeData.phone}
-        phoneHref={buildPhoneHref(resumeData.phone)}
-        email={resumeData.email}
-        linkedin={resumeData.linkedin}
-        contactLinks={resumeData.contactLinks}
-        summaryHighlights={resumeData.summaryHighlights}
-        techStack={resumeData.techStack}
-        workHistory={resumeData.workHistory}
-        education={resumeData.education}
-        certifications={resumeData.certifications}
-        personalProjects={resumeData.personalProjects}
-      />,
-    );
-    expect(screen.getAllByText(resumeData.name).length).toBeGreaterThan(0);
+  it("keeps page shell and section composition in frontend", () => {
+    render(<Home />);
+    expect(screen.getByRole("link", { name: /skip to content/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /professional summary/i })).toBeInTheDocument();
   });
 });

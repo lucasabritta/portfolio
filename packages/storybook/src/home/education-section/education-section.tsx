@@ -4,7 +4,7 @@ import type { PresentationEducationEntry } from "../presentation-types";
 
 import styles from "./education-section.module.css";
 
-type EducationSectionProps = {
+export type EducationSectionProps = {
   education: readonly PresentationEducationEntry[];
 };
 

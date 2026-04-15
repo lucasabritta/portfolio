@@ -2,7 +2,7 @@ import { ActionLink, Card, SectionHeading } from "../../primitives";
 
 import styles from "./contact-section.module.css";
 
-type ContactSectionProps = {
+export type ContactSectionProps = {
   location: string;
   phone: string;
   /** Precomputed `tel:` href (computed in `@portfolio/frontend`). */

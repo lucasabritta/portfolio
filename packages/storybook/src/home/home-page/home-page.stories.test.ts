@@ -7,10 +7,3 @@ export const homePageDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
   skip.focus();
   expect(skip).toHaveFocus();
 };
-
-export const homePageNarrowViewportPlay: StoryPlayFn = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  const skip = canvas.getByRole("link", { name: /skip to content/i });
-  skip.focus();
-  expect(skip).toHaveFocus();
-};

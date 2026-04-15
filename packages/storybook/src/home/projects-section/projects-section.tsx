@@ -4,7 +4,7 @@ import type { PresentationPersonalProject } from "../presentation-types";
 
 import styles from "./projects-section.module.css";
 
-type ProjectsSectionProps = {
+export type ProjectsSectionProps = {
   projects: readonly PresentationPersonalProject[];
 };
 
