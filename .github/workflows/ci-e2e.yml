@@ -14,11 +14,20 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Build frontend test image
-        run: docker compose build frontend
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        run: yarn playwright install chromium --with-deps
 
       - name: Lint e2e tests
-        run: docker compose run --rm frontend yarn lint:e2e
+        run: yarn lint:e2e
 
       - name: Run Playwright e2e tests
-        run: docker compose run --rm frontend yarn test:e2e
+        run: yarn test:e2e

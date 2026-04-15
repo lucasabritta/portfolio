@@ -112,7 +112,7 @@ CI runs the same stages per module (install → lint → typecheck → tests); *
 
 Workflows: **`ci-frontend.yml`**, **`ci-backend.yml`**, **`ci-resume-content.yml`**, **`ci-storybook.yml`**, **`ci-e2e.yml`** (per package/concern), plus **`ci-build.yml`** for the production build. Scoped lint/typecheck scripts live in root **`package.json`** (`lint:frontend`, `typecheck:backend`, etc.).
 
-Triggers on pushes to `main` and on pull requests. Most workflows use Node 22, Yarn cache, and `yarn install --frozen-lockfile`; `ci-e2e.yml` is Docker-first (`docker compose build frontend` + `docker compose run --rm frontend yarn ...`).
+Triggers on pushes to `main` and on pull requests. Workflows use Node 22, Yarn cache, and `yarn install --frozen-lockfile`; `ci-e2e.yml` installs Playwright Chromium on the runner, while Docker remains available for local e2e via `yarn test:e2e:docker`.
 
 ## Deploying on Vercel
 
