@@ -116,7 +116,7 @@ Triggers on pushes to `main` and on pull requests. Workflows use Node 22 and Yar
 
 1. Import this repository in the [Vercel dashboard](https://vercel.com/new).
 2. **Recommended:** **Project → Settings → General → Root Directory** → **`apps/frontend`**, and enable **Include files outside the Root Directory in the Build Step** (for `file:../../packages/...`). Optional overrides: **`apps/frontend/vercel.json`**. See [`docs/agents/cursor-mcp.md`](docs/agents/cursor-mcp.md).
-3. **If Root Directory stays the repo root:** root **`vercel.json`** and a minimal root **`package.json`** / **`yarn.lock`** are kept so Vercel can detect Next.js and install/build under **`apps/frontend`** until you apply step 2.
+3. **If Root Directory stays the repo root:** root **`vercel.json`** (with **`outputDirectory`: `apps/frontend/.next`**) plus a minimal root **`package.json`** / **`yarn.lock`** so Vercel detects Next.js, installs/builds under **`apps/frontend`**, and picks up the `.next` output until you apply step 2.
 4. Enable **Analytics** and **Speed Insights** in the Vercel project dashboard if you want first-party traffic and performance reporting for deployed environments.
 5. Set any required environment variables under **Project → Settings → Environment Variables**.
 

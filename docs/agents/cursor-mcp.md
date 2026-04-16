@@ -53,4 +53,4 @@ Then remove the repository **root** `package.json`, **`yarn.lock`**, and the **r
 
 ### Fallback (repo root still `.` on Vercel)
 
-If Root Directory is still the **repository root**, keep the **root** `vercel.json` + minimal **root** `package.json` / **`yarn.lock`** so `vercel build` can detect **Next.js** and run `yarn install` + `cd apps/frontend && yarn install` / `yarn build`. This is a compatibility shim until you switch to the recommended layout above.
+If Root Directory is still the **repository root**, keep the **root** `vercel.json` (including **`outputDirectory`: `apps/frontend/.next`**) plus minimal **root** `package.json` / **`yarn.lock`** so `vercel build` detects **Next.js**, runs install/build under **`apps/frontend`**, and Vercel still finds **`.next`** under the monorepo path. This is a compatibility shim until you switch to the recommended layout above.
