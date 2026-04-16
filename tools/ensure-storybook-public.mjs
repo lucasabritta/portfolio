@@ -15,6 +15,21 @@ if (fs.existsSync(marker)) {
   process.exit(0);
 }
 
+const storybookPkg = path.join(root, "packages", "storybook");
+const viteMarker = path.join(storybookPkg, "node_modules", "vite");
+if (!fs.existsSync(viteMarker)) {
+  console.log("ensure-storybook-public: installing packages/storybook deps (vite required for static build)…");
+  const yarnInstall = spawnSync("yarn", ["install", "--non-interactive"], {
+    cwd: storybookPkg,
+    stdio: "inherit",
+    env: process.env,
+    shell: process.platform === "win32",
+  });
+  if (yarnInstall.status !== 0) {
+    process.exit(yarnInstall.status ?? 1);
+  }
+}
+
 console.log("ensure-storybook-public: missing apps/frontend/public/storybook/index.html; building…");
 const script = path.join(toolsDir, "build-storybook-for-next.mjs");
 const result = spawnSync(process.execPath, [script], { stdio: "inherit", cwd: root, env: process.env });
