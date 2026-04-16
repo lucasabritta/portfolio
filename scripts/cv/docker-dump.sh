@@ -5,6 +5,6 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$ROOT"
 docker compose run --rm \
   -e RENDER_CV_PDF=1 \
-  -e CV_PDF_OUT=/app/tmp-cv-compare/docker-latest-cv.pdf \
-  frontend yarn vitest run app/api/cv/route.test.ts
-printf '%s\n' "Output: tmp-cv-compare/docker-latest-cv.pdf"
+  -e CV_PDF_OUT=/workspace/tmp-cv-compare/docker-latest-cv.pdf \
+  frontend yarn vitest run lib/cv-pdf/cv-pdf-dump.test.ts
+printf '%s\n' "Output: tmp-cv-compare/docker-latest-cv.pdf (repo root, bind-mounted from the container)"

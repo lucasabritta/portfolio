@@ -10,11 +10,11 @@ description: >-
 
 # Storybook UI workflow
 
-**`@portfolio/storybook`** is a **Yarn workspace package** (not a folder inside the Next app): keep DOM components, stories, and web CSS here; **do not** import `apps/frontend/app/**` from this package. Do **not** import **`@portfolio/resume-content`** (presentation-only; ESLint enforces this). The app composes Storybook components with data from `@portfolio/resume-content`; stories use **fixtures**.
+**`@portfolio/storybook`** is its **own Yarn package** (not a folder inside the Next app): keep DOM components, stories, and web CSS here; **do not** import `apps/frontend/app/**` from this package. Do **not** import **`@portfolio/resume-content`** (presentation-only; ESLint enforces this). The app composes Storybook components with data from `@portfolio/resume-content`; stories use **fixtures**.
 
 ## Read first
 
-- [`docs/agents/project-overview.md`](../../../docs/agents/project-overview.md) — workspaces monorepo vs monolith
+- [`docs/agents/project-overview.md`](../../../docs/agents/project-overview.md) — multi-package layout vs monolith
 - [`docs/agents/storybook-ui.md`](../../../docs/agents/storybook-ui.md) — layout, fixtures, stories contract, Vitest, Docker, PR checklist
 - [`docs/agents/repository-map.md`](../../../docs/agents/repository-map.md) — path reference
 
@@ -27,32 +27,31 @@ description: >-
 - Every story file: **`tags: ['autodocs']`**, **`Default`**, semantic variants (`Empty`, `LongContent`, `ManyItems`, `NarrowViewport`, …), **`narrowMobileStory`** from fixtures where responsive coverage is required.
 - Use **`play`** + **`storybook/test`** when the story renders focusable elements (links, buttons) or when asserting structure (headings, **`role="status"`**, visible copy).
 - Share cross-page styles via co-located modules under **`packages/storybook/src/`**, not `apps/frontend/app/*.module.css`.
-- Résumé PDF stays in **`apps/backend/src/cv-pdf/**`** (react-pdf); do not move PDF sections into Storybook.
+- Résumé PDF stays in **`apps/frontend/lib/cv-pdf/**`** (react-pdf, served by **`/api/cv`**); do not move PDF sections into Storybook.
 
 ## Commands
 
-**Host** (requires Node **22.12+** per `package.json` `engines` for Storybook CLI / CI parity):
+**Host** (requires Node **22.12+** per `packages/storybook/package.json` `engines` for Storybook CLI / CI parity):
 
 ```bash
-yarn storybook
-yarn build-storybook
-yarn test:storybook
+cd packages/storybook && yarn install && yarn storybook
+cd packages/storybook && yarn build-storybook
+cd packages/storybook && yarn test:storybook
 ```
 
-**Docker** (same scripts as CI; Playwright browsers live in the image at `PLAYWRIGHT_BROWSERS_PATH`):
+**Docker** (same patterns as CI; Playwright browsers live in the image at `PLAYWRIGHT_BROWSERS_PATH`):
 
 ```bash
-docker compose run --rm frontend yarn lint
-docker compose run --rm frontend yarn typecheck
-docker compose run --rm frontend yarn test:storybook
-docker compose run --rm frontend yarn build
-docker compose run --rm frontend yarn build-storybook
-docker compose run --rm --service-ports frontend yarn storybook
+docker compose run --rm frontend sh -lc "yarn --cwd ../../packages/storybook install --frozen-lockfile && yarn --cwd ../../packages/storybook lint"
+docker compose run --rm frontend yarn --cwd ../../packages/storybook typecheck
+docker compose run --rm frontend yarn --cwd ../../packages/storybook test:storybook
+docker compose run --rm frontend yarn --cwd ../../packages/storybook build-storybook
+docker compose run --rm --service-ports frontend sh -lc "cd ../../packages/storybook && yarn install --frozen-lockfile && yarn storybook"
 ```
 
 After UI changes, also run the **`nextjs-change-checklist`** skill where applicable.
 
 ## Done when
 
-- `yarn lint`, `yarn typecheck`, `yarn test:storybook`, and `yarn build-storybook` pass (prefer Docker **`frontend`** service for parity with CI); app changes also need `yarn test:unit` (or `yarn test:unit:frontend` when scoped).
+- Storybook package **`yarn lint`**, **`yarn typecheck`**, **`yarn test:storybook`**, and **`yarn build-storybook`** pass (prefer Docker **`frontend`** service for parity with CI); app changes also need **`apps/frontend`** **`yarn test:unit`** and related checks.
 - New components follow the PR checklist in `docs/agents/storybook-ui.md`.

@@ -11,13 +11,13 @@ description: >-
 
 ## Before you start
 
-- This repo is a **Yarn workspaces monorepo** (`apps/frontend`, `packages/storybook`, `packages/resume-content`, `apps/backend`, …): the same **`frontend`** image runs Next.js, Storybook, and tests, but **packages stay separated** in code—see [`docs/agents/project-overview.md`](../../../docs/agents/project-overview.md).
-- Read `AGENTS.md` and any `README.md` sections that document compose service names and ports.
+- This repo has **several Yarn packages** (`apps/frontend`, `packages/storybook`, `packages/resume-content`, `apps/e2e`, …): the **`frontend`** Compose service defaults **`working_dir`** to **`apps/frontend`**, but Storybook and other packages are invoked with **`yarn --cwd ../../packages/...`** (same pattern as CI). See [`docs/agents/project-overview.md`](../../../docs/agents/project-overview.md).
+- Read `AGENTS.md` and `README.md` for compose service names and ports.
 - Confirm **Docker Desktop** (or compatible engine) is running on the machine.
 
 ## CV PDF (this repo)
 
-- Prefer **`yarn cv:dump:docker`** or [`docs/agents/cv-pdf-docker.md`](../../../docs/agents/cv-pdf-docker.md) for rendering and comparing the résumé PDF (Vitest dump, Python raster/PNG, docx extract). Do not rely on host Python for those steps.
+- Prefer **`sh scripts/cv/docker-dump.sh`** or [`docs/agents/cv-pdf-docker.md`](../../../docs/agents/cv-pdf-docker.md) for writing a PDF to `tmp-cv-compare/` (Vitest opt-in dump), Python raster/PNG, and docx extract. Do not rely on host Python for those steps.
 
 ## Default procedure
 
@@ -32,25 +32,27 @@ The **`frontend`** service mounts a **named volume** for `apps/frontend/.next` s
 ## Storybook and full checks (this repo)
 
 - **`Dockerfile`** pulls Node from **`public.ecr.aws/docker/library/node:22-bookworm-slim`** by default (mirrors Docker Official Images) when Docker Hub returns TLS errors via Cloudflare R2. Override at build time: `docker compose build --build-arg NODE_IMAGE=node:22-bookworm-slim frontend` if your network can reach Docker Hub reliably.
-- The **`development`** image extends the **`deps`** stage so **Playwright system libraries** installed by `yarn playwright install chromium --with-deps` are present for **`yarn test:storybook`** / **`yarn test`**. Do not split `development` onto a fresh `FROM node` without reinstalling deps, or Chromium will fail with missing **`libglib-2.0.so.0`** (and similar).
+- The **`development`** image extends the **`deps`** stage so **Playwright system libraries** installed by `yarn playwright install chromium --with-deps` are present for **`yarn test:storybook`** / **`yarn test`** in packages that need Chromium. Do not split `development` onto a fresh `FROM node` without reinstalling deps, or Chromium will fail with missing **`libglib-2.0.so.0`** (and similar).
 - **`frontend`** publishes **3000** (Next.js) and **6006** (Storybook). Browsers live at **`PLAYWRIGHT_BROWSERS_PATH=/ms-playwright`** (not under the `node_modules` volume).
 - Run Storybook from the host browser:
 
   ```bash
-  docker compose run --rm --service-ports frontend yarn storybook
+  docker compose run --rm --service-ports frontend sh -lc "cd ../../packages/storybook && yarn install --frozen-lockfile && yarn storybook"
   ```
 
   Then open `http://localhost:6006`.
 
-- Mirror CI locally (same `yarn` scripts as CI workflows under `.github/workflows/ci-*.yml`):
+- Mirror CI locally (combine **`apps/frontend`** default cwd with **`yarn --cwd ../../packages/storybook …`** where CI does):
 
   ```bash
   docker compose run --rm frontend yarn lint
   docker compose run --rm frontend yarn typecheck
   docker compose run --rm frontend yarn test:unit
-  docker compose run --rm frontend yarn test:storybook
+  docker compose run --rm frontend sh -lc "yarn --cwd ../../packages/storybook install --frozen-lockfile && yarn --cwd ../../packages/storybook lint"
+  docker compose run --rm frontend yarn --cwd ../../packages/storybook typecheck
+  docker compose run --rm frontend yarn --cwd ../../packages/storybook test:storybook
   docker compose run --rm frontend yarn build
-  docker compose run --rm frontend yarn build-storybook
+  docker compose run --rm frontend yarn --cwd ../../packages/storybook build-storybook
   ```
 
 ## Troubleshooting

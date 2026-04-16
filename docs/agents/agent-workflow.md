@@ -17,11 +17,11 @@ Use this file for repository-specific working conventions.
 ## Agent expectations
 
 - Prefer small, focused changes.
-- Treat the repository as a **workspaces monorepo, not a monolith**: **`apps/frontend`**, **`packages/storybook`**, **`packages/resume-content`**, **`apps/backend`**, and **`tools/`** are separate concerns. Preserve boundaries (imports, ESLint, CI job split for unit vs Storybook tests); do not merge layers or add cross-cutting shortcuts. See [`docs/agents/project-overview.md`](project-overview.md).
+- Treat the repository as a **multi-package repo, not a monolith**: **`apps/frontend`**, **`packages/storybook`**, **`packages/resume-content`**, **`apps/e2e`**, and **`tools/`** are separate concerns. Preserve boundaries (imports, ESLint, CI workflows per package); do not merge layers or add cross-cutting shortcuts. See [`docs/agents/project-overview.md`](project-overview.md).
 - Match nearby patterns before introducing new ones.
 - Keep frontend separation explicit: `.tsx` for views, `.ts` for logic, and `.css`/`.module.css` for web styles.
 - For **`packages/storybook/**`**, keep shared DOM components documented with Storybook; do not add ad-hoc `components/` folders for web UI (ESLint enforces this).
-- For **`apps/backend/src/cv-pdf/**`**, use react-pdf `StyleSheet` (`styles.ts`) instead of web CSS while still extracting reusable logic into `.ts` files.
+- For **`apps/frontend/lib/cv-pdf/**`**, use react-pdf `StyleSheet` (`styles.ts` / `styles/*.ts`) instead of web CSS while still extracting reusable logic into `.ts` files.
 - Do not commit secrets; use Vercel or GitHub environment configuration for deploy-time values.
 
 ## Subagent plan validation
@@ -36,10 +36,9 @@ When you need an **independent** pass over **implementation** (PR, diff, pre-mer
 
 When code or config changes need verification, use the `nextjs-change-checklist` skill for the expected lint, typecheck, test, and build flow.
 
-Before saying a task is complete, run at minimum:
+Before saying a task is complete, run the **package-scoped** scripts you changed (see `.github/workflows/` and the **`nextjs-change-checklist`** skill). Typical Docker invocations from the repo root:
 
-1. `yarn lint`
-2. `yarn typecheck`
-3. `yarn test:unit` and `yarn test:storybook` (or `yarn test`)
+- Frontend: `docker compose run --rm frontend yarn lint` (and `typecheck`, `test:unit`, `build` in `apps/frontend` — default working directory of the service is that folder).
+- Storybook: `docker compose run --rm frontend sh -lc "yarn --cwd ../../packages/storybook install --frozen-lockfile && yarn --cwd ../../packages/storybook lint"` (and `typecheck`, `test:storybook`, `build-storybook` as needed).
 
-Do not mark the task done until these pass, unless the user explicitly accepts a documented exception.
+Do not mark the task done until relevant checks pass, unless the user explicitly accepts a documented exception.

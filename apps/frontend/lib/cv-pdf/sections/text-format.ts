@@ -29,7 +29,7 @@ export function wrapLongUrl(url: string): string {
  * segment still allows extra wraps at `/ ? & =` inside a line.
  *
  * Relying on ZWSP alone is not enough: @react-pdf can emit a single text run as wide as the full
- * string (see geometry check in `cv-pdf-integrity.test.ts`).
+ * string; keep runs within `CV_PDF_LEFT_INNER_WIDTH_PT` via `Text`/`Link` wrapping and line breaks.
  */
 export function formatSidebarUrlForPdf(url: string, maxLineChars = 26): string {
   const afterProto = url.indexOf("://");

@@ -9,24 +9,31 @@ description: >-
 
 # Next.js change checklist
 
-## Logical monorepo (not a monolith)
+## Logical multi-package repo (not a monolith)
 
-This repo uses **Yarn workspaces** (`apps/frontend`, `apps/backend`, `packages/storybook`, `packages/resume-content`, `tools/`) and keeps Playwright specs under **`apps/e2e`**. Validate the **parts you touched**: use **`yarn test:unit`** (or **`yarn test:unit:frontend`**, **`yarn test:unit:backend`**, **`yarn test:unit:resume-content`**), **`yarn test:storybook`**, and **`yarn test:e2e:docker`** as appropriate; for PDF-only edits, run targeted Vitest under `apps/backend/src/cv-pdf/` per project docs.
+This repo uses **separate Yarn packages** (`apps/frontend`, `packages/storybook`, `packages/resume-content`, `apps/e2e`, `tools/`) with **`file:`** dependencies. Validate the **parts you touched**:
+
+- **Frontend** (`apps/frontend`, default cwd in the **`frontend`** Docker service): `yarn lint`, `yarn typecheck`, `yarn test:unit`, `yarn build`.
+- **Storybook** (`packages/storybook`): `yarn --cwd ../../packages/storybook …` from the frontend container, or `cd packages/storybook` on the host — `lint`, `typecheck`, `test:storybook`, `build-storybook`.
+- **Résumé data** (`packages/resume-content`): `yarn --cwd ../../packages/resume-content lint`, `typecheck`, `test:unit`.
+- **E2E** (`apps/e2e`): `yarn --cwd ../../apps/e2e test:e2e` (see `ci-e2e.yml`).
+
+For **CV PDF** edits under `apps/frontend/lib/cv-pdf/**`, run frontend **`yarn test:unit`** and consider **`sh scripts/cv/docker-dump.sh`** for a real PDF byte check.
 
 ## Preconditions
 
-- Dependencies installed: `yarn install` (from repo root).
+- Dependencies installed: `yarn install` in each package directory you modify (or use Docker **`yarn install`** / **`yarn --cwd … install --frozen-lockfile`** as CI does).
 - If the project uses TypeScript, ensure `tsconfig.json` exists and paths are unchanged unless intentional.
 
 ## Commands (run what exists)
 
-Execute in order; **skip** any script absent from `package.json`:
+Execute in order; **skip** any script absent from the relevant `package.json`:
 
-1. `yarn lint` — ESLint / Next lint per project config.
-2. `yarn typecheck` or `yarn tsc --noEmit` — if defined or if `typescript` is a dependency and the team uses explicit typecheck.
-3. `yarn test:unit` and `yarn test:storybook` — unit covers **`apps/frontend`**, **`apps/backend`**, and **`packages/resume-content`**; Storybook tests run in **`@portfolio/storybook`** (needs Chromium; CI runs them in a **separate** job; Docker **`frontend`** image includes Playwright system libs).
-4. `yarn test:e2e:docker` — Playwright end-to-end tests from **`apps/e2e`**. For one spec, pass a path: `yarn test:e2e:docker -- apps/e2e/<spec>.spec.ts`.
-5. `yarn build` — production Next.js build; must pass before merge for application changes.
+1. **`yarn lint`** — in the package you changed.
+2. **`yarn typecheck`** — where defined (`apps/frontend`, `packages/storybook`, `packages/resume-content`).
+3. **`yarn test:unit`** — frontend and/or `packages/resume-content`; **`yarn test:storybook`** — under `packages/storybook` (needs Chromium; CI runs it in a **separate** job; Docker **`frontend`** image includes Playwright system libs).
+4. **`yarn test:e2e`** — from **`apps/e2e`** when flows under test changed (often via Docker per `ci-e2e.yml`).
+5. **`yarn build`** — production Next.js build under **`apps/frontend`**; must pass before merge for application changes.
 
 ## App Router specifics to double-check
 
@@ -37,15 +44,15 @@ Execute in order; **skip** any script absent from `package.json`:
 ## Docker / CI parity
 
 - If CI runs in Linux, avoid macOS-only assumptions in scripts or path separators.
-- Docker-first: prefer **`docker compose run --rm frontend yarn lint`**, **`typecheck`**, **`test:unit`**, **`test:storybook`**, **`test:e2e`**, **`build`**, **`build-storybook`** so Node, Playwright, and Linux match CI (see `Dockerfile` / `docs/agents/storybook-ui.md`).
+- Docker-first: prefer **`docker compose run --rm frontend yarn lint`** (and the **`yarn --cwd ../../packages/...`** patterns from `.github/workflows/`) so Node, Playwright, and Linux match CI (see `Dockerfile` / `docs/agents/storybook-ui.md`).
 
 ## CV PDF (this repo)
 
-- After edits under `apps/backend/src/cv-pdf/**` or `packages/resume-content/**` used by the résumé PDF, run **`yarn test:unit:backend`** or **`yarn vitest run --project unit-backend apps/backend/src/cv-pdf/`** (includes `cv-pdf-integrity.test.ts` and the Docker dump test when enabled).
-- After edits under `packages/storybook/**`, run **`yarn build-storybook`** in addition to the usual checks.
+- After edits under **`apps/frontend/lib/cv-pdf/**`** or **`packages/resume-content/**`** used by the résumé PDF, run **`apps/frontend`** **`yarn test:unit`** and optional **`sh scripts/cv/docker-dump.sh`**.
+- After edits under **`packages/storybook/**`**, run **`yarn build-storybook`** in that package in addition to the usual checks.
 
 ## Done when
 
-- `yarn lint`, `yarn typecheck`, `yarn test:unit`, `yarn test:storybook`, and `yarn test:e2e:docker` have been run and passed before reporting completion when relevant to the change.
+- Relevant lint, typecheck, unit, Storybook, e2e, and build steps for the touched packages have been run and passed before reporting completion.
 - All existing scripts invoked above complete successfully, or the user accepts a documented exception (e.g. known flaky test tracked elsewhere).
 - No new secrets or `.env` files are committed.

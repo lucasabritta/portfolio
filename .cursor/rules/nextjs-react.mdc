@@ -13,7 +13,7 @@ alwaysApply: false
   - `.ts` files are for reusable logic/helpers (formatters, selectors, mappers).
   - Web styles live in `.css`/`.module.css`.
 - **Web UI**: Shared DOM components live in **`@portfolio/storybook`** (`packages/storybook/src/`). Import from the app as **`@portfolio/storybook`** (and package CSS subpaths). Do not add new `components/` for web UI; ESLint enforces this.
-- For **`apps/backend/src/cv-pdf/**`**, keep styles in react-pdf `StyleSheet` files (`styles.ts`) and do not migrate PDF styles to web CSS.
+- For **`apps/frontend/lib/cv-pdf/**`**, keep styles in react-pdf `StyleSheet` files (`styles.ts` / `styles/*.ts`) and do not migrate PDF styles to web CSS.
 - **Data fetching**: Prefer server-side fetching in Server Components; use `fetch` caching defaults intentionally. For client mutations, use patterns already present in the repo (e.g. Server Actions, route handlers).
 - **Metadata**: Use the Metadata API (`export const metadata` or `generateMetadata`) for SEO and social cards instead of ad-hoc `<head>` manipulation where possible.
 - **Imports**: Use path aliases if `tsconfig` defines them; otherwise relative imports — match existing style.

@@ -84,7 +84,7 @@ Subagents should check, when relevant:
 
 - **Next.js**: App Router, Server vs Client components, data fetching patterns (`docs/agents/agent-workflow.md`).
 - **UI boundary**: Shared DOM under `packages/storybook/src/**` (see `storybook-ui` skill).
-- **CV PDF**: `apps/backend/src/cv-pdf/**` uses react-pdf `StyleSheet`, not web CSS.
+- **CV PDF**: `apps/frontend/lib/cv-pdf/**` uses react-pdf `StyleSheet`, not web CSS.
 - **Validation**: After code changes, `yarn lint`, `yarn typecheck`, `yarn test`, `yarn build` per `nextjs-change-checklist` skill (reviewer may cite; executor runs).
 
 ## Anti-patterns

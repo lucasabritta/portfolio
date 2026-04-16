@@ -18,7 +18,7 @@ description: >-
 - **Package manager**: Use **yarn** in CI (`yarn install --frozen-lockfile` when `yarn.lock` exists; otherwise follow lockfile policy the repo uses).
 - **Node version**: Match `package.json` `engines`, `.nvmrc`, or `.node-version` if present; otherwise use active LTS and document changes.
 - **Steps order**: checkout → setup Node → cache yarn (optional) → install → lint → typecheck → test → build (skip stages that do not exist yet).
-- **Modular CI** (this repo): Workflows are **per workspace/concern** (`.github/workflows/ci-frontend.yml`, `ci-backend.yml`, `ci-resume-content.yml`, `ci-storybook.yml`, `ci-e2e.yml`). Frontend/backend/resume-content run scoped **lint + typecheck + unit**; Storybook runs **`yarn test:storybook`** after Playwright setup; e2e runs Playwright directly on the GitHub runner (`yarn playwright install chromium --with-deps` + `yarn test:e2e`). **Production build** is **`ci-build.yml`** (`yarn build`). Prefer **new workflows or jobs scoped to one package/concern** when adding checks so unrelated workspaces do not false-fail each other.
+- **Modular CI** (this repo): Workflows are **per package/concern** (`.github/workflows/ci-frontend.yml`, `ci-resume-content.yml`, `ci-storybook.yml`, `ci-e2e.yml`). Each job builds the **`frontend`** Docker image then runs **`docker compose run --rm frontend …`** with **`yarn`** scoped to **`apps/frontend`**, **`packages/storybook`**, **`packages/resume-content`**, or **`apps/e2e`** (see YAML for exact commands). **Production image** is **`ci-build.yml`** (`docker compose --profile prod build frontend-prod`). Prefer **new jobs scoped to one package** when adding checks so unrelated packages do not false-fail each other.
 
 ## Fixing failures
 
