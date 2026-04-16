@@ -1,0 +1,94 @@
+.shell {
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  gap: 1.75rem;
+  padding-bottom: 2.5rem;
+  padding-top: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .shell {
+    align-items: start;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    padding-bottom: 3rem;
+    padding-top: 2.5rem;
+  }
+}
+
+.leadCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.positioning {
+  color: var(--foreground);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 40rem;
+}
+
+@media (min-width: 768px) {
+  .positioning {
+    font-size: 1.125rem;
+  }
+}
+
+.contactHint {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0;
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.storybookLink {
+  align-self: flex-start;
+  margin-top: 0.15rem;
+}
+
+.proofCard ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.proofCard li {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding-left: 0.85rem;
+  position: relative;
+}
+
+.proofCard li::before {
+  background: var(--accent);
+  border-radius: 999px;
+  content: "";
+  height: 0.35rem;
+  left: 0;
+  position: absolute;
+  top: 0.45rem;
+  width: 0.35rem;
+}
+
+.proofTitle {
+  color: var(--foreground);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+}

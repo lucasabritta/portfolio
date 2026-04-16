@@ -8,6 +8,10 @@
   },
   "exports": {
     ".": "./src/index.ts",
+    "./projects-page-view": {
+      "types": "./src/projects-page/projects-page-view.tsx",
+      "default": "./src/projects-page/projects-page-view.tsx"
+    },
     "./globals.css": "./src/globals.css",
     "./layout.module.css": "./src/layout.module.css"
   },

@@ -10,7 +10,24 @@ import { fileURLToPath } from "node:url";
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const storybookPkg = path.join(root, "packages", "storybook");
 const outDir = path.join(root, "apps", "frontend", "public", "storybook");
-const storybookBin = path.join(root, "node_modules", "storybook", "dist", "bin", "dispatcher.js");
+
+function resolveStorybookDispatcher() {
+  const candidates = [
+    path.join(root, "packages", "storybook", "node_modules", "storybook", "dist", "bin", "dispatcher.js"),
+    path.join(root, "apps", "frontend", "node_modules", "storybook", "dist", "bin", "dispatcher.js"),
+    path.join(root, "node_modules", "storybook", "dist", "bin", "dispatcher.js"),
+  ];
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+  throw new Error(
+    "storybook CLI (dispatcher.js) not found. Run `yarn install` in apps/frontend (and packages/storybook if deps are split).",
+  );
+}
+
+const storybookBin = resolveStorybookDispatcher();
 
 const BASE_TAG = '<base href="/storybook/" />';
 

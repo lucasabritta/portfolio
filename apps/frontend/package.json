@@ -11,7 +11,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "dev:docker": "next dev --hostname 0.0.0.0 --port 3000",
+    "dev:docker": "node ../../tools/ensure-storybook-public.mjs && next dev --hostname 0.0.0.0 --port 3000",
+    "prebuild": "node ../../tools/build-storybook-for-next.mjs",
     "build": "next build",
     "start": "next start",
     "start:docker": "next start --hostname 0.0.0.0 --port 3000",
@@ -42,6 +43,7 @@
     "eslint-config-next": "16.2.4",
     "jsdom": "^24.1.3",
     "playwright": "^1.59.1",
+    "storybook": "^10.3.5",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^3.2.4"

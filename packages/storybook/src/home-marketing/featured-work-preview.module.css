@@ -1,0 +1,38 @@
+.section {
+  scroll-margin-top: 5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.flagship {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+  .flagship {
+    grid-column: 1 / -1;
+  }
+}
+
+.desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin: 0.5rem 0 0.75rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

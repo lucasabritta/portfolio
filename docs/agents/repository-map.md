@@ -14,8 +14,9 @@ This repository is a **multi-package TypeScript repo**: several **`apps/*`** and
 | Root `package.json` | Minimal stub for Vercel when the project root is the git root (see [`docs/agents/cursor-mcp.md`](cursor-mcp.md)); **not** the primary workspace manifest |
 | `apps/frontend/` | Next.js App Router app (`app/`, `public/`, `next.config.ts`) — **`@portfolio/frontend`** |
 | `apps/frontend/lib/cv-pdf/` | CV PDF react-pdf document, sections, `StyleSheet` styles, fonts; used by `app/api/cv/` |
-| `apps/e2e/` | Playwright end-to-end spec directory |
+| `apps/e2e/` | Playwright end-to-end specs (`cv-download.spec.ts`, `projects-page.spec.ts`, `nav-smoke.spec.ts`); run via `ci-e2e.yml` / `yarn --cwd apps/e2e test:e2e` |
 | `packages/storybook/` | Shared DOM UI, co-located CSS, Storybook config (`.storybook/`), Vitest Storybook project — **`@portfolio/storybook`** |
+| `@portfolio/storybook/projects-page-view` | **`ProjectsPageView`** is a client component; the Next app must import this **subpath** (not the package root barrel) so the App Router keeps the `"use client"` boundary for flagship image `onError`. Types stay on **`@portfolio/storybook`** (`ProjectsPageViewProps`). |
 | `packages/storybook/src/` | Components, `*.stories.tsx`, `globals.css`, `layout.module.css` |
 | `packages/storybook/src/fixtures/` | Typed Storybook args helpers (synthetic presentation data, viewport globals) |
 | `packages/storybook/src/primitives/` | Shared presentation primitives; re-exported from **`@portfolio/storybook`** |

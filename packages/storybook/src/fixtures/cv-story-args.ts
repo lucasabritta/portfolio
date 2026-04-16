@@ -26,6 +26,7 @@ const SYNTH_LINKS: readonly PresentationContactLink[] = [
 const SYNTH_HIGHLIGHTS = [
   "Shipped features used by thousands of daily active users.",
   "Improved CI/CD and observability across multiple teams.",
+  "Scaled technical leadership through mentoring, clear ownership, and predictable delivery.",
 ] as const;
 
 const SYNTH_TECH = ["TypeScript", "React", "Node.js", "AWS"] as const;
@@ -317,6 +318,7 @@ export function homePageArgs(overrides: Partial<HomePageProps> = {}): HomePagePr
 }
 
 /** Exported for interaction tests (synthetic copy, not real résumé data). */
+export const storyFixtureName = SYNTH_NAME;
 export const storyFixturePhone = SYNTH_PHONE;
 export const storyFixtureEmail = SYNTH_EMAIL;
 export const storyFixtureCert = SYNTH_CERTS[0];

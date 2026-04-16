@@ -18,9 +18,8 @@ apps/frontend/public/storybook
 coverage
 **/coverage
 
-# Production / misc build dirs
-build
-**/build
+# Repo-root build output only (do not ignore `apps/frontend/app/build/` App Router segment)
+/build/
 
 # Logs & local env
 npm-debug.log*

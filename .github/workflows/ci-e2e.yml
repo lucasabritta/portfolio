@@ -17,8 +17,16 @@ jobs:
       - name: Build frontend docker image
         run: docker compose build frontend
 
+      # Compose mounts empty named volumes over `apps/frontend/node_modules` and
+      # `packages/storybook/node_modules`; populate them before any step that needs the Storybook CLI.
+      - name: Install dependencies (populate Compose volumes)
+        run: docker compose run --rm frontend sh -lc "yarn install --frozen-lockfile && cd ../../packages/storybook && yarn install --non-interactive"
+
       - name: Lint e2e tests
         run: docker compose run --rm frontend sh -lc "yarn --cwd ../../apps/e2e install --frozen-lockfile && yarn --cwd ../../apps/e2e lint"
+
+      - name: Build static Storybook for Next public/
+        run: docker compose run --rm frontend sh -lc "node ../../tools/build-storybook-for-next.mjs"
 
       - name: Run Playwright e2e tests
         run: docker compose run --rm frontend yarn --cwd ../../apps/e2e test:e2e
