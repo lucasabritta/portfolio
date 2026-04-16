@@ -115,9 +115,11 @@ Triggers on pushes to `main` and on pull requests. Workflows use Node 22 and Yar
 ## Deploying on Vercel
 
 1. Import this repository in the [Vercel dashboard](https://vercel.com/new).
-2. Framework preset: **Next.js**. Install/build commands are declared in root **`vercel.json`** and run under `apps/frontend`.
-3. Enable **Analytics** and **Speed Insights** in the Vercel project dashboard if you want first-party traffic and performance reporting for deployed environments.
-4. Set any required environment variables under **Project → Settings → Environment Variables**.
+2. **Project → Settings → General → Root Directory**: set to **`apps/frontend`**.
+3. Enable **Include files outside the Root Directory in the Build Step** (required for `file:../../packages/...` local packages).
+4. Framework preset: **Next.js** (Vercel runs `yarn install` / `yarn build` from `apps/frontend`). Optional overrides live in **`apps/frontend/vercel.json`**.
+5. Enable **Analytics** and **Speed Insights** in the Vercel project dashboard if you want first-party traffic and performance reporting for deployed environments.
+6. Set any required environment variables under **Project → Settings → Environment Variables**.
 
 Preview deployments are created automatically for pull requests when the Git integration is enabled.
 
@@ -128,8 +130,8 @@ This repo includes `@vercel/analytics` and `@vercel/speed-insights` through `app
 - `apps/frontend/` — Next.js app (`app/`, `public/`)
 - `packages/storybook/` — Shared DOM UI (`@portfolio/storybook`), Storybook, web CSS
 - `packages/resume-content/` — Résumé data and types (`@portfolio/resume-content`)
-- `apps/frontend/lib/cv-pdf-download-response.ts` — CV PDF generation logic used by frontend API route
-- `apps/frontend/Dockerfile`, root `docker-compose.yml` — Container workflows
+- `apps/frontend/lib/cv-pdf/` — CV PDF layout (`*.css`, `*.ts`, `*.tsx`) and `cv-pdf-download-response.ts` barrel used by `/api/cv`
+- `apps/frontend/Dockerfile`, `docker-compose.yml` (repo root) — Container workflows
 - `.github/workflows/` — CI
 
 ## Frontend layering convention

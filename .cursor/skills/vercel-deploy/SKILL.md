@@ -12,6 +12,7 @@ description: >-
 ## Principles
 
 - **Framework preset**: Next.js on Vercel should use the default build (`yarn build` or the install command Vercel detects from `package.json`).
+- **Monorepo / `file:` packages (this repo)**: Set Vercel **Root Directory** to **`apps/frontend`** and enable **Include files outside the Root Directory in the Build Step** so `file:../../packages/...` resolves. Optional overrides belong in **`apps/frontend/vercel.json`** (not the repo root).
 - **Avoid unnecessary `vercel.json`**: Add only redirects, headers, rewrites, or region settings when there is a concrete requirement.
 - **Secrets**: Store in the Vercel project dashboard (Production / Preview / Development). Never commit API keys or tokens.
 

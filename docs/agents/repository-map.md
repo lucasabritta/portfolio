@@ -29,10 +29,10 @@ This repository is a **Yarn workspaces monorepo**: a root `package.json` with **
 | `apps/backend/src/cv-pdf/` | CV PDF (react-pdf document, sections, pdf.js helpers, Vitest) |
 | `**/*.tsx` in `apps/frontend/app/` | Next views and route modules |
 | `apps/frontend/next.config.*` | Next.js configuration (`transpilePackages`, `outputFileTracingRoot` for monorepo) |
-| `Dockerfile` | Container image for local or deploy-related workflows |
-| `docker-compose.yml` | Local Docker Compose stack (`frontend`, `cv-tools` profile) |
+| `apps/frontend/Dockerfile` | Multi-stage image (`development`, `builder`, `runner`) for local dev and production-like runs |
+| `docker-compose.yml` | Root Compose stack (`frontend`, `frontend-prod` profile, `cv-tools` profile) |
 | `.github/workflows/` | CI pipelines for lint, typecheck, unit, Storybook, e2e (`ci-e2e.yml`), and production build |
-| `vercel.json` | Vercel build/install commands for the workspace |
+| `apps/frontend/vercel.json` | Optional Vercel overrides; project **Root Directory** must be `apps/frontend` (see `docs/agents/cursor-mcp.md`) |
 | `.cursor/rules/`, `.cursor/skills/` | Cursor rules and skills |
 | User `~/.cursor/mcp.json` | MCP servers (e.g. Vercel OAuth); keep out of the repo — see [`docs/agents/cursor-mcp.md`](cursor-mcp.md) |
 
