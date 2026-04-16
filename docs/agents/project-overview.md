@@ -10,22 +10,22 @@ Related product work may live in separate repositories:
 - Backend code lives in the Backend repository.
 - Most AI orchestration code lives in the `vectorization_pipeline` repository.
 
-## Yarn workspaces monorepo, not a monolith
+## Multi-package layout (logical monorepo, not a monolith)
 
-The portfolio uses **one git root**, **Yarn workspaces** (`apps/*`, `packages/*`), and **one lockfile** so the **Next app**, **Storybook library**, **résumé data**, and **PDF backend** stay **separately versioned and importable** — not a monolith where every feature reaches into every layer.
+The portfolio uses **one git root** with **several Yarn packages** (`apps/*`, `packages/*`). Each package has its own `package.json` and **`yarn.lock`**. The Next app consumes **`@portfolio/storybook`** and **`@portfolio/resume-content`** via local **`file:`** dependencies. That keeps the site, shared DOM UI, and résumé data **separately versioned and importable** — not a monolith where every feature reaches into every layer.
 
 | Surface | Role |
 |---------|------|
-| `apps/frontend` (`@portfolio/frontend`) | Next.js App Router: routes, layouts, `public/` |
+| `apps/frontend` (`@portfolio/frontend`) | Next.js App Router: routes, layouts, `public/`, `/api/cv` (react-pdf), `lib/cv-pdf/` |
 | `packages/storybook` (`@portfolio/storybook`) | Shared DOM components, Storybook (`.storybook/`), web CSS; consumed by the app via **`@portfolio/storybook`** |
 | `packages/resume-content` (`@portfolio/resume-content`) | Résumé types, `resumeData`, small shared formatters (`buildPhoneHref`, work-history keys) |
-| `apps/backend` (`@portfolio/backend`) | CV PDF generation (react-pdf, pdf.js); consumed by the Next API route |
-| `tools/` | Repo-local tooling |
+| `apps/e2e` | Playwright end-to-end specs (run against the Next app) |
+| `tools/` | Repo-local tooling (e.g. Storybook build helper for Next) |
 
 **Agent expectations:**
 
 - Respect **import direction** and **layer boundaries** (see [`docs/agents/repository-map.md`](repository-map.md)). The Storybook package must not import from `apps/frontend/app/**` or from **`@portfolio/resume-content`**.
-- When validating changes, prefer the **narrowest** meaningful checks: e.g. `yarn test:unit:frontend` vs `yarn test:unit:backend` vs `yarn test:storybook`, or targeted Vitest paths under `apps/backend/src/cv-pdf/` when only PDF code moved. CI runs unit and Storybook tests in **separate jobs** to keep those surfaces decoupled.
+- When validating changes, run the **narrowest** meaningful checks in the package you touched (see CI: `docker compose run --rm frontend yarn --cwd ../../packages/...` patterns in `.github/workflows/`).
 - Sibling **product** repos (Frontend, Backend, `vectorization_pipeline`) remain **outside** this tree; do not assume their packages are linked here unless files prove it.
 
 ## Intended stack
@@ -33,10 +33,10 @@ The portfolio uses **one git root**, **Yarn workspaces** (`apps/*`, `packages/*`
 | Area | Choice |
 |------|--------|
 | Framework | Next.js App Router with stable React |
-| Package manager | `yarn` (workspaces: `apps/*`, `packages/*`) |
-| Local development | Docker-first via `Dockerfile` and `compose*.yml` |
+| Package manager | `yarn` (classic) per package |
+| Local development | Docker-first via root `docker-compose.yml` and `apps/frontend/Dockerfile` |
 | CI | GitHub Actions in `.github/workflows/` |
-| Production deploy | Vercel-native deployment |
+| Production deploy | Vercel-native deployment (Next app under `apps/frontend`) |
 
 ## Working defaults
 

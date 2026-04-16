@@ -56,7 +56,7 @@ Merge non-duplicative items under one verdict in the parent reply. Do **not** ne
 - **Next.js / React**: Server vs Client boundaries, hooks rules, data fetching, metadata.
 - **Security**: secrets, XSS, unsafe HTML, auth/session assumptions, env usage.
 - **UI / a11y**: semantics, labels, focus, contrast; shared DOM only under `packages/storybook/src/**` per ESLint boundary.
-- **Styling**: view vs `.module.css`; CV PDF stays in `apps/backend/src/cv-pdf/**` with react-pdf `StyleSheet`.
+- **Styling**: view vs `.module.css`; CV PDF stays in `apps/frontend/lib/cv-pdf/**` with react-pdf `StyleSheet`.
 - **Tests & CI**: coverage of new behavior; cite `yarn lint`, `yarn typecheck`, `yarn test`, `yarn build` as needed.
 - **Scope creep**: unrelated refactors, noisy diffs.
 

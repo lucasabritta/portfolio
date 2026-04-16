@@ -4,34 +4,33 @@ Use this file when you need to locate common code or configuration.
 
 ## Monorepo vs monolith
 
-This repository is a **Yarn workspaces monorepo**: a root `package.json` with **`apps/*`** and **`packages/*`** so the **Next app**, **Storybook UI library**, **résumé data**, and **PDF backend** stay **separate packages**—not a monolith where layers freely entangle.
+This repository is a **multi-package TypeScript repo**: several **`apps/*`** and **`packages/*`** directories, each with its own **`package.json`** and **`yarn.lock`**, linked by **`file:`** dependencies where needed. The **Next app**, **Storybook UI library**, **résumé data**, and **e2e specs** are **separate packages** — not a monolith where layers freely entangle.
 
-- **`apps/frontend/`**, the Playwright spec directory **`apps/e2e/`**, **`packages/storybook/`**, **`packages/resume-content/`**, and **`apps/backend/src/cv-pdf/`** are distinct concerns: preserve **correct import direction** (app → `@portfolio/storybook` / `@portfolio/resume-content` / `@portfolio/backend`; storybook → **no** `@portfolio/resume-content`; backend → `@portfolio/resume-content`), **ESLint boundaries**, and **CI splits** (`yarn test:unit:*` vs `yarn test:storybook` vs `yarn test:e2e`).
+- **`apps/frontend/`**, **`apps/e2e/`**, **`packages/storybook/`**, and **`packages/resume-content/`** are distinct concerns: preserve **correct import direction** (app → `@portfolio/storybook` / `@portfolio/resume-content`; storybook → **no** `@portfolio/resume-content`), **ESLint boundaries**, and **CI splits** (per-workflow jobs under `.github/workflows/`).
 - Avoid cross-layer shortcuts (web CSS or Storybook-only UI inside PDF code; **no** imports from `apps/frontend/app/**` inside `packages/storybook`).
 
 | Path | Purpose |
 |------|---------|
-| Root `package.json` | Workspaces, aggregate scripts, shared `devDependencies` (ESLint, Vitest, TypeScript, Playwright), `resolutions` |
-| `apps/frontend/` | Next.js App Router app (`app/`, `public/`, `next.config.ts`) — package **`@portfolio/frontend`** |
-| `apps/e2e/` | Playwright end-to-end spec directory (Docker-first execution via root scripts) |
-| `packages/storybook/` | Shared DOM UI, co-located CSS, Storybook config (`.storybook/`), Vitest Storybook project — package **`@portfolio/storybook`** |
+| Root `package.json` | Minimal stub for Vercel when the project root is the git root (see [`docs/agents/cursor-mcp.md`](cursor-mcp.md)); **not** the primary workspace manifest |
+| `apps/frontend/` | Next.js App Router app (`app/`, `public/`, `next.config.ts`) — **`@portfolio/frontend`** |
+| `apps/frontend/lib/cv-pdf/` | CV PDF react-pdf document, sections, `StyleSheet` styles, fonts; used by `app/api/cv/` |
+| `apps/e2e/` | Playwright end-to-end spec directory |
+| `packages/storybook/` | Shared DOM UI, co-located CSS, Storybook config (`.storybook/`), Vitest Storybook project — **`@portfolio/storybook`** |
 | `packages/storybook/src/` | Components, `*.stories.tsx`, `globals.css`, `layout.module.css` |
 | `packages/storybook/src/fixtures/` | Typed Storybook args helpers (synthetic presentation data, viewport globals) |
-| `packages/storybook/src/primitives/` | Shared presentation primitives (`Card`, `Chip`, `ActionLink`, typography); **`Foundations/*`** Storybook titles; re-exported from **`@portfolio/storybook`** |
+| `packages/storybook/src/primitives/` | Shared presentation primitives; re-exported from **`@portfolio/storybook`** |
 | `packages/storybook/src/**/*.stories.test.ts` | Storybook interaction tests (`play`); typed as **`StoryPlayFn`** in **`storybook-play-types.ts`** |
-| `packages/resume-content/` | Résumé types, `resumeData`, `buildPhoneHref`, `buildHomepageWorkEntryKey` — package **`@portfolio/resume-content`** |
-| `apps/backend/` | CV PDF pipeline (react-pdf, pdf.js helpers, Vitest) — workspace **`@portfolio/backend`**; public API in `src/index.ts` |
+| `packages/resume-content/` | Résumé types, `resumeData`, `buildPhoneHref`, `buildHomepageWorkEntryKey` — **`@portfolio/resume-content`** |
 | `packages/storybook/.storybook/` | Storybook `main.ts`, `preview.tsx` |
-| Root `vitest.config.mjs` | Vitest **unit** projects: `apps/frontend`, `apps/backend`, `packages/resume-content` |
-| Root `playwright.config.ts` | Playwright runner configuration for `apps/e2e` and local web server boot |
+| `apps/frontend/vitest.config.ts` | Frontend unit tests (Vitest, jsdom / node as configured) |
 | `packages/storybook/vitest.config.mjs` | Vitest **storybook** project (`@storybook/addon-vitest`, Playwright Chromium) |
+| `packages/resume-content/vitest.config.ts` | Resume-content unit tests |
 | `apps/frontend/postcss.config.cjs` | PostCSS (Tailwind v4) for Next |
-| `apps/backend/src/cv-pdf/` | CV PDF (react-pdf document, sections, pdf.js helpers, Vitest) |
 | `**/*.tsx` in `apps/frontend/app/` | Next views and route modules |
 | `apps/frontend/next.config.*` | Next.js configuration (`transpilePackages`, `outputFileTracingRoot` for monorepo) |
 | `apps/frontend/Dockerfile` | Multi-stage image (`development`, `builder`, `runner`) for local dev and production-like runs |
 | `docker-compose.yml` | Root Compose stack (`frontend`, `frontend-prod` profile, `cv-tools` profile) |
-| `.github/workflows/` | CI pipelines for lint, typecheck, unit, Storybook, e2e (`ci-e2e.yml`), and production build |
+| `.github/workflows/` | CI pipelines (frontend, resume-content, Storybook, e2e, production Docker build) |
 | `vercel.json` (repo root) | Fallback install/build when Vercel **Root Directory** is the repo root (see `docs/agents/cursor-mcp.md`) |
 | `apps/frontend/vercel.json` | Optional Vercel overrides when **Root Directory** is `apps/frontend` |
 | `.cursor/rules/`, `.cursor/skills/` | Cursor rules and skills |

@@ -15,7 +15,7 @@ export default defineConfig({
   esbuild: { jsx: "automatic" },
   test: {
     environment: "jsdom",
-    include: ["app/**/*.{test,spec}.{ts,tsx}"],
+    include: ["app/**/*.{test,spec}.{ts,tsx}", "lib/**/*.test.ts"],
     exclude: ["**/node_modules/**", "**/.next/**"],
     setupFiles: ["./vitest.setup.ts"],
   },
