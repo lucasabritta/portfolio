@@ -1,0 +1,143 @@
+"use client";
+
+import type { ReactNode } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+
+import { ActionLink } from "../primitives";
+
+import type { SiteShellLinkComponent } from "./site-link-component";
+import styles from "./site-header.module.css";
+
+export type SiteNavItem = {
+  label: string;
+  href: string;
+};
+
+export type SiteHeaderProps = {
+  wordmarkText: string;
+  wordmarkHref: string;
+  navItems: SiteNavItem[];
+  downloadCvHref: string;
+  themeControl: ReactNode;
+  currentPath: string;
+  /** When set (e.g. Next.js `Link`), internal navigation uses this component. */
+  linkComponent?: SiteShellLinkComponent;
+};
+
+function pathMatchesNav(currentPath: string, href: string): boolean {
+  /* In-app hash routes (e.g. /#resume): never mark aria-current from pathname alone — hash is not in usePathname(). */
+  if (href.startsWith("/#")) {
+    return false;
+  }
+  if (href === "/") {
+    return currentPath === "/";
+  }
+  if (href.startsWith("/") && !href.startsWith("//")) {
+    const path = href.split("#")[0] ?? href;
+    return currentPath === path || currentPath.startsWith(`${path}/`);
+  }
+  return false;
+}
+
+export function SiteHeader({
+  wordmarkText,
+  wordmarkHref,
+  navItems,
+  downloadCvHref,
+  themeControl,
+  currentPath,
+  linkComponent: LinkComponent,
+}: SiteHeaderProps) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuId = useId();
+  const NavLink = LinkComponent ?? "a";
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobilePanelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMenuOpen(false);
+        queueMicrotask(() => menuButtonRef.current?.focus());
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    const firstLink = mobilePanelRef.current?.querySelector<HTMLElement>("a[href]");
+    queueMicrotask(() => firstLink?.focus());
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
+  return (
+    <header className={styles.header}>
+      <div className={styles.inner}>
+        <div className={styles.left}>
+          <NavLink href={wordmarkHref} className={styles.wordmark}>
+            {wordmarkText}
+          </NavLink>
+          <nav className={styles.desktopNav} aria-label="Primary">
+            <ul className={styles.navList}>
+              {navItems.map((item) => {
+                const active = pathMatchesNav(currentPath, item.href);
+                return (
+                  <li key={item.href}>
+                    <NavLink
+                      href={item.href}
+                      className={active ? styles.navLinkActive : styles.navLink}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      {item.label}
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </div>
+        <div className={styles.right}>
+          <div className={styles.themeSlot}>{themeControl}</div>
+          <ActionLink variant="primary" href={downloadCvHref} className={styles.download}>
+            Download CV
+          </ActionLink>
+          <button
+            ref={menuButtonRef}
+            type="button"
+            className={styles.menuButton}
+            aria-expanded={menuOpen}
+            aria-controls={menuOpen ? menuId : undefined}
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            Menu
+          </button>
+        </div>
+      </div>
+      {menuOpen ? (
+        <div ref={mobilePanelRef} className={styles.mobilePanel} id={menuId}>
+          <nav aria-label="Primary mobile">
+            <ul className={styles.mobileNavList}>
+              {navItems.map((item) => {
+                const active = pathMatchesNav(currentPath, item.href);
+                return (
+                  <li key={`m-${item.href}`}>
+                    <NavLink
+                      href={item.href}
+                      className={active ? styles.mobileNavLinkActive : styles.mobileNavLink}
+                      aria-current={active ? "page" : undefined}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {item.label}
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </div>
+      ) : null}
+    </header>
+  );
+}

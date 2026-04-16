@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { buildPhoneHref, resumeData } from "@portfolio/resume-content";
 import {
   CertificationsSection,
@@ -10,13 +12,17 @@ import {
   WorkHistorySection,
 } from "@portfolio/storybook";
 
+export const metadata: Metadata = {
+  title: "Home",
+  description:
+    "Engineering Manager portfolio and CV for Lucas Abritta — startup growth, platform excellence, and software delivery leadership.",
+};
+
 export default function Home() {
   const phoneHref = buildPhoneHref(resumeData.phone);
 
   return (
     <HomePageShell
-      name={resumeData.name}
-      role={resumeData.role}
       hero={
         <PortfolioHero
           name={resumeData.name}
@@ -31,7 +37,9 @@ export default function Home() {
         />
       }
     >
-      <SummarySection summaryHighlights={resumeData.summaryHighlights} techStack={resumeData.techStack} />
+      <div id="resume">
+        <SummarySection summaryHighlights={resumeData.summaryHighlights} techStack={resumeData.techStack} />
+      </div>
       <WorkHistorySection workHistory={resumeData.workHistory} />
       <EducationSection education={resumeData.education} />
       <CertificationsSection certifications={resumeData.certifications} />

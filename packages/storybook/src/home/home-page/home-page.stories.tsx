@@ -7,6 +7,7 @@ import { ContactSection } from "@ui/home/contact-section/contact-section";
 import { EducationSection } from "@ui/home/education-section/education-section";
 import { HomePageShell } from "@ui/home/home-page-shell";
 import type { HomePageProps } from "@ui/home/presentation-types";
+import { SkipToMain } from "@ui/site-chrome/skip-to-main";
 import { ProjectsSection } from "@ui/home/projects-section/projects-section";
 import { SummarySection } from "@ui/home/summary-section/summary-section";
 import { WorkHistorySection } from "@ui/home/work-history-section/work-history-section";
@@ -15,10 +16,10 @@ import { homePageDefaultPlay } from "./home-page.stories.test";
 
 function HomePageStory(props: HomePageProps) {
   return (
-    <HomePageShell
-      name={props.name}
-      role={props.role}
-      hero={
+    <>
+      <SkipToMain />
+      <HomePageShell
+        hero={
         <PortfolioHero
           name={props.name}
           role={props.role}
@@ -30,8 +31,8 @@ function HomePageStory(props: HomePageProps) {
           links={props.contactLinks}
           downloadHref={props.downloadHref}
         />
-      }
-    >
+        }
+      >
       <SummarySection summaryHighlights={props.summaryHighlights} techStack={props.techStack} />
       <WorkHistorySection workHistory={props.workHistory} />
       <EducationSection education={props.education} />
@@ -45,6 +46,7 @@ function HomePageStory(props: HomePageProps) {
         linkedin={props.linkedin}
       />
     </HomePageShell>
+    </>
   );
 }
 

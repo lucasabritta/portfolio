@@ -1,0 +1,190 @@
+.header {
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.inner {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 70rem;
+  min-height: 4rem;
+  padding: 0.5rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .inner {
+    min-height: 4.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.left {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.wordmark {
+  color: var(--foreground);
+  flex-shrink: 0;
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.wordmark:hover {
+  color: var(--accent);
+}
+
+.wordmark:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.desktopNav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .desktopNav {
+    display: block;
+  }
+}
+
+.navList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink,
+.navLinkActive {
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--foreground);
+}
+
+.navLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.navLinkActive {
+  color: var(--accent);
+}
+
+.right {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.75rem;
+}
+
+.themeSlot {
+  max-width: min(100%, 12.5rem);
+}
+
+.download {
+  display: none;
+  font-size: 0.8125rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.85rem;
+}
+
+@media (min-width: 768px) {
+  .download {
+    display: inline-flex;
+  }
+}
+
+.menuButton {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  color: var(--foreground);
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.75rem;
+}
+
+.menuButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  .menuButton {
+    display: none;
+  }
+}
+
+.mobilePanel {
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+  display: block;
+  padding: 0.75rem 1.5rem 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .mobilePanel {
+    display: none;
+  }
+}
+
+.mobileNavList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.mobileNavLink,
+.mobileNavLinkActive {
+  border-radius: 0.5rem;
+  color: var(--foreground);
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.5rem 0.35rem;
+  text-decoration: none;
+}
+
+.mobileNavLink:hover,
+.mobileNavLink:focus-visible {
+  background: var(--card);
+}
+
+.mobileNavLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.mobileNavLinkActive {
+  color: var(--accent);
+}

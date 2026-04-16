@@ -1,4 +1,12 @@
 export { HomePageShell } from "./home/home-page-shell";
+export { SiteFooter } from "./site-chrome/site-footer";
+export type { SiteFooterLink, SiteFooterProps } from "./site-chrome/site-footer";
+export { SiteHeader } from "./site-chrome/site-header";
+export type { SiteHeaderProps, SiteNavItem } from "./site-chrome/site-header";
+export type { SiteShellLinkComponent } from "./site-chrome/site-link-component";
+export { SkipToMain } from "./site-chrome/skip-to-main";
+export { ThemeModeSwitch } from "./site-chrome/theme-mode-switch";
+export type { SiteThemePreference, ThemeModeSwitchProps } from "./site-chrome/theme-mode-switch";
 export { CertificationsSection } from "./home/certifications-section/certifications-section";
 export { ContactSection } from "./home/contact-section/contact-section";
 export { EducationSection } from "./home/education-section/education-section";

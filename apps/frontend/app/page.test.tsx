@@ -22,12 +22,14 @@ describe("Home page", () => {
 
   it("keeps page shell and section composition in frontend", () => {
     render(<Home />);
-    expect(screen.getByRole("link", { name: /skip to content/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /professional summary/i })).toBeInTheDocument();
+    expect(document.getElementById("resume")).toBeTruthy();
   });
 
   it("keeps cv download path under /api", () => {
     render(<Home />);
-    expect(screen.getByRole("link", { name: /download cv/i })).toHaveAttribute("href", "/api/cv");
+    const cvPdfLinks = screen.getAllByRole("link").filter((el) => el.getAttribute("href") === "/api/cv");
+    expect(cvPdfLinks.length).toBeGreaterThanOrEqual(1);
+    expect(cvPdfLinks.some((el) => /download cv/i.test(el.textContent ?? ""))).toBe(true);
   });
 });
