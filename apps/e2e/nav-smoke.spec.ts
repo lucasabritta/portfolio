@@ -3,7 +3,7 @@ import { expect, test } from "playwright/test";
 test.describe("Site navigation and critical routes", () => {
   test.use({ viewport: { width: 1280, height: 720 } });
 
-  test("home exposes skip link, primary nav, hero, and CV CTA", async ({ page }) => {
+  test("home exposes skip link, primary nav, hero, CV, GitHub, and Storybook entry points", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("link", { name: /skip to content/i })).toBeVisible();
     const primary = page.getByRole("navigation", { name: "Primary" });
@@ -16,6 +16,9 @@ test.describe("Site navigation and critical routes", () => {
       has: page.getByRole("heading", { level: 1, name: "Lucas Abritta" }),
     });
     await expect(homeLeadHeader.getByRole("link", { name: "Download CV" })).toHaveAttribute("href", "/api/cv");
+    await expect(page.getByRole("link", { name: "Open Storybook" }).first()).toBeVisible();
+    const footer = page.getByRole("contentinfo");
+    await expect(footer.getByRole("link", { name: "GitHub" })).toHaveAttribute("href", /^https:\/\/github\.com\/lucasabritta\/?$/);
   });
 
   test("header navigates to Projects and Build", async ({ page }) => {

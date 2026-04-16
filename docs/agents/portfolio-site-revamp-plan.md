@@ -32,7 +32,7 @@ Use **multiple routes** if needed; avoid a single endless scroll as the only nav
 | Site metadata baseline | `apps/frontend/app/layout.metadata.ts` exports shared root metadata; route-level metadata should extend this rather than reinvent it. |
 | CV PDF | `apps/frontend/app/api/cv/route.ts`, `apps/frontend/lib/cv-pdf/*`; home lead hero uses `downloadHref="/api/cv"`. |
 | Storybook static URL | `apps/frontend/next.config.ts` rewrites `/storybook` → `/storybook/index.html`; build output under `apps/frontend/public/storybook/` (see `docs/agents/storybook-ui.md`). |
-| E2E baseline | `apps/e2e/cv-download.spec.ts` already verifies the generated PDF endpoint. |
+| E2E | `apps/e2e/cv-download.spec.ts` (PDF API), `projects-page.spec.ts`, `nav-smoke.spec.ts` (nav, `/`, `/build`, `/#resume`, footer discovery). |
 | Boundaries | **Do not** import `@portfolio/resume-content` inside `packages/storybook`. App composes data → presentation props. |
 
 ## Implementation guardrails
@@ -71,15 +71,13 @@ Implement incrementally; not every route is required for v1.
 
 Aim for **calm technical credibility**, not flashy agency-portfolio styling. The site should feel modern, minimal, and trustworthy for recruiters, hiring managers, and technical peers.
 
-> **Current baseline vs targets**: The values below are **design targets** for the revamp, not claims about what exists today. Key deltas from the current implementation:
+> **Optional visual polish (post–v1):** Revamp v1 shipped global **`data-theme`** (system / light / dark, FOUC script, token overrides in `globals.css`) and a wider shell (**`max-width: 70rem`** on `HomePageShell`, ≈1120px at a 16px root). The bullets below are **remaining deltas** for a future typography / component pass—not v1 blockers:
 >
-> - Shell `max-width` is **48rem (~768px)** today → target **1120px**.
-> - Hero name `clamp(2.25rem, 5vw, 3rem)` today → target `clamp(2.5rem, 6vw, 4.5rem)`.
-> - Storybook preview section decorator max-width is **42rem (~672px)** → target **720–760px** reading column.
-> - `ActionLink` radius is **8px (0.5rem)** today → target **10–12px**; heights are padding-based → target explicit **44/48px** min-height.
-> - Theme: only **`prefers-color-scheme`** media query today → target **`data-theme` attribute** with system / light / dark persistence.
+> - Hero name scale may still move toward `clamp(2.5rem, 6vw, 4.5rem)` if you tune `HeroName` globally.
+> - Storybook doc / section decorators may still widen toward **720–760px** reading columns where prose feels tight.
+> - `ActionLink` radius / min-height may still move toward **10–12px** radius and **44–48px** touch targets for denser CTAs.
 >
-> Update these components and CSS during implementation; do not assume the targets are already shipped.
+> Treat these as v2 polish unless you explicitly reopen layout scope.
 
 ### Color system
 
@@ -124,7 +122,7 @@ Recommended usage:
 
 ## Shell and navigation behavior
 
-> **Current state (post–Phase 1)**: Sticky header, mobile nav panel, skip link, enriched footer, and theme switch ship from `packages/storybook/src/site-chrome/` and are composed in `apps/frontend/app/layout.tsx`. Remaining shell items below (e.g. scroll-aware mobile bottom bar) are **not** implemented yet unless called out elsewhere.
+> **Current state (revamp v1 shipped)**: Sticky header, mobile nav panel, skip link, enriched footer, and theme switch live in `packages/storybook/src/site-chrome/` and are composed in `apps/frontend/app/layout.tsx`. Optional shell polish (e.g. scroll-aware mobile bottom bar) remains backlog unless promoted to a v2 milestone.
 
 ### Theme mode and switching
 
@@ -469,7 +467,7 @@ This document is intentionally specific enough to guide implementation without r
 
 ### Phase 2 — Projects and GitHub narrative
 
-- [x] Add **`/projects`** route; pass **curated** project data from the app (props or small `lib/projects.ts` in frontend — **not** inside `packages/storybook` if it would couple to résumé types incorrectly; prefer presentation types in storybook + mappers in app).
+- [x] Add **`/projects`** route; pass **curated** project data from the app (props or small `lib/projects-site.ts` in frontend — **not** inside `packages/storybook` if it would couple to résumé types incorrectly; prefer presentation types in storybook + mappers in app).
 - [x] Expand **game** content: hero image asset in `apps/frontend/public/`, copy blocks (pitch, “hardest problem,” AI pipeline honesty, link to Play Store).
 - [x] **GitHub section**: 3–6 pinned repos with title, one-liner, tech tags, link; manual list v1 (API later optional).
 - [x] Add image/content fallbacks so the projects page still renders well before final art is ready.
@@ -519,11 +517,13 @@ This document is intentionally specific enough to guide implementation without r
 
 ## Success criteria (definition of done for revamp v1)
 
-- [ ] New routes: at minimum **`/projects`** and **`/build`**, plus improved **`/`** and global nav/footer.
-- [ ] GitHub + Storybook + CV are **obvious** from first visit.
-- [ ] Game has **flagship** treatment (visual + narrative).
-- [ ] New content lives in the correct package: shared presentation in Storybook, shared résumé facts in `resume-content`, route composition in frontend.
-- [ ] No ESLint boundary violations; CI green for touched packages.
+- [x] New routes: at minimum **`/projects`** and **`/build`**, plus improved **`/`** and global nav/footer.
+- [x] GitHub + Storybook + CV are **obvious** from first visit.
+- [x] Game has **flagship** treatment (visual + narrative).
+- [x] New content lives in the correct package: shared presentation in Storybook, shared résumé facts in `resume-content`, route composition in frontend.
+- [x] No ESLint boundary violations; CI green for touched packages.
+
+**Shipped (v1):** Phases 1–4 in this document are complete; E2E covers CV download, `/projects`, and site nav / discovery (`nav-smoke.spec.ts`). Visual design **targets** in the “Visual design direction” section (e.g. token tweaks, ActionLink geometry) may still be iterated without reopening v1 route/IA scope unless you promote them to a v2 milestone.
 
 ---
 
