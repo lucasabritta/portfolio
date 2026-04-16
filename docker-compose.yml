@@ -1,50 +1,31 @@
 services:
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: development
-    command: yarn workspace @portfolio/backend dev
-    ports:
-      - "4000:4000"
-    volumes:
-      - .:/app
-      - frontend_node_modules:/app/node_modules
-      - frontend_apps_next:/app/apps/frontend/.next
-    environment:
-      HOST: 0.0.0.0
-      PORT: 4000
-
   frontend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: apps/frontend/Dockerfile
       target: development
-    depends_on:
-      - backend
+    working_dir: /workspace/apps/frontend
     ports:
       - "3000:3000"
       - "6006:6006"
     volumes:
-      - .:/app
-      - frontend_node_modules:/app/node_modules
-      - frontend_apps_next:/app/apps/frontend/.next
+      - .:/workspace
+      - frontend_node_modules:/workspace/apps/frontend/node_modules
+      - e2e_node_modules:/workspace/apps/e2e/node_modules
+      - frontend_apps_next:/workspace/apps/frontend/.next
+      - storybook_node_modules:/workspace/packages/storybook/node_modules
     environment:
-      BACKEND_ORIGIN: http://backend:4000
       NEXT_TELEMETRY_DISABLED: "1"
       PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
 
   frontend-prod:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: apps/frontend/Dockerfile
       target: runner
-    depends_on:
-      - backend
     ports:
       - "3001:3000"
     environment:
-      BACKEND_ORIGIN: http://backend:4000
       NODE_ENV: production
       NEXT_TELEMETRY_DISABLED: "1"
     profiles:
@@ -52,12 +33,14 @@ services:
 
   cv-tools:
     image: python:3.12-slim-bookworm
-    working_dir: /app
+    working_dir: /workspace
     volumes:
-      - .:/app
+      - .:/workspace
     profiles:
       - cv
 
 volumes:
+  e2e_node_modules:
   frontend_node_modules:
   frontend_apps_next:
+  storybook_node_modules:

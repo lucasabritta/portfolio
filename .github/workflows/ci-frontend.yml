@@ -12,21 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      
+      - name: Build frontend docker image
+        run: docker compose build frontend
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: "22"
-          cache: yarn
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      - name: Install frontend dependencies
+        run: docker compose run --rm frontend yarn install
 
       - name: Lint
-        run: yarn lint:frontend
+        run: docker compose run --rm frontend yarn lint
 
       - name: Typecheck
-        run: yarn typecheck:frontend
+        run: docker compose run --rm frontend yarn typecheck
 
       - name: Unit tests
-        run: yarn test:unit:frontend
+        run: docker compose run --rm frontend yarn test:unit

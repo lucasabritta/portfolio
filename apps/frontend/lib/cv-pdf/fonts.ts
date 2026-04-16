@@ -22,8 +22,6 @@ function resolveCvFontDir(): string {
     path.dirname(fileURLToPath(import.meta.url)),
     "..",
     "..",
-    "..",
-    "frontend",
     "public",
     "cv-fonts",
   );

@@ -12,21 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: "22"
-          cache: yarn
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      
+      - name: Build frontend docker image
+        run: docker compose build frontend
 
       - name: Lint
-        run: yarn lint:resume-content
+        run: docker compose run --rm frontend sh -lc "yarn --cwd ../../packages/resume-content install --frozen-lockfile && yarn --cwd ../../packages/resume-content lint"
 
       - name: Typecheck
-        run: yarn typecheck:resume-content
+        run: docker compose run --rm frontend yarn --cwd ../../packages/resume-content typecheck
 
       - name: Unit tests
-        run: yarn test:unit:resume-content
+        run: docker compose run --rm frontend yarn --cwd ../../packages/resume-content test:unit

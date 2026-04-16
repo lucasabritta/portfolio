@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Observability } from "@/app/observability";
 import { siteMetadata } from "@/app/layout.metadata";
 import "@portfolio/storybook/globals.css";
+import "@/lib/cv-pdf/cv-pdf.css";
 import styles from "@portfolio/storybook/layout.module.css";
 
 const geistSans = Geist({

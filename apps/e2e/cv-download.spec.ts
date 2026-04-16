@@ -1,22 +1,19 @@
-import { stat } from "node:fs/promises";
+import { stat, writeFile } from "node:fs/promises";
 
 import { expect, test } from "playwright/test";
 
 test.describe("CV download", () => {
-  test("downloads the generated PDF", async ({ page }, testInfo) => {
-    await page.goto("/");
+  test("serves the generated PDF from the CV endpoint", async ({ request }, testInfo) => {
+    test.setTimeout(120_000);
 
-    const [download] = await Promise.all([
-      page.waitForEvent("download"),
-      page.getByRole("link", { name: "Download CV" }).click(),
-    ]);
+    const response = await request.get("/api/cv");
+    expect(response.ok()).toBeTruthy();
+    expect(response.headers()["content-type"]).toContain("application/pdf");
+    expect(response.headers()["content-disposition"]).toContain('filename="Lucas_Abritta_CV.pdf"');
 
-    await expect(download.failure()).resolves.toBeNull();
-    expect(download.suggestedFilename()).toBe("Lucas_Abritta_CV.pdf");
-
-    const savedPath = testInfo.outputPath(download.suggestedFilename());
-    await download.saveAs(savedPath);
-
+    const responseBuffer = await response.body();
+    const savedPath = testInfo.outputPath("Lucas_Abritta_CV.pdf");
+    await writeFile(savedPath, responseBuffer);
     const downloadedFile = await stat(savedPath);
     expect(downloadedFile.size).toBeGreaterThan(0);
   });

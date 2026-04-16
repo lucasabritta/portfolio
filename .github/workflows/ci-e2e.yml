@@ -13,21 +13,12 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: "22"
-          cache: yarn
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Install Playwright Chromium
-        run: yarn playwright install chromium --with-deps
+      
+      - name: Build frontend docker image
+        run: docker compose build frontend
 
       - name: Lint e2e tests
-        run: yarn lint:e2e
+        run: docker compose run --rm frontend sh -lc "yarn --cwd ../../apps/e2e install --frozen-lockfile && yarn --cwd ../../apps/e2e lint"
 
       - name: Run Playwright e2e tests
-        run: yarn test:e2e
+        run: docker compose run --rm frontend yarn --cwd ../../apps/e2e test:e2e

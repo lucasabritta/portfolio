@@ -1,14 +1,13 @@
 import { createElement } from "react";
-import { resumeData } from "@portfolio/resume-content";
 import { renderToBuffer } from "@react-pdf/renderer";
+import { resumeData } from "@portfolio/resume-content";
 
-import { CvPdfDocument } from "./cv-pdf/document";
+import { CvPdfDocument } from "./cv-pdf.document";
 
 function buildCvFilename(): string {
   const slug = resumeData.name
     .replace(/[^a-zA-Z0-9]+/g, "_")
     .replace(/^_+|_+$/g, "");
-
   return `${slug || "resume"}_CV.pdf`;
 }
 
