@@ -24,7 +24,7 @@ Use **multiple routes** if needed; avoid a single endless scroll as the only nav
 | Area | Location / behavior |
 |------|---------------------|
 | Single homepage | `apps/frontend/app/page.tsx` composes `@portfolio/storybook` sections with `resumeData` from `@portfolio/resume-content`. |
-| App Router routes | `/`, `/build`, and a stub `/projects` under `apps/frontend/app/` (more routes in later phases). |
+| App Router routes | `/`, `/build`, and `/projects` (flagship + pinned GitHub) under `apps/frontend/app/`. |
 | Profile & links | `packages/resume-content/src/profile.ts` — `contactLinks`: Email, LinkedIn, Google Play; **no GitHub**. |
 | Personal projects | `packages/resume-content/src/personal-projects.ts` — one entry (game). |
 | Hero + shell | `packages/storybook/src/hero/hero.tsx` (`PortfolioHero`), `packages/storybook/src/home/home-page-shell.tsx` (`HomePageShell`). |
@@ -469,10 +469,10 @@ This document is intentionally specific enough to guide implementation without r
 
 ### Phase 2 — Projects and GitHub narrative
 
-- [ ] Add **`/projects`** route; pass **curated** project data from the app (props or small `lib/projects.ts` in frontend — **not** inside `packages/storybook` if it would couple to résumé types incorrectly; prefer presentation types in storybook + mappers in app).
-- [ ] Expand **game** content: hero image asset in `apps/frontend/public/`, copy blocks (pitch, “hardest problem,” AI pipeline honesty, link to Play Store).
-- [ ] **GitHub section**: 3–6 pinned repos with title, one-liner, tech tags, link; manual list v1 (API later optional).
-- [ ] Add image/content fallbacks so the projects page still renders well before final art is ready.
+- [x] Add **`/projects`** route; pass **curated** project data from the app (props or small `lib/projects.ts` in frontend — **not** inside `packages/storybook` if it would couple to résumé types incorrectly; prefer presentation types in storybook + mappers in app).
+- [x] Expand **game** content: hero image asset in `apps/frontend/public/`, copy blocks (pitch, “hardest problem,” AI pipeline honesty, link to Play Store).
+- [x] **GitHub section**: 3–6 pinned repos with title, one-liner, tech tags, link; manual list v1 (API later optional).
+- [x] Add image/content fallbacks so the projects page still renders well before final art is ready.
 
 **Acceptance**: Projects page tells a story per item; game is visually distinct from generic résumé bullets; all external links `rel="noopener noreferrer"` where applicable.
 

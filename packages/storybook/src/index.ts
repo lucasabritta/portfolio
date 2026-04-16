@@ -10,6 +10,13 @@ export type { SiteThemePreference, ThemeModeSwitchProps } from "./site-chrome/th
 export { CertificationsSection } from "./home/certifications-section/certifications-section";
 export { ContactSection } from "./home/contact-section/contact-section";
 export { EducationSection } from "./home/education-section/education-section";
+export { ProjectsPageView } from "./projects-page/projects-page-view";
+export type {
+  PresentationFlagshipProject,
+  PresentationPinnedRepo,
+  PresentationProjectLink,
+  ProjectsPageViewProps,
+} from "./projects-page/presentation-types";
 export { ProjectsSection } from "./home/projects-section/projects-section";
 export { SummarySection } from "./home/summary-section/summary-section";
 export { WorkHistorySection } from "./home/work-history-section/work-history-section";

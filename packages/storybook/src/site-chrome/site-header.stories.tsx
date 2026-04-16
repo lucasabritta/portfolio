@@ -24,15 +24,19 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: function SiteHeaderStory() {
+  args: {
+    wordmarkText: "Lucas Abritta",
+    wordmarkHref: "/",
+    navItems,
+    downloadCvHref: "/api/cv",
+    currentPath: "/build",
+    themeControl: <></>,
+  },
+  render: function SiteHeaderStory(args) {
     const [mode, setMode] = useState<"system" | "light" | "dark">("system");
     return (
       <SiteHeader
-        wordmarkText="Lucas Abritta"
-        wordmarkHref="/"
-        navItems={navItems}
-        downloadCvHref="/api/cv"
-        currentPath="/build"
+        {...args}
         themeControl={<ThemeModeSwitch value={mode} onChange={setMode} />}
       />
     );
