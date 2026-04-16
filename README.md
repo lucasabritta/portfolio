@@ -115,11 +115,10 @@ Triggers on pushes to `main` and on pull requests. Workflows use Node 22 and Yar
 ## Deploying on Vercel
 
 1. Import this repository in the [Vercel dashboard](https://vercel.com/new).
-2. **Project → Settings → General → Root Directory**: set to **`apps/frontend`**.
-3. Enable **Include files outside the Root Directory in the Build Step** (required for `file:../../packages/...` local packages).
-4. Framework preset: **Next.js** (Vercel runs `yarn install` / `yarn build` from `apps/frontend`). Optional overrides live in **`apps/frontend/vercel.json`**.
-5. Enable **Analytics** and **Speed Insights** in the Vercel project dashboard if you want first-party traffic and performance reporting for deployed environments.
-6. Set any required environment variables under **Project → Settings → Environment Variables**.
+2. **Recommended:** **Project → Settings → General → Root Directory** → **`apps/frontend`**, and enable **Include files outside the Root Directory in the Build Step** (for `file:../../packages/...`). Optional overrides: **`apps/frontend/vercel.json`**. See [`docs/agents/cursor-mcp.md`](docs/agents/cursor-mcp.md).
+3. **If Root Directory stays the repo root:** root **`vercel.json`** and a minimal root **`package.json`** / **`yarn.lock`** are kept so Vercel can detect Next.js and install/build under **`apps/frontend`** until you apply step 2.
+4. Enable **Analytics** and **Speed Insights** in the Vercel project dashboard if you want first-party traffic and performance reporting for deployed environments.
+5. Set any required environment variables under **Project → Settings → Environment Variables**.
 
 Preview deployments are created automatically for pull requests when the Git integration is enabled.
 

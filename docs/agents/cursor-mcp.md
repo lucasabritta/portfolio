@@ -41,10 +41,16 @@ Until authentication succeeds, authenticated Vercel MCP tools will be unavailabl
 
 ## Vercel project settings (this repo)
 
-Deployments expect the Next.js app root to be **`apps/frontend`** (not the repository root):
+**The Vercel MCP can read projects and deployments (and build logs); it cannot change dashboard settings** such as Root Directory or “include files outside root.” Apply those in the [project General settings](https://vercel.com/lucasabritta-4868s-projects/portfolio/settings/general) (adjust team/project in the URL if needed).
 
-1. **Project → Settings → General → Root Directory** → set to **`apps/frontend`**.
-2. Enable **Include files outside the Root Directory in the Build Step** so Yarn can resolve **`file:../../packages/resume-content`** and **`file:../../packages/storybook`** during install/build.
-3. Framework preset: **Next.js** (default `yarn install` / `yarn build` from `apps/frontend/package.json`). Optional overrides live in **`apps/frontend/vercel.json`**.
+### Recommended (no root shim)
 
-With that configuration you do **not** need a root `package.json` / `yarn.lock` “shim” for framework detection.
+1. **Root Directory** → **`apps/frontend`**
+2. Enable **Include files outside the Root Directory in the Build Step** (needed for **`file:../../packages/...`**).
+3. Framework preset: **Next.js**. Optional overrides: **`apps/frontend/vercel.json`**.
+
+Then remove the repository **root** `package.json`, **`yarn.lock`**, and the **root** `vercel.json` install/build overrides if you added them only for detection.
+
+### Fallback (repo root still `.` on Vercel)
+
+If Root Directory is still the **repository root**, keep the **root** `vercel.json` + minimal **root** `package.json` / **`yarn.lock`** so `vercel build` can detect **Next.js** and run `yarn install` + `cd apps/frontend && yarn install` / `yarn build`. This is a compatibility shim until you switch to the recommended layout above.

@@ -6,8 +6,8 @@ alwaysApply: false
 
 # Vercel
 
-- **Project root**: Configure the Vercel project **Root Directory** to **`apps/frontend`** (not the repo root). Turn on **Include files outside the Root Directory in the Build Step** so `file:../../packages/...` dependencies resolve during `yarn install`.
-- **Config file**: Use **`apps/frontend/vercel.json`** only when you need overrides (headers, redirects, rewrites, regions, or non-default install/build). Prefer defaults from `apps/frontend/package.json` when possible.
+- **Preferred**: **Root Directory** = **`apps/frontend`**, **Include files outside the Root Directory in the Build Step** = on, optional **`apps/frontend/vercel.json`**. The Vercel MCP cannot change these; set them in the project dashboard (see `docs/agents/cursor-mcp.md`).
+- **Fallback (repo root on Vercel)**: Root **`vercel.json`** runs `yarn install` at the repo root (minimal **`package.json`** / **`yarn.lock`** so Next.js is detected) then installs and builds **`apps/frontend`**. Remove that shim after switching to the preferred Root Directory.
 - **Environment variables**: Define secrets in the Vercel project (Production / Preview / Development). Use `process.env.NEXT_PUBLIC_*` only for values that must be public in the browser.
 - **Do not commit** **`.vercel`** project linking if the team treats it as personal; follow `.gitignore` conventions already in the repo.
 - Broader release/check steps: skill **`vercel-deploy`**.

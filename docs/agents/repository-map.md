@@ -32,7 +32,8 @@ This repository is a **Yarn workspaces monorepo**: a root `package.json` with **
 | `apps/frontend/Dockerfile` | Multi-stage image (`development`, `builder`, `runner`) for local dev and production-like runs |
 | `docker-compose.yml` | Root Compose stack (`frontend`, `frontend-prod` profile, `cv-tools` profile) |
 | `.github/workflows/` | CI pipelines for lint, typecheck, unit, Storybook, e2e (`ci-e2e.yml`), and production build |
-| `apps/frontend/vercel.json` | Optional Vercel overrides; project **Root Directory** must be `apps/frontend` (see `docs/agents/cursor-mcp.md`) |
+| `vercel.json` (repo root) | Fallback install/build when Vercel **Root Directory** is the repo root (see `docs/agents/cursor-mcp.md`) |
+| `apps/frontend/vercel.json` | Optional Vercel overrides when **Root Directory** is `apps/frontend` |
 | `.cursor/rules/`, `.cursor/skills/` | Cursor rules and skills |
 | User `~/.cursor/mcp.json` | MCP servers (e.g. Vercel OAuth); keep out of the repo — see [`docs/agents/cursor-mcp.md`](cursor-mcp.md) |
 
