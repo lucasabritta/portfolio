@@ -488,10 +488,10 @@ This document is intentionally specific enough to guide implementation without r
 
 ### Phase 4 — Polish and quality gates
 
-- [ ] **E2E** (`apps/e2e`): keep the existing CV download coverage and add nav smoke / critical-route checks.
-- [ ] **Unit tests**: new routes/components as per repo conventions (`apps/frontend`, `packages/storybook` split).
-- [ ] **Storybook interactions/a11y**: add or extend stories/tests for newly introduced shared UI.
-- [ ] Run checks per **`docs/agents/agent-workflow.md`** / **`nextjs-change-checklist`** skill (lint, typecheck, tests, build) — preferably via Docker Compose per project rules. CI splits per package in **`.github/workflows/`** (`ci-frontend.yml`, `ci-storybook.yml`, `ci-resume-content.yml`, `ci-e2e.yml`, `ci-build.yml`); ensure touched packages pass their workflow.
+- [x] **E2E** (`apps/e2e`): keep the existing CV download coverage and add nav smoke / critical-route checks.
+- [x] **Unit tests**: new routes/components as per repo conventions (`apps/frontend`, `packages/storybook` split).
+- [x] **Storybook interactions/a11y**: add or extend stories/tests for newly introduced shared UI.
+- [x] Run checks per **`docs/agents/agent-workflow.md`** / **`nextjs-change-checklist`** skill (lint, typecheck, tests, build) — preferably via Docker Compose per project rules. CI splits per package in **`.github/workflows/`** (`ci-frontend.yml`, `ci-storybook.yml`, `ci-resume-content.yml`, `ci-e2e.yml`, `ci-build.yml`); ensure touched packages pass their workflow.
 
 ## Content the owner must supply (non-code)
 

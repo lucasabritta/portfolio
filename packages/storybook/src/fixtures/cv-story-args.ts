@@ -318,6 +318,7 @@ export function homePageArgs(overrides: Partial<HomePageProps> = {}): HomePagePr
 }
 
 /** Exported for interaction tests (synthetic copy, not real résumé data). */
+export const storyFixtureName = SYNTH_NAME;
 export const storyFixturePhone = SYNTH_PHONE;
 export const storyFixtureEmail = SYNTH_EMAIL;
 export const storyFixtureCert = SYNTH_CERTS[0];
