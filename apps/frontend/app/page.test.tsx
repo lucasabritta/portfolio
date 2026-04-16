@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  */
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
 import { buildPhoneHref, resumeData } from "@portfolio/resume-content";
@@ -24,6 +24,20 @@ describe("Home page", () => {
     render(<Home />);
     expect(screen.getByRole("heading", { name: /professional summary/i })).toBeInTheDocument();
     expect(document.getElementById("resume")).toBeTruthy();
+  });
+
+  it("surfaces person-first home CTAs and routes", () => {
+    render(<Home />);
+    const h1 = screen.getByRole("heading", { level: 1, name: resumeData.name });
+    const heroRoot = h1.closest("header");
+    expect(heroRoot).toBeTruthy();
+    const projects = within(heroRoot as HTMLElement).getByRole("link", { name: "View Projects" });
+    expect(projects).toHaveAttribute("href", "/projects");
+    const storybookLinks = screen.getAllByRole("link", { name: "Open Storybook" });
+    expect(storybookLinks.length).toBeGreaterThanOrEqual(1);
+    expect(storybookLinks.every((el) => el.getAttribute("href") === "/storybook")).toBe(true);
+    expect(within(heroRoot as HTMLElement).getByText("Proof points")).toBeInTheDocument();
+    expect(within(heroRoot as HTMLElement).getByRole("list")).toBeInTheDocument();
   });
 
   it("keeps cv download path under /api", () => {

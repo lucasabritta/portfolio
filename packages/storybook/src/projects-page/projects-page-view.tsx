@@ -1,3 +1,5 @@
+"use client";
+
 import type { SyntheticEvent } from "react";
 
 import { ActionLink, Card, Chip, SectionHeading, Title } from "../primitives";

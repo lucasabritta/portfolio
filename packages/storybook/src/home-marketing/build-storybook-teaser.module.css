@@ -1,0 +1,18 @@
+.section {
+  scroll-margin-top: 5rem;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin: 0.65rem 0 0;
+  max-width: 48rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}

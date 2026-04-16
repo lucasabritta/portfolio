@@ -23,14 +23,14 @@ Use **multiple routes** if needed; avoid a single endless scroll as the only nav
 
 | Area | Location / behavior |
 |------|---------------------|
-| Single homepage | `apps/frontend/app/page.tsx` composes `@portfolio/storybook` sections with `resumeData` from `@portfolio/resume-content`. |
+| Single homepage | `apps/frontend/app/page.tsx` composes marketing blocks (`HomeLeadHero`, credibility, featured work, Storybook teaser, condensed résumé) from `apps/frontend/lib/home-site.ts`, then the existing section components inside `#resume`, using `resumeData` from `@portfolio/resume-content`. |
 | App Router routes | `/`, `/build`, and `/projects` (flagship + pinned GitHub) under `apps/frontend/app/`. |
 | Profile & links | `packages/resume-content/src/profile.ts` — `contactLinks`: Email, LinkedIn, Google Play; **no GitHub**. |
 | Personal projects | `packages/resume-content/src/personal-projects.ts` — one entry (game). |
-| Hero + shell | `packages/storybook/src/hero/hero.tsx` (`PortfolioHero`), `packages/storybook/src/home/home-page-shell.tsx` (`HomePageShell`). |
-| Global chrome | `apps/frontend/app/layout.tsx` composes `ThemeProvider`, `SiteChromeClient`, skip link, sticky `SiteHeader` / `SiteFooter`, and fonts/CSS on `<html>/<body>`. `HomePageShell` wraps home hero + `<main id="main">` only (no duplicate footer). |
+| Hero + shell | `/` uses `packages/storybook/src/home-marketing/home-lead-hero.tsx` (`HomeLeadHero`) inside `HomePageShell`; `PortfolioHero` remains available for other surfaces. |
+| Global chrome | `apps/frontend/app/layout.tsx` composes `ThemeProvider`, `SiteChromeClient`, skip link, sticky `SiteHeader` / `SiteFooter`, and fonts/CSS on `<html>/<body>`. `HomePageShell` puts the home hero **inside** `<main id="main">` with the rest of the page so “Skip to content” reaches the primary `h1` and CTAs (no duplicate footer). |
 | Site metadata baseline | `apps/frontend/app/layout.metadata.ts` exports shared root metadata; route-level metadata should extend this rather than reinvent it. |
-| CV PDF | `apps/frontend/app/api/cv/route.ts`, `apps/frontend/lib/cv-pdf/*`; hero uses `downloadHref="/api/cv"`. |
+| CV PDF | `apps/frontend/app/api/cv/route.ts`, `apps/frontend/lib/cv-pdf/*`; home lead hero uses `downloadHref="/api/cv"`. |
 | Storybook static URL | `apps/frontend/next.config.ts` rewrites `/storybook` → `/storybook/index.html`; build output under `apps/frontend/public/storybook/` (see `docs/agents/storybook-ui.md`). |
 | E2E baseline | `apps/e2e/cv-download.spec.ts` already verifies the generated PDF endpoint. |
 | Boundaries | **Do not** import `@portfolio/resume-content` inside `packages/storybook`. App composes data → presentation props. |
@@ -478,11 +478,13 @@ This document is intentionally specific enough to guide implementation without r
 
 ### Phase 3 — Home repositioning
 
-- [ ] Refactor `/` so above-the-fold is **person-first** (short narrative + CTAs), with optional “continue to full CV” or move detailed timeline to `/cv`.
-- [ ] Reuse existing section components where possible; avoid duplicating large CSS.
-- [ ] Keep the first viewport scannable for recruiter/hiring-manager traffic: title, differentiation, and primary CTA should not compete equally.
+- [x] Refactor `/` so above-the-fold is **person-first** (short narrative + CTAs), with optional “continue to full CV” or move detailed timeline to `/cv`.
+- [x] Reuse existing section components where possible; avoid duplicating large CSS.
+- [x] Keep the first viewport scannable for recruiter/hiring-manager traffic: title, differentiation, and primary CTA should not compete equally.
 
 **Acceptance**: 10-second test: role, differentiation, and one primary CTA are obvious without scrolling past first viewport on common laptop breakpoints.
+
+*Automation:* CI does not assert viewport height; do a quick laptop-width spot-check before release, or add a Phase 4 Storybook `play` / Playwright assertion when that work is scheduled.
 
 ### Phase 4 — Polish and quality gates
 

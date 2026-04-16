@@ -16,6 +16,7 @@ This repository is a **multi-package TypeScript repo**: several **`apps/*`** and
 | `apps/frontend/lib/cv-pdf/` | CV PDF react-pdf document, sections, `StyleSheet` styles, fonts; used by `app/api/cv/` |
 | `apps/e2e/` | Playwright end-to-end spec directory |
 | `packages/storybook/` | Shared DOM UI, co-located CSS, Storybook config (`.storybook/`), Vitest Storybook project — **`@portfolio/storybook`** |
+| `@portfolio/storybook/projects-page-view` | **`ProjectsPageView`** is a client component; the Next app must import this **subpath** (not the package root barrel) so the App Router keeps the `"use client"` boundary for flagship image `onError`. Types stay on **`@portfolio/storybook`** (`ProjectsPageViewProps`). |
 | `packages/storybook/src/` | Components, `*.stories.tsx`, `globals.css`, `layout.module.css` |
 | `packages/storybook/src/fixtures/` | Typed Storybook args helpers (synthetic presentation data, viewport globals) |
 | `packages/storybook/src/primitives/` | Shared presentation primitives; re-exported from **`@portfolio/storybook`** |

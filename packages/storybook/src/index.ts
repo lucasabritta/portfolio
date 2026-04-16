@@ -10,7 +10,6 @@ export type { SiteThemePreference, ThemeModeSwitchProps } from "./site-chrome/th
 export { CertificationsSection } from "./home/certifications-section/certifications-section";
 export { ContactSection } from "./home/contact-section/contact-section";
 export { EducationSection } from "./home/education-section/education-section";
-export { ProjectsPageView } from "./projects-page/projects-page-view";
 export type {
   PresentationFlagshipProject,
   PresentationPinnedRepo,
@@ -29,6 +28,21 @@ export type {
 } from "./home/presentation-types";
 export { PortfolioHero } from "./hero";
 export type { PortfolioHeroProps } from "./hero/hero";
+export { BuildStorybookTeaser } from "./home-marketing/build-storybook-teaser";
+export { CondensedCvPreview } from "./home-marketing/condensed-cv-preview";
+export { CredibilityStrip } from "./home-marketing/credibility-strip";
+export { FeaturedWorkPreview } from "./home-marketing/featured-work-preview";
+export { HomeLeadHero } from "./home-marketing/home-lead-hero";
+export type {
+  BuildStorybookTeaserProps,
+  CondensedCvPreviewProps,
+  CondensedTimelineEntry,
+  CredibilityItem,
+  CredibilityStripProps,
+  FeaturedWorkCard,
+  FeaturedWorkPreviewProps,
+  HomeLeadHeroProps,
+} from "./home-marketing/home-marketing-types";
 export type { CertificationsSectionProps } from "./home/certifications-section/certifications-section";
 export type { ContactSectionProps } from "./home/contact-section/contact-section";
 export type { EducationSectionProps } from "./home/education-section/education-section";

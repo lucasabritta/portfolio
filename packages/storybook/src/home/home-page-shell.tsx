@@ -11,8 +11,8 @@ export function HomePageShell({ hero, children }: HomePageShellProps) {
   return (
     <div className={styles.pageRoot}>
       <div className={styles.container}>
-        {hero}
         <main id="main" tabIndex={-1} className={styles.main}>
+          {hero}
           {children}
         </main>
       </div>

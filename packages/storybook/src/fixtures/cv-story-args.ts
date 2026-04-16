@@ -26,6 +26,7 @@ const SYNTH_LINKS: readonly PresentationContactLink[] = [
 const SYNTH_HIGHLIGHTS = [
   "Shipped features used by thousands of daily active users.",
   "Improved CI/CD and observability across multiple teams.",
+  "Scaled technical leadership through mentoring, clear ownership, and predictable delivery.",
 ] as const;
 
 const SYNTH_TECH = ["TypeScript", "React", "Node.js", "AWS"] as const;

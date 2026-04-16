@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { ProjectsPageView } from "@portfolio/storybook";
+import { ProjectsPageView } from "@portfolio/storybook/projects-page-view";
 
 import { projectsPageContent } from "@/lib/projects-site";
 
