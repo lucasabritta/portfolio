@@ -30,8 +30,8 @@ apps/frontend/public/storybook/
 # optional package build outputs (if a workspace starts emitting to dist/)
 **/dist/
 
-# production / misc build dirs
-build/
+# production / misc build dirs (repo root only — do not ignore `apps/frontend/app/build/`)
+/build/
 
 # misc
 .DS_Store

@@ -22,15 +22,25 @@ test.describe("Site navigation and critical routes", () => {
   });
 
   test("header navigates to Projects and Build", async ({ page }) => {
-    await page.goto("/");
-    await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Projects" }).click();
-    await expect(page).toHaveURL(/\/projects$/);
-    await expect(page.getByRole("heading", { name: "Projects" })).toBeVisible();
+    test.setTimeout(120_000);
 
     await page.goto("/");
-    await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Build" }).click();
-    await expect(page).toHaveURL(/\/build$/);
-    await expect(page.getByRole("heading", { name: "How this site is built" })).toBeVisible();
+    await Promise.all([
+      page.waitForURL(/\/projects$/),
+      page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Projects" }).click(),
+    ]);
+    await expect(page.getByRole("heading", { name: "Projects" })).toBeVisible();
+
+    await page.goto("/", { waitUntil: "load" });
+    await Promise.all([
+      page.waitForURL(/\/build$/),
+      page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Build" }).click(),
+    ]);
+    // `next dev` may compile `/build` on first hit in CI; allow well beyond the default 5s locator timeout.
+    const buildMain = page.locator("main#main");
+    await expect(buildMain.getByRole("heading", { level: 2, name: /How this site is built/ })).toBeVisible({
+      timeout: 60_000,
+    });
   });
 
   test("hash to résumé region shows professional summary", async ({ page }) => {

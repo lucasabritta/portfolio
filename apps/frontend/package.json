@@ -11,7 +11,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "dev:docker": "next dev --hostname 0.0.0.0 --port 3000",
+    "dev:docker": "node ../../tools/ensure-storybook-public.mjs && next dev --hostname 0.0.0.0 --port 3000",
+    "prebuild": "node ../../tools/build-storybook-for-next.mjs",
     "build": "next build",
     "start": "next start",
     "start:docker": "next start --hostname 0.0.0.0 --port 3000",
