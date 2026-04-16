@@ -1,18 +1,19 @@
 # Portfolio
 
-Portfolio site with a Next.js frontend and a small Fastify backend for CV PDF generation. Package management uses **Yarn**.
+Portfolio site with a Next.js frontend. CV PDF generation runs inside the frontend API route.
+
+Each directory under `apps/*` and `packages/*` is treated as a standalone project with its own `package.json` and lockfile.
 
 ## Requirements
 
 - **Node.js** **22.12 or newer** (`package.json` `engines`). Storybook 10 and Vitest (including `@storybook/addon-vitest`) expect a current Node 22 runtime; **`.nvmrc`** pins `22`.
-- **Yarn** classic (v1). The committed `.yarnrc` may enable `ignore-engines` for edge transitive packages; still use **Node 22.12+** locally so `yarn storybook`, `yarn test:storybook`, and `yarn build-storybook` match CI (plus `yarn test:unit` for workspace unit tests).
+- **Yarn** classic (v1) in each project folder.
+- `@portfolio/resume-content` and `@portfolio/storybook` are consumed through local `file:` dependencies so frontend/backend install without publishing packages.
 
 ## Local development (host)
 
 ```bash
-yarn install
-BACKEND_ORIGIN=http://localhost:4000 yarn dev
-yarn workspace @portfolio/backend dev
+cd apps/frontend && yarn install && yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -21,30 +22,23 @@ Open [http://localhost:3000](http://localhost:3000).
 
 | Script        | Description                                      |
 |---------------|--------------------------------------------------|
-| `yarn dev`    | Next.js dev server                               |
-| `yarn workspace @portfolio/backend dev` | Fastify backend server on `:4000` |
-| `yarn build`  | Production build                                 |
-| `yarn start`  | Serve production build locally                   |
-| `yarn lint`   | ESLint (Next core-web-vitals + TypeScript)       |
-| `yarn lint:e2e` | ESLint scoped to **`apps/e2e`** Playwright specs |
-| `yarn typecheck` | `tsc --noEmit` across workspaces            |
-| `yarn test`   | Vitest **unit** projects (same as `test:unit`)   |
-| `yarn test:unit` | All Vitest unit projects (frontend, backend, resume-content) |
-| `yarn test:unit:frontend` | Vitest **`apps/frontend`** (jsdom)        |
-| `yarn test:unit:backend` | Vitest **`apps/backend`** (node)          |
-| `yarn test:unit:resume-content` | Vitest **`packages/resume-content`** |
-| `yarn test:storybook` | Vitest Storybook project in **`@portfolio/storybook`** (`@storybook/addon-vitest`, Chromium) |
-| `yarn test:e2e` | Playwright e2e tests from **`apps/e2e`** (runner command used inside Docker) |
-| `yarn test:e2e:docker` | Docker-first e2e wrapper (`docker compose run --rm frontend yarn test:e2e`) |
-| `yarn test:watch` | Vitest watch mode                          |
-| `yarn storybook` | Storybook dev server on port **6006** (`--host 0.0.0.0` for Docker) |
-| `yarn build-storybook` | Static Storybook build for **`@portfolio/storybook`** |
+| `cd apps/frontend && yarn dev` | Next.js dev server                               |
+| `cd apps/frontend && yarn build` | Production build                                 |
+| `cd apps/frontend && yarn start` | Serve production build locally                   |
+| `cd apps/frontend && yarn lint` | Frontend ESLint checks |
+| `cd packages/resume-content && yarn lint` | Resume-content ESLint checks |
+| `cd packages/storybook && yarn lint` | Storybook ESLint checks |
+| `cd apps/e2e && yarn lint` | Playwright spec ESLint checks |
+| `cd apps/frontend && yarn test:unit` | Frontend unit tests (Vitest/jsdom) |
+| `cd packages/resume-content && yarn test:unit` | Resume-content unit tests |
+| `cd packages/storybook && yarn test:storybook` | Storybook browser/UI tests |
+| `cd apps/e2e && yarn test:e2e` | Playwright end-to-end tests |
 
 ## Docker-first workflow
 
-The default local path uses **Docker Compose** (`docker-compose.yml`) so installs and Node version match CI and production images. The **`frontend`** image prepares **Yarn 1.22.22** at build time (`Dockerfile`), so container commands do not prompt for a Corepack/Yarn download.
+The default local path uses **Docker Compose** (`docker-compose.yml`) from the repository root. Runtime builds from `apps/frontend/Dockerfile`.
 
-The `Dockerfile` defaults to **AWS Public ECR**’s mirror of the official Node image (`public.ecr.aws/docker/library/node:22-bookworm-slim`) so image pulls work when Docker Hub’s CDN hits TLS issues on some networks. The dev stage extends the **deps** stage so **Playwright**’s Chromium has required system libraries for **`yarn test:storybook`** (and **`yarn test`**) inside the container.
+App Dockerfiles default to **AWS Public ECR**’s mirror of the official Node image (`public.ecr.aws/docker/library/node:22-bookworm-slim`) so image pulls work when Docker Hub’s CDN hits TLS issues on some networks.
 
 ### Development (hot reload, bind mount)
 
@@ -55,13 +49,12 @@ docker compose up --build frontend
 The app listens on [http://localhost:3000](http://localhost:3000). Storybook is available on **6006** inside the container; run it with published ports, for example:
 
 ```bash
-docker compose run --rm --service-ports frontend yarn storybook
+docker compose run --rm --service-ports frontend yarn dev:docker
 ```
 
 Then open [http://localhost:6006](http://localhost:6006). Source is mounted from the host; `node_modules` live in a named volume. Playwright browsers for component tests are baked into the image at **`PLAYWRIGHT_BROWSERS_PATH=/ms-playwright`** (see `Dockerfile`).
 
-The frontend proxies CV downloads through `/api/cv` and expects `BACKEND_ORIGIN` to point at the backend API service (`http://backend:4000` in Docker Compose).
-Set `BACKEND_ORIGIN` as an origin only (scheme + host + optional port), without a path segment.
+The frontend serves CV downloads through `/api/cv` directly (no separate backend service).
 
 ### Production-like image (standalone output)
 
@@ -69,7 +62,7 @@ Set `BACKEND_ORIGIN` as an origin only (scheme + host + optional port), without 
 docker compose --profile prod up --build frontend-prod
 ```
 
-Serve on [http://localhost:3001](http://localhost:3001). This profile also starts the `backend` service so `/api/cv` can resolve `BACKEND_ORIGIN=http://backend:4000`.
+Serve on [http://localhost:3001](http://localhost:3001).
 
 ### Docker build targets
 
@@ -78,22 +71,22 @@ Serve on [http://localhost:3001](http://localhost:3001). This profile also start
 | `development` | Installs deps, runs `yarn dev:docker`        |
 | `runner`      | Minimal image from `next build` standalone   |
 
-Override the dev command if needed, for example:
+Override commands per service folder if needed, for example:
 
 ```bash
 docker compose run --rm frontend yarn lint
 ```
 
-Run e2e in Docker only:
+Run e2e from the e2e folder:
 
 ```bash
-docker compose run --rm frontend yarn test:e2e
-docker compose run --rm frontend yarn test:e2e apps/e2e/cv-download.spec.ts
+cd apps/e2e && yarn test:e2e
+cd apps/e2e && yarn test:e2e cv-download.spec.ts
 ```
 
 ### CV PDF (Docker-first)
 
-- **Dump the CV PDF** (same Node as the `frontend` service): `yarn cv:dump:docker` → `tmp-cv-compare/docker-latest-cv.pdf`
+- **Dump the CV PDF** through Docker Compose service commands from repo root.
 - **Full notes** (Python compare, PNG preview, fonts, docx extract): [`docs/agents/cv-pdf-docker.md`](docs/agents/cv-pdf-docker.md)
 - **Shell equivalent**: `scripts/cv/docker-dump.sh`
 
@@ -107,24 +100,24 @@ docker compose --profile cv run --rm -v "$HOME/Downloads:/docs:ro" cv-tools \
 
 ## Linting and tests
 
-- **Lint**: `yarn lint` uses the flat ESLint config from `eslint.config.mjs` (Next.js presets).
-- **Tests**: **`yarn test:unit`** runs **`apps/frontend`**, **`apps/backend`**, and **`packages/resume-content`** specs in Node (frontend project uses jsdom). **`yarn test:storybook`** runs stories in **`packages/storybook`** via headless Chromium (Playwright). **`yarn test:e2e`** runs Playwright specs in **`apps/e2e`** and is intended to run via **`yarn test:e2e:docker`**. **`yarn test`** runs the unit suite. CI uses **one workflow per workspace/concern** (`ci-frontend`, `ci-backend`, `ci-resume-content`, `ci-storybook`, `ci-e2e` under `.github/workflows/`), each running scoped checks, and a separate **`ci-build.yml`** runs production **`yarn build`**.
+- **Lint**: run per folder (`apps/frontend`, `packages/resume-content`, `packages/storybook`, `apps/e2e`).
+- **Tests**: run per folder (`apps/frontend` unit, `packages/resume-content` unit, `packages/storybook` browser tests, `apps/e2e` Playwright).
 - **Storybook**: design-system package **`packages/storybook`** (`@portfolio/storybook`), fixtures under `packages/storybook/src/fixtures/`, full notes in [`docs/agents/storybook-ui.md`](docs/agents/storybook-ui.md).
 
-CI runs the same stages per module (install → lint → typecheck → tests); **`ci-build.yml`** runs **`yarn build`** (Storybook static bundle + Next production build).
+CI runs install/lint/typecheck/tests in each folder's working directory; `ci-build.yml` runs `apps/frontend` production build.
 
 ## GitHub Actions
 
-Workflows: **`ci-frontend.yml`**, **`ci-backend.yml`**, **`ci-resume-content.yml`**, **`ci-storybook.yml`**, **`ci-e2e.yml`** (per package/concern), plus **`ci-build.yml`** for the production build. Scoped lint/typecheck scripts live in root **`package.json`** (`lint:frontend`, `typecheck:backend`, etc.).
+Workflows: **`ci-frontend.yml`**, **`ci-resume-content.yml`**, **`ci-storybook.yml`**, **`ci-e2e.yml`** (per package/concern), plus **`ci-build.yml`** for the production build.
 
-Triggers on pushes to `main` and on pull requests. Workflows use Node 22, Yarn cache, and `yarn install --frozen-lockfile`; `ci-e2e.yml` installs Playwright Chromium on the runner, while Docker remains available for local e2e via `yarn test:e2e:docker`.
+Triggers on pushes to `main` and on pull requests. Workflows use Node 22 and Yarn cache with per-folder installs.
 
 ## Deploying on Vercel
 
 1. Import this repository in the [Vercel dashboard](https://vercel.com/new).
-2. Framework preset: **Next.js**. Install command: `yarn install`. Build command: `yarn workspace @portfolio/frontend build` (or rely on root **`vercel.json`**). Set the Vercel project **root directory** to the **repository root** so workspaces resolve.
+2. Framework preset: **Next.js**. Install/build commands are declared in root **`vercel.json`** and run under `apps/frontend`.
 3. Enable **Analytics** and **Speed Insights** in the Vercel project dashboard if you want first-party traffic and performance reporting for deployed environments.
-4. Set any required environment variables under **Project → Settings → Environment Variables**. The frontend API route for CV download requires **`BACKEND_ORIGIN`** (for example `https://your-backend-host`) so `/api/cv` can fetch `GET /api/cv` from the backend service.
+4. Set any required environment variables under **Project → Settings → Environment Variables**.
 
 Preview deployments are created automatically for pull requests when the Git integration is enabled.
 
@@ -135,8 +128,8 @@ This repo includes `@vercel/analytics` and `@vercel/speed-insights` through `app
 - `apps/frontend/` — Next.js app (`app/`, `public/`)
 - `packages/storybook/` — Shared DOM UI (`@portfolio/storybook`), Storybook, web CSS
 - `packages/resume-content/` — Résumé data and types (`@portfolio/resume-content`)
-- `apps/backend/` — Fastify API + CV PDF pipeline (`@portfolio/backend`)
-- `Dockerfile` / `docker-compose.yml` — Container workflows
+- `apps/frontend/lib/cv-pdf-download-response.ts` — CV PDF generation logic used by frontend API route
+- `apps/frontend/Dockerfile`, root `docker-compose.yml` — Container workflows
 - `.github/workflows/` — CI
 
 ## Frontend layering convention
@@ -147,7 +140,7 @@ All frontend changes should keep a clear separation of responsibilities:
 - **Logic (`.ts`)**: pure helpers, formatters, selectors, and assembly logic.
 - **Styles (`.css` / `.module.css`)**: web UI styling.
 
-For CV PDF generation (`apps/backend/src/cv-pdf/**`), keep this equivalent split:
+For CV PDF generation (`apps/frontend/lib/**`, consumed by frontend API route), keep this equivalent split:
 
 - **View (`.tsx`)** for react-pdf render trees (`Document`, `Page`, `View`, `Text`).
 - **Logic (`.ts`)** for pagination/data partition helpers.

@@ -1,0 +1,19 @@
+/**
+ * CV PDF design tokens (browser / documentation).
+ * @react-pdf/renderer uses `StyleSheet` in `cv-pdf.styles.ts` — keep colors and spacing aligned here.
+ */
+:root {
+  --cv-pdf-color-text: #111827;
+  --cv-pdf-color-muted: #374151;
+  --cv-pdf-space-page-padding: 32px;
+  --cv-pdf-space-header-margin-bottom: 12px;
+  --cv-pdf-space-section-margin-top: 10px;
+  --cv-pdf-space-name-margin-bottom: 4px;
+  --cv-pdf-space-section-title-margin-bottom: 4px;
+  --cv-pdf-space-bullet-margin-bottom: 2px;
+  --cv-pdf-font-size-base: 10px;
+  --cv-pdf-font-size-name: 18px;
+  --cv-pdf-font-size-subtitle: 11px;
+  --cv-pdf-font-size-section-title: 12px;
+  --cv-pdf-line-height-bullet: 1.3;
+}
