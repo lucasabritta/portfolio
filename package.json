@@ -1,0 +1,11 @@
+{
+  "name": "portfolio-vercel-root",
+  "private": true,
+  "packageManager": "yarn@1.22.22",
+  "description": "Minimal root package for Vercel: Next.js is detected here while the app builds from apps/frontend.",
+  "dependencies": {
+    "next": "16.2.4",
+    "react": "19.2.5",
+    "react-dom": "19.2.5"
+  }
+}
