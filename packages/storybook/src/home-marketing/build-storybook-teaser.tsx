@@ -18,7 +18,12 @@ export function BuildStorybookTeaser({
         <ActionLink variant="primary" href={buildHref}>
           How this site is built
         </ActionLink>
-        <ActionLink variant="secondary" href={storybookHref}>
+        <ActionLink
+          variant="secondary"
+          href={storybookHref}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Open Storybook
         </ActionLink>
       </div>

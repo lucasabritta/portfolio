@@ -12,10 +12,21 @@ export function HomeLeadHero({
   downloadHref,
   projectsHref,
   storybookHref,
+  headshotSrc,
+  headshotAlt,
 }: HomeLeadHeroProps) {
   return (
     <header className={styles.shell}>
       <div className={styles.leadCol}>
+        {headshotSrc ? (
+          <img
+            src={headshotSrc}
+            alt={headshotAlt ?? `Portrait of ${name}`}
+            className={styles.headshot}
+            loading="eager"
+            decoding="async"
+          />
+        ) : null}
         <HeroRole>{roleEyebrow}</HeroRole>
         <HeroName>{name}</HeroName>
         <p className={styles.positioning}>{positioningLead}</p>
@@ -28,7 +39,13 @@ export function HomeLeadHero({
             View Projects
           </ActionLink>
         </div>
-        <ActionLink variant="accentUnderline" href={storybookHref} className={styles.storybookLink}>
+        <ActionLink
+          variant="accentUnderline"
+          href={storybookHref}
+          className={styles.storybookLink}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Open Storybook
         </ActionLink>
       </div>

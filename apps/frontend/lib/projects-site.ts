@@ -28,8 +28,8 @@ export const projectsPageContent = {
     ],
     aiPipelineNote:
       "Generative tools accelerated exploration, but compliance, store policy, and player-visible polish stayed explicitly human-owned. If a line ships in the build, a person decided it belonged there — the models only ever proposed.",
-    imageSrc: "/projects/echoes-art-placeholder.svg",
-    imageAlt: "Echoes: Missing Cat — illustrative key art (replace with final marketing asset when ready)",
+    imageSrc: "/projects/echoes-phone-1.png",
+    imageAlt: "Echoes: Missing Cat — Android gameplay screenshot",
     links: [
       {
         label: "Google Play",

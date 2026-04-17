@@ -123,6 +123,8 @@ export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
       downloadHref: "/api/cv",
       projectsHref: "/projects",
       storybookHref: "/storybook",
+      headshotSrc: "/headshot-lucas.png",
+      headshotAlt: `Portrait of ${resume.name}`,
     },
     credibilityStrip: {
       id: "how-i-work",

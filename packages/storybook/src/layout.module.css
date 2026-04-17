@@ -1,6 +1,7 @@
 .htmlRoot {
   height: 100%;
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }

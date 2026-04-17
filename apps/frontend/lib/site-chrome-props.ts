@@ -26,7 +26,7 @@ export function buildSiteChromeProps(): SiteChromeStaticProps {
     footerLinks: [
       { label: "GitHub", href: siteProfile.githubProfileUrl, external: true },
       { label: "LinkedIn", href: resumeData.linkedin, external: true },
-      { label: "Component library (Storybook)", href: "/storybook" },
+      { label: "Component library (Storybook)", href: "/storybook", external: true },
       { label: "How this site is built", href: "/build" },
       { label: "Résumé PDF", href: "/api/cv" },
     ],

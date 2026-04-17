@@ -27,7 +27,12 @@ export default function BuildPage() {
           ))}
         </div>
         <div className={styles.ctaRow}>
-          <ActionLink variant="primary" href="/storybook">
+          <ActionLink
+            variant="primary"
+            href="/storybook"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Open Storybook
           </ActionLink>
           <ActionLink variant="secondary" href="/projects">

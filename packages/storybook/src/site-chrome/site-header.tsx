@@ -39,6 +39,47 @@ function pathMatchesNav(currentPath: string, href: string): boolean {
   return false;
 }
 
+function MenuIcon() {
+  return (
+    <svg
+      aria-hidden
+      focusable={false}
+      height={20}
+      width={20}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M4 7h16" />
+      <path d="M4 12h16" />
+      <path d="M4 17h16" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      aria-hidden
+      focusable={false}
+      height={20}
+      width={20}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M6 6l12 12" />
+      <path d="M18 6L6 18" />
+    </svg>
+  );
+}
+
 export function SiteHeader({
   wordmarkText,
   wordmarkHref,
@@ -98,7 +139,7 @@ export function SiteHeader({
           </nav>
         </div>
         <div className={styles.right}>
-          <div className={styles.themeSlot}>{themeControl}</div>
+          <div className={styles.desktopThemeSlot}>{themeControl}</div>
           <ActionLink variant="primary" href={downloadCvHref} className={styles.download}>
             Download CV
           </ActionLink>
@@ -111,7 +152,7 @@ export function SiteHeader({
             aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
             onClick={() => setMenuOpen((o) => !o)}
           >
-            Menu
+            {menuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>
       </div>
@@ -136,6 +177,10 @@ export function SiteHeader({
               })}
             </ul>
           </nav>
+          <div className={styles.mobileThemeSlot}>
+            <p className={styles.mobileThemeLabel}>Theme</p>
+            {themeControl}
+          </div>
         </div>
       ) : null}
     </header>

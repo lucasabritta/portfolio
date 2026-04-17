@@ -9,6 +9,9 @@ export type HomeLeadHeroProps = {
   downloadHref: string;
   projectsHref: string;
   storybookHref: string;
+  /** Optional public URL for the hero portrait (e.g. `/headshot-lucas.png`). */
+  headshotSrc?: string;
+  headshotAlt?: string;
 };
 
 export type CredibilityItem = {
