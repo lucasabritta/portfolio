@@ -5,7 +5,7 @@ import styles from "./contact-section.module.css";
 export type ContactSectionProps = {
   location: string;
   phone: string;
-  /** Precomputed `tel:` href (computed in `@portfolio/frontend`). */
+  /** Precomputed `tel:` href (computed by the Next app in `apps/frontend`). */
   phoneHref: string;
   email: string;
   linkedin: string;

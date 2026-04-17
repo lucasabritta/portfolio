@@ -24,6 +24,17 @@ export default tseslint.config(
               message:
                 "Do not import resume-content by path from Storybook; use fixtures and presentation types.",
             },
+            {
+              group: [
+                "@portfolio/frontend",
+                "@portfolio/frontend/**",
+                "**/apps/frontend/**",
+                "**/frontend/app/**",
+                "**/frontend/lib/**",
+              ],
+              message:
+                "Storybook must not import apps/frontend: DOM UI flows props-in only, consumers compose from the Next app.",
+            },
           ],
         },
       ],

@@ -27,8 +27,8 @@ const config: StorybookConfig = {
     name: "@storybook/nextjs-vite",
     options: {},
   },
-  // Must stay *under* `public/`, not `public/` itself — static export writes to `public/storybook/`.
-  staticDirs: [path.join(packageRoot, "../../apps/frontend/public/cv-fonts")],
+  // Storybook renders DOM UI only and must not reach into `apps/frontend/public`.
+  // CV fonts are a PDF-side concern consumed by `apps/frontend/lib/cv-pdf/fonts.ts`.
   viteFinal: async (viteConfig) =>
     mergeConfig(viteConfig, {
       base: storybookViteBase(),
