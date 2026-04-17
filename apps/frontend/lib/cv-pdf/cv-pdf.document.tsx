@@ -14,9 +14,13 @@ import { SummarySection } from "@cv-pdf/sections/summary-section";
 import { WorkEntry } from "@cv-pdf/sections/work-entry";
 import { WorkHistorySection } from "@cv-pdf/sections/work-history-section";
 import { cvPdfStyles } from "@cv-pdf/styles";
-import { resumeData } from "@portfolio/resume-content";
+import type { ResumeData } from "@portfolio/resume-content";
 
-export function CvPdfDocument() {
+export type CvPdfDocumentProps = {
+  resumeData: ResumeData;
+};
+
+export function CvPdfDocument({ resumeData }: CvPdfDocumentProps) {
   const {
     firstPageEntries,
     firstOverflowAchievements,
