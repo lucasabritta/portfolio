@@ -15,7 +15,7 @@ export const resumeData = {
 
 export { buildPhoneHref } from "./contact";
 export { CV_FILENAME_PATTERN, buildCvFilename } from "./cv-filename";
-export { GOOGLE_PLAY_HOST, PROJECT_URLS, type ProjectUrlKey } from "./project-urls";
+export { GOOGLE_PLAY_HOST, PROJECT_URLS } from "./project-urls";
 export { buildWorkEntryStableKey } from "./work-entry-stable-key";
 
 export type {

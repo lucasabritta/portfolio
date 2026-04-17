@@ -2,9 +2,15 @@ import styles from "./status.module.css";
 
 export default function Loading() {
   return (
-    <div className={styles.status} role="status" aria-live="polite">
+    <main
+      id="main"
+      tabIndex={-1}
+      className={styles.status}
+      role="status"
+      aria-live="polite"
+    >
       <p className={styles.heading}>Loading…</p>
       <p className={styles.body}>Preparing this page.</p>
-    </div>
+    </main>
   );
 }

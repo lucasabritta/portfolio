@@ -19,7 +19,8 @@ export function buildCvFilename(name: string): string {
  * refuses to strip types there), so it mirrors this regex as a literal
  * with a pointer back to this file. A Vitest unit test in this package
  * asserts that `buildCvFilename` output always matches the pattern, and a
- * cross-package contract test in `apps/frontend/lib/__tests__/` imports
- * this constant to pin the frontend side to the canonical regex.
+ * cross-package contract test at
+ * `apps/frontend/lib/cv-pdf/cv-pdf.response.test.ts` imports this constant
+ * to pin the frontend side to the canonical regex.
  */
 export const CV_FILENAME_PATTERN = /^[A-Za-z0-9_]+_CV\.pdf$/;

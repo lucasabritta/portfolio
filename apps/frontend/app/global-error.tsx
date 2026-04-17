@@ -37,6 +37,15 @@ const BUTTON_STYLE = {
   cursor: "pointer",
 };
 
+// Inlined `:focus-visible` ring so the last-resort boundary keeps a visible
+// focus cue even when the root layout (and its CSS modules) failed to load.
+const FOCUS_RING_STYLES = `
+  .cursor-global-error-button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+`;
+
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
   useEffect(() => {
     console.error("Root error boundary caught", error);
@@ -45,15 +54,21 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
   return (
     <html lang="en">
       <body style={ROOT_STYLE}>
-        <div style={CARD_STYLE}>
+        <style>{FOCUS_RING_STYLES}</style>
+        <main role="main" style={CARD_STYLE}>
           <h1 style={{ fontSize: "1.75rem", margin: 0 }}>Portfolio is temporarily unavailable</h1>
           <p style={{ margin: 0 }}>
             An unexpected error interrupted the page. Please try again in a moment.
           </p>
-          <button type="button" onClick={reset} style={BUTTON_STYLE}>
+          <button
+            type="button"
+            onClick={reset}
+            style={BUTTON_STYLE}
+            className="cursor-global-error-button"
+          >
             Try again
           </button>
-        </div>
+        </main>
       </body>
     </html>
   );

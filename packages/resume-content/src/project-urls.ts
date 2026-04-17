@@ -5,7 +5,5 @@ export const PROJECT_URLS = {
     "https://play.google.com/store/apps/details?id=com.echoes.missingcat",
 } as const;
 
-export type ProjectUrlKey = keyof typeof PROJECT_URLS;
-
 /** Host that identifies Google Play Store outbound links. */
 export const GOOGLE_PLAY_HOST = "play.google.com";
