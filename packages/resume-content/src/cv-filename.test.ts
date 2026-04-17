@@ -17,7 +17,6 @@ describe("buildCvFilename", () => {
     }
   });
 
-
   it("slugifies a simple name", () => {
     expect(buildCvFilename("Lucas Abritta")).toBe("Lucas_Abritta_CV.pdf");
   });
