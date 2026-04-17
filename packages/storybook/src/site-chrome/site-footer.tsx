@@ -16,7 +16,13 @@ export type SiteFooterProps = {
   linkComponent?: SiteShellLinkComponent;
 };
 
-export function SiteFooter({ name, descriptor, links, colophon, linkComponent: LinkComponent }: SiteFooterProps) {
+export function SiteFooter({
+  name,
+  descriptor,
+  links,
+  colophon,
+  linkComponent: LinkComponent,
+}: SiteFooterProps) {
   const NavLink = LinkComponent ?? "a";
 
   return (

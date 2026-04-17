@@ -2,9 +2,9 @@
 
 The **`@portfolio/storybook`** package is a **separate workspace** from **`@portfolio/frontend`** (Next) and from **`@portfolio/resume-content`** (résumé data). Shared DOM UI must stay **library-owned** and **consumable by the app** via the package name — **no** imports from `apps/frontend/app/**` inside the UI package, and **no** `storybook/**` paths in the app. Storybook stays **presentation-only**: it must **not** import **`@portfolio/resume-content`** (ESLint enforces this); the app composes **`resumeData`** into Storybook-presentational props while Storybook owns all classes/CSS.
 
-### Presentational JSX *and* CSS live in this package — the Next app composes
+### Presentational JSX _and_ CSS live in this package — the Next app composes
 
-**`apps/frontend/app/**/*.tsx`** (route segments — `page.tsx`, `layout.tsx`, `error.tsx`, `loading.tsx`, `not-found.tsx`, `global-error.tsx`, and sibling view files like `site-chrome-client.tsx`) must be **pure composition**: import components from **`@portfolio/storybook`**, pass them data/handlers, and return the tree.
+**`apps/frontend/app/**/\*.tsx`** (route segments — `page.tsx`, `layout.tsx`, `error.tsx`, `loading.tsx`, `not-found.tsx`, `global-error.tsx`, and sibling view files like `site-chrome-client.tsx`) must be **pure composition**: import components from **`@portfolio/storybook`\*\*, pass them data/handlers, and return the tree.
 
 They **must not**:
 
@@ -30,7 +30,7 @@ Both bans are enforced in **`apps/frontend/eslint.config.mjs`** via **`no-restri
 - **DOM components** (anything that renders browser JSX) belong in **`packages/storybook/src/`**. The Next app imports composition pieces like **`HomePageShell`**, **`PortfolioHero`**, and section components from **`@portfolio/storybook`** (see `packages/storybook/src/index.ts`).
 - **Global web CSS** lives in **`packages/storybook/src/globals.css`**. Root layout classes use **`packages/storybook/src/layout.module.css`**, imported from **`apps/frontend/app/layout.tsx`** as **`@portfolio/storybook/globals.css`** and **`@portfolio/storybook/layout.module.css`** (package `exports`).
 - **Story fixtures** live in **`packages/storybook/src/fixtures/`**. Stories use **`@ui/...`** (Vite/TS path alias); package components consumed by Next should use relative imports internally where needed so Next/Turbopack does not require duplicate `@ui` aliases.
-- **Résumé PDF** (react-pdf) lives in **`apps/frontend/lib/cv-pdf/**`** (served via **`/api/cv`**) — not in Storybook; it uses `StyleSheet`, not web CSS. It imports data/types from **`@portfolio/resume-content`**.
+- **Résumé PDF** (react-pdf) lives in **`apps/frontend/lib/cv-pdf/**`** (served via **`/api/cv`**) — not in Storybook; it uses `StyleSheet`, not web CSS. It imports data/types from **`@portfolio/resume-content`\*\*.
 
 ## Running Storybook
 

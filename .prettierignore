@@ -1,0 +1,30 @@
+# Build output and caches
+**/.next/
+**/dist/
+**/out/
+**/storybook-static/
+apps/frontend/public/storybook/
+tmp-cv-compare/
+coverage/
+**/coverage/
+test-results/
+playwright-report/
+.vercel/
+*.tsbuildinfo
+
+# Dependencies
+**/node_modules/
+
+# Lockfiles — stay authoritative from yarn
+**/yarn.lock
+**/package-lock.json
+**/pnpm-lock.yaml
+
+# Generated or vendored assets that should not be reflowed
+apps/frontend/public/
+packages/storybook/public/
+**/*.min.js
+**/*.min.css
+
+# Next.js types
+**/next-env.d.ts

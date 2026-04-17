@@ -18,7 +18,13 @@ export function SummarySection({ summaryHighlights, techStack }: SummarySectionP
       ) : (
         <ul className={styles.summaryList}>
           {summaryHighlights.map((item, index) => (
-            <Card key={`${index}-${item}`} as="li" className={styles.summaryItem} radius="md" padding="compact">
+            <Card
+              key={`${index}-${item}`}
+              as="li"
+              className={styles.summaryItem}
+              radius="md"
+              padding="compact"
+            >
               {item}
             </Card>
           ))}

@@ -6,9 +6,7 @@ type LeftColumnCertificationsProps = {
   certifications: readonly string[];
 };
 
-export function LeftColumnCertifications({
-  certifications,
-}: LeftColumnCertificationsProps) {
+export function LeftColumnCertifications({ certifications }: LeftColumnCertificationsProps) {
   return (
     <View style={[cvPdfStyles.certificationsSection, cvPdfStyles.sidebarTextColumn]}>
       <View style={cvPdfStyles.dividerLine} />

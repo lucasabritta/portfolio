@@ -4,10 +4,10 @@
 
 Official docs: [Vercel MCP project configuration](https://mcp.vercel.com/docs/project-configuration).
 
-| Item | Detail |
-|------|--------|
+| Item                        | Detail                                                                                           |
+| --------------------------- | ------------------------------------------------------------------------------------------------ |
 | Recommended config location | **User/global** `%USERPROFILE%\.cursor\mcp.json` (Windows) or `~/.cursor/mcp.json` (macOS/Linux) |
-| Optional helper | `npx add-mcp https://mcp.vercel.com` (use `-g` for global across projects) |
+| Optional helper             | `npx add-mcp https://mcp.vercel.com` (use `-g` for global across projects)                       |
 
 This repository does **not** commit `.cursor/mcp.json`. Keeping Vercel (and OAuth-backed MCP servers) in your **user-level** `mcp.json` means:
 

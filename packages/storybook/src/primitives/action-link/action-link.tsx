@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import type { AnchorHTMLAttributes } from "react";
 
 import styles from "./action-link.module.css";
@@ -22,6 +23,5 @@ const variantClass: Record<ActionLinkVariant, string> = {
 };
 
 export function ActionLink({ variant, className, ...rest }: ActionLinkProps) {
-  const classes = [variantClass[variant], className].filter(Boolean).join(" ");
-  return <a className={classes} {...rest} />;
+  return <a className={clsx(variantClass[variant], className)} {...rest} />;
 }

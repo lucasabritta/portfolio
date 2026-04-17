@@ -6,8 +6,14 @@ test.describe("Projects page", () => {
   test("loads flagship and GitHub sections", async ({ page }) => {
     await page.goto("/projects");
     await expect(page.getByRole("heading", { name: PAGE_COPY.projectsHeading })).toBeVisible();
-    await expect(page.getByRole("heading", { name: PAGE_COPY.projectsFlagshipTitle })).toBeVisible();
-    await expect(page.getByRole("heading", { name: PAGE_COPY.projectsPinnedHeading })).toBeVisible();
-    await expect(page.getByRole("heading", { name: PAGE_COPY.projectsHardestHeading })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: PAGE_COPY.projectsFlagshipTitle }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: PAGE_COPY.projectsPinnedHeading }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: PAGE_COPY.projectsHardestHeading }),
+    ).toBeVisible();
   });
 });

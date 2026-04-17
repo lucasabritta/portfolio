@@ -41,9 +41,7 @@ const preview: Preview = {
         );
       }
 
-      return (
-        <div className={`${geistSans.variable} ${geistMono.variable}`}>{wrapped}</div>
-      );
+      return <div className={`${geistSans.variable} ${geistMono.variable}`}>{wrapped}</div>;
     },
   ],
   parameters: {

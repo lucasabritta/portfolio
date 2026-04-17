@@ -17,11 +17,7 @@ export function LeftColumnProjects({ projects }: LeftColumnProjectsProps) {
         <View key={`${index}-${project.href}`} style={cvPdfStyles.sidebarUrlClip}>
           <Text style={cvPdfStyles.projectDescription}>{project.description}</Text>
           {/** Outer `Link` + inner wrapping `Text` so line boxes respect sidebar width (see sidebar URL layout test). */}
-          <Link
-            src={project.href}
-            wrap
-            style={[cvPdfStyles.projectLink, cvPdfStyles.externalLink]}
-          >
+          <Link src={project.href} wrap style={[cvPdfStyles.projectLink, cvPdfStyles.externalLink]}>
             <Text wrap>{formatSidebarUrlForPdf(project.href)}</Text>
           </Link>
         </View>

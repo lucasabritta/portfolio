@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      
+
       - name: Build frontend docker image
         run: docker compose build frontend
 
@@ -28,6 +28,12 @@ jobs:
 
       - name: Lint
         run: docker compose run --rm frontend yarn lint
+
+      - name: Format check (frontend)
+        run: docker compose run --rm frontend yarn format:check
+
+      - name: Format check (repo root docs and workflows)
+        run: docker compose run --rm frontend yarn format:repo:check
 
       - name: Typecheck
         run: docker compose run --rm frontend yarn typecheck

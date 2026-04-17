@@ -40,10 +40,7 @@ export const Default: Story = {
   render: function SiteHeaderStory(args) {
     const [mode, setMode] = useState<"system" | "light" | "dark">("system");
     return (
-      <SiteHeader
-        {...args}
-        themeControl={<ThemeModeSwitch value={mode} onChange={setMode} />}
-      />
+      <SiteHeader {...args} themeControl={<ThemeModeSwitch value={mode} onChange={setMode} />} />
     );
   },
   play: siteHeaderDefaultPlay,

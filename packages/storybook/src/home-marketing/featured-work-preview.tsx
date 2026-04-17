@@ -3,7 +3,12 @@ import { ActionLink, Card, SectionHeading, Title } from "../primitives";
 import type { FeaturedWorkPreviewProps } from "./home-marketing-types";
 import styles from "./featured-work-preview.module.css";
 
-export function FeaturedWorkPreview({ id = "featured-work", heading, flagship, supporting }: FeaturedWorkPreviewProps) {
+export function FeaturedWorkPreview({
+  id = "featured-work",
+  heading,
+  flagship,
+  supporting,
+}: FeaturedWorkPreviewProps) {
   return (
     <section aria-labelledby={`${id}-heading`} className={styles.section} id={id}>
       <SectionHeading id={`${id}-heading`}>{heading}</SectionHeading>
@@ -25,7 +30,13 @@ export function FeaturedWorkPreview({ id = "featured-work", heading, flagship, s
           </div>
         </Card>
         {supporting.map((card, index) => (
-          <Card key={`${index}-${card.title}`} as="article" elevated radius="md" padding="comfortable">
+          <Card
+            key={`${index}-${card.title}`}
+            as="article"
+            elevated
+            radius="md"
+            padding="comfortable"
+          >
             <Title level={4} size="sm">
               {card.title}
             </Title>

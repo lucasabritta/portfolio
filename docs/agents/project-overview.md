@@ -14,13 +14,13 @@ Related product work may live in separate repositories:
 
 The portfolio uses **one git root** with **several Yarn packages** (`apps/*`, `packages/*`). Each package has its own `package.json` and **`yarn.lock`**. The Next app consumes **`@portfolio/storybook`** and **`@portfolio/resume-content`** via local **`file:`** dependencies. That keeps the site, shared DOM UI, and résumé data **separately versioned and importable** — not a monolith where every feature reaches into every layer.
 
-| Surface | Role |
-|---------|------|
-| `apps/frontend` (`@portfolio/frontend`) | Next.js App Router: routes, layouts, `public/`, `/api/cv` (react-pdf), `lib/cv-pdf/` |
-| `packages/storybook` (`@portfolio/storybook`) | Shared DOM components, Storybook (`.storybook/`), web CSS; consumed by the app via **`@portfolio/storybook`** |
-| `packages/resume-content` (`@portfolio/resume-content`) | Résumé types, `resumeData`, small shared formatters (`buildPhoneHref`, work-history keys) |
-| `apps/e2e` | Playwright end-to-end specs (run against the Next app) |
-| `tools/` | Repo-local tooling (e.g. Storybook build helper for Next) |
+| Surface                                                 | Role                                                                                                          |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `apps/frontend` (`@portfolio/frontend`)                 | Next.js App Router: routes, layouts, `public/`, `/api/cv` (react-pdf), `lib/cv-pdf/`                          |
+| `packages/storybook` (`@portfolio/storybook`)           | Shared DOM components, Storybook (`.storybook/`), web CSS; consumed by the app via **`@portfolio/storybook`** |
+| `packages/resume-content` (`@portfolio/resume-content`) | Résumé types, `resumeData`, small shared formatters (`buildPhoneHref`, work-history keys)                     |
+| `apps/e2e`                                              | Playwright end-to-end specs (run against the Next app)                                                        |
+| `tools/`                                                | Repo-local tooling (e.g. Storybook build helper for Next)                                                     |
 
 **Revamp v1:** The multi-page portfolio shell (`/`, `/projects`, `/build`), global nav/footer, home marketing blocks, curated project/build copy, E2E smoke, and Storybook coverage for new UI are **done** per [`portfolio-site-revamp-plan.md`](portfolio-site-revamp-plan.md) (success criteria and Phases 1–4). Further work is optional polish or v2 scope unless that doc is updated.
 
@@ -32,13 +32,13 @@ The portfolio uses **one git root** with **several Yarn packages** (`apps/*`, `p
 
 ## Intended stack
 
-| Area | Choice |
-|------|--------|
-| Framework | Next.js App Router with stable React |
-| Package manager | `yarn` (classic) per package |
+| Area              | Choice                                                                    |
+| ----------------- | ------------------------------------------------------------------------- |
+| Framework         | Next.js App Router with stable React                                      |
+| Package manager   | `yarn` (classic) per package                                              |
 | Local development | Docker-first via root `docker-compose.yml` and `apps/frontend/Dockerfile` |
-| CI | GitHub Actions in `.github/workflows/` |
-| Production deploy | Vercel-native deployment (Next app under `apps/frontend`) |
+| CI                | GitHub Actions in `.github/workflows/`                                    |
+| Production deploy | Vercel-native deployment (Next app under `apps/frontend`)                 |
 
 ## Working defaults
 

@@ -22,7 +22,9 @@ const geistMono = Geist_Mono({
 });
 
 const rootTitleDefault =
-  typeof siteMetadata.title === "string" ? siteMetadata.title : "Lucas Abritta | Engineering Manager";
+  typeof siteMetadata.title === "string"
+    ? siteMetadata.title
+    : "Lucas Abritta | Engineering Manager";
 
 export const metadata: Metadata = {
   description: siteMetadata.description,

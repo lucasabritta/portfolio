@@ -1,10 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  CV_FILENAME_PATTERN,
-  buildCvFilename,
-  resumeData,
-} from "@portfolio/resume-content";
+import { CV_FILENAME_PATTERN, buildCvFilename, resumeData } from "@portfolio/resume-content";
 
 /**
  * Cross-surface contract for `cv-pdf.response.ts`: the Playwright spec at

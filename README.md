@@ -4,13 +4,13 @@ Personal portfolio site and résumé, built as a small multi-package TypeScript 
 
 ## What is in this repository
 
-| Area | Path | Role |
-|------|------|------|
-| Site | `apps/frontend/` | Next.js 16 (App Router), pages, `/api/cv` PDF download, `lib/cv-pdf/` (react-pdf layout) |
-| Shared web UI | `packages/storybook/` | Components, styles, Storybook — imported by the app as `@portfolio/storybook` |
-| Résumé data | `packages/resume-content/` | Types and content — `@portfolio/resume-content` |
-| E2E tests | `apps/e2e/` | Playwright specs against the running app |
-| Static Storybook for Next | `tools/build-storybook-for-next.mjs` | Build step wiring (see Storybook package) |
+| Area                      | Path                                 | Role                                                                                     |
+| ------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------- |
+| Site                      | `apps/frontend/`                     | Next.js 16 (App Router), pages, `/api/cv` PDF download, `lib/cv-pdf/` (react-pdf layout) |
+| Shared web UI             | `packages/storybook/`                | Components, styles, Storybook — imported by the app as `@portfolio/storybook`            |
+| Résumé data               | `packages/resume-content/`           | Types and content — `@portfolio/resume-content`                                          |
+| E2E tests                 | `apps/e2e/`                          | Playwright specs against the running app                                                 |
+| Static Storybook for Next | `tools/build-storybook-for-next.mjs` | Build step wiring (see Storybook package)                                                |
 
 Packages link to each other with Yarn **`file:`** dependencies and their own `yarn.lock` files. CI runs **Docker Compose** so Node, Yarn, and Playwright match local containers.
 
@@ -64,3 +64,9 @@ sh scripts/cv/docker-dump.sh
 
 - **Web UI**: view in `.tsx`, logic in `.ts`, styles in `.css` / `.module.css`; shared DOM lives in `@portfolio/storybook`.
 - **CV PDF** (`apps/frontend/lib/cv-pdf/`): react-pdf `StyleSheet` and `.tsx` document tree — not web CSS for the PDF surface.
+- **Class names**: compose with [`clsx`](https://github.com/lukeed/clsx) instead of ad-hoc `.filter(Boolean).join(" ")` joiners.
+- **Formatting**: [Prettier](https://prettier.io) is the source of truth (root `.prettierrc.json`). Each package exposes `yarn format` / `yarn format:check`; CI runs the check so drift never merges.
+
+## Architecture decisions
+
+Durable architectural decisions (multi-package layout, shared DOM via Storybook, react-pdf for the CV, Docker Compose parity) are captured as short ADRs in [`docs/adr/`](docs/adr/README.md). Read the index first before proposing a cross-cutting change.

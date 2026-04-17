@@ -1,7 +1,10 @@
 import type { StoryPlayFn } from "@ui/storybook-play-types";
 import { expect, within } from "storybook/test";
 
-import { storyFixtureEducationCount, storyFixtureEducationInstitution } from "@ui/fixtures/cv-story-args";
+import {
+  storyFixtureEducationCount,
+  storyFixtureEducationInstitution,
+} from "@ui/fixtures/cv-story-args";
 
 export const educationSectionDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
@@ -12,7 +15,9 @@ export const educationSectionDefaultPlay: StoryPlayFn = async ({ canvasElement }
 };
 
 export const educationSectionEmptyPlay: StoryPlayFn = async ({ canvasElement }) => {
-  expect(within(canvasElement).getByRole("status")).toHaveTextContent(/no education entries listed/i);
+  expect(within(canvasElement).getByRole("status")).toHaveTextContent(
+    /no education entries listed/i,
+  );
 };
 
 export const educationSectionLongContentPlay: StoryPlayFn = async ({ canvasElement }) => {
@@ -20,7 +25,9 @@ export const educationSectionLongContentPlay: StoryPlayFn = async ({ canvasEleme
   expect(canvas.getByRole("heading", { name: /^education$/i })).toBeVisible();
   expect(canvas.getAllByRole("article").length).toBeGreaterThan(0);
   expect(
-    canvas.getByText(new RegExp(storyFixtureEducationInstitution.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))),
+    canvas.getByText(
+      new RegExp(storyFixtureEducationInstitution.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")),
+    ),
   ).toBeVisible();
 };
 

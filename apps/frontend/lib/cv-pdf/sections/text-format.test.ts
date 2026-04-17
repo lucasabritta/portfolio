@@ -74,8 +74,7 @@ describe("formatSidebarUrlForPdf", () => {
   });
 
   it("breaks path/query across multiple short lines respecting maxLineChars", () => {
-    const url =
-      "https://example.com/one/two/three/four/five/six?alpha=beta&gamma=delta";
+    const url = "https://example.com/one/two/three/four/five/six?alpha=beta&gamma=delta";
     const maxLineChars = 20;
 
     const out = formatSidebarUrlForPdf(url, maxLineChars);
@@ -92,8 +91,6 @@ describe("formatSidebarUrlForPdf", () => {
   });
 
   it("falls back to plain wrapLongUrl when the input has no protocol", () => {
-    expect(formatSidebarUrlForPdf("example.com/path")).toBe(
-      wrapLongUrl("example.com/path"),
-    );
+    expect(formatSidebarUrlForPdf("example.com/path")).toBe(wrapLongUrl("example.com/path"));
   });
 });

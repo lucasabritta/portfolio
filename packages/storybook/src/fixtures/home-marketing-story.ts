@@ -53,7 +53,9 @@ export function homeLeadHeroFromHomePageProps(props: HomePageProps): HomeLeadHer
     roleEyebrow: props.role,
     positioningLead: SYNTH_HOME_POSITIONING,
     proofPoints: threeStrings(props.summaryHighlights),
-    contactHint: props.location ? `${props.location} · Full contact details on the CV PDF` : undefined,
+    contactHint: props.location
+      ? `${props.location} · Full contact details on the CV PDF`
+      : undefined,
     downloadHref: props.downloadHref,
     projectsHref: "/projects",
     storybookHref: "/storybook",

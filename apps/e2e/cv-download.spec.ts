@@ -2,10 +2,7 @@ import { stat, writeFile } from "node:fs/promises";
 
 import { expect, test } from "@playwright/test";
 
-import {
-  CONTENT_DISPOSITION_FILENAME,
-  CV_FILENAME_PATTERN,
-} from "./fixtures/strings";
+import { CONTENT_DISPOSITION_FILENAME, CV_FILENAME_PATTERN } from "./fixtures/strings";
 
 test.describe("CV download", () => {
   test("serves the generated PDF from the CV endpoint", async ({ request }, testInfo) => {

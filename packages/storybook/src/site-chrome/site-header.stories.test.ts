@@ -6,27 +6,18 @@ export const siteHeaderDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
 
   expect(canvas.getByRole("banner")).toBeInTheDocument();
   const primary = canvas.getByRole("navigation", { name: "Primary" });
-  expect(
-    within(primary).getByRole("link", { name: "Home" }),
-  ).toHaveAttribute("href", "/");
-  expect(
-    within(primary).getByRole("link", { name: "Projects" }),
-  ).toHaveAttribute("href", "/projects");
-  expect(
-    within(primary).getByRole("link", { name: "Build" }),
-  ).toHaveAttribute("href", "/build");
-  expect(
-    within(primary).getByRole("link", { name: "CV" }),
-  ).toHaveAttribute("href", "/#resume");
-
-  expect(canvas.getByRole("link", { name: "Download CV" })).toHaveAttribute(
+  expect(within(primary).getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
+  expect(within(primary).getByRole("link", { name: "Projects" })).toHaveAttribute(
     "href",
-    "/api/cv",
+    "/projects",
   );
+  expect(within(primary).getByRole("link", { name: "Build" })).toHaveAttribute("href", "/build");
+  expect(within(primary).getByRole("link", { name: "CV" })).toHaveAttribute("href", "/#resume");
+
+  expect(canvas.getByRole("link", { name: "Download CV" })).toHaveAttribute("href", "/api/cv");
 
   const active = within(primary).getByRole("link", { name: "Build" });
   expect(active).toHaveAttribute("aria-current", "page");
-
 };
 
 export const siteHeaderActivePlay: StoryPlayFn = async ({ canvasElement }) => {
@@ -37,15 +28,11 @@ export const siteHeaderActivePlay: StoryPlayFn = async ({ canvasElement }) => {
   expect(active).toHaveAttribute("aria-current", "page");
 
   for (const label of ["Home", "Build", "CV"]) {
-    expect(
-      within(primary).getByRole("link", { name: label }),
-    ).not.toHaveAttribute("aria-current");
+    expect(within(primary).getByRole("link", { name: label })).not.toHaveAttribute("aria-current");
   }
 };
 
-export const siteHeaderMobileMenuPlay: StoryPlayFn = async ({
-  canvasElement,
-}) => {
+export const siteHeaderMobileMenuPlay: StoryPlayFn = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   // The menu button is always rendered (CSS-gated, not DOM-gated); use
   // `hidden: true` so the assertion does not depend on the viewport-specific
@@ -69,9 +56,10 @@ export const siteHeaderMobileMenuPlay: StoryPlayFn = async ({
     name: "Primary mobile",
     hidden: true,
   });
-  expect(
-    within(mobileNav).getByRole("link", { name: "Projects", hidden: true }),
-  ).toHaveAttribute("aria-current", "page");
+  expect(within(mobileNav).getByRole("link", { name: "Projects", hidden: true })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
 
   await userEvent.click(toggled);
   expect(

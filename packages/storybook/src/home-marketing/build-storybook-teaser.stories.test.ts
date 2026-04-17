@@ -1,9 +1,7 @@
 import type { StoryPlayFn } from "@ui/storybook-play-types";
 import { expect, within } from "storybook/test";
 
-export const buildStorybookTeaserDefaultPlay: StoryPlayFn = async ({
-  canvasElement,
-}) => {
+export const buildStorybookTeaserDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   const region = canvas.getByRole("region", { name: /site & component library/i });
 

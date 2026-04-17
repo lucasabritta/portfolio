@@ -20,16 +20,10 @@ export const Default: Story = {
   args: {
     skipLink: <SkipToMain />,
     header: (
-      <header style={{ padding: "1rem", background: "#0f172a", color: "#fff" }}>
-        Header slot
-      </header>
+      <header style={{ padding: "1rem", background: "#0f172a", color: "#fff" }}>Header slot</header>
     ),
-    children: (
-      <div style={{ padding: "2rem" }}>Page body content (flex-grown slot).</div>
-    ),
-    footer: (
-      <footer style={{ padding: "1rem", background: "#f1f5f9" }}>Footer slot</footer>
-    ),
+    children: <div style={{ padding: "2rem" }}>Page body content (flex-grown slot).</div>,
+    footer: <footer style={{ padding: "1rem", background: "#f1f5f9" }}>Footer slot</footer>,
   },
   play: siteShellPlay,
 };

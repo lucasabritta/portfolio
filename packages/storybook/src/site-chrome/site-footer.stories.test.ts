@@ -18,9 +18,10 @@ export const siteFooterDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
   expect(storybook).toHaveAttribute("href", "/storybook");
   expect(storybook).not.toHaveAttribute("target");
 
-  expect(
-    within(footer).getByRole("link", { name: "Download CV" }),
-  ).toHaveAttribute("href", "/api/cv");
+  expect(within(footer).getByRole("link", { name: "Download CV" })).toHaveAttribute(
+    "href",
+    "/api/cv",
+  );
 
   expect(
     within(footer).getByText(/built with next\.js, storybook, and vercel/i),

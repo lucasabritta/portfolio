@@ -1,9 +1,7 @@
 import type { StoryPlayFn } from "@ui/storybook-play-types";
 import { expect, userEvent, within } from "storybook/test";
 
-export const themeModeSwitchDefaultPlay: StoryPlayFn = async ({
-  canvasElement,
-}) => {
+export const themeModeSwitchDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   const group = canvas.getByRole("group", { name: "Theme" });

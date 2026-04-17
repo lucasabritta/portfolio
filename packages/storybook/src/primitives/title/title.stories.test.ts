@@ -2,11 +2,15 @@ import type { StoryPlayFn } from "@ui/storybook-play-types";
 import { expect, within } from "storybook/test";
 
 export const titleDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
-  expect(within(canvasElement).getByRole("heading", { level: 3, name: "Card title" })).toBeVisible();
+  expect(
+    within(canvasElement).getByRole("heading", { level: 3, name: "Card title" }),
+  ).toBeVisible();
 };
 
 export const titleSmallPlay: StoryPlayFn = async ({ canvasElement }) => {
-  expect(within(canvasElement).getByRole("heading", { level: 3, name: "Certification name" })).toBeVisible();
+  expect(
+    within(canvasElement).getByRole("heading", { level: 3, name: "Certification name" }),
+  ).toBeVisible();
 };
 
 export const titleMediumPlay: StoryPlayFn = async ({ canvasElement }) => {
@@ -16,7 +20,9 @@ export const titleMediumPlay: StoryPlayFn = async ({ canvasElement }) => {
 };
 
 export const titleLargePlay: StoryPlayFn = async ({ canvasElement }) => {
-  expect(within(canvasElement).getByRole("heading", { level: 3, name: "Company / role" })).toBeVisible();
+  expect(
+    within(canvasElement).getByRole("heading", { level: 3, name: "Company / role" }),
+  ).toBeVisible();
 };
 
 export const titleLongContentPlay: StoryPlayFn = async ({ canvasElement }) => {

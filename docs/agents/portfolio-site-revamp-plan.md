@@ -9,7 +9,7 @@ This document captures **product intent**, **current state**, **design constrain
 3. **Storybook** is **discoverable and explained**: link from the site, one paragraph on what lives there, URL `/storybook` (static build + Next rewrite — see existing config).
 4. **How the site is deployed / built**: human-readable “build story” (monorepo, Docker/CI, hosting) without dumping raw config.
 5. **GitHub**: surfaced projects (pinned / curated), not buried.
-6. **Game** (*Echoes: Missing Cat*): flagship treatment — visual, outcome, stack/AI angle, store link.
+6. **Game** (_Echoes: Missing Cat_): flagship treatment — visual, outcome, stack/AI angle, store link.
 
 Use **multiple routes** if needed; avoid a single endless scroll as the only navigation pattern.
 
@@ -21,19 +21,19 @@ Use **multiple routes** if needed; avoid a single endless scroll as the only nav
 
 ## Current state (facts in repo)
 
-| Area | Location / behavior |
-|------|---------------------|
-| Single homepage | `apps/frontend/app/page.tsx` composes marketing blocks (`HomeLeadHero`, credibility, featured work, Storybook teaser, condensed résumé) from `apps/frontend/lib/home-site.ts`, then the existing section components inside `#resume`, using `resumeData` from `@portfolio/resume-content`. |
-| App Router routes | `/`, `/build`, and `/projects` (flagship + pinned GitHub) under `apps/frontend/app/`. |
-| Profile & links | `packages/resume-content/src/profile.ts` — `contactLinks`: Email, LinkedIn, Google Play; **no GitHub**. |
-| Personal projects | `packages/resume-content/src/personal-projects.ts` — one entry (game). |
-| Hero + shell | `/` uses `packages/storybook/src/home-marketing/home-lead-hero.tsx` (`HomeLeadHero`) inside `HomePageShell`; `PortfolioHero` remains available for other surfaces. |
-| Global chrome | `apps/frontend/app/layout.tsx` composes `ThemeProvider`, `SiteChromeClient`, skip link, sticky `SiteHeader` / `SiteFooter`, and fonts/CSS on `<html>/<body>`. `HomePageShell` puts the home hero **inside** `<main id="main">` with the rest of the page so “Skip to content” reaches the primary `h1` and CTAs (no duplicate footer). |
-| Site metadata baseline | `apps/frontend/app/layout.metadata.ts` exports shared root metadata; route-level metadata should extend this rather than reinvent it. |
-| CV PDF | `apps/frontend/app/api/cv/route.ts`, `apps/frontend/lib/cv-pdf/*`; home lead hero uses `downloadHref="/api/cv"`. |
-| Storybook static URL | `apps/frontend/next.config.ts` rewrites `/storybook` → `/storybook/index.html`; build output under `apps/frontend/public/storybook/` (see `docs/agents/storybook-ui.md`). |
-| E2E | `apps/e2e/cv-download.spec.ts` (PDF API), `projects-page.spec.ts`, `nav-smoke.spec.ts` (nav, `/`, `/build`, `/#resume`, footer discovery). |
-| Boundaries | **Do not** import `@portfolio/resume-content` inside `packages/storybook`. App composes data → presentation props. |
+| Area                   | Location / behavior                                                                                                                                                                                                                                                                                                                    |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Single homepage        | `apps/frontend/app/page.tsx` composes marketing blocks (`HomeLeadHero`, credibility, featured work, Storybook teaser, condensed résumé) from `apps/frontend/lib/home-site.ts`, then the existing section components inside `#resume`, using `resumeData` from `@portfolio/resume-content`.                                             |
+| App Router routes      | `/`, `/build`, and `/projects` (flagship + pinned GitHub) under `apps/frontend/app/`.                                                                                                                                                                                                                                                  |
+| Profile & links        | `packages/resume-content/src/profile.ts` — `contactLinks`: Email, LinkedIn, Google Play; **no GitHub**.                                                                                                                                                                                                                                |
+| Personal projects      | `packages/resume-content/src/personal-projects.ts` — one entry (game).                                                                                                                                                                                                                                                                 |
+| Hero + shell           | `/` uses `packages/storybook/src/home-marketing/home-lead-hero.tsx` (`HomeLeadHero`) inside `HomePageShell`; `PortfolioHero` remains available for other surfaces.                                                                                                                                                                     |
+| Global chrome          | `apps/frontend/app/layout.tsx` composes `ThemeProvider`, `SiteChromeClient`, skip link, sticky `SiteHeader` / `SiteFooter`, and fonts/CSS on `<html>/<body>`. `HomePageShell` puts the home hero **inside** `<main id="main">` with the rest of the page so “Skip to content” reaches the primary `h1` and CTAs (no duplicate footer). |
+| Site metadata baseline | `apps/frontend/app/layout.metadata.ts` exports shared root metadata; route-level metadata should extend this rather than reinvent it.                                                                                                                                                                                                  |
+| CV PDF                 | `apps/frontend/app/api/cv/route.ts`, `apps/frontend/lib/cv-pdf/*`; home lead hero uses `downloadHref="/api/cv"`.                                                                                                                                                                                                                       |
+| Storybook static URL   | `apps/frontend/next.config.ts` rewrites `/storybook` → `/storybook/index.html`; build output under `apps/frontend/public/storybook/` (see `docs/agents/storybook-ui.md`).                                                                                                                                                              |
+| E2E                    | `apps/e2e/cv-download.spec.ts` (PDF API), `projects-page.spec.ts`, `nav-smoke.spec.ts` (nav, `/`, `/build`, `/#resume`, footer discovery).                                                                                                                                                                                             |
+| Boundaries             | **Do not** import `@portfolio/resume-content` inside `packages/storybook`. App composes data → presentation props.                                                                                                                                                                                                                     |
 
 ## Implementation guardrails
 
@@ -48,13 +48,13 @@ Use **multiple routes** if needed; avoid a single endless scroll as the only nav
 
 Implement incrementally; not every route is required for v1.
 
-| Route | Purpose |
-|-------|---------|
-| `/` | Story-led home: positioning copy, primary CTAs (CV, GitHub, featured work), optional featured strip (game + repos + Storybook). |
-| `/projects` | Game + GitHub highlights; cards with image, stack, role, links. |
-| `/build` (or `/craft`) | How the site is built: monorepo, Storybook, tests, Docker, CI, deploy; link `/storybook`. |
-| `/cv` *(optional)* | Full linear résumé sections **or** keep long CV on `/` and use `/cv` later — decide for SEO/scroll length. |
-| `/contact` *(optional)* | Only if footer is insufficient for shared “contact” URLs. |
+| Route                   | Purpose                                                                                                                         |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                     | Story-led home: positioning copy, primary CTAs (CV, GitHub, featured work), optional featured strip (game + repos + Storybook). |
+| `/projects`             | Game + GitHub highlights; cards with image, stack, role, links.                                                                 |
+| `/build` (or `/craft`)  | How the site is built: monorepo, Storybook, tests, Docker, CI, deploy; link `/storybook`.                                       |
+| `/cv` _(optional)_      | Full linear résumé sections **or** keep long CV on `/` and use `/cv` later — decide for SEO/scroll length.                      |
+| `/contact` _(optional)_ | Only if footer is insufficient for shared “contact” URLs.                                                                       |
 
 **Global navigation**: persistent header or sticky TOC — Home · Projects · CV · Build · (Contact).
 
@@ -83,14 +83,14 @@ Aim for **calm technical credibility**, not flashy agency-portfolio styling. The
 
 Base the revamp on the tokens already present in `packages/storybook/src/globals.css`.
 
-| Token | Use | Light | Dark |
-|------|-----|-------|------|
-| `--background` | Page background | `#fafafa` | `#0a0a0a` |
-| `--foreground` | Primary text | `#0a0a0a` | `#fafafa` |
-| `--muted` | Secondary text / supporting labels | `#525252` | `#a3a3a3` |
-| `--card` | Cards / elevated surfaces | `#ffffff` | `#171717` |
-| `--border` | Dividers / card borders | `#e5e5e5` | `#262626` |
-| `--accent` | Primary CTA / links / focus emphasis | `#2563eb` | `#60a5fa` |
+| Token          | Use                                  | Light     | Dark      |
+| -------------- | ------------------------------------ | --------- | --------- |
+| `--background` | Page background                      | `#fafafa` | `#0a0a0a` |
+| `--foreground` | Primary text                         | `#0a0a0a` | `#fafafa` |
+| `--muted`      | Secondary text / supporting labels   | `#525252` | `#a3a3a3` |
+| `--card`       | Cards / elevated surfaces            | `#ffffff` | `#171717` |
+| `--border`     | Dividers / card borders              | `#e5e5e5` | `#262626` |
+| `--accent`     | Primary CTA / links / focus emphasis | `#2563eb` | `#60a5fa` |
 
 Recommended usage:
 
@@ -240,7 +240,7 @@ Hero CTAs:
 ### `/projects`
 
 - Use a clean list/grid hybrid:
-  - First block: flagship feature for *Echoes: Missing Cat*
+  - First block: flagship feature for _Echoes: Missing Cat_
   - Then: 3-6 curated GitHub/project cards
 - Flagship project should have:
   - large image area
@@ -280,7 +280,7 @@ Desktop order:
      - CTA row: `Download CV` / `View Projects` / `Open Storybook`
    - right column:
      - one highlight card with 3 proof points
-     - or one flagship teaser for *Echoes: Missing Cat*
+     - or one flagship teaser for _Echoes: Missing Cat_
 3. **Credibility strip**
    - 3 horizontally aligned proof items on desktop
    - examples: startup growth, platform quality, hands-on technical leadership
@@ -482,7 +482,7 @@ This document is intentionally specific enough to guide implementation without r
 
 **Acceptance**: 10-second test: role, differentiation, and one primary CTA are obvious without scrolling past first viewport on common laptop breakpoints.
 
-*Automation:* CI does not assert viewport height; do a quick laptop-width spot-check before release, or add a Phase 4 Storybook `play` / Playwright assertion when that work is scheduled.
+_Automation:_ CI does not assert viewport height; do a quick laptop-width spot-check before release, or add a Phase 4 Storybook `play` / Playwright assertion when that work is scheduled.
 
 ### Phase 4 — Polish and quality gates
 
@@ -527,4 +527,4 @@ This document is intentionally specific enough to guide implementation without r
 
 ---
 
-*Last validated against repo layout on 2026-04-16; adjust file paths if the tree moves.*
+_Last validated against repo layout on 2026-04-16; adjust file paths if the tree moves._
