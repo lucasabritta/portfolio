@@ -55,7 +55,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
     <html lang="en">
       <body style={ROOT_STYLE}>
         <style>{FOCUS_RING_STYLES}</style>
-        <main role="main" style={CARD_STYLE}>
+        <main style={CARD_STYLE}>
           <h1 style={{ fontSize: "1.75rem", margin: 0 }}>Portfolio is temporarily unavailable</h1>
           <p style={{ margin: 0 }}>
             An unexpected error interrupted the page. Please try again in a moment.
