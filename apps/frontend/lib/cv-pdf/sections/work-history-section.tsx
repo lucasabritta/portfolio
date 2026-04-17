@@ -2,6 +2,7 @@ import { Text, View } from "@react-pdf/renderer";
 
 import { WorkEntry } from "@cv-pdf/sections/work-entry";
 import { cvPdfStyles } from "@cv-pdf/styles";
+import { buildPdfWorkEntryKey } from "@cv-pdf/work-history";
 import type { ResumeExperienceEntry } from "@portfolio/resume-content";
 
 type FirstPageEntry = {
@@ -20,7 +21,7 @@ export function WorkHistorySection({ entries }: WorkHistorySectionProps) {
       <Text style={[cvPdfStyles.sectionTitle, cvPdfStyles.workHistoryTitle]}>Work History</Text>
       {entries.map(({ entry, showAchievements }, index) => (
         <WorkEntry
-          key={`${entry.company}-${entry.role}-${entry.period}`}
+          key={buildPdfWorkEntryKey(entry)}
           entry={entry}
           showAchievements={showAchievements}
           stackPosition={index === 0 ? "first" : "continued"}

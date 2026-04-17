@@ -13,8 +13,8 @@ export function LeftColumnProjects({ projects }: LeftColumnProjectsProps) {
     <View style={cvPdfStyles.sidebarTextColumn}>
       <View style={cvPdfStyles.dividerLine} />
       <Text style={cvPdfStyles.sectionTitle}>Personal projects</Text>
-      {projects.map((project) => (
-        <View key={project.title} style={cvPdfStyles.sidebarUrlClip}>
+      {projects.map((project, index) => (
+        <View key={`${index}-${project.href}`} style={cvPdfStyles.sidebarUrlClip}>
           <Text style={cvPdfStyles.projectDescription}>{project.description}</Text>
           {/** Outer `Link` + inner wrapping `Text` so line boxes respect sidebar width (see sidebar URL layout test). */}
           <Link
