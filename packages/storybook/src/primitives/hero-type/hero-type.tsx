@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import type { HTMLAttributes, ReactNode } from "react";
 
 import styles from "./hero-type.module.css";
@@ -5,9 +6,8 @@ import styles from "./hero-type.module.css";
 export type HeroRoleProps = { children: ReactNode } & HTMLAttributes<HTMLParagraphElement>;
 
 export function HeroRole({ children, className, ...rest }: HeroRoleProps) {
-  const classes = [styles.role, className].filter(Boolean).join(" ");
   return (
-    <p className={classes} {...rest}>
+    <p className={clsx(styles.role, className)} {...rest}>
       {children}
     </p>
   );
@@ -16,9 +16,8 @@ export function HeroRole({ children, className, ...rest }: HeroRoleProps) {
 export type HeroNameProps = { children: ReactNode } & HTMLAttributes<HTMLHeadingElement>;
 
 export function HeroName({ children, className, ...rest }: HeroNameProps) {
-  const classes = [styles.name, className].filter(Boolean).join(" ");
   return (
-    <h1 className={classes} {...rest}>
+    <h1 className={clsx(styles.name, className)} {...rest}>
       {children}
     </h1>
   );
@@ -27,9 +26,8 @@ export function HeroName({ children, className, ...rest }: HeroNameProps) {
 export type HeroLeadProps = { children: ReactNode } & HTMLAttributes<HTMLParagraphElement>;
 
 export function HeroLead({ children, className, ...rest }: HeroLeadProps) {
-  const classes = [styles.lead, className].filter(Boolean).join(" ");
   return (
-    <p className={classes} {...rest}>
+    <p className={clsx(styles.lead, className)} {...rest}>
       {children}
     </p>
   );

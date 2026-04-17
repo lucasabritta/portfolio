@@ -40,7 +40,10 @@ export function WorkHistorySection({ workHistory }: WorkHistorySectionProps) {
               {entry.achievements.length > 0 ? (
                 <ul className={styles.achievementList}>
                   {entry.achievements.map((achievement, achievementIndex) => (
-                    <li key={`${achievementIndex}-${achievement}`} className={styles.achievementItem}>
+                    <li
+                      key={`${achievementIndex}-${achievement}`}
+                      className={styles.achievementItem}
+                    >
                       <span className={styles.achievementBullet} aria-hidden="true">
                         *
                       </span>

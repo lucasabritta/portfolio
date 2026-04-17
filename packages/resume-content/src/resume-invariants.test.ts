@@ -79,9 +79,7 @@ describe("resumeData.workHistory — stable-key uniqueness", () => {
   // `apps/frontend/lib/cv-pdf/work-history.test.ts` — keep both suites in sync
   // if the stable-key algorithm changes.
   it("buildWorkEntryStableKey produces a unique key per entry", () => {
-    const keys = resumeData.workHistory.map((entry) =>
-      buildWorkEntryStableKey(entry),
-    );
+    const keys = resumeData.workHistory.map((entry) => buildWorkEntryStableKey(entry));
     expect(new Set(keys).size).toBe(keys.length);
   });
 });

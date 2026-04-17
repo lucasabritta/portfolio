@@ -11,7 +11,13 @@ export type ContactSectionProps = {
   linkedin: string;
 };
 
-export function ContactSection({ location, phone, phoneHref, email, linkedin }: ContactSectionProps) {
+export function ContactSection({
+  location,
+  phone,
+  phoneHref,
+  email,
+  linkedin,
+}: ContactSectionProps) {
   const phoneTrim = phone.trim();
   const emailTrim = email.trim();
   const linkedinTrim = linkedin.trim();
@@ -20,9 +26,7 @@ export function ContactSection({ location, phone, phoneHref, email, linkedin }: 
     <section aria-labelledby="contact-heading">
       <SectionHeading id="contact-heading">Contact</SectionHeading>
       <Card as="div" className={styles.contactShell} radius="lg" padding="comfortable">
-        <p className={styles.contactLocation}>
-          Based in {location.trim() ? location.trim() : "—"}
-        </p>
+        <p className={styles.contactLocation}>Based in {location.trim() ? location.trim() : "—"}</p>
         <ul className={styles.contactLinks}>
           <li>
             {phoneTrim ? (
@@ -44,7 +48,12 @@ export function ContactSection({ location, phone, phoneHref, email, linkedin }: 
           </li>
           <li>
             {linkedinTrim ? (
-              <ActionLink variant="inlineAccent" href={linkedinTrim} rel="noopener noreferrer" target="_blank">
+              <ActionLink
+                variant="inlineAccent"
+                href={linkedinTrim}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
                 LinkedIn
               </ActionLink>
             ) : (

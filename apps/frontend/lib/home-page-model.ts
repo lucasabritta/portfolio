@@ -1,13 +1,6 @@
-import {
-  buildPhoneHref,
-  type ResumeData,
-} from "@portfolio/resume-content";
+import { buildPhoneHref, type ResumeData } from "@portfolio/resume-content";
 
-import {
-  buildHomeMarketing,
-  HOME_RESUME_ANCHOR_ID,
-  type HomeMarketingBlocks,
-} from "./home-site";
+import { buildHomeMarketing, HOME_RESUME_ANCHOR_ID, type HomeMarketingBlocks } from "./home-site";
 
 export type HomeResumeSectionData = {
   anchorId: string;

@@ -25,9 +25,13 @@
     "test:storybook": "vitest run --config vitest.config.mjs",
     "lint": "eslint --max-warnings=0 src .storybook",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "yarn test:storybook"
+    "test": "yarn test:storybook",
+    "format": "prettier --write . --ignore-path ../../.prettierignore",
+    "format:check": "prettier --check . --ignore-path ../../.prettierignore"
   },
-  "dependencies": {},
+  "dependencies": {
+    "clsx": "^2.1.1"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
     "@storybook/addon-a11y": "^10.3.5",
@@ -46,6 +50,7 @@
     "eslint": "^9.39.4",
     "next": "16.2.4",
     "playwright": "^1.59.1",
+    "prettier": "3.8.3",
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "storybook": "^10.3.5",

@@ -38,7 +38,10 @@ const SYNTH_WORK: readonly PresentationWorkEntry[] = [
     location: "Remote",
     period: "2022 - present",
     summary: "Led platform initiatives and mentored engineers.",
-    achievements: ["Cut p99 latency by 40% on core APIs.", "Introduced design system adoption across squads."],
+    achievements: [
+      "Cut p99 latency by 40% on core APIs.",
+      "Introduced design system adoption across squads.",
+    ],
   },
   {
     company: "Previous Inc",
@@ -81,7 +84,9 @@ export type PortfolioHeroStoryArgs = {
   downloadHref: string;
 };
 
-export function portfolioHeroArgs(overrides: Partial<PortfolioHeroStoryArgs> = {}): PortfolioHeroStoryArgs {
+export function portfolioHeroArgs(
+  overrides: Partial<PortfolioHeroStoryArgs> = {},
+): PortfolioHeroStoryArgs {
   return {
     name: SYNTH_NAME,
     role: SYNTH_ROLE,
@@ -138,11 +143,16 @@ export function summarySectionEmptyArgs() {
 export function summarySectionLongContentArgs() {
   return summarySectionArgs({
     summaryHighlights: SYNTH_HIGHLIGHTS.map((h) => `${h}${LONG}`),
-    techStack: [...SYNTH_TECH.map((t) => `${t} (primary)`), ...SYNTH_TECH.map((t) => `${t} (secondary)`)],
+    techStack: [
+      ...SYNTH_TECH.map((t) => `${t} (primary)`),
+      ...SYNTH_TECH.map((t) => `${t} (secondary)`),
+    ],
   });
 }
 
-export function workHistorySectionArgs(overrides: Partial<{ workHistory: readonly PresentationWorkEntry[] }> = {}) {
+export function workHistorySectionArgs(
+  overrides: Partial<{ workHistory: readonly PresentationWorkEntry[] }> = {},
+) {
   return { workHistory: SYNTH_WORK, ...overrides };
 }
 
@@ -206,7 +216,9 @@ export function educationSectionLongContentArgs(): { education: PresentationEduc
   };
 }
 
-export function certificationsSectionArgs(overrides: Partial<{ certifications: readonly string[] }> = {}) {
+export function certificationsSectionArgs(
+  overrides: Partial<{ certifications: readonly string[] }> = {},
+) {
   return { certifications: SYNTH_CERTS, ...overrides };
 }
 
@@ -220,11 +232,16 @@ export function certificationsSectionLongContentArgs() {
 }
 
 export function certificationsSectionManyItemsArgs() {
-  const many = Array.from({ length: 24 }, (_, i) => `Certification entry ${i + 1}: ${LONG.slice(0, 40)}`);
+  const many = Array.from(
+    { length: 24 },
+    (_, i) => `Certification entry ${i + 1}: ${LONG.slice(0, 40)}`,
+  );
   return certificationsSectionArgs({ certifications: [...SYNTH_CERTS, ...many] });
 }
 
-export function projectsSectionArgs(overrides: Partial<{ projects: readonly PresentationPersonalProject[] }> = {}) {
+export function projectsSectionArgs(
+  overrides: Partial<{ projects: readonly PresentationPersonalProject[] }> = {},
+) {
   return { projects: SYNTH_PROJECTS, ...overrides };
 }
 

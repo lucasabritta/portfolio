@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import type { HTMLAttributes, ReactNode } from "react";
 
 import styles from "./section-heading.module.css";
@@ -8,9 +9,8 @@ export type SectionHeadingProps = {
 } & Omit<HTMLAttributes<HTMLHeadingElement>, "id">;
 
 export function SectionHeading({ id, children, className, ...rest }: SectionHeadingProps) {
-  const classes = [styles.sectionTitle, className].filter(Boolean).join(" ");
   return (
-    <h2 id={id} className={classes} {...rest}>
+    <h2 id={id} className={clsx(styles.sectionTitle, className)} {...rest}>
       {children}
     </h2>
   );

@@ -7,18 +7,24 @@ export const workHistorySectionDefaultPlay: StoryPlayFn = async ({ canvasElement
   const canvas = within(canvasElement);
   expect(canvas.getByRole("heading", { name: /^work history$/i })).toBeVisible();
   expect(canvas.getAllByRole("article").length).toBeGreaterThan(0);
-  expect(canvas.getByRole("heading", { level: 3, name: new RegExp(storyFixtureWorkCompany) })).toBeVisible();
+  expect(
+    canvas.getByRole("heading", { level: 3, name: new RegExp(storyFixtureWorkCompany) }),
+  ).toBeVisible();
 };
 
 export const workHistorySectionEmptyPlay: StoryPlayFn = async ({ canvasElement }) => {
-  expect(within(canvasElement).getByRole("status")).toHaveTextContent(/no work history entries listed/i);
+  expect(within(canvasElement).getByRole("status")).toHaveTextContent(
+    /no work history entries listed/i,
+  );
 };
 
 export const workHistorySectionLongContentPlay: StoryPlayFn = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   expect(canvas.getByRole("heading", { name: /^work history$/i })).toBeVisible();
   expect(canvas.getAllByRole("article")).toHaveLength(1);
-  expect(canvas.getByRole("heading", { level: 3, name: new RegExp(storyFixtureWorkCompany) })).toBeVisible();
+  expect(
+    canvas.getByRole("heading", { level: 3, name: new RegExp(storyFixtureWorkCompany) }),
+  ).toBeVisible();
 };
 
 export const workHistorySectionManyItemsPlay: StoryPlayFn = async ({ canvasElement }) => {

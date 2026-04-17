@@ -38,11 +38,7 @@ const forbiddenJsxRules = FORBIDDEN_APP_JSX.map((element) => ({
 export default defineConfig([
   ...nextVitals,
   ...nextTs,
-  globalIgnores([
-    ".next/**",
-    "next-env.d.ts",
-    "public/storybook/**",
-  ]),
+  globalIgnores([".next/**", "next-env.d.ts", "public/storybook/**"]),
   {
     // Keep app route segments purely compositional: no visible JSX primitives,
     // no local CSS modules. Presentation (markup + classes) belongs in

@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { SectionHeading } from "./section-heading";
-import { sectionHeadingDefaultPlay, sectionHeadingLongLabelPlay } from "./section-heading.stories.test";
+import {
+  sectionHeadingDefaultPlay,
+  sectionHeadingLongLabelPlay,
+} from "./section-heading.stories.test";
 
 const meta = {
   title: "Foundations/Typography/SectionHeading",

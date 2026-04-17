@@ -34,8 +34,7 @@ export const LongContent: Story = {
   args: {
     role: "Principal engineer — platform infrastructure and developer experience",
     name: "Alexandria Montgomery-Hughes",
-    lead:
-      "A longer professional summary that still respects the max width of the lead paragraph and demonstrates how the clamped display name and multi-line summary interact in realistic CV-style layouts.",
+    lead: "A longer professional summary that still respects the max width of the lead paragraph and demonstrates how the clamped display name and multi-line summary interact in realistic CV-style layouts.",
   },
   play: heroTypeLongContentPlay,
 };
@@ -48,9 +47,7 @@ export const Role = {
 } satisfies StoryObj<typeof HeroRole>;
 
 export const Name = {
-  render: (args: ComponentProps<typeof HeroName>) => (
-    <HeroName {...args}>Jordan Example</HeroName>
-  ),
+  render: (args: ComponentProps<typeof HeroName>) => <HeroName {...args}>Jordan Example</HeroName>,
   play: heroTypeNamePlay,
 } satisfies StoryObj<typeof HeroName>;
 

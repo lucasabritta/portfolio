@@ -24,7 +24,9 @@ export const contactSectionLongContentPlay: StoryPlayFn = async ({ canvasElement
   canvas.getByRole("link", { name: storyFixturePhone }).focus();
   await userEvent.tab();
   expect(
-    canvas.getByRole("link", { name: new RegExp(storyFixtureEmail.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")) }),
+    canvas.getByRole("link", {
+      name: new RegExp(storyFixtureEmail.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")),
+    }),
   ).toHaveFocus();
   await userEvent.tab();
   expect(canvas.getByRole("link", { name: "LinkedIn" })).toHaveFocus();

@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { createElement, type HTMLAttributes, type ReactNode } from "react";
 
 import styles from "./title.module.css";
@@ -27,6 +28,5 @@ const sizeClass: Record<TitleSize, string> = {
 
 export function Title({ level, size, children, className, ...rest }: TitleProps) {
   const tag = HEADING_TAG[level];
-  const classes = [sizeClass[size], className].filter(Boolean).join(" ");
-  return createElement(tag, { className: classes, ...rest }, children);
+  return createElement(tag, { className: clsx(sizeClass[size], className), ...rest }, children);
 }

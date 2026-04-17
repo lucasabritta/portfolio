@@ -19,7 +19,13 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
       ) : (
         <div className={styles.projectList}>
           {projects.map((project, index) => (
-            <Card key={`${index}-${project.href}`} as="article" elevated radius="md" padding="compact">
+            <Card
+              key={`${index}-${project.href}`}
+              as="article"
+              elevated
+              radius="md"
+              padding="compact"
+            >
               <Title level={3} size="md">
                 {project.title}
               </Title>

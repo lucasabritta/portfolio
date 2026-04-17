@@ -34,6 +34,10 @@ Open only the document that matches the task.
 - [`.cursor/skills/subagent-plan-review/SKILL.md`](.cursor/skills/subagent-plan-review/SKILL.md) — parallel subagents for plan and feature design validation
 - [`.cursor/skills/subagent-code-review/SKILL.md`](.cursor/skills/subagent-code-review/SKILL.md) — parallel subagents for code / PR / pre-merge review
 
+## Architecture decisions
+
+Durable decisions live as short ADRs under [`docs/adr/`](docs/adr/README.md). Read the index first; each file follows the **Status / Context / Decision / Alternatives / Consequences** shape.
+
 ## Other references
 
 - [`README.md`](README.md)

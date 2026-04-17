@@ -18,9 +18,7 @@
  */
 export const CV_FILENAME_BODY = "[A-Za-z0-9_]+_CV\\.pdf";
 export const CV_FILENAME_PATTERN = new RegExp(`^${CV_FILENAME_BODY}$`);
-export const CONTENT_DISPOSITION_FILENAME = new RegExp(
-  `filename="(${CV_FILENAME_BODY})"`,
-);
+export const CONTENT_DISPOSITION_FILENAME = new RegExp(`filename="(${CV_FILENAME_BODY})"`);
 
 /** Copy that identifies landmark pages when checking HTML responses or DOM. */
 export const PAGE_COPY = {

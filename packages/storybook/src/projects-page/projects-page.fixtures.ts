@@ -4,7 +4,8 @@ import type { ProjectsPageViewProps } from "./presentation-types";
 export function projectsPageViewFixture(): ProjectsPageViewProps {
   return {
     introTitle: "Projects",
-    introLead: "Selected work: a flagship game built with heavy AI assistance, plus curated GitHub repositories.",
+    introLead:
+      "Selected work: a flagship game built with heavy AI assistance, plus curated GitHub repositories.",
     flagship: {
       title: "Echoes: Missing Cat",
       eyebrow: "Flagship",
@@ -24,8 +25,16 @@ export function projectsPageViewFixture(): ProjectsPageViewProps {
       imageSrc: null,
       imageAlt: "Echoes: Missing Cat key art placeholder",
       links: [
-        { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.echoes.missingcat", variant: "primary" },
-        { label: "Example GitHub", href: "https://github.com/example/echoes-missing-cat", variant: "secondary" },
+        {
+          label: "Google Play",
+          href: "https://play.google.com/store/apps/details?id=com.echoes.missingcat",
+          variant: "primary",
+        },
+        {
+          label: "Example GitHub",
+          href: "https://github.com/example/echoes-missing-cat",
+          variant: "secondary",
+        },
       ],
     },
     pinnedReposHeading: "Curated GitHub",

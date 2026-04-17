@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { createElement, type ComponentPropsWithoutRef, type ReactNode } from "react";
 
 import styles from "./card.module.css";
@@ -30,15 +31,13 @@ export function Card(props: CardProps) {
     ...rest
   } = props;
 
-  const classes = [
+  const classes = clsx(
     styles.card,
     radius === "md" ? styles.radiusMd : styles.radiusLg,
     padding === "compact" ? styles.paddingCompact : styles.paddingComfortable,
-    elevated ? styles.elevated : "",
+    elevated && styles.elevated,
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
 
   return createElement(tag as CardTag, { className: classes, ...rest }, children);
 }

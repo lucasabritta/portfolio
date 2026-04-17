@@ -1,15 +1,9 @@
 import { Document, Page, View } from "@react-pdf/renderer";
 
 import "@cv-pdf/fonts";
-import {
-  buildPdfWorkEntryKey,
-  buildWorkHistoryLayout,
-} from "@cv-pdf/work-history";
+import { buildPdfWorkEntryKey, buildWorkHistoryLayout } from "@cv-pdf/work-history";
 import { BulletList } from "@cv-pdf/sections/bullet-list";
-import {
-  LeftColumnLowerBand,
-  LeftColumnSummaryBand,
-} from "@cv-pdf/sections/left-column";
+import { LeftColumnLowerBand, LeftColumnSummaryBand } from "@cv-pdf/sections/left-column";
 import { SummarySection } from "@cv-pdf/sections/summary-section";
 import { WorkEntry } from "@cv-pdf/sections/work-entry";
 import { WorkHistorySection } from "@cv-pdf/sections/work-history-section";
@@ -21,12 +15,8 @@ export type CvPdfDocumentProps = {
 };
 
 export function CvPdfDocument({ resumeData }: CvPdfDocumentProps) {
-  const {
-    firstPageEntries,
-    firstOverflowAchievements,
-    remainingEntries,
-    summaryBullets,
-  } = buildWorkHistoryLayout(resumeData);
+  const { firstPageEntries, firstOverflowAchievements, remainingEntries, summaryBullets } =
+    buildWorkHistoryLayout(resumeData);
 
   return (
     <Document

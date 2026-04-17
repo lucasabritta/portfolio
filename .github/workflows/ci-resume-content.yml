@@ -19,12 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      
+
       - name: Build frontend docker image
         run: docker compose build frontend
 
       - name: Lint
         run: docker compose run --rm frontend sh -lc "yarn --cwd ../../packages/resume-content install --frozen-lockfile && yarn --cwd ../../packages/resume-content lint"
+
+      - name: Format check
+        run: docker compose run --rm frontend yarn --cwd ../../packages/resume-content format:check
 
       - name: Typecheck
         run: docker compose run --rm frontend yarn --cwd ../../packages/resume-content typecheck

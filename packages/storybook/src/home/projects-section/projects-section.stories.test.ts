@@ -14,7 +14,9 @@ export const projectsSectionDefaultPlay: StoryPlayFn = async ({ canvasElement })
 };
 
 export const projectsSectionEmptyPlay: StoryPlayFn = async ({ canvasElement }) => {
-  expect(within(canvasElement).getByRole("status")).toHaveTextContent(/no personal projects listed/i);
+  expect(within(canvasElement).getByRole("status")).toHaveTextContent(
+    /no personal projects listed/i,
+  );
 };
 
 export const projectsSectionLongContentPlay: StoryPlayFn = async ({ canvasElement }) => {

@@ -10,12 +10,7 @@ type LeftColumnContactsProps = {
   linkedin: string;
 };
 
-export function LeftColumnContacts({
-  phone,
-  email,
-  location,
-  linkedin,
-}: LeftColumnContactsProps) {
+export function LeftColumnContacts({ phone, email, location, linkedin }: LeftColumnContactsProps) {
   return (
     <View style={cvPdfStyles.sidebarTextColumn}>
       <Text style={cvPdfStyles.leftContactPhone}>{phone}</Text>

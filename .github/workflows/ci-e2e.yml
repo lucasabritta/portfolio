@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
-      
+
       - name: Build frontend docker image
         run: docker compose build frontend
 
@@ -31,6 +31,9 @@ jobs:
 
       - name: Lint e2e tests
         run: docker compose run --rm frontend sh -lc "yarn --cwd ../../apps/e2e install --frozen-lockfile && yarn --cwd ../../apps/e2e lint"
+
+      - name: Format check e2e tests
+        run: docker compose run --rm frontend yarn --cwd ../../apps/e2e format:check
 
       - name: Typecheck e2e tests
         run: docker compose run --rm frontend yarn --cwd ../../apps/e2e typecheck

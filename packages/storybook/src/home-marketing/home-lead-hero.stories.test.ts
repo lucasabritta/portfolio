@@ -7,7 +7,10 @@ export const homeLeadHeroDefaultPlay: StoryPlayFn = async ({ canvasElement }) =>
   expect(canvas.getByRole("heading", { level: 1, name: storyFixtureName })).toBeVisible();
   expect(canvas.getByRole("link", { name: "Download CV" })).toHaveAttribute("href", "/api/cv");
   expect(canvas.getByRole("link", { name: "View Projects" })).toHaveAttribute("href", "/projects");
-  expect(canvas.getByRole("link", { name: "Open Storybook" })).toHaveAttribute("href", "/storybook");
+  expect(canvas.getByRole("link", { name: "Open Storybook" })).toHaveAttribute(
+    "href",
+    "/storybook",
+  );
   expect(canvas.getByText("Proof points")).toBeVisible();
   expect(canvas.getByRole("list")).toBeVisible();
 };

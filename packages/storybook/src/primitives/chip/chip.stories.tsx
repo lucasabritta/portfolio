@@ -23,7 +23,16 @@ export const Default: Story = {
 
 export const Many: Story = {
   render: (args) => (
-    <ul style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", listStyle: "none", margin: 0, padding: 0 }}>
+    <ul
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "0.5rem",
+        listStyle: "none",
+        margin: 0,
+        padding: 0,
+      }}
+    >
       {["React", "Next.js", "TypeScript", "Node.js"].map((label) => (
         <li key={label}>
           <Chip {...args}>{label}</Chip>
@@ -37,7 +46,16 @@ export const Many: Story = {
 export const NarrowViewport: Story = {
   ...narrowMobileStory,
   render: () => (
-    <ul style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", listStyle: "none", margin: 0, padding: 0 }}>
+    <ul
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "0.5rem",
+        listStyle: "none",
+        margin: 0,
+        padding: 0,
+      }}
+    >
       {["React", "Next.js", "TypeScript", "Node.js"].map((label) => (
         <li key={label}>
           <Chip>{label}</Chip>
