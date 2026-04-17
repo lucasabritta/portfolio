@@ -6,6 +6,13 @@ on:
       - main
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
   e2e:
     name: End-to-end
@@ -24,6 +31,9 @@ jobs:
 
       - name: Lint e2e tests
         run: docker compose run --rm frontend sh -lc "yarn --cwd ../../apps/e2e install --frozen-lockfile && yarn --cwd ../../apps/e2e lint"
+
+      - name: Typecheck e2e tests
+        run: docker compose run --rm frontend yarn --cwd ../../apps/e2e typecheck
 
       - name: Build static Storybook for Next public/
         run: docker compose run --rm frontend sh -lc "node ../../tools/build-storybook-for-next.mjs"

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { SiteFooter } from "./site-footer";
+import { siteFooterDefaultPlay } from "./site-footer.stories.test";
 
 const links = [
   { label: "GitHub", href: "https://github.com/example", external: true },
@@ -28,4 +29,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: siteFooterDefaultPlay,
+};

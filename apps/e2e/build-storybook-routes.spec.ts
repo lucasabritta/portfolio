@@ -1,4 +1,6 @@
-import { expect, test } from "playwright/test";
+import { expect, test } from "@playwright/test";
+
+import { PAGE_COPY } from "./fixtures/strings";
 
 test.describe("Build and Storybook HTTP routes", () => {
   test("GET /build returns HTML", async ({ request }) => {
@@ -7,7 +9,7 @@ test.describe("Build and Storybook HTTP routes", () => {
     const ct = res.headers()["content-type"] ?? "";
     expect(ct).toMatch(/text\/html/i);
     const body = await res.text();
-    expect(body).toMatch(/How this site is built/i);
+    expect(body).toMatch(PAGE_COPY.buildHeading);
   });
 
   test("GET /storybook and /storybook/ return Storybook shell", async ({ request }) => {
@@ -17,7 +19,7 @@ test.describe("Build and Storybook HTTP routes", () => {
       const ct = res.headers()["content-type"] ?? "";
       expect(ct).toMatch(/text\/html/i);
       const body = await res.text();
-      expect(body).toMatch(/storybook/i);
+      expect(body).toMatch(PAGE_COPY.storybookShellMarker);
     }
   });
 });

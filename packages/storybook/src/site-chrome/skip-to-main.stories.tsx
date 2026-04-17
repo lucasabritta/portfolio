@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { SkipToMain } from "./skip-to-main";
+import { skipToMainDefaultPlay } from "./skip-to-main.stories.test";
 
 const meta = {
   title: "UI/SiteChrome/SkipToMain",
@@ -14,4 +15,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: skipToMainDefaultPlay,
+};

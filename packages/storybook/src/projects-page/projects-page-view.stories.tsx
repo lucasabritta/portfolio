@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { projectsPageViewFixture } from "./projects-page.fixtures";
 import { ProjectsPageView } from "./projects-page-view";
+import { projectsPageViewDefaultPlay } from "./projects-page-view.stories.test";
 
 const meta = {
   title: "Pages/Projects",
@@ -17,4 +18,5 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: projectsPageViewFixture(),
+  play: projectsPageViewDefaultPlay,
 };

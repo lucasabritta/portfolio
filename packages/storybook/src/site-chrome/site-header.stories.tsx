@@ -2,6 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
 import { SiteHeader } from "./site-header";
+import {
+  siteHeaderActivePlay,
+  siteHeaderDefaultPlay,
+  siteHeaderMobileMenuPlay,
+} from "./site-header.stories.test";
 import { ThemeModeSwitch } from "./theme-mode-switch";
 
 const navItems = [
@@ -41,4 +46,26 @@ export const Default: Story = {
       />
     );
   },
+  play: siteHeaderDefaultPlay,
+};
+
+export const ActiveRoute: Story = {
+  ...Default,
+  args: {
+    ...Default.args!,
+    currentPath: "/projects",
+  },
+  play: siteHeaderActivePlay,
+};
+
+export const MobileMenu: Story = {
+  ...Default,
+  args: {
+    ...Default.args!,
+    currentPath: "/projects",
+  },
+  parameters: {
+    viewport: { defaultViewport: "mobile1" },
+  },
+  play: siteHeaderMobileMenuPlay,
 };
