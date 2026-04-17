@@ -23,6 +23,24 @@
   min-width: 0;
 }
 
+.headshot {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  display: block;
+  height: 5rem;
+  margin-bottom: 0.25rem;
+  object-fit: cover;
+  width: 5rem;
+}
+
+@media (min-width: 768px) {
+  .headshot {
+    height: 6rem;
+    width: 6rem;
+  }
+}
+
 .positioning {
   color: var(--foreground);
   font-size: 1.0625rem;

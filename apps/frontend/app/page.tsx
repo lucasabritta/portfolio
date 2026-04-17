@@ -34,7 +34,15 @@ export default function Home() {
       <FeaturedWorkPreview {...marketing.featuredWork} />
       <BuildStorybookTeaser {...marketing.buildTeaser} />
       <CondensedCvPreview {...marketing.condensedCv} />
-      <div id={HOME_RESUME_ANCHOR_ID}>
+      <div
+        id={HOME_RESUME_ANCHOR_ID}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "4rem",
+          scrollMarginTop: "5rem",
+        }}
+      >
         <SummarySection summaryHighlights={resumeData.summaryHighlights} techStack={resumeData.techStack} />
         <WorkHistorySection workHistory={resumeData.workHistory} />
         <EducationSection education={resumeData.education} />
