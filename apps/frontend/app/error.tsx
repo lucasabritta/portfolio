@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 
-import styles from "./status.module.css";
+import { StatusPageView } from "@portfolio/storybook";
 
 type ErrorBoundaryProps = {
   error: Error & { digest?: string };
@@ -16,19 +16,14 @@ export default function ErrorBoundary({ error, reset }: ErrorBoundaryProps) {
   }, [error]);
 
   return (
-    <main id="main" tabIndex={-1} className={styles.status}>
-      <h1 className={styles.heading}>Something went wrong</h1>
-      <p className={styles.body}>
-        An unexpected error interrupted this page. Try again, or return home.
-      </p>
-      <div className={styles.actions}>
-        <button type="button" onClick={reset} className={styles.action}>
-          Try again
-        </button>
-        <Link href="/" className={styles.action}>
-          Back to home
-        </Link>
-      </div>
-    </main>
+    <StatusPageView
+      heading="Something went wrong"
+      body="An unexpected error interrupted this page. Try again, or return home."
+      actions={[
+        { kind: "button", label: "Try again", onClick: reset },
+        { kind: "link", label: "Back to home", href: "/" },
+      ]}
+      linkComponent={Link}
+    />
   );
 }

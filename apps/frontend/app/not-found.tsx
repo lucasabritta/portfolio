@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import styles from "./status.module.css";
+import { StatusPageView } from "@portfolio/storybook";
 
 export const metadata = {
   title: "Page not found",
@@ -9,20 +9,14 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <main id="main" tabIndex={-1} className={styles.status}>
-      <h1 className={styles.heading}>Page not found</h1>
-      <p className={styles.body}>
-        The page you are looking for does not exist or has been moved. Try the homepage or
-        projects.
-      </p>
-      <div className={styles.actions}>
-        <Link href="/" className={styles.action}>
-          Back to home
-        </Link>
-        <Link href="/projects" className={styles.action}>
-          View projects
-        </Link>
-      </div>
-    </main>
+    <StatusPageView
+      heading="Page not found"
+      body="The page you are looking for does not exist or has been moved. Try the homepage or projects."
+      actions={[
+        { kind: "link", label: "Back to home", href: "/" },
+        { kind: "link", label: "View projects", href: "/projects" },
+      ]}
+      linkComponent={Link}
+    />
   );
 }
