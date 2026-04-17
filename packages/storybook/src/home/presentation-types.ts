@@ -34,7 +34,7 @@ export type HomePageProps = {
   summary: string;
   location: string;
   phone: string;
-  /** Precomputed `tel:` href (computed in `@portfolio/frontend`). */
+  /** Precomputed `tel:` href (computed by the Next app in `apps/frontend`). */
   phoneHref: string;
   email: string;
   linkedin: string;

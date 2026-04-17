@@ -1,20 +1,10 @@
 "use client";
 
-import type { SyntheticEvent } from "react";
-
 import { ActionLink, Card, Chip, SectionHeading, Title } from "../primitives";
 
+import { hideImageShowFallback } from "./flagship-media-fallback";
 import type { ProjectsPageViewProps } from "./presentation-types";
 import styles from "./projects-page-view.module.css";
-
-function hideImageShowFallback(event: SyntheticEvent<HTMLImageElement>) {
-  const img = event.currentTarget;
-  img.style.display = "none";
-  const fallback = img.nextElementSibling;
-  if (fallback instanceof HTMLElement) {
-    fallback.hidden = false;
-  }
-}
 
 function FlagshipMedia({
   imageSrc,

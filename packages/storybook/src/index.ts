@@ -1,14 +1,28 @@
+export { BuildPageView } from "./build-page/build-page-view";
+export type {
+  BuildPageCta,
+  BuildPageSection,
+  BuildPageViewProps,
+} from "./build-page/build-page-view";
 export { HomePageShell } from "./home/home-page-shell";
+export { GlobalErrorView, globalErrorBodyStyle } from "./status-page/global-error-view";
+export type { GlobalErrorViewProps } from "./status-page/global-error-view";
+export { StatusPageView } from "./status-page/status-page-view";
+export type { StatusPageAction, StatusPageViewProps } from "./status-page/status-page-view";
 export { SiteFooter } from "./site-chrome/site-footer";
 export type { SiteFooterLink, SiteFooterProps } from "./site-chrome/site-footer";
 export { SiteHeader } from "./site-chrome/site-header";
 export type { SiteHeaderProps, SiteNavItem } from "./site-chrome/site-header";
 export type { SiteShellLinkComponent } from "./site-chrome/site-link-component";
+export { SiteShell } from "./site-chrome/site-shell";
+export type { SiteShellProps } from "./site-chrome/site-shell";
 export { SkipToMain } from "./site-chrome/skip-to-main";
 export { ThemeModeSwitch } from "./site-chrome/theme-mode-switch";
 export type { SiteThemePreference, ThemeModeSwitchProps } from "./site-chrome/theme-mode-switch";
 export { CertificationsSection } from "./home/certifications-section/certifications-section";
 export { ContactSection } from "./home/contact-section/contact-section";
+export { HomeResumeAnchor } from "./home/home-resume-anchor/home-resume-anchor";
+export type { HomeResumeAnchorProps } from "./home/home-resume-anchor/home-resume-anchor";
 export { EducationSection } from "./home/education-section/education-section";
 export type {
   PresentationFlagshipProject,

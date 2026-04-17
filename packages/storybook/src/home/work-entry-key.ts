@@ -6,7 +6,8 @@ import type { PresentationWorkEntry } from "./presentation-types";
  * Mirrors the canonical `buildWorkEntryStableKey` from `@portfolio/resume-content`.
  * This package cannot import that module (see `eslint.config.mjs` boundary), so
  * the composition `${company}-${role}-${period}` is duplicated here and covered
- * by a cross-package contract test in `apps/frontend/lib/__tests__/`.
+ * by a cross-package contract test at
+ * `apps/frontend/lib/cv-pdf/work-history.test.ts`.
  */
 export function presentationWorkEntryKey(entry: PresentationWorkEntry): string {
   return `${entry.company}-${entry.role}-${entry.period}`;

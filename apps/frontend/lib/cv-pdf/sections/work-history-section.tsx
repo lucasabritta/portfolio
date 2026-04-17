@@ -2,13 +2,7 @@ import { Text, View } from "@react-pdf/renderer";
 
 import { WorkEntry } from "@cv-pdf/sections/work-entry";
 import { cvPdfStyles } from "@cv-pdf/styles";
-import { buildPdfWorkEntryKey } from "@cv-pdf/work-history";
-import type { ResumeExperienceEntry } from "@portfolio/resume-content";
-
-type FirstPageEntry = {
-  entry: ResumeExperienceEntry;
-  showAchievements: boolean;
-};
+import { buildPdfWorkEntryKey, type FirstPageEntry } from "@cv-pdf/work-history";
 
 type WorkHistorySectionProps = {
   entries: readonly FirstPageEntry[];

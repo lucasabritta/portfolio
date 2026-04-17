@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { buildPhoneHref, resumeData } from "@portfolio/resume-content";
+import { resumeData } from "@portfolio/resume-content";
 import {
   BuildStorybookTeaser,
   CertificationsSection,
@@ -11,12 +11,13 @@ import {
   FeaturedWorkPreview,
   HomeLeadHero,
   HomePageShell,
+  HomeResumeAnchor,
   ProjectsSection,
   SummarySection,
   WorkHistorySection,
 } from "@portfolio/storybook";
 
-import { buildHomeMarketing, HOME_RESUME_ANCHOR_ID } from "@/lib/home-site";
+import { buildHomePageModel } from "@/lib/home-page-model";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -25,8 +26,7 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const phoneHref = buildPhoneHref(resumeData.phone);
-  const marketing = buildHomeMarketing(resumeData);
+  const { marketing, resume } = buildHomePageModel(resumeData);
 
   return (
     <HomePageShell hero={<HomeLeadHero {...marketing.homeLeadHero} />}>
@@ -34,28 +34,14 @@ export default function Home() {
       <FeaturedWorkPreview {...marketing.featuredWork} />
       <BuildStorybookTeaser {...marketing.buildTeaser} />
       <CondensedCvPreview {...marketing.condensedCv} />
-      <div
-        id={HOME_RESUME_ANCHOR_ID}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "4rem",
-          scrollMarginTop: "5rem",
-        }}
-      >
-        <SummarySection summaryHighlights={resumeData.summaryHighlights} techStack={resumeData.techStack} />
-        <WorkHistorySection workHistory={resumeData.workHistory} />
-        <EducationSection education={resumeData.education} />
-        <CertificationsSection certifications={resumeData.certifications} />
-        <ProjectsSection projects={resumeData.personalProjects} />
-        <ContactSection
-          location={resumeData.location}
-          phone={resumeData.phone}
-          phoneHref={phoneHref}
-          email={resumeData.email}
-          linkedin={resumeData.linkedin}
-        />
-      </div>
+      <HomeResumeAnchor id={resume.anchorId}>
+        <SummarySection {...resume.summary} />
+        <WorkHistorySection workHistory={resume.workHistory} />
+        <EducationSection education={resume.education} />
+        <CertificationsSection certifications={resume.certifications} />
+        <ProjectsSection projects={resume.projects} />
+        <ContactSection {...resume.contact} />
+      </HomeResumeAnchor>
     </HomePageShell>
   );
 }

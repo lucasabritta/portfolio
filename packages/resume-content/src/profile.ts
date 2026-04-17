@@ -1,3 +1,4 @@
+import { PROJECT_URLS } from "./project-urls";
 import type { ResumeContactLink } from "./types";
 
 export const resumeProfile = {
@@ -36,7 +37,7 @@ export const resumeProfile = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/lucas-abritta" },
     {
       label: "Google Play",
-      href: "https://play.google.com/store/apps/details?id=com.echoes.missingcat",
+      href: PROJECT_URLS.echoesMissingCatPlayStore,
     },
   ] satisfies ResumeContactLink[],
 } as const;

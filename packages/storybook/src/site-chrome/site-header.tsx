@@ -5,6 +5,7 @@ import { useEffect, useId, useRef, useState } from "react";
 
 import { ActionLink } from "../primitives";
 
+import { pathMatchesNav } from "./nav-active-path";
 import type { SiteShellLinkComponent } from "./site-link-component";
 import styles from "./site-header.module.css";
 
@@ -23,21 +24,6 @@ export type SiteHeaderProps = {
   /** When set (e.g. Next.js `Link`), internal navigation uses this component. */
   linkComponent?: SiteShellLinkComponent;
 };
-
-function pathMatchesNav(currentPath: string, href: string): boolean {
-  /* In-app hash routes (e.g. /#resume): never mark aria-current from pathname alone — hash is not in usePathname(). */
-  if (href.startsWith("/#")) {
-    return false;
-  }
-  if (href === "/") {
-    return currentPath === "/";
-  }
-  if (href.startsWith("/") && !href.startsWith("//")) {
-    const path = href.split("#")[0] ?? href;
-    return currentPath === path || currentPath.startsWith(`${path}/`);
-  }
-  return false;
-}
 
 function MenuIcon() {
   return (

@@ -12,7 +12,7 @@ const navItems = [
 ];
 
 const meta = {
-  title: "Site chrome/Header",
+  title: "UI/SiteChrome/Header",
   component: SiteHeader,
   tags: ["autodocs"],
   parameters: {

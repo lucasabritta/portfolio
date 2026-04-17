@@ -6,7 +6,7 @@ import type {
   HomeLeadHeroProps,
 } from "@portfolio/storybook";
 
-import type { ResumeData } from "@portfolio/resume-content";
+import { GOOGLE_PLAY_HOST, type ResumeData } from "@portfolio/resume-content";
 
 /** Anchor for the in-page full résumé block (header CV link uses `/#resume`). */
 export const HOME_RESUME_ANCHOR_ID = "resume";
@@ -55,7 +55,7 @@ function threeCondensedEntries(
 }
 
 function flagshipCta(href: string): string {
-  if (href.includes("play.google.com")) return "Google Play";
+  if (href.includes(GOOGLE_PLAY_HOST)) return "Google Play";
   return "Open";
 }
 

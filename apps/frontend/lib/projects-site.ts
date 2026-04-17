@@ -1,3 +1,4 @@
+import { PROJECT_URLS } from "@portfolio/resume-content";
 import type { ProjectsPageViewProps } from "@portfolio/storybook";
 
 import { siteProfile } from "./site-profile";
@@ -33,7 +34,7 @@ export const projectsPageContent = {
     links: [
       {
         label: "Google Play",
-        href: "https://play.google.com/store/apps/details?id=com.echoes.missingcat",
+        href: PROJECT_URLS.echoesMissingCatPlayStore,
         variant: "primary",
       },
       {

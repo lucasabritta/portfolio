@@ -10,8 +10,8 @@ import { expect, test } from "playwright/test";
  * we mirror the canonical `CV_FILENAME_PATTERN` defined in
  * `packages/resume-content/src/cv-filename.ts` — DO NOT edit this fragment
  * without updating that file and the frontend contract test at
- * `apps/frontend/lib/__tests__/cv-filename-contract.test.ts`, which both
- * reference the same canonical pattern.
+ * `apps/frontend/lib/cv-pdf/cv-pdf.response.test.ts`, which both reference
+ * the same canonical pattern.
  */
 const CV_FILENAME_BODY = "[A-Za-z0-9_]+_CV\\.pdf";
 const CV_FILENAME_PATTERN = new RegExp(`^${CV_FILENAME_BODY}$`);

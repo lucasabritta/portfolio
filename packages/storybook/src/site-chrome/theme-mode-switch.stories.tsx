@@ -9,7 +9,7 @@ function ThemeSwitchDemo() {
 }
 
 const meta = {
-  title: "Site chrome/Theme mode",
+  title: "UI/SiteChrome/ThemeModeSwitch",
   component: ThemeSwitchDemo,
   tags: ["autodocs"],
 } satisfies Meta<typeof ThemeSwitchDemo>;

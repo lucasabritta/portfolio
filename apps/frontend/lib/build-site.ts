@@ -1,5 +1,10 @@
+import type { BuildPageCta, BuildPageSection } from "@portfolio/storybook";
+
 /**
  * Marketing copy for `/build` (engineering narrative; not `@portfolio/resume-content`).
+ *
+ * Shape matches `BuildPageViewProps` from `@portfolio/storybook` so the page
+ * stays a thin composition layer.
  */
 export const buildPageContent = {
   title: "How this site is built",
@@ -25,5 +30,9 @@ export const buildPageContent = {
       heading: "Deployment",
       body: "Production targets Vercel with a standalone Next.js output. Environment-specific configuration stays in the dashboard rather than hardcoding domains in source.",
     },
-  ],
+  ] as const satisfies ReadonlyArray<BuildPageSection>,
+  ctas: [
+    { label: "Open Storybook", href: "/storybook", variant: "primary", external: true },
+    { label: "View projects", href: "/projects", variant: "secondary" },
+  ] as const satisfies ReadonlyArray<BuildPageCta>,
 } as const;

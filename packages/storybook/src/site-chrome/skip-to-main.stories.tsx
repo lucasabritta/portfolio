@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { SkipToMain } from "./skip-to-main";
 
 const meta = {
-  title: "Site chrome/Skip to main",
+  title: "UI/SiteChrome/SkipToMain",
   component: SkipToMain,
   tags: ["autodocs"],
   parameters: {
