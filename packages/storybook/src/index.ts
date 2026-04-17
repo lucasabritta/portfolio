@@ -19,6 +19,7 @@ export type {
 export { ProjectsSection } from "./home/projects-section/projects-section";
 export { SummarySection } from "./home/summary-section/summary-section";
 export { WorkHistorySection } from "./home/work-history-section/work-history-section";
+export { presentationWorkEntryKey } from "./home/work-entry-key";
 export type {
   HomePageProps,
   PresentationContactLink,

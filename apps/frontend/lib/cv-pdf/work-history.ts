@@ -1,4 +1,8 @@
-import type { ResumeData, ResumeExperienceEntry } from "@portfolio/resume-content";
+import {
+  buildWorkEntryStableKey,
+  type ResumeData,
+  type ResumeExperienceEntry,
+} from "@portfolio/resume-content";
 
 type FirstPageEntry = {
   entry: ResumeExperienceEntry;
@@ -33,5 +37,5 @@ export function buildWorkHistoryLayout(resumeData: ResumeData): WorkHistoryLayou
 }
 
 export function buildPdfWorkEntryKey(entry: ResumeExperienceEntry): string {
-  return `${entry.company}-${entry.role}-${entry.period}`;
+  return buildWorkEntryStableKey(entry);
 }

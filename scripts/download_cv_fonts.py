@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download CV PDF fonts (Lato + Raleway) into public/cv-fonts/ for react-pdf.
+"""Download CV PDF fonts (Lato + Raleway) into apps/frontend/public/cv-fonts/ for react-pdf.
 
 Run locally or in Docker, e.g.:
   docker compose --profile cv run --rm cv-tools python scripts/download_cv_fonts.py
@@ -10,7 +10,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "public" / "cv-fonts"
+OUT = ROOT / "apps" / "frontend" / "public" / "cv-fonts"
 
 # Lato: google/fonts OFL. Raleway: gstatic non-variable TTFs (same files as prior Font.register URLs).
 FILES: dict[str, str] = {

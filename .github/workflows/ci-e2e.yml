@@ -20,7 +20,7 @@ jobs:
       # Compose mounts empty named volumes over `apps/frontend/node_modules` and
       # `packages/storybook/node_modules`; populate them before any step that needs the Storybook CLI.
       - name: Install dependencies (populate Compose volumes)
-        run: docker compose run --rm frontend sh -lc "yarn install --frozen-lockfile && cd ../../packages/storybook && yarn install --non-interactive"
+        run: docker compose run --rm frontend sh -lc "yarn install --frozen-lockfile && cd ../../packages/storybook && yarn install --frozen-lockfile"
 
       - name: Lint e2e tests
         run: docker compose run --rm frontend sh -lc "yarn --cwd ../../apps/e2e install --frozen-lockfile && yarn --cwd ../../apps/e2e lint"

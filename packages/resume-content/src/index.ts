@@ -14,7 +14,8 @@ export const resumeData = {
 } satisfies ResumeData;
 
 export { buildPhoneHref } from "./contact";
-export { buildHomepageWorkEntryKey } from "./homepage-work-key";
+export { buildCvFilename } from "./cv-filename";
+export { buildWorkEntryStableKey } from "./work-entry-stable-key";
 
 export type {
   ResumeContactLink,

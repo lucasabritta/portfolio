@@ -21,7 +21,7 @@ This repository is a **multi-package TypeScript repo**: several **`apps/*`** and
 | `packages/storybook/src/fixtures/` | Typed Storybook args helpers (synthetic presentation data, viewport globals) |
 | `packages/storybook/src/primitives/` | Shared presentation primitives; re-exported from **`@portfolio/storybook`** |
 | `packages/storybook/src/**/*.stories.test.ts` | Storybook interaction tests (`play`); typed as **`StoryPlayFn`** in **`storybook-play-types.ts`** |
-| `packages/resume-content/` | Résumé types, `resumeData`, `buildPhoneHref`, `buildHomepageWorkEntryKey` — **`@portfolio/resume-content`** |
+| `packages/resume-content/` | Résumé types, `resumeData`, `buildPhoneHref`, `buildWorkEntryStableKey`, `buildCvFilename` — **`@portfolio/resume-content`** |
 | `packages/storybook/.storybook/` | Storybook `main.ts`, `preview.tsx` |
 | `apps/frontend/vitest.config.ts` | Frontend unit tests (Vitest, jsdom / node as configured) |
 | `packages/storybook/vitest.config.mjs` | Vitest **storybook** project (`@storybook/addon-vitest`, Playwright Chromium) |

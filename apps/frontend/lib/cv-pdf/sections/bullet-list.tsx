@@ -9,8 +9,8 @@ type BulletListProps = {
 export function BulletList({ items }: BulletListProps) {
   return (
     <View>
-      {items.map((item) => (
-        <View key={item} style={cvPdfStyles.bulletRow}>
+      {items.map((item, index) => (
+        <View key={`${index}-${item}`} style={cvPdfStyles.bulletRow}>
           <View style={cvPdfStyles.bulletDot} />
           <Text style={cvPdfStyles.bulletText}>{item}</Text>
         </View>

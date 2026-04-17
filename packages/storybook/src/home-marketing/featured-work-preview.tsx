@@ -24,8 +24,8 @@ export function FeaturedWorkPreview({ id = "featured-work", heading, flagship, s
             </ActionLink>
           </div>
         </Card>
-        {supporting.map((card) => (
-          <Card key={card.title} as="article" elevated radius="md" padding="comfortable">
+        {supporting.map((card, index) => (
+          <Card key={`${index}-${card.title}`} as="article" elevated radius="md" padding="comfortable">
             <Title level={4} size="sm">
               {card.title}
             </Title>
