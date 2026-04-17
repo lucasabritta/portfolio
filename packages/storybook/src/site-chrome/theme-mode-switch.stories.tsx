@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
 import { ThemeModeSwitch } from "./theme-mode-switch";
+import { themeModeSwitchDefaultPlay } from "./theme-mode-switch.stories.test";
 
 function ThemeSwitchDemo() {
   const [value, setValue] = useState<"system" | "light" | "dark">("system");
@@ -17,4 +18,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: themeModeSwitchDefaultPlay,
+};
