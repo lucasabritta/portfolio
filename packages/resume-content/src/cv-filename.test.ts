@@ -1,8 +1,23 @@
 import { describe, expect, it } from "vitest";
 
-import { buildCvFilename } from "./cv-filename";
+import { CV_FILENAME_PATTERN, buildCvFilename } from "./cv-filename";
 
 describe("buildCvFilename", () => {
+  it("always produces a filename matching CV_FILENAME_PATTERN", () => {
+    const samples = [
+      "Lucas Abritta",
+      "Ana María O'Neill-Jr.",
+      "  Spaced Name  ",
+      "!!!",
+      "",
+      "Ω 42 ✨ test",
+    ];
+    for (const name of samples) {
+      expect(buildCvFilename(name)).toMatch(CV_FILENAME_PATTERN);
+    }
+  });
+
+
   it("slugifies a simple name", () => {
     expect(buildCvFilename("Lucas Abritta")).toBe("Lucas_Abritta_CV.pdf");
   });
