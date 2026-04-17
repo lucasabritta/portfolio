@@ -11,13 +11,13 @@ import {
   FeaturedWorkPreview,
   HomeLeadHero,
   HomePageShell,
+  HomeResumeAnchor,
   ProjectsSection,
   SummarySection,
   WorkHistorySection,
 } from "@portfolio/storybook";
 
 import { buildHomePageModel } from "@/lib/home-page-model";
-import resumeAnchorStyles from "./home-resume-anchor.module.css";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -34,14 +34,14 @@ export default function Home() {
       <FeaturedWorkPreview {...marketing.featuredWork} />
       <BuildStorybookTeaser {...marketing.buildTeaser} />
       <CondensedCvPreview {...marketing.condensedCv} />
-      <div id={resume.anchorId} className={resumeAnchorStyles.resumeAnchor}>
+      <HomeResumeAnchor id={resume.anchorId}>
         <SummarySection {...resume.summary} />
         <WorkHistorySection workHistory={resume.workHistory} />
         <EducationSection education={resume.education} />
         <CertificationsSection certifications={resume.certifications} />
         <ProjectsSection projects={resume.projects} />
         <ContactSection {...resume.contact} />
-      </div>
+      </HomeResumeAnchor>
     </HomePageShell>
   );
 }

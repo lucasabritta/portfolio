@@ -2,17 +2,28 @@
 
 The **`@portfolio/storybook`** package is a **separate workspace** from **`@portfolio/frontend`** (Next) and from **`@portfolio/resume-content`** (résumé data). Shared DOM UI must stay **library-owned** and **consumable by the app** via the package name — **no** imports from `apps/frontend/app/**` inside the UI package, and **no** `storybook/**` paths in the app. Storybook stays **presentation-only**: it must **not** import **`@portfolio/resume-content`** (ESLint enforces this); the app composes **`resumeData`** into Storybook-presentational props while Storybook owns all classes/CSS.
 
-### Presentational JSX lives in this package — the Next app composes
+### Presentational JSX *and* CSS live in this package — the Next app composes
 
-**`apps/frontend/app/**/*.tsx`** (route segments — `page.tsx`, `layout.tsx`, `error.tsx`, `loading.tsx`, `not-found.tsx`, `global-error.tsx`, and sibling view files like `site-chrome-client.tsx`) must be **pure composition**: import components from **`@portfolio/storybook`**, pass them data/handlers, and return the tree. They **must not** render visible DOM primitives — specifically **`h1`–`h6`**, **`p`**, **`button`**, **`label`**, **`ul`/`ol`/`li`/`dl`**, **`img`**, **`figure`**, **`blockquote`**, **`input`/`select`/`textarea`/`form`**. Structural/landmark elements (**`main`**, **`section`**, **`article`**, **`header`**, **`footer`**, **`nav`**, **`aside`**, **`div`**, **`span`**, **`html`**, **`body`**) remain allowed because the app is responsible for composition, layout, and landmarks (e.g. `global-error.tsx` must render its own `<html><body>`).
+**`apps/frontend/app/**/*.tsx`** (route segments — `page.tsx`, `layout.tsx`, `error.tsx`, `loading.tsx`, `not-found.tsx`, `global-error.tsx`, and sibling view files like `site-chrome-client.tsx`) must be **pure composition**: import components from **`@portfolio/storybook`**, pass them data/handlers, and return the tree.
+
+They **must not**:
+
+- Render visible DOM primitives — **`h1`–`h6`**, **`p`**, **`button`**, **`label`**, **`ul`/`ol`/`li`/`dl`**, **`img`**, **`figure`**, **`blockquote`**, **`input`/`select`/`textarea`/`form`**.
+- Import local **`*.module.css`** files (relative or `@/`-aliased). All component CSS lives next to its component in **`packages/storybook/src/<feature>/`**.
+
+They **may**:
+
+- Use structural/landmark elements (**`main`**, **`section`**, **`article`**, **`header`**, **`footer`**, **`nav`**, **`aside`**, **`div`**, **`span`**, **`html`**, **`body`**) — the app owns composition, layout, and landmarks (e.g. `global-error.tsx` must render its own `<html><body>`). When even those need styling (page-level layout, anchored sections, chrome wrappers), wrap them in a Storybook slot component (see **`SiteShell`**, **`HomeResumeAnchor`**, **`HomePageShell`**).
+- Import **package** CSS subpaths owned by the UI library: **`@portfolio/storybook/globals.css`** and **`@portfolio/storybook/layout.module.css`** (declared in `packages/storybook/package.json` `exports`).
 
 Patterns for things a pure UI package can't know about:
 
 - **Internal navigation** (e.g. `next/link`): the Storybook component accepts a `linkComponent` prop typed as **`SiteShellLinkComponent`** (`packages/storybook/src/site-chrome/site-link-component.ts`); external anchors stay plain `<a>`. The app passes `Link` at the composition site (see `app/site-chrome-client.tsx`).
 - **Handlers** (e.g. App Router `reset()` in `error.tsx`, `global-error.tsx`): declare them as action props (see `StatusPageAction` / `GlobalErrorViewProps`).
+- **Slots** (chrome wrappers, anchored sections): use children/slot props (see **`SiteShell`**'s `skipLink` / `header` / `footer` slots, or **`HomeResumeAnchor`**'s `id` + children).
 - **Last-resort boundaries** (`global-error.tsx`): the view exports inline styles (e.g. **`globalErrorBodyStyle`**) the app applies to `<body>`, so the component still owns the look even when CSS fails to load.
 
-This rule is enforced by **`no-restricted-syntax`** in **`apps/frontend/eslint.config.mjs`** (`*.test.tsx` under `app/` is excluded). If a lint error points here, extract a component into **`packages/storybook/src/<feature>/`** (with co-located story + `*.stories.test.ts` `play`), export it from **`packages/storybook/src/index.ts`**, and compose it from the app.
+Both bans are enforced in **`apps/frontend/eslint.config.mjs`** via **`no-restricted-syntax`** (forbidden JSX) and **`no-restricted-imports`** (forbidden CSS module patterns). `*.test.tsx` under `app/` is excluded. If a lint error points here, extract a component into **`packages/storybook/src/<feature>/`** (component + co-located **`*.module.css`** + `*.stories.tsx` + `*.stories.test.ts` `play`), export it from **`packages/storybook/src/index.ts`**, and compose it from the app.
 
 ## Where UI lives
 

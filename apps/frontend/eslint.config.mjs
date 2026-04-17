@@ -44,12 +44,33 @@ export default defineConfig([
     "public/storybook/**",
   ]),
   {
-    // Keep app route segments purely compositional: no visible JSX primitives.
+    // Keep app route segments purely compositional: no visible JSX primitives,
+    // no local CSS modules. Presentation (markup + classes) belongs in
+    // @portfolio/storybook; the app composes components with data and slots.
     // See .cursor/rules/nextjs-react.mdc and docs/agents/storybook-ui.md.
     files: ["app/**/*.tsx"],
     ignores: ["app/**/*.test.tsx"],
     rules: {
       "no-restricted-syntax": ["error", ...forbiddenJsxRules],
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: [
+                "./*.module.css",
+                "./**/*.module.css",
+                "../*.module.css",
+                "../**/*.module.css",
+                "@/*.module.css",
+                "@/**/*.module.css",
+              ],
+              message:
+                "CSS modules under apps/frontend/app/** belong in @portfolio/storybook. Move the styles next to a storybook component (packages/storybook/src/<feature>/) and compose it from the app. Package CSS subpaths like '@portfolio/storybook/layout.module.css' are allowed.",
+            },
+          ],
+        },
+      ],
     },
   },
 ]);
