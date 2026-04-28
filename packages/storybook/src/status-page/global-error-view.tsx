@@ -51,6 +51,13 @@ const FOCUS_RING_STYLES = `
     outline: 2px solid currentColor;
     outline-offset: 2px;
   }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: #0f172a !important;
+      color: #f8fafc !important;
+    }
+  }
 `;
 
 export type GlobalErrorViewProps = {

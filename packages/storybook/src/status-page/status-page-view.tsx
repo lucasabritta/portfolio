@@ -36,10 +36,9 @@ export function StatusPageView({
   mainId = "main",
 }: StatusPageViewProps) {
   const NavLink = LinkComponent ?? "a";
-  const HeadingTag = live ? "p" : "h1";
   const copy = (
     <>
-      <HeadingTag className={styles.heading}>{heading}</HeadingTag>
+      <h1 className={styles.heading}>{heading}</h1>
       <p className={styles.body}>{body}</p>
     </>
   );
@@ -78,6 +77,7 @@ export function StatusPageView({
                   target="_blank"
                 >
                   {action.label}
+                  <span className={styles.visuallyHidden}> (opens in a new tab)</span>
                 </a>
               );
             }

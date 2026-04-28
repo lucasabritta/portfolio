@@ -54,7 +54,7 @@ test.describe("Site navigation and critical routes", () => {
     // `next dev` may compile `/build` on first hit in CI; allow well beyond the default 5s locator timeout.
     const buildMain = page.getByRole("main");
     await expect(
-      buildMain.getByRole("heading", { level: 2, name: PAGE_COPY.buildHeading }),
+      buildMain.getByRole("heading", { level: 1, name: PAGE_COPY.buildHeading }),
     ).toBeVisible({
       timeout: 60_000,
     });

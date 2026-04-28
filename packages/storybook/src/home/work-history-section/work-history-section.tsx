@@ -20,39 +20,50 @@ export function WorkHistorySection({ workHistory }: WorkHistorySectionProps) {
       ) : (
         <div className={styles.workList}>
           {workHistory.map((entry, index) => (
-            <Card
+            <div
               key={`${index}-${presentationWorkEntryKey(entry)}`}
-              as="article"
-              elevated
-              radius="lg"
-              padding="comfortable"
+              className={styles.timelineItem}
             >
-              <div className={styles.workHeader}>
-                <div>
-                  <Title level={3} size="lg">
-                    {entry.company} / {entry.role}
-                  </Title>
-                  <p className={styles.workLocation}>{entry.location}</p>
+              <span className={styles.timelineDot} aria-hidden="true" />
+              <Card
+                as="article"
+                elevated
+                radius="lg"
+                padding="comfortable"
+                className={styles.workCard}
+              >
+                <div className={styles.workHeader}>
+                  <div>
+                    <Title level={3} size="lg">
+                      {entry.company} / {entry.role}
+                    </Title>
+                    <p className={styles.workLocation}>{entry.location}</p>
+                  </div>
+                  <p className={styles.workPeriod}>{entry.period}</p>
                 </div>
-                <p className={styles.workPeriod}>{entry.period}</p>
-              </div>
-              <p className={styles.workSummary}>{entry.summary}</p>
-              {entry.achievements.length > 0 ? (
-                <ul className={styles.achievementList}>
-                  {entry.achievements.map((achievement, achievementIndex) => (
-                    <li
-                      key={`${achievementIndex}-${achievement}`}
-                      className={styles.achievementItem}
-                    >
-                      <span className={styles.achievementBullet} aria-hidden="true">
-                        *
-                      </span>
-                      <span>{achievement}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-            </Card>
+                <p className={styles.workSummary}>{entry.summary}</p>
+                {entry.achievements.length > 0 ? (
+                  <details className={styles.achievementsDisclosure} open={index === 0}>
+                    <summary className={styles.achievementsSummary}>
+                      Key outcomes ({entry.achievements.length})
+                    </summary>
+                    <ul className={styles.achievementList}>
+                      {entry.achievements.map((achievement, achievementIndex) => (
+                        <li
+                          key={`${achievementIndex}-${achievement}`}
+                          className={styles.achievementItem}
+                        >
+                          <span className={styles.achievementBullet} aria-hidden="true">
+                            *
+                          </span>
+                          <span>{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                ) : null}
+              </Card>
+            </div>
           ))}
         </div>
       )}

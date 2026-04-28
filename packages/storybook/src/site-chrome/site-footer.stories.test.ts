@@ -7,18 +7,20 @@ export const siteFooterDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
   const footer = canvas.getByRole("contentinfo");
   expect(footer).toBeInTheDocument();
 
-  const github = within(footer).getByRole("link", { name: "GitHub" });
+  const footerNav = within(footer).getByRole("navigation", { name: "Footer" });
+
+  const github = within(footerNav).getByRole("link", { name: /GitHub.*opens in a new tab/i });
   expect(github).toHaveAttribute("href", "https://github.com/example");
   expect(github).toHaveAttribute("rel", "noopener noreferrer");
   expect(github).toHaveAttribute("target", "_blank");
 
-  const storybook = within(footer).getByRole("link", {
+  const storybook = within(footerNav).getByRole("link", {
     name: "Component library (Storybook)",
   });
   expect(storybook).toHaveAttribute("href", "/storybook");
   expect(storybook).not.toHaveAttribute("target");
 
-  expect(within(footer).getByRole("link", { name: "Download CV" })).toHaveAttribute(
+  expect(within(footerNav).getByRole("link", { name: "Download CV" })).toHaveAttribute(
     "href",
     "/api/cv",
   );

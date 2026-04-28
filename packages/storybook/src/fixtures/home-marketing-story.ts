@@ -14,14 +14,17 @@ export const SYNTH_HOME_POSITIONING =
 export const SYNTH_CREDIBILITY_ITEMS: CredibilityStripProps["items"] = [
   {
     title: "Startup growth",
+    metric: "0 → scale",
     body: "Comfortable operating from early ambiguity through scale — hiring, delivery cadence, and engineering culture as explicit levers.",
   },
   {
     title: "Platform quality",
+    metric: "Reliability",
     body: "Treats observability, testing, and deployment hygiene as product features, not ticket overhead.",
   },
   {
     title: "Hands-on leadership",
+    metric: "Teams + code",
     body: "Stays close enough to architecture and code paths to unblock teams without becoming a bottleneck.",
   },
 ];

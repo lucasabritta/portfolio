@@ -17,6 +17,7 @@ export type HomeLeadHeroProps = {
 export type CredibilityItem = {
   title: string;
   body: string;
+  metric?: string;
 };
 
 export type CredibilityStripProps = {

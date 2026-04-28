@@ -6,15 +6,15 @@
  * and the matching rules stay unit-testable without rendering DOM.
  *
  * Rules:
- * - In-app hash routes (e.g. `/#resume`) never match from `pathname` alone
- *   because `usePathname()` does not include the fragment.
+ * - In-app hash routes (e.g. `/#resume`) match only when the consumer passes
+ *   the fragment in `currentPath`.
  * - Root (`/`) only matches exact `/`.
  * - Internal paths match exact or as a path prefix (with `/` boundary).
  * - External/absolute URLs never match.
  */
 export function pathMatchesNav(currentPath: string, href: string): boolean {
   if (href.startsWith("/#")) {
-    return false;
+    return currentPath === href;
   }
   if (href === "/") {
     return currentPath === "/";

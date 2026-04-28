@@ -55,6 +55,7 @@ export function ContactSection({
                 target="_blank"
               >
                 LinkedIn
+                <span className={styles.visuallyHidden}> (opens in a new tab)</span>
               </ActionLink>
             ) : (
               <span aria-label="LinkedIn not provided">—</span>

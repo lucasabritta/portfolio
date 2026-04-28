@@ -17,14 +17,17 @@ const HOME_POSITIONING_LEAD =
 const CREDIBILITY_ITEMS = [
   {
     title: "Startup → scale",
+    metric: "Seed → Series B",
     body: "Comfortable from seed ambiguity through Series B: hiring, delivery cadence, and engineering culture as explicit levers alongside the product roadmap.",
   },
   {
     title: "Platform & delivery",
+    metric: "Boring releases",
     body: "Treats observability, testing, CI/CD, and incident practice as product features—so releases stay boring and regressions do not stack invisibly.",
   },
   {
     title: "Hands-on leadership",
+    metric: "Managers + ICs",
     body: "Stays close enough to architecture and code paths to unblock teams without becoming a bottleneck; invests in managers and IC growth with structured feedback.",
   },
 ] as const satisfies CredibilityStripProps["items"];

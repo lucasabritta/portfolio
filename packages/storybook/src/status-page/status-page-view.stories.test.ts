@@ -14,6 +14,7 @@ export const statusPageLoadingPlay: StoryPlayFn = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   const liveRegion = canvas.getByRole("status");
   expect(liveRegion).toHaveAttribute("aria-live", "polite");
+  expect(canvas.getByRole("heading", { level: 1, name: /loading/i })).toBeVisible();
   expect(liveRegion).toHaveTextContent(/loading/i);
 };
 

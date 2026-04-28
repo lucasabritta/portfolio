@@ -25,6 +25,7 @@ export function BuildStorybookTeaser({
           rel="noopener noreferrer"
         >
           Open Storybook
+          <span className={styles.visuallyHidden}> (opens in a new tab)</span>
         </ActionLink>
       </div>
     </section>

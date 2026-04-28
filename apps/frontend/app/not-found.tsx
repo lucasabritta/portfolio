@@ -15,6 +15,8 @@ export default function NotFound() {
       actions={[
         { kind: "link", label: "Back to home", href: "/" },
         { kind: "link", label: "View projects", href: "/projects" },
+        { kind: "link", label: "Read build notes", href: "/build" },
+        { kind: "link", label: "Jump to CV", href: "/#resume" },
       ]}
       linkComponent={Link}
     />

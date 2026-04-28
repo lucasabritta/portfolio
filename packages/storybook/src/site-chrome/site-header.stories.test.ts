@@ -52,6 +52,9 @@ export const siteHeaderMobileMenuPlay: StoryPlayFn = async ({ canvasElement }) =
   expect(toggled).toHaveAttribute("aria-expanded", "true");
   expect(toggled).toHaveAttribute("aria-controls");
 
+  const dialog = canvas.getByRole("dialog", { name: "Navigation", hidden: true });
+  expect(dialog).toHaveAttribute("aria-modal", "true");
+
   const mobileNav = canvas.getByRole("navigation", {
     name: "Primary mobile",
     hidden: true,
@@ -59,6 +62,10 @@ export const siteHeaderMobileMenuPlay: StoryPlayFn = async ({ canvasElement }) =
   expect(within(mobileNav).getByRole("link", { name: "Projects", hidden: true })).toHaveAttribute(
     "aria-current",
     "page",
+  );
+  expect(within(dialog).getByRole("link", { name: "Download CV", hidden: true })).toHaveAttribute(
+    "href",
+    "/api/cv",
   );
 
   await userEvent.click(toggled);

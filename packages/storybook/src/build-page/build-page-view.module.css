@@ -4,7 +4,7 @@
 
 .article {
   margin: 0 auto;
-  max-width: 48rem;
+  max-width: 58rem;
 }
 
 .lead {
@@ -17,12 +17,88 @@
 .stack {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
   margin-top: 2rem;
 }
 
+.flow {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+.flow a {
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  display: inline-flex;
+  font-family:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.85rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.flow a:hover,
+.flow a:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (min-width: 640px) {
+  .flow {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 .block {
-  padding: 1.25rem 1.35rem;
+  scroll-margin-top: 5rem;
+}
+
+.blockHeader {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.blockGlyph {
+  align-items: center;
+  background: color-mix(in srgb, var(--accent) 8%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+  border-radius: 0.85rem;
+  color: var(--focus-ring, var(--accent));
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-family:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  height: 2.5rem;
+  justify-content: center;
+  width: 2.5rem;
+}
+
+.blockEyebrow {
+  color: var(--accent);
+  font-family:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.25rem;
+  text-transform: uppercase;
 }
 
 .blockTitle {
@@ -44,4 +120,16 @@
   flex-wrap: wrap;
   gap: 0.65rem;
   margin-top: 2rem;
+}
+
+.visuallyHidden {
+  clip: rect(0 0 0 0);
+  border: 0;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
