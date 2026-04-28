@@ -20,13 +20,13 @@ const preview: Preview = {
     (Story, context) => {
       const title = String(context.title ?? "");
       let wrapped: ReactNode = <Story />;
-      if (title.startsWith("Foundations/")) {
+      if (title.startsWith("Foundations/") || title.startsWith("Components/")) {
         wrapped = (
           <div style={{ padding: "1.5rem", width: "100%" }}>
             <Story />
           </div>
         );
-      } else if (title.startsWith("UI/Sections/")) {
+      } else if (title.startsWith("Patterns/Sections/")) {
         wrapped = (
           <div
             style={{
@@ -59,6 +59,12 @@ const preview: Preview = {
     },
     a11y: {
       test: "error",
+    },
+    options: {
+      storySort: {
+        method: "alphabetical",
+        order: ["Foundations", "Components", "Patterns", "Pages"],
+      },
     },
   },
 };

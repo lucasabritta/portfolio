@@ -17,7 +17,7 @@ import {
 } from "./education-section.stories.test";
 
 const meta = {
-  title: "UI/Sections/EducationSection",
+  title: "Patterns/Sections/EducationSection",
   component: EducationSection,
   tags: ["autodocs"],
 } satisfies Meta<typeof EducationSection>;

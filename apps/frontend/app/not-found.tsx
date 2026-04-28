@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { StatusPageView } from "@portfolio/storybook";
+import { StatusPageView } from "@portfolio/storybook/status-page";
 
 export const metadata = {
   title: "Page not found",

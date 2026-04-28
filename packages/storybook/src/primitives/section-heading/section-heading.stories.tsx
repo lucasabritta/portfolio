@@ -7,7 +7,7 @@ import {
 } from "./section-heading.stories.test";
 
 const meta = {
-  title: "Foundations/Typography/SectionHeading",
+  title: "Components/Typography/SectionHeading",
   component: SectionHeading,
   tags: ["autodocs"],
   args: {

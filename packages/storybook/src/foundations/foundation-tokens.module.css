@@ -1,0 +1,193 @@
+.section {
+  color: var(--foreground);
+  display: grid;
+  gap: 1.5rem;
+  max-width: 64rem;
+  width: 100%;
+}
+
+.sectionIntro {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.sectionDescription {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 48rem;
+}
+
+.colorGrid,
+.themeGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.colorCard,
+.themeCard,
+.typeSpecimen {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.colorCard {
+  align-items: center;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto 1fr;
+}
+
+.swatch {
+  background: var(--foundation-token-color);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--foreground) 8%, transparent);
+  display: block;
+  height: 3rem;
+  width: 3rem;
+}
+
+.tokenName,
+.tokenValue {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.tokenName {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.tokenRole {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  margin: 0.25rem 0;
+}
+
+.tokenValue {
+  color: var(--accent);
+  font-size: 0.8125rem;
+}
+
+.typeSpecimen {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.displayText {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.bodyText {
+  color: var(--muted);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 42rem;
+}
+
+.spacingList {
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.spacingRow {
+  align-items: center;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 5rem minmax(6rem, 1fr) minmax(10rem, 2fr);
+}
+
+.spacingTrack {
+  align-items: center;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-radius: 999px;
+  display: flex;
+  min-height: 1rem;
+  padding: 0.25rem;
+}
+
+.spacingBar {
+  background: var(--accent);
+  border-radius: 999px;
+  display: block;
+  height: 0.5rem;
+}
+
+.themeCard[data-theme="light"] {
+  --background: #fafafa;
+  --foreground: #0a0a0a;
+  --muted: #525252;
+  --card: #ffffff;
+  --border: #e5e5e5;
+  --accent: #2563eb;
+}
+
+.themeCard[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --muted: #a3a3a3;
+  --card: #171717;
+  --border: #262626;
+  --accent: #60a5fa;
+}
+
+.themeCard {
+  background: var(--background);
+  color: var(--foreground);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.themeTitle {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.themeText {
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.themeAccent {
+  color: var(--accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 640px) {
+  .spacingRow {
+    align-items: start;
+    grid-template-columns: 1fr;
+  }
+}

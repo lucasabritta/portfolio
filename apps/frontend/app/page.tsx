@@ -3,19 +3,21 @@ import type { Metadata } from "next";
 import { resumeData } from "@portfolio/resume-content";
 import {
   BuildStorybookTeaser,
-  CertificationsSection,
   CondensedCvPreview,
-  ContactSection,
   CredibilityStrip,
-  EducationSection,
   FeaturedWorkPreview,
   HomeLeadHero,
+} from "@portfolio/storybook/home-marketing";
+import {
+  CertificationsSection,
+  ContactSection,
+  EducationSection,
   HomePageShell,
   HomeResumeAnchor,
   ProjectsSection,
   SummarySection,
   WorkHistorySection,
-} from "@portfolio/storybook";
+} from "@portfolio/storybook/home";
 
 import { buildHomePageModel } from "@/lib/home-page-model";
 

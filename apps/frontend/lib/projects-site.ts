@@ -1,5 +1,5 @@
 import { PROJECT_URLS } from "@portfolio/resume-content";
-import type { ProjectsPageViewProps } from "@portfolio/storybook";
+import type { ProjectsPageViewProps } from "@portfolio/storybook/projects-page";
 
 import { siteProfile } from "./site-profile";
 

@@ -20,9 +20,9 @@ description: >-
 
 ## Conventions
 
-- Put reusable DOM components in **`packages/storybook/src/`**; the Next app imports from **`@portfolio/storybook`** (public API in `src/index.ts`). Keep internal package imports relative where Next should not rely on Storybook-only `@ui` aliases.
+- Put reusable DOM components in **`packages/storybook/src/`**; the Next app imports from granular public subpaths such as **`@portfolio/storybook/home`**, **`@portfolio/storybook/home-marketing`**, **`@portfolio/storybook/build-page`**, **`@portfolio/storybook/projects-page`**, **`@portfolio/storybook/site-chrome`**, **`@portfolio/storybook/status-page`**, **`@portfolio/storybook/primitives`**, **`@portfolio/storybook/foundations`**, or **`@portfolio/storybook/hero`**. Keep the root **`@portfolio/storybook`** barrel as a compatibility API, and keep internal package imports relative where Next should not rely on Storybook-only `@ui` aliases.
 - Put shared story args and viewport helpers in **`packages/storybook/src/fixtures/`**; stories must not duplicate large résumé-shaped props—use helpers like **`homePageArgs()`** and related fixtures.
-- Add **`*.stories.tsx`** next to the component; titles **`Foundations/<Category>/<Name>`** (primitives), **`UI/Sections/<Name>`** / **`UI/Hero/<Name>`**, or **`Pages/<Route>`**.
+- Add **`*.stories.tsx`** next to the component; titles **`Foundations/Design Tokens/<Name>`** (tokens), **`Components/<Category>/<Name>`** (primitives), **`Patterns/Sections/<Name>`** / **`Patterns/Hero/<Name>`** / **`Patterns/Site Chrome/<Name>`** / **`Patterns/Home Marketing/<Name>`** / **`Patterns/Status Page/<Name>`**, or **`Pages/<Route>`**.
 - Put Storybook **`play`** functions in a co-located **`*.stories.test.ts`** file; use **`StoryPlayFn`** from **`packages/storybook/src/storybook-play-types.ts`** and assign **`play: exportedPlay`** in **`*.stories.tsx`**. Every story with non-trivial rendered output should have a **`play`**.
 - Every story file: **`tags: ['autodocs']`**, **`Default`**, semantic variants (`Empty`, `LongContent`, `ManyItems`, `NarrowViewport`, …), **`narrowMobileStory`** from fixtures where responsive coverage is required.
 - Use **`play`** + **`storybook/test`** when the story renders focusable elements (links, buttons) or when asserting structure (headings, **`role="status"`**, visible copy).

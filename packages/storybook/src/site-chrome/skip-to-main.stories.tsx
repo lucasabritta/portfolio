@@ -4,7 +4,7 @@ import { SkipToMain } from "./skip-to-main";
 import { skipToMainDefaultPlay } from "./skip-to-main.stories.test";
 
 const meta = {
-  title: "UI/SiteChrome/SkipToMain",
+  title: "Patterns/Site Chrome/SkipToMain",
   component: SkipToMain,
   tags: ["autodocs"],
   parameters: {

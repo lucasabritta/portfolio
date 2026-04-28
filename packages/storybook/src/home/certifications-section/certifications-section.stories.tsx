@@ -17,7 +17,7 @@ import {
 } from "./certifications-section.stories.test";
 
 const meta = {
-  title: "UI/Sections/CertificationsSection",
+  title: "Patterns/Sections/CertificationsSection",
   component: CertificationsSection,
   tags: ["autodocs"],
 } satisfies Meta<typeof CertificationsSection>;

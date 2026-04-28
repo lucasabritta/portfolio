@@ -4,7 +4,7 @@ import { HomeResumeAnchor } from "./home-resume-anchor";
 import { homeResumeAnchorPlay } from "./home-resume-anchor.stories.test";
 
 const meta = {
-  title: "UI/Sections/HomeResumeAnchor",
+  title: "Patterns/Sections/HomeResumeAnchor",
   component: HomeResumeAnchor,
   tags: ["autodocs"],
 } satisfies Meta<typeof HomeResumeAnchor>;

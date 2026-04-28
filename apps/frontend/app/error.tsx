@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 
-import { StatusPageView } from "@portfolio/storybook";
+import { StatusPageView } from "@portfolio/storybook/status-page";
 
 type ErrorBoundaryProps = {
   error: Error & { digest?: string };

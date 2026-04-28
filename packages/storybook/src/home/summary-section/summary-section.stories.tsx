@@ -15,7 +15,7 @@ import {
 } from "./summary-section.stories.test";
 
 const meta = {
-  title: "UI/Sections/SummarySection",
+  title: "Patterns/Sections/SummarySection",
   component: SummarySection,
   tags: ["autodocs"],
 } satisfies Meta<typeof SummarySection>;

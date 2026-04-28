@@ -6,7 +6,7 @@ import { Chip } from "./chip";
 import { chipDefaultPlay, chipManyPlay, chipNarrowViewportPlay } from "./chip.stories.test";
 
 const meta = {
-  title: "Foundations/Surfaces/Chip",
+  title: "Components/Surfaces/Chip",
   component: Chip,
   tags: ["autodocs"],
   args: {

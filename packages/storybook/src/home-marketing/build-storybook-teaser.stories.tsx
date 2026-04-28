@@ -6,7 +6,7 @@ import { BuildStorybookTeaser } from "./build-storybook-teaser";
 import { buildStorybookTeaserDefaultPlay } from "./build-storybook-teaser.stories.test";
 
 const meta = {
-  title: "UI/HomeMarketing/BuildStorybookTeaser",
+  title: "Patterns/Home Marketing/BuildStorybookTeaser",
   component: BuildStorybookTeaser,
   tags: ["autodocs"],
   parameters: {

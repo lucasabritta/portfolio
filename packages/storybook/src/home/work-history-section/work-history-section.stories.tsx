@@ -17,7 +17,7 @@ import {
 } from "./work-history-section.stories.test";
 
 const meta = {
-  title: "UI/Sections/WorkHistorySection",
+  title: "Patterns/Sections/WorkHistorySection",
   component: WorkHistorySection,
   tags: ["autodocs"],
 } satisfies Meta<typeof WorkHistorySection>;

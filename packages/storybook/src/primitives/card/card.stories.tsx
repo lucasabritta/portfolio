@@ -11,7 +11,7 @@ import {
 } from "./card.stories.test";
 
 const meta = {
-  title: "Foundations/Surfaces/Card",
+  title: "Components/Surfaces/Card",
   component: Card,
   tags: ["autodocs"],
   args: {

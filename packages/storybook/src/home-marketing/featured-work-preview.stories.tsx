@@ -4,7 +4,7 @@ import { FeaturedWorkPreview } from "./featured-work-preview";
 import { featuredWorkPreviewDefaultPlay } from "./featured-work-preview.stories.test";
 
 const meta = {
-  title: "UI/HomeMarketing/FeaturedWorkPreview",
+  title: "Patterns/Home Marketing/FeaturedWorkPreview",
   component: FeaturedWorkPreview,
   tags: ["autodocs"],
   parameters: {

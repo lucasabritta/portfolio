@@ -4,7 +4,7 @@ import type {
   CredibilityStripProps,
   FeaturedWorkPreviewProps,
   HomeLeadHeroProps,
-} from "@portfolio/storybook";
+} from "@portfolio/storybook/home-marketing";
 
 import { GOOGLE_PLAY_HOST, type ResumeData } from "@portfolio/resume-content";
 

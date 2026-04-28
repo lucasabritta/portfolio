@@ -5,7 +5,7 @@ import { GlobalErrorView, globalErrorBodyStyle } from "./global-error-view";
 import { globalErrorDefaultPlay, globalErrorHasRetryPlay } from "./global-error-view.stories.test";
 
 const meta = {
-  title: "UI/StatusPage/GlobalErrorView",
+  title: "Patterns/Status Page/GlobalErrorView",
   component: GlobalErrorView,
   tags: ["autodocs"],
   parameters: {

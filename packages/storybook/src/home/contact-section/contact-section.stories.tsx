@@ -15,7 +15,7 @@ import {
 } from "./contact-section.stories.test";
 
 const meta = {
-  title: "UI/Sections/ContactSection",
+  title: "Patterns/Sections/ContactSection",
   component: ContactSection,
   tags: ["autodocs"],
 } satisfies Meta<typeof ContactSection>;

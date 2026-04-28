@@ -12,7 +12,7 @@ const links = [
 ];
 
 const meta = {
-  title: "UI/SiteChrome/Footer",
+  title: "Patterns/Site Chrome/Footer",
   component: SiteFooter,
   tags: ["autodocs"],
   parameters: {

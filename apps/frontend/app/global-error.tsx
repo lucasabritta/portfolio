@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-import { GlobalErrorView, globalErrorBodyStyle } from "@portfolio/storybook";
+import { GlobalErrorView, globalErrorBodyStyle } from "@portfolio/storybook/status-page";
 
 type GlobalErrorProps = {
   error: Error & { digest?: string };

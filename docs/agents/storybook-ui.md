@@ -4,7 +4,7 @@ The **`@portfolio/storybook`** package is a **separate workspace** from **`@port
 
 ### Presentational JSX _and_ CSS live in this package — the Next app composes
 
-**`apps/frontend/app/**/\*.tsx`** (route segments — `page.tsx`, `layout.tsx`, `error.tsx`, `loading.tsx`, `not-found.tsx`, `global-error.tsx`, and sibling view files like `site-chrome-client.tsx`) must be **pure composition**: import components from **`@portfolio/storybook`\*\*, pass them data/handlers, and return the tree.
+**`apps/frontend/app/**/\*.tsx`** (route segments — `page.tsx`, `layout.tsx`, `error.tsx`, `loading.tsx`, `not-found.tsx`, `global-error.tsx`, and sibling view files like `site-chrome-client.tsx`) must be **pure composition**: import components from **`@portfolio/storybook`** public subpaths, pass them data/handlers, and return the tree.
 
 They **must not**:
 
@@ -23,14 +23,14 @@ Patterns for things a pure UI package can't know about:
 - **Slots** (chrome wrappers, anchored sections): use children/slot props (see **`SiteShell`**'s `skipLink` / `header` / `footer` slots, or **`HomeResumeAnchor`**'s `id` + children).
 - **Last-resort boundaries** (`global-error.tsx`): the view exports inline styles (e.g. **`globalErrorBodyStyle`**) the app applies to `<body>`, so the component still owns the look even when CSS fails to load.
 
-Both bans are enforced in **`apps/frontend/eslint.config.mjs`** via **`no-restricted-syntax`** (forbidden JSX) and **`no-restricted-imports`** (forbidden CSS module patterns). `*.test.tsx` under `app/` is excluded. If a lint error points here, extract a component into **`packages/storybook/src/<feature>/`** (component + co-located **`*.module.css`** + `*.stories.tsx` + `*.stories.test.ts` `play`), export it from **`packages/storybook/src/index.ts`**, and compose it from the app.
+Both bans are enforced in **`apps/frontend/eslint.config.mjs`** via **`no-restricted-syntax`** (forbidden JSX) and **`no-restricted-imports`** (forbidden CSS module patterns). `*.test.tsx` under `app/` is excluded. If a lint error points here, extract a component into **`packages/storybook/src/<feature>/`** (component + co-located **`*.module.css`** + `*.stories.tsx` + `*.stories.test.ts` `play`), export it from the feature barrel plus **`packages/storybook/package.json`** `exports` when it is app-facing, and keep **`packages/storybook/src/index.ts`** as the compatibility barrel. Client views can also keep a dedicated compatibility subpath such as **`@portfolio/storybook/projects-page-view`** when the package already exposes one.
 
 ## Where UI lives
 
-- **DOM components** (anything that renders browser JSX) belong in **`packages/storybook/src/`**. The Next app imports composition pieces like **`HomePageShell`**, **`PortfolioHero`**, and section components from **`@portfolio/storybook`** (see `packages/storybook/src/index.ts`).
+- **DOM components** (anything that renders browser JSX) belong in **`packages/storybook/src/`**. The Next app imports composition pieces like **`HomePageShell`**, **`PortfolioHero`**, and section components from granular **`@portfolio/storybook/*`** subpaths (see `packages/storybook/package.json` `exports`), with the root barrel kept for compatibility.
 - **Global web CSS** lives in **`packages/storybook/src/globals.css`**. Root layout classes use **`packages/storybook/src/layout.module.css`**, imported from **`apps/frontend/app/layout.tsx`** as **`@portfolio/storybook/globals.css`** and **`@portfolio/storybook/layout.module.css`** (package `exports`).
 - **Story fixtures** live in **`packages/storybook/src/fixtures/`**. Stories use **`@ui/...`** (Vite/TS path alias); package components consumed by Next should use relative imports internally where needed so Next/Turbopack does not require duplicate `@ui` aliases.
-- **Résumé PDF** (react-pdf) lives in **`apps/frontend/lib/cv-pdf/**`** (served via **`/api/cv`**) — not in Storybook; it uses `StyleSheet`, not web CSS. It imports data/types from **`@portfolio/resume-content`\*\*.
+- **Résumé PDF** (react-pdf) lives in **`apps/frontend/lib/cv-pdf/**`** (served via **`/api/cv`**) — not in Storybook; it uses `StyleSheet`, not web CSS. It imports data/types from **`@portfolio/resume-content`**.
 
 ## Running Storybook
 
@@ -79,8 +79,8 @@ docker compose run --rm frontend yarn build
 - **CSF3 only**: `satisfies Meta<typeof Component>`, **`tags: ['autodocs']`** on every `meta`, and **`Default`** plus semantic variants — see **`packages/storybook/src/fixtures/cv-story-args.ts`** for **`narrowMobileStory`**.
 - Co-locate **`*.stories.tsx`** next to the component under **`packages/storybook/src/`**.
 - **Interaction tests (`play`)** live in a sibling **`*.stories.test.ts`** file (same basename prefix as the CSF file). Each named export is a **`StoryPlayFn`** (see **`packages/storybook/src/storybook-play-types.ts`**); **`*.stories.tsx`** imports them and sets **`play: somePlay`**. Every story that renders meaningful UI (sections, hero, primitives, pages) should wire a **`play`** so **`@storybook/addon-vitest`** exercises it. **Unit** tests for the app and résumé package live in **`apps/frontend`** and **`packages/resume-content`** respectively (separate Vitest configs), not in a single root Vitest workspace.
-- **Story `title` groups**: **`Foundations/<Category>/<Component>`** for design primitives under **`packages/storybook/src/primitives/`** (Typography, Buttons, Surfaces); **`UI/Sections/<Name>`** for homepage section stories; **`UI/Hero/<Name>`** for the hero; **`Pages/<Route>`** for full-page stories (e.g. **`Pages/Home`**).
-- **Primitives** (`Card`, `Chip`, `ActionLink`, `SectionHeading`, `Title`, hero typography) live in **`packages/storybook/src/primitives/`** and are re-exported from **`@portfolio/storybook`** for consumers that need them; feature code inside the package typically imports via **`../primitives`** or **`../../primitives`** (the **`@ui/*`** path maps to **`./src/*`** and does not resolve **`@ui/primitives`** to the folder index).
+- **Story `title` groups**: **`Foundations/Design Tokens/<Name>`** for tokens and theme documentation; **`Components/<Category>/<Component>`** for reusable primitives under **`packages/storybook/src/primitives/`** (Typography, Buttons, Surfaces); **`Patterns/Sections/<Name>`**, **`Patterns/Site Chrome/<Name>`**, **`Patterns/Home Marketing/<Name>`**, **`Patterns/Hero/<Name>`**, and **`Patterns/Status Page/<Name>`** for composed UI; **`Pages/<Route>`** for full-page stories (e.g. **`Pages/Home`**).
+- **Primitives** (`Card`, `Chip`, `ActionLink`, `SectionHeading`, `Title`, hero typography) live in **`packages/storybook/src/primitives/`** and are re-exported from **`@portfolio/storybook/primitives`** plus the compatibility root for consumers that need them; feature code inside the package typically imports via **`../primitives`** or **`../../primitives`** (the **`@ui/*`** path maps to **`./src/*`** and does not resolve **`@ui/primitives`** to the folder index).
 - **Full-page stories** compose page-level views from Storybook exports such as **`HomePageShell`**, **`PortfolioHero`**, and home sections.
 
 ## Testing (Vitest + Storybook)
@@ -92,11 +92,11 @@ docker compose run --rm frontend yarn build
 
 ## Preview governance
 
-[`packages/storybook/.storybook/preview.tsx`](../../packages/storybook/.storybook/preview.tsx) applies Geist fonts, globals, viewports, layout decorators (**`Foundations/*`** padded full width; **`UI/Sections/*`** max-width column), and **`a11y.test: 'error'`**.
+[`packages/storybook/.storybook/preview.tsx`](../../packages/storybook/.storybook/preview.tsx) applies Geist fonts, globals, viewports, layout decorators (**`Foundations/*`** and **`Components/*`** padded full width; **`Patterns/Sections/*`** max-width column; other **`Patterns/*`** stories use the default canvas), story ordering (**`Foundations`**, **`Components`**, **`Patterns`**, **`Pages`**), and **`a11y.test: 'error'`**.
 
 ## Framework
 
-**`@storybook/nextjs-vite`** with **`@storybook/addon-docs`**, **`@storybook/addon-a11y`**, and **`@storybook/addon-vitest`**. Static assets for stories come from **`apps/frontend/public/cv-fonts`** (see **`packages/storybook/.storybook/main.ts`** `staticDirs`).
+**`@storybook/nextjs-vite`** with **`@storybook/addon-docs`**, **`@storybook/addon-a11y`**, and **`@storybook/addon-vitest`**. Storybook renders DOM UI only and should not reach into **`apps/frontend/public`** for PDF-specific assets.
 
 ## PR checklist (Storybook / UI)
 

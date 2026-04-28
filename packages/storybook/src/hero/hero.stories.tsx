@@ -16,7 +16,7 @@ import {
 } from "./hero.stories.test";
 
 const meta = {
-  title: "UI/Hero/PortfolioHero",
+  title: "Patterns/Hero/PortfolioHero",
   component: PortfolioHero,
   tags: ["autodocs"],
   parameters: {

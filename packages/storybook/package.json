@@ -8,9 +8,45 @@
   },
   "exports": {
     ".": "./src/index.ts",
+    "./build-page": {
+      "types": "./src/build-page/index.ts",
+      "default": "./src/build-page/index.ts"
+    },
+    "./foundations": {
+      "types": "./src/foundations/index.ts",
+      "default": "./src/foundations/index.ts"
+    },
+    "./home": {
+      "types": "./src/home/index.ts",
+      "default": "./src/home/index.ts"
+    },
+    "./home-marketing": {
+      "types": "./src/home-marketing/index.ts",
+      "default": "./src/home-marketing/index.ts"
+    },
+    "./hero": {
+      "types": "./src/hero/index.ts",
+      "default": "./src/hero/index.ts"
+    },
+    "./primitives": {
+      "types": "./src/primitives/index.ts",
+      "default": "./src/primitives/index.ts"
+    },
+    "./projects-page": {
+      "types": "./src/projects-page/index.ts",
+      "default": "./src/projects-page/index.ts"
+    },
     "./projects-page-view": {
       "types": "./src/projects-page/projects-page-view.tsx",
       "default": "./src/projects-page/projects-page-view.tsx"
+    },
+    "./site-chrome": {
+      "types": "./src/site-chrome/index.ts",
+      "default": "./src/site-chrome/index.ts"
+    },
+    "./status-page": {
+      "types": "./src/status-page/index.ts",
+      "default": "./src/status-page/index.ts"
     },
     "./globals.css": "./src/globals.css",
     "./layout.module.css": "./src/layout.module.css"

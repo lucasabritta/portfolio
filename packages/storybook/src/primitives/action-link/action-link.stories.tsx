@@ -12,7 +12,7 @@ import {
 const demoHref = "https://example.com";
 
 const meta = {
-  title: "Foundations/Buttons/ActionLink",
+  title: "Components/Buttons/ActionLink",
   component: ActionLink,
   tags: ["autodocs"],
   args: {
