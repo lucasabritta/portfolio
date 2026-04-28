@@ -7,7 +7,7 @@ import { condensedCvPreviewDefaultPlay } from "./condensed-cv-preview.stories.te
 import { CondensedCvPreview } from "./condensed-cv-preview";
 
 const meta = {
-  title: "UI/HomeMarketing/CondensedCvPreview",
+  title: "Patterns/Home Marketing/CondensedCvPreview",
   component: CondensedCvPreview,
   tags: ["autodocs"],
   parameters: {

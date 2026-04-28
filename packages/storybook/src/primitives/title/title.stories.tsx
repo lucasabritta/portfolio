@@ -10,7 +10,7 @@ import {
 } from "./title.stories.test";
 
 const meta = {
-  title: "Foundations/Typography/Title",
+  title: "Components/Typography/Title",
   component: Title,
   tags: ["autodocs"],
   args: {

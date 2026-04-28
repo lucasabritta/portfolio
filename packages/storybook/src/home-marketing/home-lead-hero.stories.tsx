@@ -7,7 +7,7 @@ import { homeLeadHeroDefaultPlay } from "./home-lead-hero.stories.test";
 import { HomeLeadHero } from "./home-lead-hero";
 
 const meta = {
-  title: "UI/HomeMarketing/HomeLeadHero",
+  title: "Patterns/Home Marketing/HomeLeadHero",
   component: HomeLeadHero,
   tags: ["autodocs"],
   parameters: {

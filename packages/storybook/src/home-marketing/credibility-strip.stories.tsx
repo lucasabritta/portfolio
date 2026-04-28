@@ -6,7 +6,7 @@ import { CredibilityStrip } from "./credibility-strip";
 import { credibilityStripDefaultPlay } from "./credibility-strip.stories.test";
 
 const meta = {
-  title: "UI/HomeMarketing/CredibilityStrip",
+  title: "Patterns/Home Marketing/CredibilityStrip",
   component: CredibilityStrip,
   tags: ["autodocs"],
   parameters: {

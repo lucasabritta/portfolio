@@ -11,7 +11,7 @@ import {
   SiteShell,
   SkipToMain,
   ThemeModeSwitch,
-} from "@portfolio/storybook";
+} from "@portfolio/storybook/site-chrome";
 
 import { useThemeMode } from "./theme-provider";
 

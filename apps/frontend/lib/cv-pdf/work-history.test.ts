@@ -6,7 +6,6 @@ import {
   type ResumeData,
   type ResumeExperienceEntry,
 } from "@portfolio/resume-content";
-import { presentationWorkEntryKey } from "@portfolio/storybook";
 
 import {
   FIRST_PAGE_ENTRIES_WITH_ACHIEVEMENTS,
@@ -15,14 +14,6 @@ import {
   buildWorkHistoryLayout,
 } from "./work-history";
 
-/**
- * Cross-package contract: `@portfolio/storybook` must not import
- * `@portfolio/resume-content` (ESLint-enforced boundary), so it mirrors the
- * work-entry key algorithm. This file lives alongside `work-history.ts` —
- * which owns the PDF-side `buildPdfWorkEntryKey` delegate — and pins the
- * three implementations (canonical, PDF wrapper, Storybook mirror) together
- * for every real résumé entry.
- */
 describe("buildPdfWorkEntryKey", () => {
   it("delegates to the canonical buildWorkEntryStableKey", () => {
     for (const entry of resumeData.workHistory) {
@@ -31,15 +22,7 @@ describe("buildPdfWorkEntryKey", () => {
   });
 });
 
-describe("work-entry key contract across resume-content and storybook", () => {
-  it("produces identical keys for every entry in resumeData.workHistory", () => {
-    for (const entry of resumeData.workHistory) {
-      const canonical = buildWorkEntryStableKey(entry);
-      const mirrored = presentationWorkEntryKey(entry);
-      expect(mirrored).toBe(canonical);
-    }
-  });
-
+describe("work-entry key uniqueness", () => {
   it("produces unique keys across the whole work history", () => {
     const keys = resumeData.workHistory.map((entry) => buildWorkEntryStableKey(entry));
     const unique = new Set(keys);

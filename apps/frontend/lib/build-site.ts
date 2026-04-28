@@ -1,9 +1,9 @@
-import type { BuildPageCta, BuildPageSection } from "@portfolio/storybook";
+import type { BuildPageCta, BuildPageSection } from "@portfolio/storybook/build-page";
 
 /**
  * Marketing copy for `/build` (engineering narrative; not `@portfolio/resume-content`).
  *
- * Shape matches `BuildPageViewProps` from `@portfolio/storybook` so the page
+ * Shape matches the `@portfolio/storybook/build-page` view props so the page
  * stays a thin composition layer.
  */
 export const buildPageContent = {

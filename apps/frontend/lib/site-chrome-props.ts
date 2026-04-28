@@ -1,6 +1,6 @@
 import { resumeData } from "@portfolio/resume-content";
 
-import type { SiteFooterLink, SiteNavItem } from "@portfolio/storybook";
+import type { SiteFooterLink, SiteNavItem } from "@portfolio/storybook/site-chrome";
 
 import { siteProfile } from "./site-profile";
 

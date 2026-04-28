@@ -9,7 +9,7 @@ import {
 } from "./status-page-view.stories.test";
 
 const meta = {
-  title: "UI/StatusPage/StatusPageView",
+  title: "Patterns/Status Page/StatusPageView",
   component: StatusPageView,
   tags: ["autodocs"],
   parameters: {

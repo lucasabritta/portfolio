@@ -11,7 +11,7 @@ import {
 } from "./hero-type.stories.test";
 
 const meta = {
-  title: "Foundations/Typography/HeroType",
+  title: "Components/Typography/HeroType",
   component: HeroTypeComposition,
   subcomponents: { HeroRole, HeroName, HeroLead },
   tags: ["autodocs"],

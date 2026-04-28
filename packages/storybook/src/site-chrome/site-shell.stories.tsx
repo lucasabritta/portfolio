@@ -5,7 +5,7 @@ import { SkipToMain } from "./skip-to-main";
 import { siteShellPlay } from "./site-shell.stories.test";
 
 const meta = {
-  title: "UI/SiteChrome/SiteShell",
+  title: "Patterns/Site Chrome/SiteShell",
   component: SiteShell,
   tags: ["autodocs"],
   parameters: {
