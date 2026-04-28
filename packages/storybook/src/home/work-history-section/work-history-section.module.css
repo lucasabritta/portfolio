@@ -8,6 +8,40 @@
   display: grid;
   gap: 1.5rem;
   margin-top: 1.5rem;
+  position: relative;
+}
+
+.workList::before {
+  background: var(--border);
+  bottom: 0.75rem;
+  content: "";
+  left: 0.55rem;
+  position: absolute;
+  top: 0.75rem;
+  width: 1px;
+}
+
+.timelineItem {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: 1.1rem minmax(0, 1fr);
+  position: relative;
+}
+
+.timelineDot {
+  background: var(--accent);
+  border: 3px solid var(--background);
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px var(--border);
+  height: 0.75rem;
+  margin-top: 0.55rem;
+  position: relative;
+  width: 0.75rem;
+  z-index: 1;
+}
+
+.workCard {
+  min-width: 0;
 }
 
 .workHeader {
@@ -37,6 +71,26 @@
   font-size: 1rem;
   line-height: 1.7;
   margin-top: 1rem;
+}
+
+.achievementsDisclosure {
+  margin-top: 1rem;
+}
+
+.achievementsSummary {
+  color: var(--accent);
+  cursor: pointer;
+  font-family:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.achievementsSummary::marker {
+  color: var(--accent);
 }
 
 .achievementList {

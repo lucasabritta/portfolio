@@ -32,26 +32,29 @@ export function SiteFooter({
           <p className={styles.name}>{name}</p>
           <p className={styles.descriptor}>{descriptor}</p>
         </div>
-        <ul className={styles.linkRow}>
-          {links.map((link) => (
-            <li key={`${link.href}-${link.label}`}>
-              {link.external ? (
-                <a
-                  href={link.href}
-                  className={styles.link}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <NavLink href={link.href} className={styles.link}>
-                  {link.label}
-                </NavLink>
-              )}
-            </li>
-          ))}
-        </ul>
+        <nav aria-label="Footer">
+          <ul className={styles.linkRow}>
+            {links.map((link) => (
+              <li key={`${link.href}-${link.label}`}>
+                {link.external ? (
+                  <a
+                    href={link.href}
+                    className={styles.link}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {link.label}
+                    <span className={styles.visuallyHidden}> (opens in a new tab)</span>
+                  </a>
+                ) : (
+                  <NavLink href={link.href} className={styles.link}>
+                    {link.label}
+                  </NavLink>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
         <p className={styles.colophon}>{colophon}</p>
       </div>
     </footer>

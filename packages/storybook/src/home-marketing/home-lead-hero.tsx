@@ -47,6 +47,7 @@ export function HomeLeadHero({
           rel="noopener noreferrer"
         >
           Open Storybook
+          <span className={styles.visuallyHidden}> (opens in a new tab)</span>
         </ActionLink>
       </div>
       <Card as="article" elevated radius="md" padding="comfortable" className={styles.proofCard}>

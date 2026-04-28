@@ -175,7 +175,7 @@
 
 .reposGrid {
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
   grid-template-columns: 1fr;
   list-style: none;
   margin: 0;
@@ -215,4 +215,16 @@
 
 .repoLink {
   font-size: 0.875rem;
+}
+
+.visuallyHidden {
+  clip: rect(0 0 0 0);
+  border: 0;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }

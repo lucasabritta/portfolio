@@ -6,6 +6,7 @@ import {
   titleLargePlay,
   titleLongContentPlay,
   titleMediumPlay,
+  titlePageLevelPlay,
   titleSmallPlay,
 } from "./title.stories.test";
 
@@ -49,6 +50,15 @@ export const Large: Story = {
     children: "Company / role",
   },
   play: titleLargePlay,
+};
+
+export const PageLevel: Story = {
+  args: {
+    level: 1,
+    size: "lg",
+    children: "Projects",
+  },
+  play: titlePageLevelPlay,
 };
 
 export const LongContent: Story = {

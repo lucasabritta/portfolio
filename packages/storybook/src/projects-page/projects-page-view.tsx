@@ -51,7 +51,7 @@ export function ProjectsPageView({
   return (
     <div className={styles.page}>
       <header>
-        <Title level={2} size="lg">
+        <Title level={1} size="lg">
           {introTitle}
         </Title>
         <p className={styles.introLead}>{introLead}</p>
@@ -65,7 +65,7 @@ export function ProjectsPageView({
         />
         <div className={styles.flagshipBody}>
           <p className={styles.eyebrow}>{flagship.eyebrow}</p>
-          <Title id="flagship-title" level={3} size="md">
+          <Title id="flagship-title" level={2} size="md">
             {flagship.title}
           </Title>
           <p className={styles.roleLine}>{flagship.role}</p>
@@ -74,11 +74,11 @@ export function ProjectsPageView({
               <Chip key={tech}>{tech}</Chip>
             ))}
           </div>
-          <h4 className={styles.blockHeading}>Pitch</h4>
+          <h3 className={styles.blockHeading}>Pitch</h3>
           <p className={styles.blockText}>{flagship.pitch}</p>
-          <h4 className={styles.blockHeading}>Hardest problem</h4>
+          <h3 className={styles.blockHeading}>Hardest problem</h3>
           <p className={styles.blockText}>{flagship.hardestProblem}</p>
-          <h4 className={styles.blockHeading}>Outcomes</h4>
+          <h3 className={styles.blockHeading}>Outcomes</h3>
           <ul className={styles.outcomesList}>
             {flagship.outcomes.map((line) => (
               <li key={line}>{line}</li>
@@ -95,6 +95,7 @@ export function ProjectsPageView({
                 target="_blank"
               >
                 {link.label}
+                <span className={styles.visuallyHidden}> (opens in a new tab)</span>
               </ActionLink>
             ))}
           </div>
@@ -120,7 +121,7 @@ export function ProjectsPageView({
                   className={styles.repoLink}
                   rel="noopener noreferrer"
                   target="_blank"
-                  aria-label={`Open GitHub repository: ${repo.name}`}
+                  aria-label={`Open GitHub repository: ${repo.name} (opens in a new tab)`}
                 >
                   View on GitHub
                 </ActionLink>

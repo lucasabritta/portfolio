@@ -26,6 +26,9 @@ export function FeaturedWorkPreview({
               target={flagship.external ? "_blank" : undefined}
             >
               {flagship.ctaLabel}
+              {flagship.external ? (
+                <span className={styles.visuallyHidden}> (opens in a new tab)</span>
+              ) : null}
             </ActionLink>
           </div>
         </Card>

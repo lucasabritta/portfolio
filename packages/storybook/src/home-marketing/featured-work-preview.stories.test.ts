@@ -11,7 +11,9 @@ export const featuredWorkPreviewDefaultPlay: StoryPlayFn = async ({ canvasElemen
   });
   expect(flagshipHeading).toBeVisible();
 
-  const openOnPlay = within(region).getByRole("link", { name: "Google Play" });
+  const openOnPlay = within(region).getByRole("link", {
+    name: /Google Play.*opens in a new tab/i,
+  });
   expect(openOnPlay).toHaveAttribute("target", "_blank");
   expect(openOnPlay.getAttribute("rel") ?? "").toMatch(/noopener/);
 

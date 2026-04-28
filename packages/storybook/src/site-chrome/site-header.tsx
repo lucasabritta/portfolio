@@ -9,6 +9,12 @@ import { pathMatchesNav } from "./nav-active-path";
 import type { SiteShellLinkComponent } from "./site-link-component";
 import styles from "./site-header.module.css";
 
+const FOCUSABLE_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  "[tabindex]:not([tabindex='-1'])",
+].join(",");
+
 export type SiteNavItem = {
   label: string;
   href: string;
@@ -20,6 +26,7 @@ export type SiteHeaderProps = {
   navItems: SiteNavItem[];
   downloadCvHref: string;
   themeControl: ReactNode;
+  mobileThemeControl: ReactNode;
   currentPath: string;
   /** When set (e.g. Next.js `Link`), internal navigation uses this component. */
   linkComponent?: SiteShellLinkComponent;
@@ -72,11 +79,13 @@ export function SiteHeader({
   navItems,
   downloadCvHref,
   themeControl,
+  mobileThemeControl,
   currentPath,
   linkComponent: LinkComponent,
 }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuId = useId();
+  const menuTitleId = `${menuId}-title`;
   const NavLink = LinkComponent ?? "a";
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mobilePanelRef = useRef<HTMLDivElement>(null);
@@ -90,12 +99,46 @@ export function SiteHeader({
         event.preventDefault();
         setMenuOpen(false);
         queueMicrotask(() => menuButtonRef.current?.focus());
+        return;
+      }
+
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const focusable = Array.from(
+        mobilePanelRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR) ?? [],
+      );
+      if (focusable.length === 0) {
+        event.preventDefault();
+        mobilePanelRef.current?.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
     document.addEventListener("keydown", onKeyDown);
-    const firstLink = mobilePanelRef.current?.querySelector<HTMLElement>("a[href]");
+    const previousOverflow = document.body.style.overflow;
+    const inertTargets = Array.from(document.querySelectorAll<HTMLElement>("main, footer"));
+    document.body.style.overflow = "hidden";
+    inertTargets.forEach((target) => target.setAttribute("inert", ""));
+    const firstLink = mobilePanelRef.current?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
     queueMicrotask(() => firstLink?.focus());
-    return () => document.removeEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+      inertTargets.forEach((target) => target.removeAttribute("inert"));
+    };
   }, [menuOpen]);
 
   return (
@@ -134,7 +177,7 @@ export function SiteHeader({
             type="button"
             className={styles.menuButton}
             aria-expanded={menuOpen}
-            aria-controls={menuOpen ? menuId : undefined}
+            aria-controls={menuId}
             aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
             onClick={() => setMenuOpen((o) => !o)}
           >
@@ -143,31 +186,52 @@ export function SiteHeader({
         </div>
       </div>
       {menuOpen ? (
-        <div ref={mobilePanelRef} className={styles.mobilePanel} id={menuId}>
-          <nav aria-label="Primary mobile">
-            <ul className={styles.mobileNavList}>
-              {navItems.map((item) => {
-                const active = pathMatchesNav(currentPath, item.href);
-                return (
-                  <li key={`m-${item.href}`}>
-                    <NavLink
-                      href={item.href}
-                      className={active ? styles.mobileNavLinkActive : styles.mobileNavLink}
-                      aria-current={active ? "page" : undefined}
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {item.label}
-                    </NavLink>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-          <div className={styles.mobileThemeSlot}>
-            <p className={styles.mobileThemeLabel}>Theme</p>
-            {themeControl}
+        <>
+          <div
+            className={styles.mobileBackdrop}
+            aria-hidden="true"
+            onClick={() => setMenuOpen(false)}
+          />
+          <div
+            ref={mobilePanelRef}
+            className={styles.mobilePanel}
+            id={menuId}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={menuTitleId}
+            tabIndex={-1}
+          >
+            <h2 id={menuTitleId} className={styles.mobileDialogTitle}>
+              Navigation
+            </h2>
+            <nav aria-label="Primary mobile">
+              <ul className={styles.mobileNavList}>
+                {navItems.map((item) => {
+                  const active = pathMatchesNav(currentPath, item.href);
+                  return (
+                    <li key={`m-${item.href}`}>
+                      <NavLink
+                        href={item.href}
+                        className={active ? styles.mobileNavLinkActive : styles.mobileNavLink}
+                        aria-current={active ? "page" : undefined}
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {item.label}
+                      </NavLink>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+            <ActionLink variant="primary" href={downloadCvHref} className={styles.mobileDownload}>
+              Download CV
+            </ActionLink>
+            <div className={styles.mobileThemeSlot}>
+              <p className={styles.mobileThemeLabel}>Theme</p>
+              {mobileThemeControl}
+            </div>
           </div>
-        </div>
+        </>
       ) : null}
     </header>
   );

@@ -79,7 +79,6 @@ export function ThemeModeSwitch({ value, onChange, idPrefix = "theme" }: ThemeMo
             className={pressed ? styles.segmentPressed : styles.segment}
             aria-pressed={pressed}
             aria-label={label}
-            title={label}
             onClick={() => onChange(key)}
           >
             {icon}

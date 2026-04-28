@@ -67,8 +67,20 @@
 }
 
 .link:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 3px solid var(--focus-ring, var(--accent));
   outline-offset: 3px;
+}
+
+.visuallyHidden {
+  clip: rect(0 0 0 0);
+  border: 0;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 .colophon {

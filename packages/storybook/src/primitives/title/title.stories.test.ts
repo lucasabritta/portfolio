@@ -25,6 +25,10 @@ export const titleLargePlay: StoryPlayFn = async ({ canvasElement }) => {
   ).toBeVisible();
 };
 
+export const titlePageLevelPlay: StoryPlayFn = async ({ canvasElement }) => {
+  expect(within(canvasElement).getByRole("heading", { level: 1, name: "Projects" })).toBeVisible();
+};
+
 export const titleLongContentPlay: StoryPlayFn = async ({ canvasElement }) => {
   expect(
     within(canvasElement).getByRole("heading", {

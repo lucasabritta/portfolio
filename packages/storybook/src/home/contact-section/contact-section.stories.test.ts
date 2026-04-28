@@ -29,7 +29,7 @@ export const contactSectionLongContentPlay: StoryPlayFn = async ({ canvasElement
     }),
   ).toHaveFocus();
   await userEvent.tab();
-  expect(canvas.getByRole("link", { name: "LinkedIn" })).toHaveFocus();
+  expect(canvas.getByRole("link", { name: /LinkedIn.*opens in a new tab/i })).toHaveFocus();
 };
 
 export const contactSectionNarrowViewportPlay: StoryPlayFn = async ({ canvasElement }) => {

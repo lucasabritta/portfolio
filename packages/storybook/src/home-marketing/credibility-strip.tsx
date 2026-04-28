@@ -11,6 +11,7 @@ export function CredibilityStrip({ id = "credibility", items }: CredibilityStrip
         {items.map((item) => (
           <li key={item.title}>
             <Card as="article" elevated radius="md" padding="comfortable">
+              {item.metric ? <p className={styles.metric}>{item.metric}</p> : null}
               <h3 className={styles.title}>{item.title}</h3>
               <p className={styles.body}>{item.body}</p>
             </Card>

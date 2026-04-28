@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import type { SiteChromeStaticProps } from "@/lib/site-chrome-props";
 import {
@@ -29,7 +29,17 @@ export function SiteChromeClient({
   downloadCvHref,
 }: SiteChromeClientProps) {
   const pathname = usePathname() ?? "/";
+  const [hash, setHash] = useState("");
   const { preference, setPreference } = useThemeMode();
+
+  useEffect(() => {
+    const syncHash = () => setHash(window.location.hash);
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => window.removeEventListener("hashchange", syncHash);
+  }, []);
+
+  const currentPath = hash && pathname === "/" ? `${pathname}${hash}` : pathname;
 
   return (
     <SiteShell
@@ -40,11 +50,24 @@ export function SiteChromeClient({
           wordmarkHref="/"
           navItems={navItems}
           downloadCvHref={downloadCvHref}
-          currentPath={pathname}
+          currentPath={currentPath}
           linkComponent={Link}
           themeControl={
             <span suppressHydrationWarning>
-              <ThemeModeSwitch value={preference} onChange={setPreference} />
+              <ThemeModeSwitch
+                value={preference}
+                onChange={setPreference}
+                idPrefix="desktop-theme"
+              />
+            </span>
+          }
+          mobileThemeControl={
+            <span suppressHydrationWarning>
+              <ThemeModeSwitch
+                value={preference}
+                onChange={setPreference}
+                idPrefix="mobile-theme"
+              />
             </span>
           }
         />

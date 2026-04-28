@@ -33,7 +33,9 @@ describe("Home page", () => {
     expect(heroRoot).toBeTruthy();
     const projects = within(heroRoot as HTMLElement).getByRole("link", { name: "View Projects" });
     expect(projects).toHaveAttribute("href", "/projects");
-    const storybookLinks = screen.getAllByRole("link", { name: "Open Storybook" });
+    const storybookLinks = screen.getAllByRole("link", {
+      name: /Open Storybook.*opens in a new tab/i,
+    });
     expect(storybookLinks.length).toBeGreaterThanOrEqual(1);
     expect(storybookLinks.every((el) => el.getAttribute("href") === "/storybook")).toBe(true);
     expect(within(heroRoot as HTMLElement).getByText("Proof points")).toBeInTheDocument();

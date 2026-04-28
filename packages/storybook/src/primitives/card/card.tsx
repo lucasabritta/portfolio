@@ -6,7 +6,7 @@ import styles from "./card.module.css";
 export type CardRadius = "md" | "lg";
 export type CardPadding = "compact" | "comfortable";
 
-type CardTag = "div" | "article" | "li";
+type CardTag = "div" | "article" | "li" | "section";
 
 type CommonCardProps = {
   elevated?: boolean;
@@ -18,7 +18,8 @@ type CommonCardProps = {
 export type CardProps =
   | ({ as?: "div" } & CommonCardProps & Omit<ComponentPropsWithoutRef<"div">, "as">)
   | ({ as: "article" } & CommonCardProps & Omit<ComponentPropsWithoutRef<"article">, "as">)
-  | ({ as: "li" } & CommonCardProps & Omit<ComponentPropsWithoutRef<"li">, "as">);
+  | ({ as: "li" } & CommonCardProps & Omit<ComponentPropsWithoutRef<"li">, "as">)
+  | ({ as: "section" } & CommonCardProps & Omit<ComponentPropsWithoutRef<"section">, "as">);
 
 export function Card(props: CardProps) {
   const {

@@ -36,11 +36,20 @@ export const Default: Story = {
     downloadCvHref: "/api/cv",
     currentPath: "/build",
     themeControl: <></>,
+    mobileThemeControl: <></>,
   },
   render: function SiteHeaderStory(args) {
     const [mode, setMode] = useState<"system" | "light" | "dark">("system");
     return (
-      <SiteHeader {...args} themeControl={<ThemeModeSwitch value={mode} onChange={setMode} />} />
+      <SiteHeader
+        {...args}
+        themeControl={
+          <ThemeModeSwitch value={mode} onChange={setMode} idPrefix="story-desktop-theme" />
+        }
+        mobileThemeControl={
+          <ThemeModeSwitch value={mode} onChange={setMode} idPrefix="story-mobile-theme" />
+        }
+      />
     );
   },
   play: siteHeaderDefaultPlay,
