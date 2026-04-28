@@ -42,9 +42,15 @@ function TokenSection({
   children: ReactNode;
 }) {
   return (
-    <section className={styles.section} aria-labelledby={`${title.toLowerCase().replaceAll(" ", "-")}-title`}>
+    <section
+      className={styles.section}
+      aria-labelledby={`${title.toLowerCase().replaceAll(" ", "-")}-title`}
+    >
       <div className={styles.sectionIntro}>
-        <h2 id={`${title.toLowerCase().replaceAll(" ", "-")}-title`} className={styles.sectionTitle}>
+        <h2
+          id={`${title.toLowerCase().replaceAll(" ", "-")}-title`}
+          className={styles.sectionTitle}
+        >
           {title}
         </h2>
         <p className={styles.sectionDescription}>{description}</p>
@@ -90,7 +96,8 @@ export function TypographyTokens() {
         <p className={styles.eyebrow}>--font-geist-mono</p>
         <p className={styles.displayText}>Engineering systems with clear ownership.</p>
         <p className={styles.bodyText}>
-          Body copy uses Geist Sans with readable line-height, while small technical labels use Geist Mono.
+          Body copy uses Geist Sans with readable line-height, while small technical labels use
+          Geist Mono.
         </p>
       </div>
     </TokenSection>
