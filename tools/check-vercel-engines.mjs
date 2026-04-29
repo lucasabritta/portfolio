@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const expectedVercelEngine = "24.15.0";
+const expectedVercelEngine = "24.14.1";
 const packagePaths = [
   "package.json",
   "apps/frontend/package.json",
@@ -28,7 +28,7 @@ for (const packagePath of packagePaths) {
 }
 
 if (failures.length > 0) {
-  console.error("Package engines must pin the Node.js LTS runtime to 24.15.0.");
+  console.error("Package engines must pin the Node.js LTS runtime to 24.14.1.");
   console.error(
     "Keep package engines, .nvmrc, and apps/frontend/Dockerfile on the same Node.js version.",
   );

@@ -31,7 +31,7 @@ The **`frontend`** service mounts a **named volume** for `apps/frontend/.next` s
 
 ## Storybook and full checks (this repo)
 
-- **`Dockerfile`** pulls Node from **`public.ecr.aws/docker/library/node:24.15.0-bookworm-slim`** by default (mirrors Docker Official Images) when Docker Hub returns TLS errors via Cloudflare R2. Override at build time: `docker compose build --build-arg NODE_IMAGE=node:24.15.0-bookworm-slim frontend` if your network can reach Docker Hub reliably.
+- **`Dockerfile`** pulls Node from **`public.ecr.aws/docker/library/node:24.14.1-bookworm-slim`** by default (mirrors Docker Official Images) when Docker Hub returns TLS errors via Cloudflare R2. Override at build time: `docker compose build --build-arg NODE_IMAGE=node:24.14.1-bookworm-slim frontend` if your network can reach Docker Hub reliably.
 - The **`development`** image extends the **`deps`** stage so **Playwright system libraries** installed by `yarn playwright install chromium --with-deps` are present for **`yarn test:storybook`** / **`yarn test`** in packages that need Chromium. Do not split `development` onto a fresh `FROM node` without reinstalling deps, or Chromium will fail with missing **`libglib-2.0.so.0`** (and similar).
 - **`frontend`** publishes **3000** (Next.js) and **6006** (Storybook). Browsers live at **`PLAYWRIGHT_BROWSERS_PATH=/ms-playwright`** (not under the `node_modules` volume).
 - Run Storybook from the host browser:

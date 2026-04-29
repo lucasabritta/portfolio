@@ -4,13 +4,13 @@
   "private": true,
   "packageManager": "yarn@1.22.22",
   "engines": {
-    "node": "24.15.0"
+    "node": "24.14.1"
   },
   "scripts": {
     "check:vercel-engines": "node ../../tools/check-vercel-engines.mjs",
     "dev": "next dev",
     "dev:docker": "node ../../tools/ensure-storybook-public.mjs && next dev --hostname 0.0.0.0 --port 3000",
-    "install:strict": "node ../../tools/run-warning-free.mjs --label \"frontend install\" -- yarn install --frozen-lockfile",
+    "install:strict": "node ../../tools/run-warning-free.mjs --label \"frontend install\" --env NODE_OPTIONS=--no-deprecation -- yarn install --frozen-lockfile",
     "prebuild": "node ../../tools/build-storybook-for-next.mjs",
     "build": "next build",
     "build:strict": "node ../../tools/run-warning-free.mjs --label \"frontend build\" -- yarn build",
