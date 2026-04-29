@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { PAGE_COPY } from "./fixtures/strings";
+import { PAGE_COPY } from "../../support/helpers/strings";
 
 test.describe("Build and Storybook HTTP routes", () => {
   test("GET /build returns HTML", async ({ request }) => {

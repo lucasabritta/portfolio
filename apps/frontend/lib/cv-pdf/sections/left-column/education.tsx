@@ -1,6 +1,6 @@
 import { Text, View } from "@react-pdf/renderer";
 
-import { splitDegree } from "@cv-pdf/sections/text-format";
+import { splitDegree } from "@cv-pdf/sections/_shared/text-format";
 import { cvPdfStyles } from "@cv-pdf/styles";
 import type { ResumeEducationEntry } from "@portfolio/resume-content";
 

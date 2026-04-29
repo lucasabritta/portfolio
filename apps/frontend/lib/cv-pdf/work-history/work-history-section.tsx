@@ -1,6 +1,6 @@
 import { Text, View } from "@react-pdf/renderer";
 
-import { WorkEntry } from "@cv-pdf/sections/work-entry";
+import { WorkEntry } from "@cv-pdf/work-history/work-entry";
 import { cvPdfStyles } from "@cv-pdf/styles";
 import { buildPdfWorkEntryKey, type FirstPageEntry } from "@cv-pdf/work-history";
 

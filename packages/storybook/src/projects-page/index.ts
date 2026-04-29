@@ -1,6 +1,3 @@
-"use client";
-
-export { ProjectsPageView } from "./projects-page-view";
 export type {
   PresentationFlagshipProject,
   PresentationPinnedRepo,

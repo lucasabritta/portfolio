@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Observability } from "@/app/observability";
-import { buildSiteChromeProps } from "@/lib/site-chrome-props";
-import { themeInlineBootstrapScript } from "@/lib/theme-inline-script";
-import { siteMetadata } from "@/app/layout.metadata";
-import { SiteChromeClient } from "@/app/site-chrome-client";
-import { ThemeProvider } from "@/app/theme-provider";
+import { Observability } from "@/app/_shell/observability";
+import { buildSiteChromeProps } from "@/lib/site/site-chrome-props";
+import { themeInlineBootstrapScript } from "@/lib/theme/theme-inline-script";
+import { siteMetadata } from "@/app/_shell/layout.metadata";
+import { SiteChromeClient } from "@/app/_shell/site-chrome-client";
+import { ThemeProvider } from "@/app/_shell/theme-provider";
 import "@portfolio/storybook/globals.css";
-import "@/lib/cv-pdf/cv-pdf.css";
+import "@/app/_styles/cv-pdf.tokens.css";
 import styles from "@portfolio/storybook/layout.module.css";
 
 const geistSans = Geist({

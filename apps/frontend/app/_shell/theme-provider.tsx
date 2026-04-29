@@ -11,7 +11,11 @@ import {
   type ReactNode,
 } from "react";
 
-import { isThemePreference, THEME_STORAGE_KEY, type ThemePreference } from "@/lib/theme-storage";
+import {
+  isThemePreference,
+  THEME_STORAGE_KEY,
+  type ThemePreference,
+} from "@/lib/theme/theme-storage";
 
 type ThemeContextValue = {
   preference: ThemePreference;

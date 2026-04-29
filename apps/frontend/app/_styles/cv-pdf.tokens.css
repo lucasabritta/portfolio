@@ -1,6 +1,7 @@
 /**
  * CV PDF design tokens (browser / documentation).
- * @react-pdf/renderer uses `StyleSheet` in `styles.ts` (and `styles/*`) — keep colors and spacing aligned here.
+ * @react-pdf/renderer uses `StyleSheet` under `lib/cv-pdf` — keep colors and
+ * spacing aligned here without mixing browser CSS into the PDF implementation.
  */
 :root {
   --cv-pdf-color-text: #111827;

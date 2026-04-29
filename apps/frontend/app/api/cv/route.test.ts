@@ -7,7 +7,7 @@ const { createCvPdfDownloadResponseMock } = vi.hoisted(() => ({
   createCvPdfDownloadResponseMock: vi.fn(),
 }));
 
-vi.mock("@/lib/cv-pdf-download-response", () => ({
+vi.mock("@/lib/cv-pdf/download-response", () => ({
   createCvPdfDownloadResponse: createCvPdfDownloadResponseMock,
 }));
 

@@ -1,7 +1,7 @@
 import { Link, Text, View } from "@react-pdf/renderer";
 
 import { cvPdfStyles } from "@cv-pdf/styles";
-import { wrapLongUrl } from "@cv-pdf/sections/text-format";
+import { wrapLongUrl } from "@cv-pdf/sections/_shared/text-format";
 
 type LeftColumnContactsProps = {
   phone: string;
