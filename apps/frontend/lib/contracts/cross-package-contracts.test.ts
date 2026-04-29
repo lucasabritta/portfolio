@@ -12,7 +12,7 @@ import {
 import { presentationWorkEntryKey } from "@portfolio/storybook/home";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
-const e2eStringsPath = path.resolve(dirname, "../../../../apps/e2e/fixtures/strings.ts");
+const e2eStringsPath = path.resolve(dirname, "../../../../apps/e2e/support/helpers/strings.ts");
 
 describe("cross-package presentation contracts", () => {
   it("keeps Storybook work-entry keys aligned with resume-content", () => {
