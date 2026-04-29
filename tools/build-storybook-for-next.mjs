@@ -13,8 +13,26 @@ const outDir = path.join(root, "apps", "frontend", "public", "storybook");
 
 function resolveStorybookDispatcher() {
   const candidates = [
-    path.join(root, "packages", "storybook", "node_modules", "storybook", "dist", "bin", "dispatcher.js"),
-    path.join(root, "apps", "frontend", "node_modules", "storybook", "dist", "bin", "dispatcher.js"),
+    path.join(
+      root,
+      "packages",
+      "storybook",
+      "node_modules",
+      "storybook",
+      "dist",
+      "bin",
+      "dispatcher.js",
+    ),
+    path.join(
+      root,
+      "apps",
+      "frontend",
+      "node_modules",
+      "storybook",
+      "dist",
+      "bin",
+      "dispatcher.js",
+    ),
     path.join(root, "node_modules", "storybook", "dist", "bin", "dispatcher.js"),
   ];
   for (const candidate of candidates) {
@@ -70,7 +88,11 @@ function patchStorybookHtml(dir) {
   }
 }
 
-const env = { ...process.env, STORYBOOK_PUBLIC_PATH: "/storybook" };
+const env = {
+  ...process.env,
+  STORYBOOK_PUBLIC_PATH: "/storybook",
+  VITE_CJS_IGNORE_WARNING: "true",
+};
 
 const result = spawnSync(process.execPath, [storybookBin, "build", "-o", outDir], {
   cwd: storybookPkg,

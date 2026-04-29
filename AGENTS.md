@@ -30,6 +30,7 @@ Open only the document that matches the task.
 - [`.cursor/skills/vercel-deploy/SKILL.md`](.cursor/skills/vercel-deploy/SKILL.md)
 - [`.cursor/skills/ci-github-actions/SKILL.md`](.cursor/skills/ci-github-actions/SKILL.md)
 - [`.cursor/skills/nextjs-change-checklist/SKILL.md`](.cursor/skills/nextjs-change-checklist/SKILL.md)
+- [`.cursor/skills/react-nextjs/SKILL.md`](.cursor/skills/react-nextjs/SKILL.md)
 - [`.cursor/skills/storybook-ui/SKILL.md`](.cursor/skills/storybook-ui/SKILL.md)
 - [`.cursor/skills/subagent-plan-review/SKILL.md`](.cursor/skills/subagent-plan-review/SKILL.md) — parallel subagents for plan and feature design validation
 - [`.cursor/skills/subagent-code-review/SKILL.md`](.cursor/skills/subagent-code-review/SKILL.md) — parallel subagents for code / PR / pre-merge review

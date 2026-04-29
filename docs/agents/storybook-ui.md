@@ -34,7 +34,7 @@ Both bans are enforced in **`apps/frontend/eslint.config.mjs`** via **`no-restri
 
 ## Running Storybook
 
-Use **Node.js 22.12+** (see `package.json` `engines` and `.nvmrc`) so Storybook 10 and Vitest match CI. Storybook’s CLI enforces **20.19+ or 22.12+**.
+Use **Node.js 24.14.1** (see `.nvmrc`, package `engines`, and the Docker image pin) so Storybook 10 and Vitest match CI. Storybook’s CLI enforces **20.19+ or 22.12+**.
 
 From **`packages/storybook`** (after `yarn install` in that directory):
 
@@ -52,7 +52,7 @@ Output is written to **`apps/frontend/public/storybook/`** with Vite **`base: /s
 
 ### Docker (preferred)
 
-The **`Dockerfile`** uses **`public.ecr.aws/docker/library/node:22-bookworm-slim`**. The **`development`** stage builds **`FROM deps`** so Playwright system libraries are present for **`yarn test:storybook`**.
+The **`Dockerfile`** uses **`public.ecr.aws/docker/library/node:24.14.1-bookworm-slim`**. The **`development`** stage builds **`FROM deps`** so Playwright system libraries are present for **`yarn test:storybook`**.
 
 The **`frontend`** service exposes **3000** (Next.js) and **6006** (Storybook). Run Storybook from the container (working directory is **`apps/frontend`**):
 

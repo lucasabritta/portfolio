@@ -24,7 +24,7 @@ jobs:
         run: docker compose build frontend
 
       - name: Lint
-        run: docker compose run --rm frontend sh -lc "yarn --cwd ../../packages/storybook install --frozen-lockfile && yarn --cwd ../../packages/storybook lint"
+        run: docker compose run --rm frontend sh -lc "yarn --cwd ../../packages/storybook install:strict && yarn --cwd ../../packages/storybook lint"
 
       - name: Format check
         run: docker compose run --rm frontend yarn --cwd ../../packages/storybook format:check
@@ -34,3 +34,6 @@ jobs:
 
       - name: Storybook UI tests
         run: docker compose run --rm frontend yarn --cwd ../../packages/storybook test:storybook
+
+      - name: Strict Storybook build
+        run: docker compose run --rm frontend yarn --cwd ../../packages/storybook build-storybook:strict
