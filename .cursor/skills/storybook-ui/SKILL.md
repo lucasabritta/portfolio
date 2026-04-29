@@ -31,7 +31,7 @@ description: >-
 
 ## Commands
 
-**Host** (requires Node **22.13.0** per `.nvmrc` / Docker for Storybook CLI / CI parity):
+**Host** (requires Node **24.15.0** per `.nvmrc`, package `engines`, and Docker for Storybook CLI / CI parity):
 
 ```bash
 cd packages/storybook && yarn install && yarn storybook

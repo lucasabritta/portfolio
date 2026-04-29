@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "yarn@1.22.22",
   "engines": {
-    "node": "22.x"
+    "node": "24.15.0"
   },
   "exports": {
     ".": "./src/index.ts"

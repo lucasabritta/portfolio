@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const expectedVercelEngine = "22.x";
+const expectedVercelEngine = "24.15.0";
 const packagePaths = [
   "package.json",
   "apps/frontend/package.json",
@@ -28,9 +28,9 @@ for (const packagePath of packagePaths) {
 }
 
 if (failures.length > 0) {
-  console.error("Vercel only selects Node.js by major version, so package engines must use 22.x.");
+  console.error("Package engines must pin the Node.js LTS runtime to 24.15.0.");
   console.error(
-    "Keep exact local/CI runtime pinning in .nvmrc and apps/frontend/Dockerfile instead.",
+    "Keep package engines, .nvmrc, and apps/frontend/Dockerfile on the same Node.js version.",
   );
   for (const failure of failures) {
     console.error(`- ${failure}`);

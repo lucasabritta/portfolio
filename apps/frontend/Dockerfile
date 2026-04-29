@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG NODE_IMAGE=public.ecr.aws/docker/library/node:22.13.0-bookworm-slim
+ARG NODE_IMAGE=public.ecr.aws/docker/library/node:24.15.0-bookworm-slim
 
 FROM ${NODE_IMAGE} AS deps
 WORKDIR /workspace

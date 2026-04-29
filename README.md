@@ -32,7 +32,7 @@ docker compose run --rm --service-ports frontend sh -lc "cd ../../packages/story
 
 ## Requirements
 
-- **Node.js** 22.13.0 (see `.nvmrc` and the Docker image pin; package `engines` use Vercel's required `22.x` selector).
+- **Node.js** 24.15.0 (see `.nvmrc`, package `engines`, and the Docker image pin).
 - **Yarn** classic (v1) per package directory.
 
 ## Host install (without Docker)
