@@ -29,6 +29,9 @@ jobs:
       - name: Install Storybook dependencies for build
         run: docker compose run --rm frontend yarn --cwd ../../packages/storybook install:strict
 
+      - name: Check Vercel Node engine selector
+        run: docker compose run --rm frontend yarn check:vercel-engines
+
       - name: Lint
         run: docker compose run --rm frontend yarn lint
 

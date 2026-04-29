@@ -34,7 +34,7 @@ Both bans are enforced in **`apps/frontend/eslint.config.mjs`** via **`no-restri
 
 ## Running Storybook
 
-Use **Node.js 22.13.0** (see `package.json` `engines` and `.nvmrc`) so Storybook 10 and Vitest match CI. Storybook’s CLI enforces **20.19+ or 22.12+**.
+Use **Node.js 22.13.0** (see `.nvmrc` and the Docker image pin) so Storybook 10 and Vitest match CI. Package `engines` use Vercel's required **`22.x`** selector; Storybook’s CLI enforces **20.19+ or 22.12+**.
 
 From **`packages/storybook`** (after `yarn install` in that directory):
 
