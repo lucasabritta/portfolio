@@ -2,7 +2,7 @@ import type { ResumeData } from "@portfolio/resume-content";
 import type { BuildPageViewProps } from "@portfolio/storybook/build-page";
 import type { ProjectsPageViewProps } from "@portfolio/storybook/projects-page";
 
-import type { SiteChromeStaticProps } from "@/lib/site-chrome-props";
+import type { SiteChromeStaticProps } from "@/lib/site/site-chrome-props";
 
 type Link = {
   label: string;

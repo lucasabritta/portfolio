@@ -2,9 +2,9 @@ import { describe, expect, it } from "vitest";
 
 import { resumeData } from "@portfolio/resume-content";
 
-import { buildPageContent } from "../build-site";
-import { projectsPageContent } from "../projects-site";
-import { buildSiteChromeProps } from "../site-chrome-props";
+import { buildPageContent } from "../site/build-site";
+import { projectsPageContent } from "../site/projects-site";
+import { buildSiteChromeProps } from "../site/site-chrome-props";
 import { buildLlmsText, buildProjectsText, buildResumeText } from "./text";
 
 describe("agent text formatters", () => {

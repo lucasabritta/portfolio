@@ -1,6 +1,6 @@
 import { Text, View } from "@react-pdf/renderer";
 
-import { BulletList } from "@cv-pdf/sections/bullet-list";
+import { BulletList } from "@cv-pdf/sections/_shared/bullet-list";
 import { cvPdfStyles } from "@cv-pdf/styles";
 import type { ResumeExperienceEntry } from "@portfolio/resume-content";
 

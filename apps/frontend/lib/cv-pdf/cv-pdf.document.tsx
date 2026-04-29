@@ -2,11 +2,11 @@ import { Document, Page, View } from "@react-pdf/renderer";
 
 import "@cv-pdf/fonts";
 import { buildPdfWorkEntryKey, buildWorkHistoryLayout } from "@cv-pdf/work-history";
-import { BulletList } from "@cv-pdf/sections/bullet-list";
+import { BulletList } from "@cv-pdf/sections/_shared/bullet-list";
 import { LeftColumnLowerBand, LeftColumnSummaryBand } from "@cv-pdf/sections/left-column";
 import { SummarySection } from "@cv-pdf/sections/summary-section";
-import { WorkEntry } from "@cv-pdf/sections/work-entry";
-import { WorkHistorySection } from "@cv-pdf/sections/work-history-section";
+import { WorkEntry } from "@cv-pdf/work-history/work-entry";
+import { WorkHistorySection } from "@cv-pdf/work-history/work-history-section";
 import { cvPdfStyles } from "@cv-pdf/styles";
 import type { ResumeData } from "@portfolio/resume-content";
 

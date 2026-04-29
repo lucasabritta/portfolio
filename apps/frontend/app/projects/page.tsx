@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-import { ProjectsPageView } from "@portfolio/storybook/projects-page";
+import { ProjectsPageView } from "@portfolio/storybook/projects-page-view";
 
-import { projectsPageContent } from "@/lib/projects-site";
+import { projectsPageContent } from "@/lib/site/projects-site";
 
 export const metadata: Metadata = {
   title: "Projects",

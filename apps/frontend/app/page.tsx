@@ -19,7 +19,7 @@ import {
   WorkHistorySection,
 } from "@portfolio/storybook/home";
 
-import { buildHomePageModel } from "@/lib/home-page-model";
+import { buildHomePageModel } from "@/lib/site/home-page-model";
 
 export const metadata: Metadata = {
   title: "Home",

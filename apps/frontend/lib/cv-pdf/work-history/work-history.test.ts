@@ -12,7 +12,7 @@ import {
   FIRST_PAGE_ENTRY_COUNT,
   buildPdfWorkEntryKey,
   buildWorkHistoryLayout,
-} from "./work-history";
+} from ".";
 
 describe("buildPdfWorkEntryKey", () => {
   it("delegates to the canonical buildWorkEntryStableKey", () => {

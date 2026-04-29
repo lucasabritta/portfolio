@@ -1,4 +1,4 @@
-import { createCvPdfDownloadResponse } from "@/lib/cv-pdf-download-response";
+import { createCvPdfDownloadResponse } from "@/lib/cv-pdf/download-response";
 
 export const runtime = "nodejs";
 

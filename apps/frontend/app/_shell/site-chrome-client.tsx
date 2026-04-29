@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 
-import type { SiteChromeStaticProps } from "@/lib/site-chrome-props";
+import type { SiteChromeStaticProps } from "@/lib/site/site-chrome-props";
 import {
   SiteFooter,
   SiteHeader,

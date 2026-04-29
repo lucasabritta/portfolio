@@ -1,7 +1,7 @@
 import { Link, Text, View } from "@react-pdf/renderer";
 
 import { cvPdfStyles } from "@cv-pdf/styles";
-import { formatSidebarUrlForPdf } from "@cv-pdf/sections/text-format";
+import { formatSidebarUrlForPdf } from "@cv-pdf/sections/_shared/text-format";
 import type { ResumePersonalProject } from "@portfolio/resume-content";
 
 type LeftColumnProjectsProps = {
