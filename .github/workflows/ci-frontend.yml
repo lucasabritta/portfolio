@@ -24,7 +24,10 @@ jobs:
         run: docker compose build frontend
 
       - name: Install frontend dependencies
-        run: docker compose run --rm frontend yarn install
+        run: docker compose run --rm frontend yarn install:strict
+
+      - name: Install Storybook dependencies for build
+        run: docker compose run --rm frontend yarn --cwd ../../packages/storybook install:strict
 
       - name: Lint
         run: docker compose run --rm frontend yarn lint
@@ -40,3 +43,6 @@ jobs:
 
       - name: Unit tests
         run: docker compose run --rm frontend yarn test:unit
+
+      - name: Strict production build
+        run: docker compose run --rm frontend yarn build:strict

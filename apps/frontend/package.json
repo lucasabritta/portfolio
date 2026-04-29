@@ -4,16 +4,15 @@
   "private": true,
   "packageManager": "yarn@1.22.22",
   "engines": {
-    "node": ">=22.12.0"
-  },
-  "resolutions": {
-    "@react-pdf/image": "3.0.4"
+    "node": "22.13.0"
   },
   "scripts": {
     "dev": "next dev",
     "dev:docker": "node ../../tools/ensure-storybook-public.mjs && next dev --hostname 0.0.0.0 --port 3000",
+    "install:strict": "node ../../tools/run-warning-free.mjs --label \"frontend install\" -- yarn install --frozen-lockfile",
     "prebuild": "node ../../tools/build-storybook-for-next.mjs",
     "build": "next build",
+    "build:strict": "node ../../tools/run-warning-free.mjs --label \"frontend build\" -- yarn build",
     "start": "next start",
     "start:docker": "next start --hostname 0.0.0.0 --port 3000",
     "lint": "eslint --max-warnings=0 .",

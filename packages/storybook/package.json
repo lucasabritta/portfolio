@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "yarn@1.22.22",
   "engines": {
-    "node": ">=22.12.0"
+    "node": "22.13.0"
   },
   "exports": {
     ".": "./src/index.ts",
@@ -57,7 +57,9 @@
   ],
   "scripts": {
     "storybook": "storybook dev -p 6006 --host 0.0.0.0 --no-open",
+    "install:strict": "node ../../tools/run-warning-free.mjs --label \"storybook install\" -- yarn install --frozen-lockfile",
     "build-storybook": "storybook build",
+    "build-storybook:strict": "node ../../tools/run-warning-free.mjs --label \"storybook build\" --env VITE_CJS_IGNORE_WARNING=true -- yarn build-storybook",
     "test:storybook": "vitest run --config vitest.config.mjs",
     "lint": "eslint --max-warnings=0 src .storybook",
     "typecheck": "tsc --noEmit -p tsconfig.json",

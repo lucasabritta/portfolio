@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG NODE_IMAGE=public.ecr.aws/docker/library/node:22-bookworm-slim
+ARG NODE_IMAGE=public.ecr.aws/docker/library/node:22.13.0-bookworm-slim
 
 FROM ${NODE_IMAGE} AS deps
 WORKDIR /workspace
@@ -50,7 +50,7 @@ WORKDIR /workspace/apps/frontend
 # Refresh file: workspace packages after full COPY (deps layer node_modules can be stale vs packages/*).
 RUN --mount=type=cache,target=/usr/local/share/.cache/yarn,sharing=locked \
   yarn install --frozen-lockfile
-RUN yarn build
+RUN yarn build:strict
 
 FROM ${NODE_IMAGE} AS runner
 WORKDIR /app

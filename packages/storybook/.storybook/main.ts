@@ -1,7 +1,8 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { StorybookConfig } from "@storybook/nextjs-vite";
-import { mergeConfig } from "vite";
+
+process.env.VITE_CJS_IGNORE_WARNING = "true";
 
 const configDir = path.dirname(fileURLToPath(import.meta.url));
 const packageRoot = path.join(configDir, "..");
@@ -16,6 +17,15 @@ function storybookViteBase(): string {
   return withLeading.endsWith("/") ? withLeading : `${withLeading}/`;
 }
 
+function shouldSuppressRollupWarning(warning: { code?: string; message?: string }): boolean {
+  const message = warning.message ?? "";
+  return (
+    warning.code === "MODULE_LEVEL_DIRECTIVE" ||
+    message.includes("Module level directives cause errors when bundled") ||
+    message.includes("Error when using sourcemap for reporting an error")
+  );
+}
+
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(ts|tsx)"],
   addons: ["@storybook/addon-docs", "@storybook/addon-a11y", "@storybook/addon-vitest"],
@@ -25,15 +35,37 @@ const config: StorybookConfig = {
   },
   // Storybook renders DOM UI only and must not reach into `apps/frontend/public`.
   // CV fonts are a PDF-side concern consumed by `apps/frontend/lib/cv-pdf/fonts.ts`.
-  viteFinal: async (viteConfig) =>
-    mergeConfig(viteConfig, {
+  viteFinal: async (viteConfig) => {
+    const existingAlias = viteConfig.resolve?.alias;
+    const alias = Array.isArray(existingAlias)
+      ? [...existingAlias, { find: "@ui", replacement: path.join(packageRoot, "src") }]
+      : {
+          ...existingAlias,
+          "@ui": path.join(packageRoot, "src"),
+        };
+
+    return {
+      ...viteConfig,
       base: storybookViteBase(),
       resolve: {
-        alias: {
-          "@ui": path.join(packageRoot, "src"),
+        ...viteConfig.resolve,
+        alias,
+      },
+      build: {
+        ...viteConfig.build,
+        chunkSizeWarningLimit: 1500,
+        rollupOptions: {
+          ...viteConfig.build?.rollupOptions,
+          onwarn(warning, defaultHandler) {
+            if (shouldSuppressRollupWarning(warning)) {
+              return;
+            }
+            defaultHandler(warning);
+          },
         },
       },
-    }),
+    };
+  },
 };
 
 export default config;

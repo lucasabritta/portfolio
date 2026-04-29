@@ -27,11 +27,11 @@ description: >-
 - Every story file: **`tags: ['autodocs']`**, **`Default`**, semantic variants (`Empty`, `LongContent`, `ManyItems`, `NarrowViewport`, …), **`narrowMobileStory`** from fixtures where responsive coverage is required.
 - Use **`play`** + **`storybook/test`** when the story renders focusable elements (links, buttons) or when asserting structure (headings, **`role="status"`**, visible copy).
 - Share cross-page styles via co-located modules under **`packages/storybook/src/`**, not `apps/frontend/app/*.module.css`.
-- Résumé PDF stays in **`apps/frontend/lib/cv-pdf/**`** (react-pdf, served by **`/api/cv`**); do not move PDF sections into Storybook.
+- Résumé PDF stays in **`apps/frontend/lib/cv-pdf/**`** (react-pdf, served by **`/api/cv`\*\*); do not move PDF sections into Storybook.
 
 ## Commands
 
-**Host** (requires Node **22.12+** per `packages/storybook/package.json` `engines` for Storybook CLI / CI parity):
+**Host** (requires Node **22.13.0** per `packages/storybook/package.json` `engines` for Storybook CLI / CI parity):
 
 ```bash
 cd packages/storybook && yarn install && yarn storybook
