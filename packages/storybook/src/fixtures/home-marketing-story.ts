@@ -56,9 +56,7 @@ export function homeLeadHeroFromHomePageProps(props: HomePageProps): HomeLeadHer
     roleEyebrow: props.role,
     positioningLead: SYNTH_HOME_POSITIONING,
     proofPoints: threeStrings(props.summaryHighlights),
-    contactHint: props.location
-      ? `${props.location} · `
-      : undefined,
+    contactHint: props.location ? `${props.location} · ` : undefined,
     contactHintLabel: props.location ? "contacts" : undefined,
     contactHintHref: props.location ? "#contact-heading" : undefined,
     downloadHref: props.downloadHref,

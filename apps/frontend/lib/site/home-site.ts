@@ -119,9 +119,7 @@ export type HomeMarketingBlocks = {
  * Presentation lives in `@portfolio/storybook`; strings here are site-only unless mirrored from résumé fields.
  */
 export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
-  const contactHint = resume.location
-    ? (`${resume.location} · ` as ContactHintText)
-    : undefined;
+  const contactHint = resume.location ? (`${resume.location} · ` as ContactHintText) : undefined;
 
   return {
     homeLeadHero: {
