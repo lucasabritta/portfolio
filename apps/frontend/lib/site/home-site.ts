@@ -91,7 +91,8 @@ function featuredWorkFromResume(resume: ResumeData): FeaturedWorkPreviewProps {
       },
       {
         title: "How I build this website",
-        description: "A practical look at the site structure, shared UI, release checks, and hosting path.",
+        description:
+          "A practical look at the site structure, shared UI, release checks, and hosting path.",
         href: "/site-architecture",
         ctaLabel: "Read site architecture",
       },
