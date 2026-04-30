@@ -8,8 +8,11 @@ import type { SyntheticEvent } from "react";
  */
 export function hideImageShowFallback(event: SyntheticEvent<HTMLImageElement>): void {
   const img = event.currentTarget;
-  img.style.display = "none";
-  const fallback = img.nextElementSibling;
+  const media = img.closest("picture") ?? img;
+  if (media instanceof HTMLElement) {
+    media.style.display = "none";
+  }
+  const fallback = media.nextElementSibling;
   if (fallback instanceof HTMLElement) {
     fallback.hidden = false;
   }

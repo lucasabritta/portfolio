@@ -8,10 +8,20 @@ import styles from "./projects-page-view.module.css";
 
 function FlagshipMedia({
   imageSrc,
+  imageAvifSrcSet,
+  imageWebpSrcSet,
+  imageSizes,
+  imageWidth,
+  imageHeight,
   imageAlt,
   title,
 }: {
   imageSrc: string | null;
+  imageAvifSrcSet?: string;
+  imageWebpSrcSet?: string;
+  imageSizes?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   imageAlt: string;
   title: string;
 }) {
@@ -19,13 +29,23 @@ function FlagshipMedia({
     <div className={styles.flagshipMedia}>
       <div className={styles.mediaFrame}>
         {imageSrc ? (
-          <img
-            src={imageSrc}
-            alt={imageAlt}
-            loading="lazy"
-            decoding="async"
-            onError={hideImageShowFallback}
-          />
+          <picture>
+            {imageAvifSrcSet ? (
+              <source srcSet={imageAvifSrcSet} sizes={imageSizes} type="image/avif" />
+            ) : null}
+            {imageWebpSrcSet ? (
+              <source srcSet={imageWebpSrcSet} sizes={imageSizes} type="image/webp" />
+            ) : null}
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              loading="lazy"
+              decoding="async"
+              width={imageWidth}
+              height={imageHeight}
+              onError={hideImageShowFallback}
+            />
+          </picture>
         ) : null}
         <div
           className={styles.mediaPlaceholder}
@@ -60,6 +80,11 @@ export function ProjectsPageView({
       <section aria-labelledby="flagship-title" className={styles.flagship}>
         <FlagshipMedia
           imageSrc={flagship.imageSrc}
+          imageAvifSrcSet={flagship.imageAvifSrcSet}
+          imageWebpSrcSet={flagship.imageWebpSrcSet}
+          imageSizes={flagship.imageSizes}
+          imageWidth={flagship.imageWidth}
+          imageHeight={flagship.imageHeight}
           imageAlt={flagship.imageAlt}
           title={flagship.title}
         />
@@ -121,9 +146,9 @@ export function ProjectsPageView({
                   className={styles.repoLink}
                   rel="noopener noreferrer"
                   target="_blank"
-                  aria-label={`Open GitHub repository: ${repo.name} (opens in a new tab)`}
                 >
                   View on GitHub
+                  <span className={styles.visuallyHidden}>: {repo.name} (opens in a new tab)</span>
                 </ActionLink>
               </Card>
             </li>
