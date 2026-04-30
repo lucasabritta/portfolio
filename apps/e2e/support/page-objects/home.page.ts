@@ -66,6 +66,9 @@ export class HomePage {
   }
 
   async openBuildFromPrimaryNav() {
-    await Promise.all([this.page.waitForURL(/\/build$/), this.primaryNavLink("Build").click()]);
+    await Promise.all([
+      this.page.waitForURL(/\/site-architecture$/),
+      this.primaryNavLink("Site architecture").click(),
+    ]);
   }
 }

@@ -9,7 +9,7 @@ This document captures **product intent**, **current state**, **design constrain
 3. **Storybook** is **discoverable and explained**: link from the site, one paragraph on what lives there, URL `/storybook` (static build + Next rewrite — see existing config).
 4. **How the site is deployed / built**: human-readable “build story” (monorepo, Docker/CI, hosting) without dumping raw config.
 5. **GitHub**: surfaced projects (pinned / curated), not buried.
-6. **Game** (_Echoes: Missing Cat_): flagship treatment — visual, outcome, stack/AI angle, store link.
+6. **Game** (_Echoes of the missing cat_): flagship treatment — visual, outcome, stack/AI angle, store link.
 
 Use **multiple routes** if needed; avoid a single endless scroll as the only navigation pattern.
 
@@ -24,7 +24,7 @@ Use **multiple routes** if needed; avoid a single endless scroll as the only nav
 | Area                   | Location / behavior                                                                                                                                                                                                                                                                                                                    |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Single homepage        | `apps/frontend/app/page.tsx` composes marketing blocks (`HomeLeadHero`, credibility, featured work, Storybook teaser, condensed résumé) from `apps/frontend/lib/home-site.ts`, then the existing section components inside `#resume`, using `resumeData` from `@portfolio/resume-content`.                                             |
-| App Router routes      | `/`, `/build`, and `/projects` (flagship + pinned GitHub) under `apps/frontend/app/`.                                                                                                                                                                                                                                                  |
+| App Router routes      | `/`, `/site-architecture`, and `/projects` (flagship + pinned GitHub) under `apps/frontend/app/`.                                                                                                                                                                                                                                      |
 | Profile & links        | `packages/resume-content/src/profile.ts` — `contactLinks`: Email, LinkedIn, Google Play; **no GitHub**.                                                                                                                                                                                                                                |
 | Personal projects      | `packages/resume-content/src/personal-projects.ts` — one entry (game).                                                                                                                                                                                                                                                                 |
 | Hero + shell           | `/` uses `packages/storybook/src/home-marketing/home-lead-hero.tsx` (`HomeLeadHero`) inside `HomePageShell`; `PortfolioHero` remains available for other surfaces.                                                                                                                                                                     |
@@ -32,7 +32,7 @@ Use **multiple routes** if needed; avoid a single endless scroll as the only nav
 | Site metadata baseline | `apps/frontend/app/layout.metadata.ts` exports shared root metadata; route-level metadata should extend this rather than reinvent it.                                                                                                                                                                                                  |
 | CV PDF                 | `apps/frontend/app/api/cv/route.ts`, `apps/frontend/lib/cv-pdf/*`; home lead hero uses `downloadHref="/api/cv"`.                                                                                                                                                                                                                       |
 | Storybook static URL   | `apps/frontend/next.config.ts` rewrites `/storybook` → `/storybook/index.html`; build output under `apps/frontend/public/storybook/` (see `docs/agents/storybook-ui.md`).                                                                                                                                                              |
-| E2E                    | `apps/e2e/cv-download.spec.ts` (PDF API), `projects-page.spec.ts`, `nav-smoke.spec.ts` (nav, `/`, `/build`, `/#resume`, footer discovery).                                                                                                                                                                                             |
+| E2E                    | `apps/e2e/cv-download.spec.ts` (PDF API), `projects-page.spec.ts`, `nav-smoke.spec.ts` (nav, `/`, `/site-architecture`, `/#resume`, footer discovery).                                                                                                                                                                                 |
 | Boundaries             | **Do not** import `@portfolio/resume-content` inside `packages/storybook`. App composes data → presentation props.                                                                                                                                                                                                                     |
 
 ## Implementation guardrails
@@ -52,19 +52,19 @@ Implement incrementally; not every route is required for v1.
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `/`                     | Story-led home: positioning copy, primary CTAs (CV, GitHub, featured work), optional featured strip (game + repos + Storybook). |
 | `/projects`             | Game + GitHub highlights; cards with image, stack, role, links.                                                                 |
-| `/build` (or `/craft`)  | How the site is built: monorepo, Storybook, tests, Docker, CI, deploy; link `/storybook`.                                       |
+| `/site-architecture`    | Site architecture: monorepo, Storybook, tests, Docker, CI, deploy, Vercel, and Cloudflare; link `/storybook`.                   |
 | `/cv` _(optional)_      | Full linear résumé sections **or** keep long CV on `/` and use `/cv` later — decide for SEO/scroll length.                      |
 | `/contact` _(optional)_ | Only if footer is insufficient for shared “contact” URLs.                                                                       |
 
 **Global navigation**: persistent header or sticky TOC — Home · Projects · CV · Build · (Contact).
 
-**Footer**: extend beyond name + role — GitHub, LinkedIn, `/storybook`, link to `/build`, legal/colophon if needed.
+**Footer**: extend beyond name + role — GitHub, LinkedIn, `/storybook`, link to `/site-architecture`, legal/colophon if needed.
 
 **Recommended content split**:
 
 - `/` should answer: who Lucas is, what he is strong at, and where to click next.
 - `/projects` should answer: what he has built, with the game treated as the flagship case study.
-- `/build` should answer: how this site is made and maintained, with a clear link to `/storybook`.
+- `/site-architecture` should answer: how this site is made and maintained, with a clear link to `/storybook`.
 - `/cv` remains optional because `/api/cv` already covers download/distribution.
 
 ## Visual design direction (v1 spec)
@@ -202,7 +202,7 @@ Reasoning: this keeps desktop polished and uncluttered while preserving conversi
   - LinkedIn
   - Storybook
   - CV download
-  - Optional short colophon line such as “Built with Next.js, Storybook, and Vercel”
+  - Optional short colophon line such as “Built with Next.js, Storybook, Vercel, and Cloudflare”
 
 ## Page-level visual spec
 
@@ -240,7 +240,7 @@ Hero CTAs:
 ### `/projects`
 
 - Use a clean list/grid hybrid:
-  - First block: flagship feature for _Echoes: Missing Cat_
+  - First block: flagship feature for _Echoes of the missing cat_
   - Then: 3-6 curated GitHub/project cards
 - Flagship project should have:
   - large image area
@@ -251,7 +251,7 @@ Hero CTAs:
 - Desktop: flagship project can use a 60/40 or 55/45 split.
 - Mobile: image first, then content, then links.
 
-### `/build`
+### `/site-architecture`
 
 - This page should read like a concise engineering narrative, not docs pasted into the site.
 - Use 3-5 blocks such as:
@@ -280,7 +280,7 @@ Desktop order:
      - CTA row: `Download CV` / `View Projects` / `Open Storybook`
    - right column:
      - one highlight card with 3 proof points
-     - or one flagship teaser for _Echoes: Missing Cat_
+     - or one flagship teaser for _Echoes of the missing cat_
 3. **Credibility strip**
    - 3 horizontally aligned proof items on desktop
    - examples: startup growth, platform quality, hands-on technical leadership
@@ -289,7 +289,7 @@ Desktop order:
    - 2 smaller supporting cards underneath or beside it
 5. **Build/storybook preview**
    - short explanation of the build system
-   - one CTA to `/build`
+   - one CTA to `/site-architecture`
    - one secondary CTA to `/storybook`
 6. **Optional condensed CV preview**
    - 2-3 timeline snippets max
@@ -343,7 +343,7 @@ Desktop order:
 
 1. Sticky header
 2. Intro band
-   - title such as `How this site is built`
+   - title such as `Site architecture`
    - one paragraph explaining the philosophy
 3. Four narrative blocks
    - `Architecture`
@@ -459,7 +459,7 @@ This document is intentionally specific enough to guide implementation without r
 - [x] Decide whether **GitHub** is **résumé data** (`packages/resume-content`) or **site-only marketing data** (`apps/frontend/lib/**`); implement the smaller model that matches intended reuse.
 - [x] Footer (or header): explicit **`/storybook`** link with accessible label (e.g. “Component library (Storybook)”).
 - [x] Ensure a **GitHub profile URL** exists in the data model chosen above before wiring header/footer links to it.
-- [x] Add **`/build`** route: static/marketing content first (**TSX** by default; MDX is an option but requires adding `@next/mdx` + config, which is not present today); no backend required.
+- [x] Add **`/site-architecture`** route: static/marketing content first (**TSX** by default; MDX is an option but requires adding `@next/mdx` + config, which is not present today); no backend required.
 - [x] **Metadata**: extend the existing `siteMetadata` baseline with route-specific title/description (OG later if desired).
 - [x] Add Storybook coverage for any new shared chrome components introduced in `packages/storybook`.
 
@@ -496,14 +496,14 @@ _Automation:_ CI does not assert viewport height; do a quick laptop-width spot-c
 - One **positioning paragraph** (non-résumé tone).
 - **Game**: hero image (or approved placeholder), 3–5 bullets, optional “lessons learned.”
 - **GitHub**: list of repos to pin + one-line hook each.
-- **`/build`**: facts to highlight (Vercel, GitHub Actions, Docker — align with truth in README/workflows).
+- **`/site-architecture`**: facts to highlight (Vercel, Cloudflare, GitHub Actions, Docker — align with truth in README/workflows).
 - Preferred **target role / audience emphasis** if the homepage should optimize for EM leadership, hands-on platform work, or AI/product narrative.
 
 ## Open decisions (pick one before deep implementation)
 
 1. **CV on `/` vs `/cv`**: single long page vs split; affects scroll and SEO.
 2. **GitHub placement/model**: add to `resume-content` for shared reuse, or keep as site-only curated data in frontend.
-3. **Route naming**: `/build` vs `/craft` (recommend `/build` unless a more editorial voice is preferred).
+3. **Route naming**: `/site-architecture` is the canonical route.
 4. **Internationalization**: English-only v1 is implied; call out if ES copy is needed later.
 5. **GitHub data source**: manual curation (recommended v1) vs GitHub API (token, caching, rate limits).
 
@@ -517,7 +517,7 @@ _Automation:_ CI does not assert viewport height; do a quick laptop-width spot-c
 
 ## Success criteria (definition of done for revamp v1)
 
-- [x] New routes: at minimum **`/projects`** and **`/build`**, plus improved **`/`** and global nav/footer.
+- [x] New routes: at minimum **`/projects`** and **`/site-architecture`**, plus improved **`/`** and global nav/footer.
 - [x] GitHub + Storybook + CV are **obvious** from first visit.
 - [x] Game has **flagship** treatment (visual + narrative).
 - [x] New content lives in the correct package: shared presentation in Storybook, shared résumé facts in `resume-content`, route composition in frontend.

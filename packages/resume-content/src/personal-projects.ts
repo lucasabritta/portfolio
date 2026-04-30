@@ -3,8 +3,8 @@ import type { ResumePersonalProject } from "./types";
 
 export const resumePersonalProjects = [
   {
-    title: "Echoes: Missing Cat",
-    description: "Developed an android game using 100% AI",
+    title: "Echoes of the missing cat",
+    description: "Built and released a landscape Android adventure game with AI-assisted workflows",
     href: PROJECT_URLS.echoesMissingCatPlayStore,
   },
 ] satisfies ResumePersonalProject[];

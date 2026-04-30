@@ -57,7 +57,11 @@ export function homeLeadHeroFromHomePageProps(props: HomePageProps): HomeLeadHer
     positioningLead: SYNTH_HOME_POSITIONING,
     proofPoints: threeStrings(props.summaryHighlights),
     contactHint: props.location
-      ? `${props.location} · Full contact details on the CV PDF`
+      ? {
+          prefix: `${props.location} · `,
+          label: "contacts",
+          href: "#contact-heading",
+        }
       : undefined,
     downloadHref: props.downloadHref,
     projectsHref: "/projects",
@@ -91,10 +95,10 @@ export function featuredWorkPreviewFromHomePageProps(
         ctaLabel: "View Projects",
       },
       {
-        title: "Build story",
-        description: "Monorepo, Storybook, CI, and how this site is hosted.",
-        href: "/build",
-        ctaLabel: "Read build notes",
+        title: "How I build this website",
+        description: "Site structure, shared UI, release checks, and hosting path.",
+        href: "/site-architecture",
+        ctaLabel: "Read site architecture",
       },
     ],
   };
@@ -103,7 +107,7 @@ export function featuredWorkPreviewFromHomePageProps(
 export const SYNTH_BUILD_TEASER: BuildStorybookTeaserProps = {
   heading: "Site & component library",
   lead: "The portfolio runs as a small monorepo: a Next.js app, a Storybook package for shared UI, résumé data shared with the PDF CV, and GitHub Actions for split CI.",
-  buildHref: "/build",
+  buildHref: "/site-architecture",
   storybookHref: "/storybook",
 };
 

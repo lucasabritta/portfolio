@@ -3,7 +3,7 @@
   display: grid;
   gap: 1.75rem;
   padding-bottom: 2.5rem;
-  padding-top: 2rem;
+  padding-top: 0.75rem;
 }
 
 @media (min-width: 1024px) {
@@ -12,7 +12,7 @@
     gap: 2rem;
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
     padding-bottom: 3rem;
-    padding-top: 2.5rem;
+    padding-top: 1rem;
   }
 }
 

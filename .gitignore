@@ -30,7 +30,7 @@ apps/frontend/public/storybook/
 # optional package build outputs (if a workspace starts emitting to dist/)
 **/dist/
 
-# production / misc build dirs (repo root only — do not ignore `apps/frontend/app/build/`)
+# production / misc build dirs (repo root only)
 /build/
 
 # misc
@@ -47,6 +47,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+tmp/
 
 # vercel
 .vercel

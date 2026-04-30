@@ -12,7 +12,7 @@ import { GOOGLE_PLAY_HOST, type ResumeData } from "@portfolio/resume-content";
 export const HOME_RESUME_ANCHOR_ID = "resume";
 
 const HOME_POSITIONING_LEAD =
-  "Lucas leads engineering through rapid startup growth with a bias for clear ownership: platform reliability and delivery speed that show up in revenue and retention—not only in sprint charts—and teams that scale without losing accountability for quality.";
+  "I lead engineering through rapid startup growth with a bias for clear ownership: reliable platforms and faster delivery that show up in revenue, retention, and teams that scale without losing accountability for quality.";
 
 const CREDIBILITY_ITEMS = [
   {
@@ -21,9 +21,9 @@ const CREDIBILITY_ITEMS = [
     body: "Comfortable from seed ambiguity through Series B: hiring, delivery cadence, and engineering culture as explicit levers alongside the product roadmap.",
   },
   {
-    title: "Platform & delivery",
-    metric: "Boring releases",
-    body: "Treats observability, testing, CI/CD, and incident practice as product features—so releases stay boring and regressions do not stack invisibly.",
+    title: "Calm launches",
+    metric: "Less drama",
+    body: "Builds the habits that let teams ship with confidence: clear ownership, steady follow-through, and problems surfaced early enough to fix before customers feel them.",
   },
   {
     title: "Hands-on leadership",
@@ -35,7 +35,7 @@ const CREDIBILITY_ITEMS = [
 const BUILD_TEASER: BuildStorybookTeaserProps = {
   heading: "Site & component library",
   lead: "This portfolio is a small monorepo: a Next.js app, a Storybook package for shared UI, résumé data reused by the PDF CV, Docker for local parity, and GitHub Actions split by package so changes stay reviewable.",
-  buildHref: "/build",
+  buildHref: "/site-architecture",
   storybookHref: "/storybook",
 };
 
@@ -90,10 +90,11 @@ function featuredWorkFromResume(resume: ResumeData): FeaturedWorkPreviewProps {
         ctaLabel: "View Projects",
       },
       {
-        title: "Build story",
-        description: "Monorepo layout, Storybook, CI, Docker, and hosting choices.",
-        href: "/build",
-        ctaLabel: "Read build notes",
+        title: "How I build this website",
+        description:
+          "A practical look at the site structure, shared UI, release checks, and hosting path.",
+        href: "/site-architecture",
+        ctaLabel: "Read site architecture",
       },
     ] as const satisfies FeaturedWorkPreviewProps["supporting"],
   };
@@ -113,7 +114,11 @@ export type HomeMarketingBlocks = {
  */
 export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
   const contactHint = resume.location
-    ? `${resume.location} · Phone, email, and LinkedIn are on the CV PDF and below`
+    ? {
+        prefix: `${resume.location} · `,
+        label: "contacts",
+        href: "#contact-heading",
+      }
     : undefined;
 
   return {

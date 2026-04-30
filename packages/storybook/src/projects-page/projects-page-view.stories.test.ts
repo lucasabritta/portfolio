@@ -6,7 +6,7 @@ export const projectsPageViewDefaultPlay: StoryPlayFn = async ({ canvasElement }
 
   expect(canvas.getByRole("heading", { level: 1, name: "Projects" })).toBeVisible();
 
-  expect(canvas.getByRole("heading", { name: "Echoes: Missing Cat" })).toBeVisible();
+  expect(canvas.getByRole("heading", { name: "Echoes of the missing cat" })).toBeVisible();
   expect(canvas.getByRole("heading", { name: /hardest problem/i })).toBeVisible();
 
   expect(canvas.getByRole("heading", { name: /curated github/i })).toBeVisible();

@@ -26,6 +26,6 @@ export const siteFooterDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
   );
 
   expect(
-    within(footer).getByText(/built with next\.js, storybook, and vercel/i),
+    within(footer).getByText(/built with next\.js, storybook, vercel, and cloudflare/i),
   ).toBeInTheDocument();
 };

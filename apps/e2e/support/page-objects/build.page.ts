@@ -17,6 +17,6 @@ export class BuildPage {
   }
 
   async goto() {
-    await this.page.goto("/build");
+    await this.page.goto("/site-architecture");
   }
 }

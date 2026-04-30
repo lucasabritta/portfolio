@@ -5,7 +5,11 @@ export type HomeLeadHeroProps = {
   roleEyebrow: string;
   positioningLead: string;
   proofPoints: readonly [string, string, string];
-  contactHint?: string;
+  contactHint?: {
+    prefix: string;
+    label: string;
+    href: string;
+  };
   downloadHref: string;
   projectsHref: string;
   storybookHref: string;

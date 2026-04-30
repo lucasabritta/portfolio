@@ -20,17 +20,17 @@ export function buildSiteChromeProps(): SiteChromeStaticProps {
     navItems: [
       { label: "Home", href: "/" },
       { label: "Projects", href: "/projects" },
-      { label: "Build", href: "/build" },
+      { label: "Site architecture", href: "/site-architecture" },
       { label: "CV", href: "/#resume" },
     ],
     footerLinks: [
       { label: "GitHub", href: siteProfile.githubProfileUrl, external: true },
       { label: "LinkedIn", href: resumeData.linkedin, external: true },
       { label: "Component library (Storybook)", href: "/storybook", external: true },
-      { label: "How this site is built", href: "/build" },
+      { label: "Site architecture", href: "/site-architecture" },
       { label: "Résumé PDF", href: "/api/cv" },
     ],
-    colophon: "Built with Next.js, Storybook, and Vercel.",
+    colophon: "Built with Next.js, Storybook, Vercel, and Cloudflare.",
     downloadCvHref: "/api/cv",
   };
 }

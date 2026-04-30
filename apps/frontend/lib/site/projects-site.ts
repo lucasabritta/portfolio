@@ -12,26 +12,26 @@ const githubBase = siteProfile.githubProfileUrl.replace(/\/$/, "");
 export const projectsPageContent = {
   introTitle: "Projects",
   introLead:
-    "Selected work spans a flagship Android title built with heavy AI assistance, plus three public GitHub repositories: a TypeScript user-service demo, a React feature-flag lab, and a Python booking dashboard.",
+    "Selected work includes an Android game shipped through a solo, AI-assisted workflow, plus public repositories that show product-minded engineering across this portfolio, backend APIs, and data dashboards.",
   flagship: {
-    title: "Echoes: Missing Cat",
+    title: "Echoes of the missing cat",
     eyebrow: "Flagship",
-    role: "Creator — product direction, narrative beats, Android delivery, and release hygiene",
-    stack: ["Android", "Kotlin", "Google Play", "LLM-assisted workflows", "Narrative & pacing"],
+    role: "Creator — game direction, Godot implementation, Android delivery, and release hygiene",
+    stack: ["Godot 4", "Android", "Google Play", "PowerShell QA tooling", "AI-assisted workflows"],
     pitch:
-      "Echoes is a compact mystery on the Play Store: players follow audio and visual echoes to track down a missing cat. The project was a deliberate experiment in how far generative tooling can carry a solo-ish pipeline while still shipping something store-quality with clear accountability for player trust.",
+      "Echoes of the missing cat is a landscape-only, top-down 2D adventure for Android. Players move through a compact sequence of coastal maps, collect simple items, clear gates, and reunite with the missing cat while the project stays intentionally small enough for one person to own end to end.",
     hardestProblem:
-      "Keeping narrative cohesion when drafts, dialog, and even placeholder art moved quickly through AI-assisted iterations. The fix was not “more model” but tighter creative gates: human storyboarding, ruthless cutting, and weekly installs on real hardware so performance and UX regressions never stacked invisibly.",
+      "The hard part was not adding more mechanics. It was keeping the game predictable across Godot runtime code, map data, Android exports, and store-ready release checks while using AI to move faster without letting generated work decide the product shape.",
     outcomes: [
-      "Live Google Play listing with store graphics, privacy disclosures, and crash reporting wired in.",
-      "A repeatable build → review → ship cadence that separated experimental branches from store-bound releases.",
-      "Concrete lessons on where LLMs remove toil (copy iteration, asset exploration) versus where they create debt if you skip design ownership.",
+      "Google Play package identity and release documentation for com.echoes.missingcat, with signed AAB/APK release paths.",
+      "A documented progression path across 13 maps, including item gates, controlled backtracking, and a final reunion flow.",
+      "Headless QA, Android emulator validation, release-matrix checks, and store-release workflows captured as repeatable scripts.",
     ],
     aiPipelineNote:
-      "Generative tools accelerated exploration, but compliance, store policy, and player-visible polish stayed explicitly human-owned. If a line ships in the build, a person decided it belonged there — the models only ever proposed.",
+      "AI helped accelerate drafts, tooling, and implementation loops, but the shipped behavior stayed human-owned: map progression, release gates, Play policy, and player-facing polish were validated through scripts, docs, and device checks.",
     imageSrc: "/projects/echoes-phone-1.png",
     imageAlt:
-      "Echoes: Missing Cat Android screenshot showing the phone-framed mystery game interface.",
+      "Echoes of the missing cat Android screenshot showing the phone-framed adventure game interface.",
     links: [
       {
         label: "Google Play",
@@ -54,9 +54,9 @@ export const projectsPageContent = {
       tags: ["TypeScript"],
     },
     {
-      name: "feature-flag-simulator",
-      summary: "React feature-flag simulation, state, boundaries",
-      href: `${githubBase}/feature-flag-simulator`,
+      name: "portfolio",
+      summary: "Next.js portfolio, Storybook UI, résumé data, CI, and deployment setup",
+      href: `${githubBase}/portfolio`,
       tags: ["TypeScript"],
     },
     {

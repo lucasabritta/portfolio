@@ -4,7 +4,7 @@ import { BuildPageView } from "./build-page-view";
 import { buildPageDefaultPlay } from "./build-page-view.stories.test";
 
 const meta = {
-  title: "Pages/Build",
+  title: "Pages/Site Architecture",
   component: BuildPageView,
   tags: ["autodocs"],
   parameters: {
@@ -17,8 +17,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    title: "How this site is built",
-    lead: "A small multi-package repo with a clear split between the Next.js app, shared DOM UI, résumé data, and automated checks.",
+    title: "Site architecture",
+    lead: "A small multi-package repo with a clear split between the Next.js app, shared DOM UI, résumé data, automated checks, and the Vercel to Cloudflare hosting path.",
     sections: [
       {
         id: "architecture",
@@ -35,9 +35,20 @@ export const Default: Story = {
         heading: "Quality checks and CI",
         body: "GitHub Actions split lint, typecheck, unit tests, Storybook checks, and Playwright smoke tests across the packages they touch.",
       },
+      {
+        id: "edge",
+        heading: "Vercel to Cloudflare",
+        body: "Vercel serves the app while Cloudflare owns DNS and the public domain path.",
+      },
     ],
     ctas: [
       { label: "Open Storybook", href: "/storybook", variant: "primary", external: true },
+      {
+        label: "View GitHub repository",
+        href: "https://github.com/lucasabritta/portfolio",
+        variant: "secondary",
+        external: true,
+      },
       { label: "View projects", href: "/projects", variant: "secondary" },
     ],
   },

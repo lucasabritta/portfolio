@@ -17,7 +17,7 @@
   flex: 1;
   flex-direction: column;
   gap: 4rem;
-  padding: 4rem 0;
+  padding: 2.5rem 0 4rem;
 }
 
 @media (min-width: 768px) {

@@ -18,7 +18,7 @@ export const resumeWorkHistory = [
     company: "PowerUs",
     role: "Engineering Manager",
     location: "Berlin, Germany (Remote)",
-    period: "01/2024 - 12/2025",
+    period: "01/2024 - 12/2025 • 2 yrs",
     summary:
       "I joined the company during its early startup phase and, over more than four years, contributed to its growth to a valuation exceeding $200M as Engineering Manager. Throughout its progression from Seed to Series A and B, positioning it as a potential unicorn, I was primarily responsible for software development and platform excellence.",
     achievements: [

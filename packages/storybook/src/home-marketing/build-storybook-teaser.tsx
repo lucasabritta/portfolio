@@ -16,7 +16,7 @@ export function BuildStorybookTeaser({
       <p className={styles.lead}>{lead}</p>
       <div className={styles.row}>
         <ActionLink variant="primary" href={buildHref}>
-          How this site is built
+          Site architecture
         </ActionLink>
         <ActionLink
           variant="secondary"

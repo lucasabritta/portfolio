@@ -23,7 +23,7 @@ export default defineConfig({
     command: "yarn --cwd ../frontend dev:docker",
     url: baseURL,
     reuseExistingServer: !process.env.CI,
-    // First boot may compile `/build` and compile Storybook if `ensure-storybook-public` runs.
+    // First boot may compile `/site-architecture` and Storybook if `ensure-storybook-public` runs.
     timeout: 300_000,
   },
 });

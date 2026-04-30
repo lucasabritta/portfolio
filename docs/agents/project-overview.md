@@ -22,7 +22,7 @@ The portfolio uses **one git root** with **several Yarn packages** (`apps/*`, `p
 | `apps/e2e`                                              | Playwright end-to-end specs (run against the Next app)                                                        |
 | `tools/`                                                | Repo-local tooling (e.g. Storybook build helper for Next)                                                     |
 
-**Revamp v1:** The multi-page portfolio shell (`/`, `/projects`, `/build`), global nav/footer, home marketing blocks, curated project/build copy, E2E smoke, and Storybook coverage for new UI are **done** per [`portfolio-site-revamp-plan.md`](portfolio-site-revamp-plan.md) (success criteria and Phases 1–4). Further work is optional polish or v2 scope unless that doc is updated.
+**Revamp v1:** The multi-page portfolio shell (`/`, `/projects`, `/site-architecture`), global nav/footer, home marketing blocks, curated project/build copy, E2E smoke, and Storybook coverage for new UI are **done** per [`portfolio-site-revamp-plan.md`](portfolio-site-revamp-plan.md) (success criteria and Phases 1–4). Further work is optional polish or v2 scope unless that doc is updated.
 
 **Agent expectations:**
 
