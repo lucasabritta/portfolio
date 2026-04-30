@@ -6,9 +6,9 @@ export const buildStorybookTeaserDefaultPlay: StoryPlayFn = async ({ canvasEleme
   const region = canvas.getByRole("region", { name: /site & component library/i });
 
   const buildLink = within(region).getByRole("link", {
-    name: /how this site is built/i,
+    name: /site architecture/i,
   });
-  expect(buildLink).toHaveAttribute("href", "/build");
+  expect(buildLink).toHaveAttribute("href", "/site-architecture");
 
   const storybookLink = within(region).getByRole("link", {
     name: /open storybook/i,

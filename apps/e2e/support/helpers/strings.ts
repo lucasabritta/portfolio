@@ -5,19 +5,19 @@ export const CONTENT_DISPOSITION_FILENAME = new RegExp(`filename="(${CV_FILENAME
 export const PAGE_COPY = {
   homeHeroName: "Lucas Abritta",
   projectsHeading: "Projects",
-  projectsFlagshipTitle: "Echoes: Missing Cat",
+  projectsFlagshipTitle: "Echoes of the missing cat",
   projectsPinnedHeading: "Pinned GitHub repositories",
   projectsHardestHeading: "Hardest problem",
-  buildHeading: /How this site is built/i,
+  buildHeading: /Site architecture/i,
   resumeSectionHeading: /professional summary/i,
   storybookShellMarker: /storybook/i,
-  colophonMarker: /built with next\.js, storybook, and vercel/i,
+  colophonMarker: /built with next\.js, storybook, vercel, and cloudflare/i,
 } as const;
 
 export const NAV_LINKS = {
   home: { label: "Home", href: "/" },
   projects: { label: "Projects", href: "/projects" },
-  build: { label: "Build", href: "/build" },
+  build: { label: "Site architecture", href: "/site-architecture" },
   cv: { label: "CV", href: "/#resume" },
 } as const;
 

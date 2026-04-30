@@ -5,7 +5,7 @@ import { buildAbsoluteSiteUrl } from "@/lib/agent-surfaces/site-url";
 const SITEMAP_ENTRIES = [
   { pathname: "/", priority: 1 },
   { pathname: "/projects", priority: 0.8 },
-  { pathname: "/build", priority: 0.7 },
+  { pathname: "/site-architecture", priority: 0.7 },
   { pathname: "/llms.txt", priority: 0.9 },
   { pathname: "/resume.txt", priority: 0.9 },
   { pathname: "/projects.txt", priority: 0.8 },

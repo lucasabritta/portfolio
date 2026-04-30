@@ -30,7 +30,14 @@ export function HomeLeadHero({
         <HeroRole>{roleEyebrow}</HeroRole>
         <HeroName>{name}</HeroName>
         <p className={styles.positioning}>{positioningLead}</p>
-        {contactHint ? <p className={styles.contactHint}>{contactHint}</p> : null}
+        {contactHint ? (
+          <p className={styles.contactHint}>
+            {contactHint.prefix}
+            <ActionLink variant="inlineAccent" href={contactHint.href}>
+              {contactHint.label}
+            </ActionLink>
+          </p>
+        ) : null}
         <div className={styles.ctaRow}>
           <ActionLink variant="primary" href={downloadHref}>
             Download CV

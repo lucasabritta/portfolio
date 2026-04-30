@@ -17,7 +17,7 @@ export const CRAWLER_TEXT_ROUTES = [
   {
     path: "/projects.txt",
     contentType: /text\/plain/i,
-    expectedContent: [/# Projects/i, /Echoes: Missing Cat/i],
+    expectedContent: [/# Projects/i, /Echoes of the missing cat/i],
   },
   {
     path: "/resume.txt",

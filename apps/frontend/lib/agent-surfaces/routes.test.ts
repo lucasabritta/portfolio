@@ -43,7 +43,7 @@ describe("agent text routes", () => {
 
     expect(response.headers.get("content-type")).toBe("text/plain; charset=utf-8");
     expect(text).toContain("# Projects");
-    expect(text).toContain("Echoes: Missing Cat");
+    expect(text).toContain("Echoes of the missing cat");
   });
 });
 
@@ -66,6 +66,7 @@ describe("crawler discovery routes", () => {
     expect(urls).toEqual(
       expect.arrayContaining([
         "https://portfolio.example/",
+        "https://portfolio.example/site-architecture",
         "https://portfolio.example/llms.txt",
         "https://portfolio.example/resume.txt",
         "https://portfolio.example/projects.txt",

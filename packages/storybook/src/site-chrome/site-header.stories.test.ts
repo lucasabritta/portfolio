@@ -11,12 +11,15 @@ export const siteHeaderDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
     "href",
     "/projects",
   );
-  expect(within(primary).getByRole("link", { name: "Build" })).toHaveAttribute("href", "/build");
+  expect(within(primary).getByRole("link", { name: "Site architecture" })).toHaveAttribute(
+    "href",
+    "/site-architecture",
+  );
   expect(within(primary).getByRole("link", { name: "CV" })).toHaveAttribute("href", "/#resume");
 
   expect(canvas.getByRole("link", { name: "Download CV" })).toHaveAttribute("href", "/api/cv");
 
-  const active = within(primary).getByRole("link", { name: "Build" });
+  const active = within(primary).getByRole("link", { name: "Site architecture" });
   expect(active).toHaveAttribute("aria-current", "page");
 };
 
@@ -27,7 +30,7 @@ export const siteHeaderActivePlay: StoryPlayFn = async ({ canvasElement }) => {
   const active = within(primary).getByRole("link", { name: "Projects" });
   expect(active).toHaveAttribute("aria-current", "page");
 
-  for (const label of ["Home", "Build", "CV"]) {
+  for (const label of ["Home", "Site architecture", "CV"]) {
     expect(within(primary).getByRole("link", { name: label })).not.toHaveAttribute("aria-current");
   }
 };

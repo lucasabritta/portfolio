@@ -27,7 +27,7 @@ export const NotFound: Story = {
     actions: [
       { kind: "link", label: "Back to home", href: "/" },
       { kind: "link", label: "View projects", href: "/projects" },
-      { kind: "link", label: "Read build notes", href: "/build" },
+      { kind: "link", label: "Site architecture", href: "/site-architecture" },
       { kind: "link", label: "Jump to CV", href: "/#resume" },
     ],
   },

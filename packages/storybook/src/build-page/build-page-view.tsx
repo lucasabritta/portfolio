@@ -29,6 +29,7 @@ const SECTION_META: Record<string, { eyebrow: string; glyph: string }> = {
   storybook: { eyebrow: "Design system", glyph: "02" },
   quality: { eyebrow: "Confidence", glyph: "03" },
   deploy: { eyebrow: "Release path", glyph: "04" },
+  edge: { eyebrow: "Domain path", glyph: "05" },
 };
 
 function sectionMeta(section: BuildPageSection, index: number) {

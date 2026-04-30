@@ -7,7 +7,7 @@ import { projectsPageContent } from "@/lib/site/projects-site";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Flagship Android game Echoes: Missing Cat — pitch, hardest problems, and outcomes — plus curated GitHub repositories.",
+    "Flagship Android game Echoes of the missing cat, plus curated GitHub repositories for portfolio, backend, and dashboard work.",
 };
 
 export default function ProjectsPage() {

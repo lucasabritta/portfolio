@@ -128,7 +128,7 @@ export function buildLlmsText({
   const primaryPages: Link[] = [
     { label: "Home", href: "/", description: "Portfolio home and resume overview." },
     { label: "Projects", href: "/projects", description: projects.introLead },
-    { label: "Build", href: "/build", description: build.lead },
+    { label: "Site architecture", href: "/site-architecture", description: build.lead },
   ];
 
   const textPages: Link[] = [

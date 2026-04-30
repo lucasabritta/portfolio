@@ -12,7 +12,7 @@ import { ThemeModeSwitch } from "./theme-mode-switch";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
-  { label: "Build", href: "/build" },
+  { label: "Site architecture", href: "/site-architecture" },
   { label: "CV", href: "/#resume" },
 ];
 
@@ -34,7 +34,7 @@ export const Default: Story = {
     wordmarkHref: "/",
     navItems,
     downloadCvHref: "/api/cv",
-    currentPath: "/build",
+    currentPath: "/site-architecture",
     themeControl: <></>,
     mobileThemeControl: <></>,
   },

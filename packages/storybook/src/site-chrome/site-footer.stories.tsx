@@ -7,7 +7,7 @@ const links = [
   { label: "GitHub", href: "https://github.com/example", external: true },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/example", external: true },
   { label: "Component library (Storybook)", href: "/storybook" },
-  { label: "How this site is built", href: "/build" },
+  { label: "Site architecture", href: "/site-architecture" },
   { label: "Download CV", href: "/api/cv" },
 ];
 
@@ -22,7 +22,7 @@ const meta = {
     name: "Lucas Abritta",
     descriptor: "Engineering Manager",
     links,
-    colophon: "Built with Next.js, Storybook, and Vercel.",
+    colophon: "Built with Next.js, Storybook, Vercel, and Cloudflare.",
   },
 } satisfies Meta<typeof SiteFooter>;
 

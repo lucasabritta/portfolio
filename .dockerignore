@@ -18,7 +18,7 @@ apps/frontend/public/storybook
 coverage
 **/coverage
 
-# Repo-root build output only (do not ignore `apps/frontend/app/build/` App Router segment)
+# Repo-root build output only
 /build/
 
 # Logs & local env

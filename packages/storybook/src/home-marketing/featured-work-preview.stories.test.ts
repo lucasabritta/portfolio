@@ -21,8 +21,8 @@ export const featuredWorkPreviewDefaultPlay: StoryPlayFn = async ({ canvasElemen
     "href",
     "/projects",
   );
-  expect(within(region).getByRole("link", { name: "Read build notes" })).toHaveAttribute(
+  expect(within(region).getByRole("link", { name: "Read site architecture" })).toHaveAttribute(
     "href",
-    "/build",
+    "/site-architecture",
   );
 };

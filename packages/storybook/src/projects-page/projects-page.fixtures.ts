@@ -7,10 +7,10 @@ export function projectsPageViewFixture(): ProjectsPageViewProps {
     introLead:
       "Selected work: a flagship game built with heavy AI assistance, plus curated GitHub repositories.",
     flagship: {
-      title: "Echoes: Missing Cat",
+      title: "Echoes of the missing cat",
       eyebrow: "Flagship",
-      role: "Creator · product, narrative, and Android delivery",
-      stack: ["Android", "Kotlin", "Play Console", "LLM-assisted workflows", "Narrative design"],
+      role: "Creator · game direction, Godot implementation, and Android delivery",
+      stack: ["Godot 4", "Android", "Google Play", "QA tooling", "AI-assisted workflows"],
       pitch:
         "A short mystery adventure on Android where players follow echoes to find a missing cat. The goal was to ship a polished store listing with real art direction while keeping the build pipeline honest about where AI helped versus where craft still mattered.",
       hardestProblem:
@@ -23,7 +23,7 @@ export function projectsPageViewFixture(): ProjectsPageViewProps {
       aiPipelineNote:
         "AI was used heavily for ideation, drafts, and asset iteration, but release engineering, store policy compliance, and player-facing quality bars stayed manual and accountable. That split is intentional: the stack is a lever, not the story.",
       imageSrc: null,
-      imageAlt: "Echoes: Missing Cat key art placeholder",
+      imageAlt: "Echoes of the missing cat key art placeholder",
       links: [
         {
           label: "Google Play",
