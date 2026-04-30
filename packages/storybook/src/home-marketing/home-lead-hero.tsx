@@ -9,33 +9,50 @@ export function HomeLeadHero({
   positioningLead,
   proofPoints,
   contactHint,
+  contactHintLabel,
+  contactHintHref,
   downloadHref,
   projectsHref,
   storybookHref,
   headshotSrc,
+  headshotAvifSrcSet,
+  headshotWebpSrcSet,
+  headshotSizes,
   headshotAlt,
 }: HomeLeadHeroProps) {
   return (
     <header className={styles.shell}>
       <div className={styles.leadCol}>
         {headshotSrc ? (
-          <img
-            src={headshotSrc}
-            alt={headshotAlt ?? `Portrait of ${name}`}
-            className={styles.headshot}
-            loading="eager"
-            decoding="async"
-          />
+          <picture>
+            {headshotAvifSrcSet ? (
+              <source srcSet={headshotAvifSrcSet} sizes={headshotSizes} type="image/avif" />
+            ) : null}
+            {headshotWebpSrcSet ? (
+              <source srcSet={headshotWebpSrcSet} sizes={headshotSizes} type="image/webp" />
+            ) : null}
+            <img
+              src={headshotSrc}
+              alt={headshotAlt ?? `Portrait of ${name}`}
+              className={styles.headshot}
+              loading="eager"
+              decoding="async"
+              width="96"
+              height="96"
+            />
+          </picture>
         ) : null}
         <HeroRole>{roleEyebrow}</HeroRole>
         <HeroName>{name}</HeroName>
         <p className={styles.positioning}>{positioningLead}</p>
         {contactHint ? (
           <p className={styles.contactHint}>
-            {contactHint.prefix}
-            <ActionLink variant="inlineAccent" href={contactHint.href}>
-              {contactHint.label}
-            </ActionLink>
+            {contactHint}
+            {contactHintHref && contactHintLabel ? (
+              <ActionLink variant="inlineAccent" href={contactHintHref}>
+                {contactHintLabel}
+              </ActionLink>
+            ) : null}
           </p>
         ) : null}
         <div className={styles.ctaRow}>

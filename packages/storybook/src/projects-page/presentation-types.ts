@@ -17,6 +17,11 @@ export type PresentationFlagshipProject = {
   aiPipelineNote: string;
   /** Public URL (e.g. `/projects/art.svg`). `null` uses the built-in gradient frame only. */
   imageSrc: string | null;
+  imageAvifSrcSet?: string;
+  imageWebpSrcSet?: string;
+  imageSizes?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   imageAlt: string;
   links: readonly PresentationProjectLink[];
 };

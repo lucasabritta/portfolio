@@ -11,6 +11,12 @@ import { GOOGLE_PLAY_HOST, type ResumeData } from "@portfolio/resume-content";
 /** Anchor for the in-page full résumé block (header CV link uses `/#resume`). */
 export const HOME_RESUME_ANCHOR_ID = "resume";
 
+type ContactHintText = string & {
+  prefix?: string;
+  label?: string;
+  href?: string;
+};
+
 const HOME_POSITIONING_LEAD =
   "I lead engineering through rapid startup growth with a bias for clear ownership: reliable platforms and faster delivery that show up in revenue, retention, and teams that scale without losing accountability for quality.";
 
@@ -113,13 +119,7 @@ export type HomeMarketingBlocks = {
  * Presentation lives in `@portfolio/storybook`; strings here are site-only unless mirrored from résumé fields.
  */
 export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
-  const contactHint = resume.location
-    ? {
-        prefix: `${resume.location} · `,
-        label: "contacts",
-        href: "#contact-heading",
-      }
-    : undefined;
+  const contactHint = resume.location ? (`${resume.location} · ` as ContactHintText) : undefined;
 
   return {
     homeLeadHero: {
@@ -128,10 +128,17 @@ export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
       positioningLead: HOME_POSITIONING_LEAD,
       proofPoints: threeProofPoints(resume.summaryHighlights),
       contactHint,
+      contactHintLabel: contactHint ? "contacts" : undefined,
+      contactHintHref: contactHint ? "#contact-heading" : undefined,
       downloadHref: "/api/cv",
       projectsHref: "/projects",
       storybookHref: "/storybook",
-      headshotSrc: "/headshot-lucas.png",
+      headshotSrc: "/headshot-lucas-192.webp",
+      headshotAvifSrcSet:
+        "/headshot-lucas-96.avif 96w, /headshot-lucas-192.avif 192w, /headshot-lucas-256.avif 256w",
+      headshotWebpSrcSet:
+        "/headshot-lucas-96.webp 96w, /headshot-lucas-192.webp 192w, /headshot-lucas-256.webp 256w",
+      headshotSizes: "(min-width: 768px) 96px, 80px",
       headshotAlt: `Portrait of ${resume.name}`,
     },
     credibilityStrip: {

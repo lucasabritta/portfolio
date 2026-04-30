@@ -29,7 +29,14 @@ export const projectsPageContent = {
     ],
     aiPipelineNote:
       "AI helped accelerate drafts, tooling, and implementation loops, but the shipped behavior stayed human-owned: map progression, release gates, Play policy, and player-facing polish were validated through scripts, docs, and device checks.",
-    imageSrc: "/projects/echoes-phone-1.png",
+    imageSrc: "/projects/echoes-phone-1-768.webp",
+    imageAvifSrcSet:
+      "/projects/echoes-phone-1-480.avif 480w, /projects/echoes-phone-1-768.avif 768w, /projects/echoes-phone-1-1080.avif 1080w",
+    imageWebpSrcSet:
+      "/projects/echoes-phone-1-480.webp 480w, /projects/echoes-phone-1-768.webp 768w, /projects/echoes-phone-1-1080.webp 1080w",
+    imageSizes: "(min-width: 1024px) 52vw, calc(100vw - 5rem)",
+    imageWidth: 768,
+    imageHeight: 346,
     imageAlt:
       "Echoes of the missing cat Android screenshot showing the phone-framed adventure game interface.",
     links: [

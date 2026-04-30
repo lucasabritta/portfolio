@@ -28,6 +28,12 @@ const rootTitleDefault =
 
 export const metadata: Metadata = {
   description: siteMetadata.description,
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "32x32" },
+    ],
+  },
   title: {
     default: rootTitleDefault,
     template: "%s | Lucas Abritta",

@@ -5,16 +5,17 @@ export type HomeLeadHeroProps = {
   roleEyebrow: string;
   positioningLead: string;
   proofPoints: readonly [string, string, string];
-  contactHint?: {
-    prefix: string;
-    label: string;
-    href: string;
-  };
+  contactHint?: string;
+  contactHintLabel?: string;
+  contactHintHref?: string;
   downloadHref: string;
   projectsHref: string;
   storybookHref: string;
   /** Optional public URL for the hero portrait (e.g. `/headshot-lucas.png`). */
   headshotSrc?: string;
+  headshotAvifSrcSet?: string;
+  headshotWebpSrcSet?: string;
+  headshotSizes?: string;
   headshotAlt?: string;
 };
 

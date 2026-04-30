@@ -21,7 +21,7 @@ export const projectsPageViewDefaultPlay: StoryPlayFn = async ({ canvasElement }
 
   expect(
     canvas.getByRole("link", {
-      name: /open github repository: example\/portfolio/i,
+      name: /view on github\s*: example\/portfolio/i,
     }),
   ).toHaveAttribute("href", "https://github.com/example/portfolio");
 };
