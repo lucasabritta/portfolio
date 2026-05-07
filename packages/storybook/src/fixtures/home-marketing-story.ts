@@ -52,6 +52,7 @@ export function homeLeadHeroFromHomePageProps(props: HomePageProps): HomeLeadHer
     contactHintHref: props.location ? "#contact-heading" : undefined,
     projectsHref: "/projects",
     githubHref: "https://github.com/example",
+    proofPoints: SYNTH_CREDIBILITY_ITEMS,
   };
 }
 
@@ -72,6 +73,20 @@ export function featuredWorkPreviewFromHomePageProps(
       href: flagship.href,
       ctaLabel: flagshipCta(flagship.href),
       external: true,
+      actions: [
+        {
+          label: "Google Play",
+          href: "https://play.google.com/store/apps/details?id=com.echoes.missingcat",
+          variant: "primary",
+          external: true,
+        },
+        {
+          label: "Medium article",
+          href: "https://medium.com/@lucasabritta_93729/what-i-learned-building-an-android-game-with-ai-agents-5f64d23024fe",
+          variant: "secondary",
+          external: true,
+        },
+      ],
     },
     supporting: [
       {

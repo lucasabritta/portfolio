@@ -50,6 +50,23 @@
   }
 }
 
+.heroGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .heroGrid {
+    align-items: start;
+    grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.65fr);
+  }
+}
+
+.copyCol {
+  min-width: 0;
+}
+
 .contactHint {
   color: var(--muted);
   font-size: 0.875rem;
@@ -61,6 +78,58 @@
   flex-wrap: wrap;
   gap: 0.65rem;
   margin-top: 0.75rem;
+}
+
+.proofCard {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 11%, transparent), transparent 42%),
+    var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  padding: 1rem;
+}
+
+.proofTitle {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+.proofList {
+  display: grid;
+  gap: 0.8rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.proofItem {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.proofMetric {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.proofHeading {
+  color: var(--foreground);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.proofBody {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 
 .visuallyHidden {

@@ -9,6 +9,7 @@ export type {
   CondensedTimelineEntry,
   CredibilityItem,
   CredibilityStripProps,
+  FeaturedWorkAction,
   FeaturedWorkCard,
   FeaturedWorkPreviewProps,
   HomeLeadHeroProps,

@@ -6,7 +6,7 @@ import type {
   HomeLeadHeroProps,
 } from "@portfolio/storybook/home-marketing";
 
-import { GOOGLE_PLAY_HOST, type ResumeData } from "@portfolio/resume-content";
+import { GOOGLE_PLAY_HOST, PROJECT_URLS, type ResumeData } from "@portfolio/resume-content";
 
 import { siteProfile } from "./site-profile";
 
@@ -80,6 +80,20 @@ function featuredWorkFromResume(resume: ResumeData): FeaturedWorkPreviewProps {
       href: flagship.href,
       ctaLabel: flagshipCta(flagship.href),
       external: flagshipExternal ? true : undefined,
+      actions: [
+        {
+          label: "Google Play",
+          href: PROJECT_URLS.echoesMissingCatPlayStore,
+          variant: "primary",
+          external: true,
+        },
+        {
+          label: "Medium article",
+          href: PROJECT_URLS.echoesMissingCatMediumArticle,
+          variant: "secondary",
+          external: true,
+        },
+      ],
     },
     supporting: [
       {
@@ -124,6 +138,7 @@ export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
       contactHintHref: contactHint ? "#contact-heading" : undefined,
       projectsHref: "/projects",
       githubHref: siteProfile.githubProfileUrl,
+      proofPoints: CREDIBILITY_ITEMS,
       headshotSrc: "/headshot-lucas-192.webp",
       headshotAvifSrcSet:
         "/headshot-lucas-96.avif 96w, /headshot-lucas-192.avif 192w, /headshot-lucas-256.avif 256w",

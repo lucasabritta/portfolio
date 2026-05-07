@@ -3,6 +3,15 @@ import { ActionLink, Card, SectionHeading, Title } from "../primitives";
 import type { FeaturedWorkPreviewProps } from "./home-marketing-types";
 import styles from "./featured-work-preview.module.css";
 
+const fallbackFlagshipActions = (flagship: FeaturedWorkPreviewProps["flagship"]) => [
+  {
+    label: flagship.ctaLabel,
+    href: flagship.href,
+    variant: "primary" as const,
+    external: flagship.external,
+  },
+];
+
 export function FeaturedWorkPreview({
   id = "featured-work",
   heading,
@@ -19,17 +28,20 @@ export function FeaturedWorkPreview({
           </Title>
           <p className={styles.desc}>{flagship.description}</p>
           <div className={styles.actions}>
-            <ActionLink
-              variant="primary"
-              href={flagship.href}
-              rel={flagship.external ? "noopener noreferrer" : undefined}
-              target={flagship.external ? "_blank" : undefined}
-            >
-              {flagship.ctaLabel}
-              {flagship.external ? (
-                <span className={styles.visuallyHidden}> (opens in a new tab)</span>
-              ) : null}
-            </ActionLink>
+            {(flagship.actions ?? fallbackFlagshipActions(flagship)).map((action) => (
+              <ActionLink
+                key={`${action.label}-${action.href}`}
+                variant={action.variant ?? "secondary"}
+                href={action.href}
+                rel={action.external ? "noopener noreferrer" : undefined}
+                target={action.external ? "_blank" : undefined}
+              >
+                {action.label}
+                {action.external ? (
+                  <span className={styles.visuallyHidden}> (opens in a new tab)</span>
+                ) : null}
+              </ActionLink>
+            ))}
           </div>
         </Card>
         {supporting.map((card, index) => (

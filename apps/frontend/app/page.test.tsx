@@ -34,6 +34,7 @@ describe("Home page", () => {
     const h1 = screen.getByRole("heading", { level: 1, name: resumeData.name });
     const heroRoot = h1.closest("header");
     expect(heroRoot).toBeTruthy();
+    expect(within(heroRoot as HTMLElement).getByText("Proof points")).toBeInTheDocument();
     const projects = within(heroRoot as HTMLElement).getByRole("link", { name: "View Projects" });
     expect(projects).toHaveAttribute("href", "/projects");
     expect(
@@ -42,6 +43,16 @@ describe("Home page", () => {
     expect(
       within(heroRoot as HTMLElement).getByRole("link", { name: /GitHub profile/i }),
     ).toHaveAttribute("href", "https://github.com/lucasabritta");
+    expect(screen.getByRole("link", { name: /Google Play.*opens in a new tab/i })).toHaveAttribute(
+      "href",
+      "https://play.google.com/store/apps/details?id=com.echoes.missingcat",
+    );
+    expect(
+      screen.getByRole("link", { name: /Medium article.*opens in a new tab/i }),
+    ).toHaveAttribute(
+      "href",
+      "https://medium.com/@lucasabritta_93729/what-i-learned-building-an-android-game-with-ai-agents-5f64d23024fe",
+    );
     expect(screen.queryByRole("link", { name: /download cv/i })).not.toBeInTheDocument();
   });
 });

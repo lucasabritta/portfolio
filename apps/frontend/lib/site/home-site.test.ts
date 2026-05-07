@@ -1,4 +1,4 @@
-import { resumeData } from "@portfolio/resume-content";
+import { PROJECT_URLS, resumeData } from "@portfolio/resume-content";
 import { describe, expect, it } from "vitest";
 
 import { buildHomeMarketing, HOME_RESUME_ANCHOR_ID } from "./home-site";
@@ -9,6 +9,7 @@ describe("buildHomeMarketing", () => {
     expect(m.homeLeadHero.projectsHref).toBe("/projects");
     expect(m.homeLeadHero.githubHref).toBe("https://github.com/lucasabritta");
     expect(m.homeLeadHero.name).toBe(resumeData.name);
+    expect(m.homeLeadHero.proofPoints).toHaveLength(3);
     expect(m.condensedCv.resumeAnchorId).toBe(HOME_RESUME_ANCHOR_ID);
     expect(m.condensedCv.heading).toBe("Work history");
     expect(m.condensedCv.entries).toHaveLength(resumeData.workHistory.length);
@@ -20,6 +21,20 @@ describe("buildHomeMarketing", () => {
     expect(m.featuredWork.flagship.href).toBe("/projects");
     expect(m.featuredWork.flagship.ctaLabel).toBe("View Projects");
     expect(m.featuredWork.flagship.external).toBeFalsy();
+    expect(m.featuredWork.flagship.actions).toEqual([
+      {
+        label: "Google Play",
+        href: PROJECT_URLS.echoesMissingCatPlayStore,
+        variant: "primary",
+        external: true,
+      },
+      {
+        label: "Medium article",
+        href: PROJECT_URLS.echoesMissingCatMediumArticle,
+        variant: "secondary",
+        external: true,
+      },
+    ]);
     expect(m.featuredWork.supporting[0]?.href).toBe("/projects");
     expect(m.featuredWork.supporting[0]?.external).toBeFalsy();
   });
