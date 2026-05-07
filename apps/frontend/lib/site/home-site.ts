@@ -8,7 +8,9 @@ import type {
 
 import { GOOGLE_PLAY_HOST, type ResumeData } from "@portfolio/resume-content";
 
-/** Anchor for the in-page full résumé block (header CV link uses `/#resume`). */
+import { siteProfile } from "./site-profile";
+
+/** Anchor for the in-page résumé details block. */
 export const HOME_RESUME_ANCHOR_ID = "resume";
 
 type ContactHintText = string & {
@@ -54,6 +56,7 @@ function condensedEntries(work: ResumeData["workHistory"]): CondensedCvPreviewPr
 }
 
 function flagshipCta(href: string): string {
+  if (href === "/projects") return "View Projects";
   if (href.includes(GOOGLE_PLAY_HOST)) return "Google Play";
   return "Open";
 }
@@ -120,7 +123,7 @@ export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
       contactHintLabel: contactHint ? "contacts" : undefined,
       contactHintHref: contactHint ? "#contact-heading" : undefined,
       projectsHref: "/projects",
-      storybookHref: "/storybook",
+      githubHref: siteProfile.githubProfileUrl,
       headshotSrc: "/headshot-lucas-192.webp",
       headshotAvifSrcSet:
         "/headshot-lucas-96.avif 96w, /headshot-lucas-192.avif 192w, /headshot-lucas-256.avif 256w",

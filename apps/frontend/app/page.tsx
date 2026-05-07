@@ -15,7 +15,6 @@ import {
   HomePageShell,
   HomeResumeAnchor,
   ProjectsSection,
-  SummarySection,
 } from "@portfolio/storybook/home";
 
 import { buildHomePageModel } from "@/lib/site/home-page-model";
@@ -23,7 +22,7 @@ import { buildHomePageModel } from "@/lib/site/home-page-model";
 export const metadata: Metadata = {
   title: "Home",
   description:
-    "Engineering Manager portfolio and CV for Lucas Abritta — startup growth, platform excellence, and software delivery leadership.",
+    "Engineering Manager portfolio for Lucas Abritta — startup growth, platform excellence, and software delivery leadership.",
 };
 
 export default function Home() {
@@ -36,7 +35,6 @@ export default function Home() {
       <BuildStorybookTeaser {...marketing.buildTeaser} />
       <CondensedCvPreview {...marketing.condensedCv} />
       <HomeResumeAnchor id={resume.anchorId}>
-        <SummarySection {...resume.summary} />
         <EducationSection education={resume.education} />
         <CertificationsSection certifications={resume.certifications} />
         <ProjectsSection projects={resume.projects} />

@@ -16,7 +16,7 @@ export function projectsPageViewFixture(): ProjectsPageViewProps {
       hardestProblem:
         "Keeping many AI-assisted sessions aligned required more than better prompts: Docker-first tooling, scoped tickets, validation scripts, ownership boundaries, and release checks made the work repeatable.",
       outcomes: [
-        "Published on Google Play with signed Android artifacts and release validation.",
+        "Published on Google Play after turning a playable prototype into a store-ready Android release.",
         "Replaced broad prompts with scoped tickets carrying dependencies and acceptance criteria.",
         "Added checks for map topology, flags, assets, docs, logs, ownership, and Android artifacts.",
         "Split gameplay into smaller systems so parallel agents had clearer boundaries.",
@@ -34,11 +34,6 @@ export function projectsPageViewFixture(): ProjectsPageViewProps {
         {
           label: "Medium article",
           href: "https://medium.com/@lucasabritta_93729/what-i-learned-building-an-android-game-with-ai-agents-5f64d23024fe",
-          variant: "secondary",
-        },
-        {
-          label: "Example GitHub",
-          href: "https://github.com/example/echoes-missing-cat",
           variant: "secondary",
         },
       ],

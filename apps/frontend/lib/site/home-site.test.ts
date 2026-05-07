@@ -7,7 +7,7 @@ describe("buildHomeMarketing", () => {
   it("wires hero CTAs and condensed résumé anchor from résumé data", () => {
     const m = buildHomeMarketing(resumeData);
     expect(m.homeLeadHero.projectsHref).toBe("/projects");
-    expect(m.homeLeadHero.storybookHref).toBe("/storybook");
+    expect(m.homeLeadHero.githubHref).toBe("https://github.com/lucasabritta");
     expect(m.homeLeadHero.name).toBe(resumeData.name);
     expect(m.condensedCv.resumeAnchorId).toBe(HOME_RESUME_ANCHOR_ID);
     expect(m.condensedCv.heading).toBe("Work history");
@@ -15,10 +15,11 @@ describe("buildHomeMarketing", () => {
     expect(m.condensedCv.entries[0]?.company).toBe(resumeData.workHistory[0]?.company);
   });
 
-  it("marks flagship store link as external for featured work", () => {
+  it("keeps featured work pointing at the projects page", () => {
     const m = buildHomeMarketing(resumeData);
-    expect(m.featuredWork.flagship.href).toMatch(/^https:\/\//);
-    expect(m.featuredWork.flagship.external).toBe(true);
+    expect(m.featuredWork.flagship.href).toBe("/projects");
+    expect(m.featuredWork.flagship.ctaLabel).toBe("View Projects");
+    expect(m.featuredWork.flagship.external).toBeFalsy();
     expect(m.featuredWork.supporting[0]?.href).toBe("/projects");
     expect(m.featuredWork.supporting[0]?.external).toBeFalsy();
   });

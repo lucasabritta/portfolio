@@ -8,7 +8,7 @@ export type HomeLeadHeroProps = {
   contactHintLabel?: string;
   contactHintHref?: string;
   projectsHref: string;
-  storybookHref: string;
+  githubHref: string;
   /** Optional public URL for the hero portrait (e.g. `/headshot-lucas.png`). */
   headshotSrc?: string;
   headshotAvifSrcSet?: string;

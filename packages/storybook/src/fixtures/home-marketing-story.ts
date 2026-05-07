@@ -51,7 +51,7 @@ export function homeLeadHeroFromHomePageProps(props: HomePageProps): HomeLeadHer
     contactHintLabel: props.location ? "contacts" : undefined,
     contactHintHref: props.location ? "#contact-heading" : undefined,
     projectsHref: "/projects",
-    storybookHref: "/storybook",
+    githubHref: "https://github.com/example",
   };
 }
 

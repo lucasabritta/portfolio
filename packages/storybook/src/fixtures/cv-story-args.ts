@@ -23,8 +23,6 @@ const SYNTH_LINKS: readonly PresentationContactLink[] = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/example" },
 ];
 
-const SYNTH_TECH = ["TypeScript", "React", "Node.js", "AWS"] as const;
-
 const SYNTH_WORK: readonly PresentationWorkEntry[] = [
   {
     company: "Example Corp",
@@ -111,33 +109,6 @@ export function portfolioHeroEmptyArgs(): PortfolioHeroStoryArgs {
     phoneHref: "tel:",
     email: "",
     links: [],
-  });
-}
-
-export function summarySectionArgs(
-  overrides: Partial<{
-    summary: string;
-    techStack: readonly string[];
-  }> = {},
-) {
-  return {
-    summary: SYNTH_SUMMARY,
-    techStack: SYNTH_TECH,
-    ...overrides,
-  };
-}
-
-export function summarySectionEmptyArgs() {
-  return summarySectionArgs({ summary: "", techStack: [] });
-}
-
-export function summarySectionLongContentArgs() {
-  return summarySectionArgs({
-    summary: `${SYNTH_SUMMARY}${LONG.repeat(3)}`,
-    techStack: [
-      ...SYNTH_TECH.map((t) => `${t} (primary)`),
-      ...SYNTH_TECH.map((t) => `${t} (secondary)`),
-    ],
   });
 }
 
@@ -281,7 +252,6 @@ export function homePageArgs(overrides: Partial<HomePageProps> = {}): HomePagePr
     email: SYNTH_EMAIL,
     linkedin: SYNTH_LINKEDIN,
     contactLinks: SYNTH_LINKS,
-    techStack: [...SYNTH_TECH],
     workHistory: [...SYNTH_WORK],
     education: [...SYNTH_EDU],
     certifications: [...SYNTH_CERTS],
@@ -297,8 +267,6 @@ export const storyFixtureEmail = SYNTH_EMAIL;
 export const storyFixtureCert = SYNTH_CERTS[0];
 export const storyFixtureEducationInstitution = SYNTH_EDU[0].institution;
 export const storyFixtureWorkCompany = SYNTH_WORK[0].company;
-export const storyFixtureSummary = SYNTH_SUMMARY;
-export const storyFixtureTech = SYNTH_TECH[0];
 export const storyFixtureEducationCount = SYNTH_EDU.length;
 export const storyFixtureWorkCount = SYNTH_WORK.length;
 export const storyFixtureCertCount = SYNTH_CERTS.length;

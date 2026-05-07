@@ -22,7 +22,10 @@ describe("Home page", () => {
 
   it("keeps page shell and section composition in frontend", () => {
     render(<Home />);
-    expect(screen.getByRole("heading", { name: /professional summary/i })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /professional summary/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /personal projects/i })).toBeInTheDocument();
     expect(document.getElementById("resume")).toBeTruthy();
   });
 
@@ -33,11 +36,12 @@ describe("Home page", () => {
     expect(heroRoot).toBeTruthy();
     const projects = within(heroRoot as HTMLElement).getByRole("link", { name: "View Projects" });
     expect(projects).toHaveAttribute("href", "/projects");
-    const storybookLinks = screen.getAllByRole("link", {
-      name: /Open Storybook.*opens in a new tab/i,
-    });
-    expect(storybookLinks.length).toBeGreaterThanOrEqual(1);
-    expect(storybookLinks.every((el) => el.getAttribute("href") === "/storybook")).toBe(true);
+    expect(
+      within(heroRoot as HTMLElement).queryByRole("link", { name: /Open Storybook/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(heroRoot as HTMLElement).getByRole("link", { name: /GitHub profile/i }),
+    ).toHaveAttribute("href", "https://github.com/lucasabritta");
     expect(screen.queryByRole("link", { name: /download cv/i })).not.toBeInTheDocument();
   });
 });

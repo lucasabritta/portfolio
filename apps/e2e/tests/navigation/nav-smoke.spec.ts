@@ -35,7 +35,7 @@ test.describe("Site navigation and critical routes", () => {
     await expect(build.pageHeading).toBeVisible();
   });
 
-  test("hash to résumé region shows professional summary", async ({ page }) => {
+  test("hash to résumé region shows résumé details", async ({ page }) => {
     const home = new HomePage(page);
 
     await home.gotoResumeSection();

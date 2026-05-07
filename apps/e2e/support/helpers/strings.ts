@@ -5,7 +5,7 @@ export const PAGE_COPY = {
   projectsPinnedHeading: "Pinned GitHub repositories",
   projectsHardestHeading: "Hardest problem",
   buildHeading: /Site architecture/i,
-  resumeSectionHeading: /professional summary/i,
+  resumeSectionHeading: /education/i,
   storybookShellMarker: /storybook/i,
   colophonMarker: /built with next\.js, storybook, vercel, and cloudflare/i,
 } as const;
@@ -14,7 +14,6 @@ export const NAV_LINKS = {
   home: { label: "Home", href: "/" },
   projects: { label: "Projects", href: "/projects" },
   build: { label: "Site architecture", href: "/site-architecture" },
-  cv: { label: "CV", href: "/#resume" },
 } as const;
 
 export const EXTERNAL_URLS = {

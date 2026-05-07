@@ -6,8 +6,9 @@ export const homeLeadHeroDefaultPlay: StoryPlayFn = async ({ canvasElement }) =>
   const canvas = within(canvasElement);
   expect(canvas.getByRole("heading", { level: 1, name: storyFixtureName })).toBeVisible();
   expect(canvas.getByRole("link", { name: "View Projects" })).toHaveAttribute("href", "/projects");
-  expect(canvas.getByRole("link", { name: /Open Storybook.*opens in a new tab/i })).toHaveAttribute(
+  expect(canvas.getByRole("link", { name: /GitHub profile.*opens in a new tab/i })).toHaveAttribute(
     "href",
-    "/storybook",
+    "https://github.com/example",
   );
+  expect(canvas.queryByRole("link", { name: /Open Storybook/i })).toBeNull();
 };

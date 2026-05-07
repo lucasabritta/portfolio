@@ -20,7 +20,6 @@ export function buildSiteChromeProps(): SiteChromeStaticProps {
       { label: "Home", href: "/" },
       { label: "Projects", href: "/projects" },
       { label: "Site architecture", href: "/site-architecture" },
-      { label: "CV", href: "/#resume" },
     ],
     footerLinks: [
       { label: "GitHub", href: siteProfile.githubProfileUrl, external: true },

@@ -84,12 +84,12 @@ describe("resumeData — list invariants", () => {
     }
   });
 
-  it("personal projects have title and an absolute https URL", () => {
+  it("personal projects have title and a valid URL", () => {
     expect(resumeData.personalProjects.length).toBeGreaterThan(0);
     for (const project of resumeData.personalProjects) {
       expect(project.title.trim().length).toBeGreaterThan(0);
       expect(project.description.trim().length).toBeGreaterThan(0);
-      expect(project.href).toMatch(/^https:\/\//);
+      expect(project.href).toMatch(/^(https:\/\/|\/)/);
     }
   });
 

@@ -5,7 +5,7 @@ This document captures **product intent**, **current state**, **design constrain
 ## Goals (visitor outcomes)
 
 1. **Introduce Lucas** as a person and leader, not only a résumé header: short narrative, credibility signals, clear “what I want next.”
-2. **CV** remains easy to find and download (PDF), including for recruiters skimming quickly.
+2. Résumé details remain easy to find for recruiters skimming quickly.
 3. **Storybook** is **discoverable and explained**: link from the site, one paragraph on what lives there, URL `/storybook` (static build + Next rewrite — see existing config).
 4. **How the site is deployed / built**: human-readable “build story” (monorepo, Docker/CI, hosting) without dumping raw config.
 5. **GitHub**: surfaced projects (pinned / curated), not buried.
@@ -54,7 +54,7 @@ Implement incrementally; not every route is required for v1.
 | `/cv` _(optional)_      | Full linear résumé sections **or** keep résumé content on `/` — decide for SEO/scroll length.                 |
 | `/contact` _(optional)_ | Only if footer is insufficient for shared “contact” URLs.                                                     |
 
-**Global navigation**: persistent header or sticky TOC — Home · Projects · Build · CV anchor · (Contact).
+**Global navigation**: persistent header or sticky TOC — Home · Projects · Build · (Contact).
 
 **Footer**: extend beyond name + role — GitHub, LinkedIn, `/storybook`, link to `/site-architecture`, legal/colophon if needed.
 
@@ -172,7 +172,7 @@ Theme switch behavior:
 - Header contents:
   - Left: wordmark / name (`Lucas Abritta`)
   - Right: nav links and theme switch
-- Recommended nav items: `Home`, `Projects`, `Build`, `CV`.
+- Recommended nav items: `Home`, `Projects`, `Build`.
 
 ### Floating / sticky action recommendation
 
@@ -211,7 +211,7 @@ Recommended structure:
 3. Credibility strip
 4. Selected work preview
 5. Build/storybook preview
-6. Optional condensed CV preview
+6. Optional condensed résumé preview
 7. Footer
 
 Hero layout:
@@ -228,7 +228,7 @@ Hero layout:
 Hero CTAs:
 
 - Primary button: `View Projects`
-- Tertiary text link: `Open Storybook`
+- Secondary button: `GitHub profile`
 
 ### `/projects`
 
@@ -264,13 +264,13 @@ Desktop order:
 
 1. **Sticky header**
    - left: `Lucas Abritta`
-   - right: `Home`, `Projects`, `Build`, `CV`, theme switch
+   - right: `Home`, `Projects`, `Build`, theme switch
 2. **Hero section**
    - left column:
      - mono eyebrow like `Engineering Manager`
      - main headline introducing Lucas
      - 2-3 sentence positioning paragraph
-     - CTA row: `View Projects` / `Open Storybook`
+     - CTA row: `View Projects` / `GitHub profile`
 3. **Credibility strip**
    - 3 horizontally aligned credibility items on desktop
    - examples: startup growth, platform quality, hands-on technical leadership
@@ -281,7 +281,7 @@ Desktop order:
    - short explanation of the build system
    - one CTA to `/site-architecture`
    - one secondary CTA to `/storybook`
-6. **Optional condensed CV preview**
+6. **Optional condensed résumé preview**
    - timeline snippets or the full work-history list, depending on content length
 7. **Editorial footer**
 
@@ -294,7 +294,7 @@ Mobile order:
 5. Credibility strip as stacked cards or rows
 6. Featured work preview
 7. Build/storybook preview
-8. Optional condensed CV preview
+8. Optional condensed résumé preview
 9. Footer
 10. Sticky bottom CTA bar appears only after the hero CTA group scrolls away
 

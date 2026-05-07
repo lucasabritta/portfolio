@@ -23,7 +23,7 @@ export const projectsPageContent = {
     hardestProblem:
       "The real challenge was not prompting an agent to make a game. It was creating enough structure for many AI-assisted sessions to stay aligned: Docker-first tooling, small tickets, map and flag validation, ownership boundaries, and release checks that agents could not accidentally bypass.",
     outcomes: [
-      "Published on Google Play with signed AAB/APK paths, artifact verification, native-symbol checks, 16 KB page-size validation, and Android 15 warning follow-up.",
+      "Published on Google Play after turning a playable prototype into a store-ready Android release.",
       "Turned broad prompts into 247 scoped tickets with dependencies, acceptance criteria, files to touch, and validation expectations.",
       "Added guardrails for map exits, return-side continuity, spawn cells, topology uniqueness, flags, docs, assets, logging, ownership, and Android release artifacts.",
       "Split monolithic gameplay code into smaller systems for input, movement, interactions, abilities, flute behavior, map data, and biome-owned content so parallel agents had fewer collision points.",
@@ -49,11 +49,6 @@ export const projectsPageContent = {
       {
         label: "Medium article",
         href: PROJECT_URLS.echoesMissingCatMediumArticle,
-        variant: "secondary",
-      },
-      {
-        label: "GitHub profile",
-        href: siteProfile.githubProfileUrl,
         variant: "secondary",
       },
     ],

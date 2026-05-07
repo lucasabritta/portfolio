@@ -13,7 +13,6 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
   { label: "Site architecture", href: "/site-architecture" },
-  { label: "CV", href: "/#resume" },
 ];
 
 const meta = {

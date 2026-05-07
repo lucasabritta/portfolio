@@ -25,5 +25,6 @@ describe("Projects page", () => {
       "href",
       "https://medium.com/@lucasabritta_93729/what-i-learned-building-an-android-game-with-ai-agents-5f64d23024fe",
     );
+    expect(screen.queryByRole("link", { name: /GitHub profile/i })).not.toBeInTheDocument();
   });
 });

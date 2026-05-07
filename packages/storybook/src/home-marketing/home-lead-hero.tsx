@@ -11,7 +11,7 @@ export function HomeLeadHero({
   contactHintLabel,
   contactHintHref,
   projectsHref,
-  storybookHref,
+  githubHref,
   headshotSrc,
   headshotAvifSrcSet,
   headshotWebpSrcSet,
@@ -57,17 +57,16 @@ export function HomeLeadHero({
           <ActionLink variant="primary" href={projectsHref}>
             View Projects
           </ActionLink>
+          <ActionLink
+            variant="secondary"
+            href={githubHref}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub profile
+            <span className={styles.visuallyHidden}> (opens in a new tab)</span>
+          </ActionLink>
         </div>
-        <ActionLink
-          variant="accentUnderline"
-          href={storybookHref}
-          className={styles.storybookLink}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open Storybook
-          <span className={styles.visuallyHidden}> (opens in a new tab)</span>
-        </ActionLink>
       </div>
     </header>
   );

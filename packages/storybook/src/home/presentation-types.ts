@@ -38,7 +38,6 @@ export type HomePageProps = {
   email: string;
   linkedin: string;
   contactLinks: readonly PresentationContactLink[];
-  techStack: readonly string[];
   workHistory: readonly PresentationWorkEntry[];
   education: readonly PresentationEducationEntry[];
   certifications: readonly string[];
