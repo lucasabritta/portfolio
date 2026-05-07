@@ -16,19 +16,20 @@ export const projectsPageContent = {
   flagship: {
     title: "Echoes of the missing cat",
     eyebrow: "Flagship",
-    role: "Creator — game direction, Godot implementation, Android delivery, and release hygiene",
-    stack: ["Godot 4", "Android", "Google Play", "PowerShell QA tooling", "AI-assisted workflows"],
+    role: "Creator — game direction, Godot implementation, Android delivery, release hygiene, and agent workflow design",
+    stack: ["Godot 4", "Android", "Google Play", "Docker", "GitHub Actions", "AI agents"],
     pitch:
-      "Echoes of the missing cat is a landscape-only, top-down 2D adventure for Android. Players move through a compact sequence of coastal maps, collect simple items, clear gates, and reunite with the missing cat while the project stays intentionally small enough for one person to own end to end.",
+      "Echoes of the missing cat is a landscape-only, top-down 2D Android adventure built in Godot 4. The shipped game has touch controls, 13 maps, simple puzzles, light backtracking, English and Brazilian Portuguese text, and a final cat reunion shaped by family playtesting.",
     hardestProblem:
-      "The hard part was not adding more mechanics. It was keeping the game predictable across Godot runtime code, map data, Android exports, and store-ready release checks while using AI to move faster without letting generated work decide the product shape.",
+      "The real challenge was not prompting an agent to make a game. It was creating enough structure for many AI-assisted sessions to stay aligned: Docker-first tooling, small tickets, map and flag validation, ownership boundaries, and release checks that agents could not accidentally bypass.",
     outcomes: [
-      "Google Play package identity and release documentation for com.echoes.missingcat, with signed AAB/APK release paths.",
-      "A documented progression path across 13 maps, including item gates, controlled backtracking, and a final reunion flow.",
-      "Headless QA, Android emulator validation, release-matrix checks, and store-release workflows captured as repeatable scripts.",
+      "Published on Google Play with signed AAB/APK paths, artifact verification, native-symbol checks, 16 KB page-size validation, and Android 15 warning follow-up.",
+      "Turned broad prompts into 247 scoped tickets with dependencies, acceptance criteria, files to touch, and validation expectations.",
+      "Added guardrails for map exits, return-side continuity, spawn cells, topology uniqueness, flags, docs, assets, logging, ownership, and Android release artifacts.",
+      "Split monolithic gameplay code into smaller systems for input, movement, interactions, abilities, flute behavior, map data, and biome-owned content so parallel agents had fewer collision points.",
     ],
     aiPipelineNote:
-      "AI helped accelerate drafts, tooling, and implementation loops, but the shipped behavior stayed human-owned: map progression, release gates, Play policy, and player-facing polish were validated through scripts, docs, and device checks.",
+      "The Medium write-up captures the biggest lesson from the project: agents move fastest when the project has boring structure around them. Tickets, lint rules, Docker wrappers, validation scripts, and release automation mattered more than clever one-off prompts.",
     imageSrc: "/projects/echoes-phone-1-768.webp",
     imageAvifSrcSet:
       "/projects/echoes-phone-1-480.avif 480w, /projects/echoes-phone-1-768.avif 768w, /projects/echoes-phone-1-1080.avif 1080w",
@@ -44,6 +45,11 @@ export const projectsPageContent = {
         label: "Google Play",
         href: PROJECT_URLS.echoesMissingCatPlayStore,
         variant: "primary",
+      },
+      {
+        label: "Medium article",
+        href: PROJECT_URLS.echoesMissingCatMediumArticle,
+        variant: "secondary",
       },
       {
         label: "GitHub profile",

@@ -128,19 +128,6 @@
   }
 }
 
-.download {
-  display: none;
-  font-size: 0.8125rem;
-  min-height: 2.75rem;
-  padding: 0.5rem 0.85rem;
-}
-
-@media (min-width: 768px) {
-  .download {
-    display: inline-flex;
-  }
-}
-
 .menuButton {
   align-items: center;
   background: var(--card);
@@ -261,12 +248,6 @@
   flex-direction: column;
   gap: 0.5rem;
   padding-top: 0.75rem;
-}
-
-.mobileDownload {
-  justify-content: center;
-  min-height: 2.75rem;
-  width: 100%;
 }
 
 .mobileThemeLabel {

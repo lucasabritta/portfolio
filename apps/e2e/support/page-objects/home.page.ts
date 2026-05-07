@@ -1,4 +1,4 @@
-import { type Download, type Locator, type Page } from "@playwright/test";
+import { type Locator, type Page } from "@playwright/test";
 
 import { PAGE_COPY } from "../helpers/strings";
 
@@ -8,12 +8,10 @@ export class HomePage {
   readonly primaryNavigation: Locator;
   readonly heroHeading: Locator;
   readonly leadHeader: Locator;
-  readonly downloadCvLink: Locator;
   readonly storybookEntryLink: Locator;
   readonly footer: Locator;
   readonly footerGithubLink: Locator;
   readonly footerStorybookLink: Locator;
-  readonly footerResumePdfLink: Locator;
   readonly resumeSectionHeading: Locator;
 
   constructor(page: Page) {
@@ -24,14 +22,12 @@ export class HomePage {
     this.leadHeader = page.locator("header").filter({
       has: this.heroHeading,
     });
-    this.downloadCvLink = this.leadHeader.getByRole("link", { name: "Download CV" });
     this.storybookEntryLink = page.getByRole("link", { name: "Open Storybook" }).first();
     this.footer = page.getByRole("contentinfo");
     this.footerGithubLink = this.footer.getByRole("link", { name: "GitHub" });
     this.footerStorybookLink = this.footer.getByRole("link", {
       name: /Component library \(Storybook\)/i,
     });
-    this.footerResumePdfLink = this.footer.getByRole("link", { name: "Résumé PDF" });
     this.resumeSectionHeading = page.getByRole("heading", {
       name: PAGE_COPY.resumeSectionHeading,
     });
@@ -47,15 +43,6 @@ export class HomePage {
 
   async gotoResumeSection() {
     await this.page.goto("/#resume");
-  }
-
-  async downloadCv(): Promise<Download> {
-    const [download] = await Promise.all([
-      this.page.waitForEvent("download"),
-      this.downloadCvLink.click(),
-    ]);
-
-    return download;
   }
 
   async openProjectsFromPrimaryNav() {

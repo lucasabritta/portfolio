@@ -15,10 +15,6 @@ description: >-
 - Read `AGENTS.md` and `README.md` for compose service names and ports.
 - Confirm **Docker Desktop** (or compatible engine) is running on the machine.
 
-## CV PDF (this repo)
-
-- Prefer **`sh scripts/cv/docker-dump.sh`** or [`docs/agents/cv-pdf-docker.md`](../../../docs/agents/cv-pdf-docker.md) for writing a PDF to `tmp-cv-compare/` (Vitest opt-in dump), Python raster/PNG, and docx extract. Do not rely on host Python for those steps.
-
 ## Default procedure
 
 1. **Discover entrypoints**: Locate `Dockerfile`, `docker-compose.yml` (this repo), and `.env.example` (if present).

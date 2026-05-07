@@ -16,7 +16,6 @@ import {
   HomeResumeAnchor,
   ProjectsSection,
   SummarySection,
-  WorkHistorySection,
 } from "@portfolio/storybook/home";
 
 import { buildHomePageModel } from "@/lib/site/home-page-model";
@@ -38,7 +37,6 @@ export default function Home() {
       <CondensedCvPreview {...marketing.condensedCv} />
       <HomeResumeAnchor id={resume.anchorId}>
         <SummarySection {...resume.summary} />
-        <WorkHistorySection workHistory={resume.workHistory} />
         <EducationSection education={resume.education} />
         <CertificationsSection certifications={resume.certifications} />
         <ProjectsSection projects={resume.projects} />

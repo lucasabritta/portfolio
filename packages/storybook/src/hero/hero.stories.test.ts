@@ -19,9 +19,7 @@ export const portfolioHeroEmptyPlay: StoryPlayFn = async ({ canvasElement }) => 
   expect(canvas.getByLabelText("Location not provided")).toBeInTheDocument();
   expect(canvas.getByLabelText("Phone not provided")).toBeInTheDocument();
   expect(canvas.getByLabelText("Email not provided")).toBeInTheDocument();
-  const download = canvas.getByRole("link", { name: /download cv/i });
-  download.focus();
-  expect(download).toHaveFocus();
+  expect(canvas.queryByRole("link", { name: /download cv/i })).toBeNull();
 };
 
 export const portfolioHeroLongContentPlay: StoryPlayFn = async ({ canvasElement }) => {

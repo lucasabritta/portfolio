@@ -7,13 +7,7 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   resolve: {
-    alias: [
-      { find: "@", replacement: dirname },
-      {
-        find: /^@cv-pdf\/(.+)$/,
-        replacement: path.resolve(dirname, "lib/cv-pdf/$1"),
-      },
-    ],
+    alias: [{ find: "@", replacement: dirname }],
   },
   esbuild: { jsx: "automatic" },
   test: {

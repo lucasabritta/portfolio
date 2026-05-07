@@ -1,7 +1,3 @@
-export const CV_FILENAME_BODY = "[A-Za-z0-9_]+_CV\\.pdf";
-export const CV_FILENAME_PATTERN = new RegExp(`^${CV_FILENAME_BODY}$`);
-export const CONTENT_DISPOSITION_FILENAME = new RegExp(`filename="(${CV_FILENAME_BODY})"`);
-
 export const PAGE_COPY = {
   homeHeroName: "Lucas Abritta",
   projectsHeading: "Projects",
@@ -23,6 +19,5 @@ export const NAV_LINKS = {
 
 export const EXTERNAL_URLS = {
   githubProfile: /^https:\/\/github\.com\/lucasabritta\/?$/,
-  cvApi: "/api/cv",
   storybookIndex: "/storybook",
 } as const;

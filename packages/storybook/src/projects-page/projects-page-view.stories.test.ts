@@ -19,6 +19,11 @@ export const projectsPageViewDefaultPlay: StoryPlayFn = async ({ canvasElement }
   expect(googlePlay).toHaveAttribute("target", "_blank");
   expect(googlePlay.getAttribute("rel") ?? "").toMatch(/noopener/);
 
+  expect(canvas.getByRole("link", { name: /Medium article.*opens in a new tab/i })).toHaveAttribute(
+    "href",
+    "https://medium.com/@lucasabritta_93729/what-i-learned-building-an-android-game-with-ai-agents-5f64d23024fe",
+  );
+
   expect(
     canvas.getByRole("link", {
       name: /view on github\s*: example\/portfolio/i,

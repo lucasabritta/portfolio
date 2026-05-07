@@ -38,16 +38,6 @@ describe("Home page", () => {
     });
     expect(storybookLinks.length).toBeGreaterThanOrEqual(1);
     expect(storybookLinks.every((el) => el.getAttribute("href") === "/storybook")).toBe(true);
-    expect(within(heroRoot as HTMLElement).getByText("Proof points")).toBeInTheDocument();
-    expect(within(heroRoot as HTMLElement).getByRole("list")).toBeInTheDocument();
-  });
-
-  it("keeps cv download path under /api", () => {
-    render(<Home />);
-    const cvPdfLinks = screen
-      .getAllByRole("link")
-      .filter((el) => el.getAttribute("href") === "/api/cv");
-    expect(cvPdfLinks.length).toBeGreaterThanOrEqual(1);
-    expect(cvPdfLinks.some((el) => /download cv/i.test(el.textContent ?? ""))).toBe(true);
+    expect(screen.queryByRole("link", { name: /download cv/i })).not.toBeInTheDocument();
   });
 });

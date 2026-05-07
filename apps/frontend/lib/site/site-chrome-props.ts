@@ -10,7 +10,6 @@ export type SiteChromeStaticProps = {
   navItems: SiteNavItem[];
   footerLinks: SiteFooterLink[];
   colophon: string;
-  downloadCvHref: string;
 };
 
 export function buildSiteChromeProps(): SiteChromeStaticProps {
@@ -28,9 +27,7 @@ export function buildSiteChromeProps(): SiteChromeStaticProps {
       { label: "LinkedIn", href: resumeData.linkedin, external: true },
       { label: "Component library (Storybook)", href: "/storybook", external: true },
       { label: "Site architecture", href: "/site-architecture" },
-      { label: "Résumé PDF", href: "/api/cv" },
     ],
     colophon: "Built with Next.js, Storybook, Vercel, and Cloudflare.",
-    downloadCvHref: "/api/cv",
   };
 }

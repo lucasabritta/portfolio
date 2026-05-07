@@ -17,8 +17,6 @@ export const siteHeaderDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
   );
   expect(within(primary).getByRole("link", { name: "CV" })).toHaveAttribute("href", "/#resume");
 
-  expect(canvas.getByRole("link", { name: "Download CV" })).toHaveAttribute("href", "/api/cv");
-
   const active = within(primary).getByRole("link", { name: "Site architecture" });
   expect(active).toHaveAttribute("aria-current", "page");
 };
@@ -66,10 +64,7 @@ export const siteHeaderMobileMenuPlay: StoryPlayFn = async ({ canvasElement }) =
     "aria-current",
     "page",
   );
-  expect(within(dialog).getByRole("link", { name: "Download CV", hidden: true })).toHaveAttribute(
-    "href",
-    "/api/cv",
-  );
+  expect(within(dialog).queryByRole("link", { name: "Download CV", hidden: true })).toBeNull();
 
   await userEvent.click(toggled);
   expect(

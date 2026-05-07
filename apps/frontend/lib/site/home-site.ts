@@ -40,27 +40,17 @@ const CREDIBILITY_ITEMS = [
 
 const BUILD_TEASER: BuildStorybookTeaserProps = {
   heading: "Site & component library",
-  lead: "This portfolio is a small monorepo: a Next.js app, a Storybook package for shared UI, résumé data reused by the PDF CV, Docker for local parity, and GitHub Actions split by package so changes stay reviewable.",
+  lead: "This portfolio is a small monorepo: a Next.js app, a Storybook package for shared UI, résumé data for site content, Docker for local parity, and GitHub Actions split by package so changes stay reviewable.",
   buildHref: "/site-architecture",
   storybookHref: "/storybook",
 };
 
-function threeProofPoints(highlights: readonly string[]): HomeLeadHeroProps["proofPoints"] {
-  const a = highlights[0] ?? "—";
-  const b = highlights[1] ?? a;
-  const c = highlights[2] ?? b;
-  return [a, b, c];
-}
-
-function threeCondensedEntries(
-  work: ResumeData["workHistory"],
-): CondensedCvPreviewProps["entries"] {
-  const pick = (i: number) => ({
-    company: work[i]?.company ?? "—",
-    role: work[i]?.role ?? "—",
-    period: work[i]?.period ?? "—",
-  });
-  return [pick(0), pick(1), pick(2)];
+function condensedEntries(work: ResumeData["workHistory"]): CondensedCvPreviewProps["entries"] {
+  return work.map((entry) => ({
+    company: entry.company,
+    role: entry.role,
+    period: entry.period,
+  }));
 }
 
 function flagshipCta(href: string): string {
@@ -126,11 +116,9 @@ export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
       name: resume.name,
       roleEyebrow: resume.role,
       positioningLead: HOME_POSITIONING_LEAD,
-      proofPoints: threeProofPoints(resume.summaryHighlights),
       contactHint,
       contactHintLabel: contactHint ? "contacts" : undefined,
       contactHintHref: contactHint ? "#contact-heading" : undefined,
-      downloadHref: "/api/cv",
       projectsHref: "/projects",
       storybookHref: "/storybook",
       headshotSrc: "/headshot-lucas-192.webp",
@@ -148,10 +136,9 @@ export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
     featuredWork: featuredWorkFromResume(resume),
     buildTeaser: BUILD_TEASER,
     condensedCv: {
-      heading: "Recent roles",
-      entries: threeCondensedEntries(resume.workHistory),
+      heading: "Work history",
+      entries: condensedEntries(resume.workHistory),
       resumeAnchorId: HOME_RESUME_ANCHOR_ID,
-      continueLabel: "Continue to full résumé",
     },
   };
 }

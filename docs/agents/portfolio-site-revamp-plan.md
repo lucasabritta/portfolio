@@ -4,7 +4,7 @@ This document captures **product intent**, **current state**, **design constrain
 
 ## Goals (visitor outcomes)
 
-1. **Introduce Lucas** as a person and leader, not only a résumé header: short narrative, proof points, clear “what I want next.”
+1. **Introduce Lucas** as a person and leader, not only a résumé header: short narrative, credibility signals, clear “what I want next.”
 2. **CV** remains easy to find and download (PDF), including for recruiters skimming quickly.
 3. **Storybook** is **discoverable and explained**: link from the site, one paragraph on what lives there, URL `/storybook` (static build + Next rewrite — see existing config).
 4. **How the site is deployed / built**: human-readable “build story” (monorepo, Docker/CI, hosting) without dumping raw config.
@@ -30,33 +30,31 @@ Use **multiple routes** if needed; avoid a single endless scroll as the only nav
 | Hero + shell           | `/` uses `packages/storybook/src/home-marketing/home-lead-hero.tsx` (`HomeLeadHero`) inside `HomePageShell`; `PortfolioHero` remains available for other surfaces.                                                                                                                                                                     |
 | Global chrome          | `apps/frontend/app/layout.tsx` composes `ThemeProvider`, `SiteChromeClient`, skip link, sticky `SiteHeader` / `SiteFooter`, and fonts/CSS on `<html>/<body>`. `HomePageShell` puts the home hero **inside** `<main id="main">` with the rest of the page so “Skip to content” reaches the primary `h1` and CTAs (no duplicate footer). |
 | Site metadata baseline | `apps/frontend/app/layout.metadata.ts` exports shared root metadata; route-level metadata should extend this rather than reinvent it.                                                                                                                                                                                                  |
-| CV PDF                 | `apps/frontend/app/api/cv/route.ts`, `apps/frontend/lib/cv-pdf/*`; home lead hero uses `downloadHref="/api/cv"`.                                                                                                                                                                                                                       |
 | Storybook static URL   | `apps/frontend/next.config.ts` rewrites `/storybook` → `/storybook/index.html`; build output under `apps/frontend/public/storybook/` (see `docs/agents/storybook-ui.md`).                                                                                                                                                              |
-| E2E                    | `apps/e2e/cv-download.spec.ts` (PDF API), `projects-page.spec.ts`, `nav-smoke.spec.ts` (nav, `/`, `/site-architecture`, `/#resume`, footer discovery).                                                                                                                                                                                 |
+| E2E                    | `projects-page.spec.ts`, `nav-smoke.spec.ts`, and crawler specs (nav, `/`, `/projects`, `/site-architecture`, `/#resume`, footer discovery).                                                                                                                                                                                           |
 | Boundaries             | **Do not** import `@portfolio/resume-content` inside `packages/storybook`. App composes data → presentation props.                                                                                                                                                                                                                     |
 
 ## Implementation guardrails
 
 - Keep **presentation components** in `packages/storybook`; keep **route modules, content composition, and mappers** in `apps/frontend`.
-- Treat `packages/resume-content` as **résumé/PDF-safe shared data**, not as a dumping ground for every marketing-only field.
+- Treat `packages/resume-content` as **résumé-safe shared data**, not as a dumping ground for every marketing-only field.
 - If a datum should appear only on the website (for example curated GitHub repos, featured project callouts, or richer build-story copy), prefer `apps/frontend/lib/**` or route-local content modules.
-- If a datum should appear consistently across both the web site and the PDF/CV surfaces, consider `packages/resume-content`.
-- Reuse the existing **`/api/cv`** download path regardless of whether a dedicated `/cv` page is added later.
+- If a datum should appear consistently across text and visual résumé surfaces, consider `packages/resume-content`.
 - Prefer manual, typed content for v1 over dynamic fetching.
 
 ## Target information architecture (recommended)
 
 Implement incrementally; not every route is required for v1.
 
-| Route                   | Purpose                                                                                                                         |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                     | Story-led home: positioning copy, primary CTAs (CV, GitHub, featured work), optional featured strip (game + repos + Storybook). |
-| `/projects`             | Game + GitHub highlights; cards with image, stack, role, links.                                                                 |
-| `/site-architecture`    | Site architecture: monorepo, Storybook, tests, Docker, CI, deploy, Vercel, and Cloudflare; link `/storybook`.                   |
-| `/cv` _(optional)_      | Full linear résumé sections **or** keep long CV on `/` and use `/cv` later — decide for SEO/scroll length.                      |
-| `/contact` _(optional)_ | Only if footer is insufficient for shared “contact” URLs.                                                                       |
+| Route                   | Purpose                                                                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `/`                     | Story-led home: positioning copy, primary CTAs, optional featured strip (game + repos + Storybook).           |
+| `/projects`             | Game + GitHub highlights; cards with image, stack, role, links.                                               |
+| `/site-architecture`    | Site architecture: monorepo, Storybook, tests, Docker, CI, deploy, Vercel, and Cloudflare; link `/storybook`. |
+| `/cv` _(optional)_      | Full linear résumé sections **or** keep résumé content on `/` — decide for SEO/scroll length.                 |
+| `/contact` _(optional)_ | Only if footer is insufficient for shared “contact” URLs.                                                     |
 
-**Global navigation**: persistent header or sticky TOC — Home · Projects · CV · Build · (Contact).
+**Global navigation**: persistent header or sticky TOC — Home · Projects · Build · CV anchor · (Contact).
 
 **Footer**: extend beyond name + role — GitHub, LinkedIn, `/storybook`, link to `/site-architecture`, legal/colophon if needed.
 
@@ -65,7 +63,7 @@ Implement incrementally; not every route is required for v1.
 - `/` should answer: who Lucas is, what he is strong at, and where to click next.
 - `/projects` should answer: what he has built, with the game treated as the flagship case study.
 - `/site-architecture` should answer: how this site is made and maintained, with a clear link to `/storybook`.
-- `/cv` remains optional because `/api/cv` already covers download/distribution.
+- `/cv` remains optional because `/` exposes the résumé content.
 
 ## Visual design direction (v1 spec)
 
@@ -163,7 +161,7 @@ Theme switch behavior:
   - borders
   - hover states
   - focus rings
-- The CV PDF endpoint does **not** need to mirror site theme selection; the PDF remains a separate output.
+- Machine-readable text endpoints do not need to mirror site theme selection.
 
 ### Header
 
@@ -173,9 +171,8 @@ Theme switch behavior:
   - Desktop: about **72px**
 - Header contents:
   - Left: wordmark / name (`Lucas Abritta`)
-  - Right: nav links, theme switch, and one compact CTA
+  - Right: nav links and theme switch
 - Recommended nav items: `Home`, `Projects`, `Build`, `CV`.
-- Add a compact desktop CTA in the header: **`Download CV`**.
 
 ### Floating / sticky action recommendation
 
@@ -183,11 +180,11 @@ Do **not** use a floating circular FAB as the primary pattern on desktop.
 
 Recommended behavior:
 
-- **Desktop**: no floating button. Keep CTA in the sticky header and hero.
+- **Desktop**: no floating button. Keep CTAs in the hero.
 - **Mobile**: use a **sticky bottom action bar** only after the hero scrolls out of view.
 - Mobile sticky action bar contents:
-  - Primary: `Download CV`
-  - Secondary: `GitHub` or `Projects`
+  - Primary: `Projects`
+  - Secondary: `GitHub` or `Storybook`
 - Hide the sticky bottom bar when the hero CTA group is fully visible to avoid duplication.
 - The sticky bottom bar should respect safe-area insets and never cover critical content or footer links.
 
@@ -201,7 +198,6 @@ Reasoning: this keeps desktop polished and uncluttered while preserving conversi
   - GitHub
   - LinkedIn
   - Storybook
-  - CV download
   - Optional short colophon line such as “Built with Next.js, Storybook, Vercel, and Cloudflare”
 
 ## Page-level visual spec
@@ -212,7 +208,7 @@ Recommended structure:
 
 1. Sticky header
 2. Hero
-3. Credibility strip / proof points
+3. Credibility strip
 4. Selected work preview
 5. Build/storybook preview
 6. Optional condensed CV preview
@@ -220,21 +216,18 @@ Recommended structure:
 
 Hero layout:
 
-- Desktop: two-column feel, but still content-led rather than image-led.
+- Desktop: content-led, with an optional portrait or project visual.
   - Left: eyebrow, name, leadership positioning, CTA group
-  - Right: optional highlight card with 3 proof points or flagship project callout
 - Mobile: single column, stacked in this order:
   - eyebrow
   - name
   - role/positioning
   - short narrative
   - CTA group
-  - proof/highlight card
 
 Hero CTAs:
 
-- Primary button: `Download CV`
-- Secondary button: `View Projects`
+- Primary button: `View Projects`
 - Tertiary text link: `Open Storybook`
 
 ### `/projects`
@@ -271,18 +264,15 @@ Desktop order:
 
 1. **Sticky header**
    - left: `Lucas Abritta`
-   - right: `Home`, `Projects`, `Build`, `CV`, theme switch, `Download CV`
+   - right: `Home`, `Projects`, `Build`, `CV`, theme switch
 2. **Hero section**
    - left column:
      - mono eyebrow like `Engineering Manager`
      - main headline introducing Lucas
      - 2-3 sentence positioning paragraph
-     - CTA row: `Download CV` / `View Projects` / `Open Storybook`
-   - right column:
-     - one highlight card with 3 proof points
-     - or one flagship teaser for _Echoes of the missing cat_
+     - CTA row: `View Projects` / `Open Storybook`
 3. **Credibility strip**
-   - 3 horizontally aligned proof items on desktop
+   - 3 horizontally aligned credibility items on desktop
    - examples: startup growth, platform quality, hands-on technical leadership
 4. **Featured work preview**
    - one large featured project row
@@ -292,8 +282,7 @@ Desktop order:
    - one CTA to `/site-architecture`
    - one secondary CTA to `/storybook`
 6. **Optional condensed CV preview**
-   - 2-3 timeline snippets max
-   - CTA to full CV route if `/cv` exists, otherwise CTA stays `Download CV`
+   - timeline snippets or the full work-history list, depending on content length
 7. **Editorial footer**
 
 Mobile order:
@@ -463,7 +452,7 @@ This document is intentionally specific enough to guide implementation without r
 - [x] **Metadata**: extend the existing `siteMetadata` baseline with route-specific title/description (OG later if desired).
 - [x] Add Storybook coverage for any new shared chrome components introduced in `packages/storybook`.
 
-**Acceptance**: From any page, user can reach CV download, GitHub, Storybook, and Build in ≤2 clicks; keyboard/focus order sane; theme switch visible and persistent; no Storybook package boundary violations.
+**Acceptance**: From any page, user can reach GitHub, Storybook, and Build in ≤2 clicks; keyboard/focus order sane; theme switch visible and persistent; no Storybook package boundary violations.
 
 ### Phase 2 — Projects and GitHub narrative
 
@@ -476,7 +465,7 @@ This document is intentionally specific enough to guide implementation without r
 
 ### Phase 3 — Home repositioning
 
-- [x] Refactor `/` so above-the-fold is **person-first** (short narrative + CTAs), with optional “continue to full CV” or move detailed timeline to `/cv`.
+- [x] Refactor `/` so above-the-fold is **person-first** (short narrative + CTAs), with résumé details kept lower on the page.
 - [x] Reuse existing section components where possible; avoid duplicating large CSS.
 - [x] Keep the first viewport scannable for recruiter/hiring-manager traffic: title, differentiation, and primary CTA should not compete equally.
 
@@ -486,7 +475,7 @@ _Automation:_ CI does not assert viewport height; do a quick laptop-width spot-c
 
 ### Phase 4 — Polish and quality gates
 
-- [x] **E2E** (`apps/e2e`): keep the existing CV download coverage and add nav smoke / critical-route checks.
+- [x] **E2E** (`apps/e2e`): keep nav smoke / critical-route checks.
 - [x] **Unit tests**: new routes/components as per repo conventions (`apps/frontend`, `packages/storybook` split).
 - [x] **Storybook interactions/a11y**: add or extend stories/tests for newly introduced shared UI.
 - [x] Run checks per **`docs/agents/agent-workflow.md`** / **`nextjs-change-checklist`** skill (lint, typecheck, tests, build) — preferably via Docker Compose per project rules. CI splits per package in **`.github/workflows/`** (`ci-frontend.yml`, `ci-storybook.yml`, `ci-resume-content.yml`, `ci-e2e.yml`, `ci-build.yml`); ensure touched packages pass their workflow.
@@ -501,7 +490,7 @@ _Automation:_ CI does not assert viewport height; do a quick laptop-width spot-c
 
 ## Open decisions (pick one before deep implementation)
 
-1. **CV on `/` vs `/cv`**: single long page vs split; affects scroll and SEO.
+1. **Résumé on `/` vs `/cv`**: single long page vs split; affects scroll and SEO.
 2. **GitHub placement/model**: add to `resume-content` for shared reuse, or keep as site-only curated data in frontend.
 3. **Route naming**: `/site-architecture` is the canonical route.
 4. **Internationalization**: English-only v1 is implied; call out if ES copy is needed later.
@@ -512,18 +501,17 @@ _Automation:_ CI does not assert viewport height; do a quick laptop-width spot-c
 - [`docs/agents/project-overview.md`](project-overview.md) — workspace boundaries.
 - [`docs/agents/repository-map.md`](repository-map.md) — where UI and data live.
 - [`docs/agents/storybook-ui.md`](storybook-ui.md) — Storybook build, `/storybook`, Vitest addon.
-- [`docs/agents/cv-pdf-docker.md`](cv-pdf-docker.md) — CV PDF pipeline and Docker.
 - [`.cursor/rules/nextjs-react.mdc`](../../.cursor/rules/nextjs-react.mdc) — view/logic/style separation.
 
 ## Success criteria (definition of done for revamp v1)
 
 - [x] New routes: at minimum **`/projects`** and **`/site-architecture`**, plus improved **`/`** and global nav/footer.
-- [x] GitHub + Storybook + CV are **obvious** from first visit.
+- [x] GitHub + Storybook + selected work are **obvious** from first visit.
 - [x] Game has **flagship** treatment (visual + narrative).
 - [x] New content lives in the correct package: shared presentation in Storybook, shared résumé facts in `resume-content`, route composition in frontend.
 - [x] No ESLint boundary violations; CI green for touched packages.
 
-**Shipped (v1):** Phases 1–4 in this document are complete; E2E covers CV download, `/projects`, and site nav / discovery (`nav-smoke.spec.ts`). Visual design **targets** in the “Visual design direction” section (e.g. token tweaks, ActionLink geometry) may still be iterated without reopening v1 route/IA scope unless you promote them to a v2 milestone.
+**Shipped (v1):** Phases 1–4 in this document are complete; E2E covers `/projects` and site nav / discovery (`nav-smoke.spec.ts`). Visual design **targets** in the “Visual design direction” section (e.g. token tweaks, ActionLink geometry) may still be iterated without reopening v1 route/IA scope unless you promote them to a v2 milestone.
 
 ---
 

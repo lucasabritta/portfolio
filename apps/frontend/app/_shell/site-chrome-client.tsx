@@ -26,7 +26,6 @@ export function SiteChromeClient({
   navItems,
   footerLinks,
   colophon,
-  downloadCvHref,
 }: SiteChromeClientProps) {
   const pathname = usePathname() ?? "/";
   const [hash, setHash] = useState("");
@@ -49,7 +48,6 @@ export function SiteChromeClient({
           wordmarkText={wordmarkText}
           wordmarkHref="/"
           navItems={navItems}
-          downloadCvHref={downloadCvHref}
           currentPath={currentPath}
           linkComponent={Link}
           themeControl={

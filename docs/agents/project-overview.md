@@ -16,7 +16,7 @@ The portfolio uses **one git root** with **several Yarn packages** (`apps/*`, `p
 
 | Surface                                                 | Role                                                                                                          |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `apps/frontend` (`@portfolio/frontend`)                 | Next.js App Router: routes, layouts, `public/`, `/api/cv` (react-pdf), `lib/cv-pdf/`                          |
+| `apps/frontend` (`@portfolio/frontend`)                 | Next.js App Router: routes, layouts, route handlers, and `public/` assets                                     |
 | `packages/storybook` (`@portfolio/storybook`)           | Shared DOM components, Storybook (`.storybook/`), web CSS; consumed by the app via **`@portfolio/storybook`** |
 | `packages/resume-content` (`@portfolio/resume-content`) | Résumé types, `resumeData`, small shared formatters (`buildPhoneHref`, work-history keys)                     |
 | `apps/e2e`                                              | Playwright end-to-end specs (run against the Next app)                                                        |

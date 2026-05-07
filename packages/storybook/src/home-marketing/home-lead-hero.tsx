@@ -1,4 +1,4 @@
-import { ActionLink, Card, HeroName, HeroRole } from "../primitives";
+import { ActionLink, HeroName, HeroRole } from "../primitives";
 
 import type { HomeLeadHeroProps } from "./home-marketing-types";
 import styles from "./home-lead-hero.module.css";
@@ -7,11 +7,9 @@ export function HomeLeadHero({
   name,
   roleEyebrow,
   positioningLead,
-  proofPoints,
   contactHint,
   contactHintLabel,
   contactHintHref,
-  downloadHref,
   projectsHref,
   storybookHref,
   headshotSrc,
@@ -56,10 +54,7 @@ export function HomeLeadHero({
           </p>
         ) : null}
         <div className={styles.ctaRow}>
-          <ActionLink variant="primary" href={downloadHref}>
-            Download CV
-          </ActionLink>
-          <ActionLink variant="secondary" href={projectsHref}>
+          <ActionLink variant="primary" href={projectsHref}>
             View Projects
           </ActionLink>
         </div>
@@ -74,16 +69,6 @@ export function HomeLeadHero({
           <span className={styles.visuallyHidden}> (opens in a new tab)</span>
         </ActionLink>
       </div>
-      <Card as="article" elevated radius="md" padding="comfortable" className={styles.proofCard}>
-        <p id="home-lead-proof-points-label" className={styles.proofTitle}>
-          Proof points
-        </p>
-        <ul aria-labelledby="home-lead-proof-points-label">
-          {proofPoints.map((line, index) => (
-            <li key={`proof-${index}`}>{line}</li>
-          ))}
-        </ul>
-      </Card>
     </header>
   );
 }

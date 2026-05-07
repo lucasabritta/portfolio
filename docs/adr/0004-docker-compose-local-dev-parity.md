@@ -5,7 +5,7 @@
 
 ## Context
 
-Across contributors, CI, and Vercel builds we need identical Node/Yarn versions and matching system dependencies (fonts, Playwright browsers, react-pdf runtime). Host setups drift; pinning `.nvmrc` alone has repeatedly produced "works on my machine" gaps.
+Across contributors, CI, and Vercel builds we need identical Node/Yarn versions and matching system dependencies (fonts, Playwright browsers, native build dependencies). Host setups drift; pinning `.nvmrc` alone has repeatedly produced "works on my machine" gaps.
 
 ## Decision
 
@@ -20,7 +20,7 @@ Across contributors, CI, and Vercel builds we need identical Node/Yarn versions 
 
 ## Alternatives considered
 
-- **Pinned Node via `.nvmrc` only**: rejected — does not cover Playwright system deps or react-pdf font rendering, and drifts on Windows/macOS/Linux hosts.
+- **Pinned Node via `.nvmrc` only**: rejected — does not cover Playwright system deps and drifts on Windows/macOS/Linux hosts.
 - **Dev containers (`.devcontainer`)**: deferred — adds editor-specific configuration; the Compose setup already runs everywhere without editor coupling. Revisit if contributors request it.
 
 ## Consequences
@@ -30,6 +30,5 @@ Across contributors, CI, and Vercel builds we need identical Node/Yarn versions 
 
 ## Related
 
-- [`docs/agents/cv-pdf-docker.md`](../agents/cv-pdf-docker.md).
 - [`.cursor/skills/docker-local-dev/SKILL.md`](../../.cursor/skills/docker-local-dev/SKILL.md).
 - [`.cursor/skills/ci-github-actions/SKILL.md`](../../.cursor/skills/ci-github-actions/SKILL.md).

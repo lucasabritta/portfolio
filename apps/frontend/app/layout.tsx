@@ -8,7 +8,6 @@ import { siteMetadata } from "@/app/_shell/layout.metadata";
 import { SiteChromeClient } from "@/app/_shell/site-chrome-client";
 import { ThemeProvider } from "@/app/_shell/theme-provider";
 import "@portfolio/storybook/globals.css";
-import "@/app/_styles/cv-pdf.tokens.css";
 import styles from "@portfolio/storybook/layout.module.css";
 
 const geistSans = Geist({

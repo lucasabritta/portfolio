@@ -33,7 +33,6 @@ export type ResumeData = {
   email: string;
   linkedin: string;
   summary: string;
-  summaryHighlights: readonly string[];
   techStack: readonly string[];
   contactLinks: readonly ResumeContactLink[];
   workHistory: readonly ResumeExperienceEntry[];

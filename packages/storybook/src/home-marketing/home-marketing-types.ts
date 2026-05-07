@@ -4,11 +4,9 @@ export type HomeLeadHeroProps = {
   name: string;
   roleEyebrow: string;
   positioningLead: string;
-  proofPoints: readonly [string, string, string];
   contactHint?: string;
   contactHintLabel?: string;
   contactHintHref?: string;
-  downloadHref: string;
   projectsHref: string;
   storybookHref: string;
   /** Optional public URL for the hero portrait (e.g. `/headshot-lucas.png`). */
@@ -63,7 +61,7 @@ export type CondensedTimelineEntry = {
 export type CondensedCvPreviewProps = {
   id?: string;
   heading: string;
-  entries: readonly [CondensedTimelineEntry, CondensedTimelineEntry, CondensedTimelineEntry];
+  entries: readonly CondensedTimelineEntry[];
   resumeAnchorId: string;
-  continueLabel: string;
+  continueLabel?: string;
 };

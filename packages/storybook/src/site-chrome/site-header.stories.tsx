@@ -33,7 +33,6 @@ export const Default: Story = {
     wordmarkText: "Lucas Abritta",
     wordmarkHref: "/",
     navItems,
-    downloadCvHref: "/api/cv",
     currentPath: "/site-architecture",
     themeControl: <></>,
     mobileThemeControl: <></>,

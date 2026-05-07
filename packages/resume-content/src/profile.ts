@@ -9,11 +9,6 @@ export const resumeProfile = {
   email: "lucasabritta@gmail.com",
   linkedin: "https://www.linkedin.com/in/lucas-abritta",
   summary: "Engineering Manager with experience in rapid startup growth.",
-  summaryHighlights: [
-    "Played a key role in growing a Startup from Seed to Series A and B, contributing to its ~$200 M valuation while leading engineering quality and platform excellence.",
-    "Hands-on background in software development and automation, with expertise in cloud infrastructure, CI/CD, observability and performance.",
-    "Leading recruiting, onboarding, and performance development through structured 360° feedback cycles; Fostering a culture of ownership, technical excellence, and cross-team collaboration.",
-  ],
   techStack: [
     "TypeScript",
     "Angular",

@@ -15,11 +15,11 @@ For **code-review-only** workflows (PR/diff review, pre-merge, second opinion on
 
 ## When to use
 
-| Situation | Subagent role |
-|-----------|----------------|
-| Plan, RFC, or feature approach before coding | **Plan validator** — gaps, repo fit, risks |
-| After a substantive change set (or before merge) | **Code reviewer** — correctness, boundaries, tests |
-| User asks for parallel or second opinion | Run **both** in one assistant turn (parallel Task calls) |
+| Situation                                        | Subagent role                                            |
+| ------------------------------------------------ | -------------------------------------------------------- |
+| Plan, RFC, or feature approach before coding     | **Plan validator** — gaps, repo fit, risks               |
+| After a substantive change set (or before merge) | **Code reviewer** — correctness, boundaries, tests       |
+| User asks for parallel or second opinion         | Run **both** in one assistant turn (parallel Task calls) |
 
 Skip subagents for trivial one-file edits unless the user asks.
 
@@ -27,11 +27,11 @@ Skip subagents for trivial one-file edits unless the user asks.
 
 Use the **Task** tool (subagents). Subagents **do not** see the user’s chat or prior turns — put everything they need in the **prompt** you send.
 
-| Goal | `subagent_type` | `readonly` | Notes |
-|------|-----------------|------------|--------|
-| Plan / architecture / repo fit | `explore` | `true` | Read-only search and file reads |
-| Code review from description + paths | `explore` | `true` | Paste relevant snippets or name paths/commits |
-| Review that must run commands (lint, tests) | `generalPurpose` | `false` | Prefer repo scripts (`yarn lint`, etc.); keep scope narrow |
+| Goal                                        | `subagent_type`  | `readonly` | Notes                                                      |
+| ------------------------------------------- | ---------------- | ---------- | ---------------------------------------------------------- |
+| Plan / architecture / repo fit              | `explore`        | `true`     | Read-only search and file reads                            |
+| Code review from description + paths        | `explore`        | `true`     | Paste relevant snippets or name paths/commits              |
+| Review that must run commands (lint, tests) | `generalPurpose` | `false`    | Prefer repo scripts (`yarn lint`, etc.); keep scope narrow |
 
 Use **`model: fast`** unless the change is unusually large or security-critical.
 
@@ -62,17 +62,21 @@ Return markdown with:
 
 ```markdown
 ## Verdict
+
 One of: **Approve** | **Approve with notes** | **Block**
 
 ## Summary
+
 One short paragraph.
 
 ## Findings
+
 - **Blockers** (must fix): …
 - **Should fix**: …
 - **Nits / optional**: …
 
 ## Suggested next steps
+
 Numbered, concrete actions (files or commands when possible).
 ```
 
@@ -84,7 +88,6 @@ Subagents should check, when relevant:
 
 - **Next.js**: App Router, Server vs Client components, data fetching patterns (`docs/agents/agent-workflow.md`).
 - **UI boundary**: Shared DOM under `packages/storybook/src/**` (see `storybook-ui` skill).
-- **CV PDF**: `apps/frontend/lib/cv-pdf/**` uses react-pdf `StyleSheet`, not web CSS.
 - **Validation**: After code changes, `yarn lint`, `yarn typecheck`, `yarn test`, `yarn build` per `nextjs-change-checklist` skill (reviewer may cite; executor runs).
 
 ## Anti-patterns

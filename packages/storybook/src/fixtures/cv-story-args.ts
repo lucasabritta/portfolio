@@ -23,12 +23,6 @@ const SYNTH_LINKS: readonly PresentationContactLink[] = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/example" },
 ];
 
-const SYNTH_HIGHLIGHTS = [
-  "Shipped features used by thousands of daily active users.",
-  "Improved CI/CD and observability across multiple teams.",
-  "Scaled technical leadership through mentoring, clear ownership, and predictable delivery.",
-] as const;
-
 const SYNTH_TECH = ["TypeScript", "React", "Node.js", "AWS"] as const;
 
 const SYNTH_WORK: readonly PresentationWorkEntry[] = [
@@ -81,7 +75,6 @@ export type PortfolioHeroStoryArgs = {
   phoneHref: string;
   email: string;
   links: readonly PresentationContactLink[];
-  downloadHref: string;
 };
 
 export function portfolioHeroArgs(
@@ -96,7 +89,6 @@ export function portfolioHeroArgs(
     phoneHref: SYNTH_PHONE_HREF,
     email: SYNTH_EMAIL,
     links: SYNTH_LINKS,
-    downloadHref: "/api/cv",
     ...overrides,
   };
 }
@@ -119,68 +111,34 @@ export function portfolioHeroEmptyArgs(): PortfolioHeroStoryArgs {
     phoneHref: "tel:",
     email: "",
     links: [],
-    downloadHref: "/api/cv",
   });
 }
 
 export function summarySectionArgs(
   overrides: Partial<{
-    summaryHighlights: readonly string[];
+    summary: string;
     techStack: readonly string[];
   }> = {},
 ) {
   return {
-    summaryHighlights: SYNTH_HIGHLIGHTS,
+    summary: SYNTH_SUMMARY,
     techStack: SYNTH_TECH,
     ...overrides,
   };
 }
 
 export function summarySectionEmptyArgs() {
-  return summarySectionArgs({ summaryHighlights: [], techStack: [] });
+  return summarySectionArgs({ summary: "", techStack: [] });
 }
 
 export function summarySectionLongContentArgs() {
   return summarySectionArgs({
-    summaryHighlights: SYNTH_HIGHLIGHTS.map((h) => `${h}${LONG}`),
+    summary: `${SYNTH_SUMMARY}${LONG.repeat(3)}`,
     techStack: [
       ...SYNTH_TECH.map((t) => `${t} (primary)`),
       ...SYNTH_TECH.map((t) => `${t} (secondary)`),
     ],
   });
-}
-
-export function workHistorySectionArgs(
-  overrides: Partial<{ workHistory: readonly PresentationWorkEntry[] }> = {},
-) {
-  return { workHistory: SYNTH_WORK, ...overrides };
-}
-
-export function workHistorySectionEmptyArgs() {
-  return workHistorySectionArgs({ workHistory: [] });
-}
-
-export function workHistorySectionManyItemsArgs(): { workHistory: PresentationWorkEntry[] } {
-  const template = SYNTH_WORK[0];
-  const workHistory: PresentationWorkEntry[] = Array.from({ length: 6 }, (_, i) => ({
-    ...template,
-    company: `${template.company} (${i + 1})`,
-    role: `${template.role} — variant ${i + 1}`,
-  }));
-  return { workHistory };
-}
-
-export function workHistorySectionLongContentArgs(): { workHistory: PresentationWorkEntry[] } {
-  const template = SYNTH_WORK[0];
-  return {
-    workHistory: [
-      {
-        ...template,
-        summary: `${template.summary}${LONG.repeat(4)}`,
-        achievements: template.achievements.map((a) => `${a}${LONG}`),
-      },
-    ],
-  };
 }
 
 export function educationSectionArgs(
@@ -314,7 +272,6 @@ export function contactSectionLongContentArgs() {
 
 export function homePageArgs(overrides: Partial<HomePageProps> = {}): HomePageProps {
   return {
-    downloadHref: "/api/cv",
     name: SYNTH_NAME,
     role: SYNTH_ROLE,
     summary: SYNTH_SUMMARY,
@@ -324,7 +281,6 @@ export function homePageArgs(overrides: Partial<HomePageProps> = {}): HomePagePr
     email: SYNTH_EMAIL,
     linkedin: SYNTH_LINKEDIN,
     contactLinks: SYNTH_LINKS,
-    summaryHighlights: [...SYNTH_HIGHLIGHTS],
     techStack: [...SYNTH_TECH],
     workHistory: [...SYNTH_WORK],
     education: [...SYNTH_EDU],
@@ -341,7 +297,7 @@ export const storyFixtureEmail = SYNTH_EMAIL;
 export const storyFixtureCert = SYNTH_CERTS[0];
 export const storyFixtureEducationInstitution = SYNTH_EDU[0].institution;
 export const storyFixtureWorkCompany = SYNTH_WORK[0].company;
-export const storyFixtureHighlight = SYNTH_HIGHLIGHTS[0];
+export const storyFixtureSummary = SYNTH_SUMMARY;
 export const storyFixtureTech = SYNTH_TECH[0];
 export const storyFixtureEducationCount = SYNTH_EDU.length;
 export const storyFixtureWorkCount = SYNTH_WORK.length;

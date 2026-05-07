@@ -6,7 +6,7 @@ import { HomePage } from "../../support/page-objects/home.page";
 import { ProjectsPage } from "../../support/page-objects/projects.page";
 
 test.describe("Site navigation and critical routes", () => {
-  test("home exposes skip link, primary nav, hero, CV, GitHub, and Storybook entry points", async ({
+  test("home exposes skip link, primary nav, hero, GitHub, and Storybook entry points", async ({
     page,
   }) => {
     const home = new HomePage(page);
@@ -17,7 +17,6 @@ test.describe("Site navigation and critical routes", () => {
       await expect(home.primaryNavLink(label)).toHaveAttribute("href", href);
     }
     await expect(home.heroHeading).toBeVisible();
-    await expect(home.downloadCvLink).toHaveAttribute("href", EXTERNAL_URLS.cvApi);
     await expect(home.storybookEntryLink).toBeVisible();
     await expect(home.footerGithubLink).toHaveAttribute("href", EXTERNAL_URLS.githubProfile);
   });
@@ -43,11 +42,10 @@ test.describe("Site navigation and critical routes", () => {
     await expect(home.resumeSectionHeading).toBeVisible();
   });
 
-  test("footer links include Storybook and résumé PDF", async ({ page }) => {
+  test("footer links include Storybook", async ({ page }) => {
     const home = new HomePage(page);
 
     await home.goto();
     await expect(home.footerStorybookLink).toHaveAttribute("href", EXTERNAL_URLS.storybookIndex);
-    await expect(home.footerResumePdfLink).toHaveAttribute("href", EXTERNAL_URLS.cvApi);
   });
 });

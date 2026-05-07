@@ -1,34 +1,22 @@
-import { Card, Chip, SectionHeading } from "../../primitives";
+import { Chip, SectionHeading } from "../../primitives";
 
 import styles from "./summary-section.module.css";
 
 export type SummarySectionProps = {
-  summaryHighlights: readonly string[];
+  summary: string;
   techStack: readonly string[];
 };
 
-export function SummarySection({ summaryHighlights, techStack }: SummarySectionProps) {
+export function SummarySection({ summary, techStack }: SummarySectionProps) {
   return (
     <section aria-labelledby="summary-heading">
       <SectionHeading id="summary-heading">Professional summary</SectionHeading>
-      {summaryHighlights.length === 0 ? (
-        <p className={styles.emptyState} role="status">
-          No summary highlights listed.
-        </p>
+      {summary ? (
+        <p className={styles.summaryText}>{summary}</p>
       ) : (
-        <ul className={styles.summaryList}>
-          {summaryHighlights.map((item, index) => (
-            <Card
-              key={`${index}-${item}`}
-              as="li"
-              className={styles.summaryItem}
-              radius="md"
-              padding="compact"
-            >
-              {item}
-            </Card>
-          ))}
-        </ul>
+        <p className={styles.emptyState} role="status">
+          No professional summary listed.
+        </p>
       )}
       {techStack.length === 0 ? (
         <p className={styles.emptyStateTech} role="status">

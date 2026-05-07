@@ -13,7 +13,6 @@ export type PortfolioHeroProps = {
   phoneHref: string;
   email: string;
   links: readonly PresentationContactLink[];
-  downloadHref: string;
 };
 
 export function PortfolioHero({
@@ -25,7 +24,6 @@ export function PortfolioHero({
   phoneHref,
   email,
   links,
-  downloadHref,
 }: PortfolioHeroProps) {
   const phoneTrim = phone.trim();
   const emailTrim = email.trim();
@@ -62,13 +60,10 @@ export function PortfolioHero({
         )}
       </div>
       <div className={styles.actions}>
-        <ActionLink variant="primary" href={downloadHref}>
-          Download CV
-        </ActionLink>
         {links.map((link, index) => (
           <ActionLink
             key={`${index}-${link.label}-${link.href}`}
-            variant="secondary"
+            variant={index === 0 ? "primary" : "secondary"}
             href={link.href}
             rel="noopener noreferrer"
             target="_blank"
