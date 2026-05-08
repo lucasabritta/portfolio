@@ -1,4 +1,4 @@
-import { ActionButton, ActionLink, HeroLead, HeroName, HeroRole } from "../primitives";
+import { ActionButton, ActionLink, HeroLead, HeroName, HeroRole, brandIconForLink } from "../primitives";
 
 import styles from "./hero.module.css";
 
@@ -65,6 +65,7 @@ export function PortfolioHero({
             key={`${index}-${link.label}-${link.href}`}
             variant={index === 0 ? "primary" : "secondary"}
             href={link.href}
+            icon={brandIconForLink({ href: link.href, label: link.label })}
             rel="noopener noreferrer"
             target="_blank"
           >

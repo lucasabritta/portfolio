@@ -13,6 +13,7 @@ export const siteFooterDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
   expect(github).toHaveAttribute("href", "https://github.com/example");
   expect(github).toHaveAttribute("rel", "noopener noreferrer");
   expect(github).toHaveAttribute("target", "_blank");
+  expect(github.querySelector("svg")).toBeTruthy();
 
   const storybook = within(footerNav).getByRole("link", {
     name: "Component library (Storybook)",

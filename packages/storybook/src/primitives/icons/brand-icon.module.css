@@ -1,0 +1,12 @@
+/* Icon geometry from Simple Icons (CC0-1.0) — https://simpleicons.org/ */
+
+.icon {
+  display: block;
+  flex-shrink: 0;
+  height: var(--icon-size-md);
+  width: var(--icon-size-md);
+}
+
+.icon path {
+  fill: currentcolor;
+}

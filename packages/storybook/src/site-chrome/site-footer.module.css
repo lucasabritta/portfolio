@@ -61,6 +61,12 @@
   transition: color 0.15s ease;
 }
 
+.linkLabel {
+  align-items: center;
+  display: inline-flex;
+  gap: var(--gap-xs);
+}
+
 .link:hover,
 .link:focus-visible {
   color: var(--accent);

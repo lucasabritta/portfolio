@@ -37,6 +37,7 @@ export const Default: Story = {
           href: "https://medium.com/@lucasabritta_93729/what-i-learned-building-an-android-game-with-ai-agents-5f64d23024fe",
           variant: "secondary",
           external: true,
+          icon: "medium",
         },
       ],
     },

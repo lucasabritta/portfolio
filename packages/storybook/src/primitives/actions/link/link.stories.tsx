@@ -1,7 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ActionLink } from "./link";
-import { linkAccentUnderlinePlay, linkInlineAccentPlay, linkInlineNeutralPlay } from "./link.stories.test";
+import {
+  linkAccentChipPlay,
+  linkAccentUnderlineMediumPlay,
+  linkAccentUnderlinePlay,
+  linkInlineAccentPlay,
+  linkInlineNeutralPlay,
+} from "./link.stories.test";
 
 const demoHref = "https://example.com";
 
@@ -9,6 +15,12 @@ const meta = {
   title: "Components/Links/ActionLink",
   component: ActionLink,
   tags: ["autodocs"],
+  argTypes: {
+    icon: {
+      control: "select",
+      options: [undefined, "github", "linkedin", "medium"] as const,
+    },
+  },
   args: {
     href: demoHref,
     children: "Link",
@@ -56,4 +68,32 @@ export const AccentUnderline: Story = {
     target: "_blank",
   },
   play: linkAccentUnderlinePlay,
+};
+
+export const AccentUnderlineWithMediumIcon: Story = {
+  args: {
+    variant: "accentUnderline",
+    href: "https://medium.com/@example/story",
+    children: "Medium article",
+    icon: "medium",
+    rel: "noopener noreferrer",
+    target: "_blank",
+  },
+  play: linkAccentUnderlineMediumPlay,
+};
+
+export const AccentChip: Story = {
+  args: {
+    variant: "accentChip",
+    href: "#contact-heading",
+    children: "contacts",
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ color: "var(--muted)", fontSize: "var(--text-size-label)" }}>
+        Based in Berlin · <Story />
+      </div>
+    ),
+  ],
+  play: linkAccentChipPlay,
 };

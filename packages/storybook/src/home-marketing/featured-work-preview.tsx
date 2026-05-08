@@ -1,9 +1,11 @@
-import { ActionButton, Card, SectionHeading, Title } from "../primitives";
+import { ActionButton, Card, SectionHeading, Title, brandIconForLink } from "../primitives";
 
-import type { FeaturedWorkPreviewProps } from "./home-marketing-types";
+import type { FeaturedWorkAction, FeaturedWorkPreviewProps } from "./home-marketing-types";
 import styles from "./featured-work-preview.module.css";
 
-const fallbackFlagshipActions = (flagship: FeaturedWorkPreviewProps["flagship"]) => [
+const fallbackFlagshipActions = (
+  flagship: FeaturedWorkPreviewProps["flagship"],
+): FeaturedWorkAction[] => [
   {
     label: flagship.ctaLabel,
     href: flagship.href,
@@ -33,6 +35,7 @@ export function FeaturedWorkPreview({
                 key={`${action.label}-${action.href}`}
                 variant={action.variant ?? "secondary"}
                 href={action.href}
+                icon={action.icon ?? brandIconForLink({ href: action.href, label: action.label })}
                 rel={action.external ? "noopener noreferrer" : undefined}
                 target={action.external ? "_blank" : undefined}
               >

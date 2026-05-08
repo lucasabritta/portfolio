@@ -1,3 +1,7 @@
+.withIcon {
+  gap: var(--gap-xs);
+}
+
 .primary {
   align-items: center;
   background: var(--accent);

@@ -16,14 +16,14 @@ export const featuredWorkPreviewDefaultPlay: StoryPlayFn = async ({ canvasElemen
   });
   expect(openOnPlay).toHaveAttribute("target", "_blank");
   expect(openOnPlay.getAttribute("rel") ?? "").toMatch(/noopener/);
-  expect(
-    within(region).getByRole("link", {
-      name: /Medium article.*opens in a new tab/i,
-    }),
-  ).toHaveAttribute(
+  const medium = within(region).getByRole("link", {
+    name: /Medium article.*opens in a new tab/i,
+  });
+  expect(medium).toHaveAttribute(
     "href",
     "https://medium.com/@lucasabritta_93729/what-i-learned-building-an-android-game-with-ai-agents-5f64d23024fe",
   );
+  expect(medium.querySelector("svg")).toBeTruthy();
 
   expect(within(region).getByRole("link", { name: "View Projects" })).toHaveAttribute(
     "href",

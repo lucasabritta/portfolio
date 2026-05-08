@@ -8,9 +8,12 @@ export const homeLeadHeroDefaultPlay: StoryPlayFn = async ({ canvasElement }) =>
   expect(canvas.getByText("Proof points")).toBeVisible();
   expect(canvas.getByText(/early ambiguity through scale/i)).toBeVisible();
   expect(canvas.getByRole("link", { name: "View Projects" })).toHaveAttribute("href", "/projects");
-  expect(canvas.getByRole("link", { name: /GitHub profile.*opens in a new tab/i })).toHaveAttribute(
+  const github = canvas.getByRole("link", { name: /GitHub profile.*opens in a new tab/i });
+  expect(github).toHaveAttribute("href", "https://github.com/example");
+  expect(github.querySelector("svg")).toBeTruthy();
+  expect(canvas.getByRole("link", { name: /^contacts$/i })).toHaveAttribute(
     "href",
-    "https://github.com/example",
+    "#contact-heading",
   );
   expect(canvas.queryByRole("link", { name: /Open Storybook/i })).toBeNull();
 };

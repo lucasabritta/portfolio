@@ -1,4 +1,4 @@
-import { ActionButton, Card, Title, type ActionButtonVariant } from "../primitives";
+import { ActionButton, Card, Title, brandIconForLink, type ActionButtonVariant } from "../primitives";
 
 import styles from "./build-page-view.module.css";
 
@@ -95,6 +95,7 @@ export function BuildPageView({
               key={`${cta.label}-${cta.href}`}
               variant={cta.variant}
               href={cta.href}
+              icon={brandIconForLink({ href: cta.href, label: cta.label })}
               target={cta.external ? "_blank" : undefined}
               rel={cta.external ? "noopener noreferrer" : undefined}
             >

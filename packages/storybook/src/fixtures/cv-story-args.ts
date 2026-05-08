@@ -16,7 +16,7 @@ const SYNTH_LOCATION = "Remote";
 const SYNTH_PHONE = "+1 555 0100";
 const SYNTH_PHONE_HREF = "tel:+15550100";
 const SYNTH_EMAIL = "jane.doe@example.com";
-const SYNTH_LINKEDIN = "https://www.linkedin.com/in/example";
+export const SYNTH_LINKEDIN = "https://www.linkedin.com/in/example";
 
 const SYNTH_LINKS: readonly PresentationContactLink[] = [
   { label: "Email", href: "mailto:jane.doe@example.com" },

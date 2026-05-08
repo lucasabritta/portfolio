@@ -1,6 +1,14 @@
 "use client";
 
-import { ActionButton, ActionLink, Card, Chip, SectionHeading, Title } from "../primitives";
+import {
+  ActionButton,
+  ActionLink,
+  Card,
+  Chip,
+  SectionHeading,
+  Title,
+  brandIconForLink,
+} from "../primitives";
 
 import { hideImageShowFallback } from "./flagship-media-fallback";
 import type { ProjectsPageViewProps } from "./presentation-types";
@@ -117,6 +125,7 @@ export function ProjectsPageView({
                   key={`${link.label}-${link.href}`}
                   variant="accentUnderline"
                   href={link.href}
+                  icon={brandIconForLink({ href: link.href, label: link.label })}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
@@ -128,6 +137,7 @@ export function ProjectsPageView({
                   key={`${link.label}-${link.href}`}
                   variant={link.variant}
                   href={link.href}
+                  icon={brandIconForLink({ href: link.href, label: link.label })}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
@@ -157,6 +167,7 @@ export function ProjectsPageView({
                   variant="accentUnderline"
                   href={repo.href}
                   className={styles.repoLink}
+                  icon={brandIconForLink({ href: repo.href, label: "View on GitHub" })}
                   rel="noopener noreferrer"
                   target="_blank"
                 >

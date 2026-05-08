@@ -27,6 +27,7 @@ description: >-
 - Every story file: **`tags: ['autodocs']`**, **`Default`**, semantic variants (`Empty`, `LongContent`, `ManyItems`, `NarrowViewport`, …), **`narrowMobileStory`** from fixtures where responsive coverage is required.
 - Use **`play`** + **`storybook/test`** when the story renders focusable elements (links, buttons) or when asserting structure (headings, **`role="status"`**, visible copy).
 - Share cross-page styles via co-located modules under **`packages/storybook/src/`**, not `apps/frontend/app/*.module.css`.
+- For actions, links, cards, chips, typography, and other repeated UI affordances, use Storybook primitives first. If a feature needs a new visual treatment such as a link chip or CTA variant, extend the primitive/design-system layer under **`packages/storybook/src/primitives/`** with stories and play tests instead of adding one-off feature-local classes.
 - **Token-only styling policy**: all Storybook styling values must come from foundation tokens.
   - In `*.module.css`, avoid raw literals for spacing, borders, radii, typography, and icon sizing (`1px`, `0.875rem`, `20`, etc). Use token vars (`--space-*`, `--gap-*`, `--space-column-*`, `--radius-*`, `--text-size-*`, `--line-height-*`, `--font-weight-*`, `--tracking-*`, `--border-*`, `--icon-*`).
   - In TSX/stories inline styles, use `var(--token-name)` values rather than hardcoded numbers/colors.

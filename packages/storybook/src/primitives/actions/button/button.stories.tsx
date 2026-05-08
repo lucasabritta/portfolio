@@ -14,6 +14,12 @@ const meta = {
   title: "Components/Buttons/ActionButton",
   component: ActionButton,
   tags: ["autodocs"],
+  argTypes: {
+    icon: {
+      control: "select",
+      options: [undefined, "github", "linkedin", "medium"] as const,
+    },
+  },
   args: {
     children: "Button",
   },
@@ -36,6 +42,7 @@ export const Secondary: Story = {
     variant: "secondary",
     href: demoHref,
     children: "GitHub",
+    icon: "github",
     rel: "noopener noreferrer",
     target: "_blank",
   },

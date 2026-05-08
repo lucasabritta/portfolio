@@ -48,7 +48,7 @@ export function HomeLeadHero({
           <p className={styles.contactHint}>
             {contactHint}
             {contactHintHref && contactHintLabel ? (
-              <ActionLink variant="inlineAccent" href={contactHintHref}>
+              <ActionLink variant="accentChip" href={contactHintHref}>
                 {contactHintLabel}
               </ActionLink>
             ) : null}
@@ -61,6 +61,7 @@ export function HomeLeadHero({
           <ActionButton
             variant="secondary"
             href={githubHref}
+            icon="github"
             target="_blank"
             rel="noopener noreferrer"
           >

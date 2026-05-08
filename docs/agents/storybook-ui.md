@@ -31,6 +31,12 @@ Both bans are enforced in **`apps/frontend/eslint.config.mjs`** via **`no-restri
 - **Global web CSS** lives in **`packages/storybook/src/globals.css`**. Root layout classes use **`packages/storybook/src/layout.module.css`**, imported from **`apps/frontend/app/layout.tsx`** as **`@portfolio/storybook/globals.css`** and **`@portfolio/storybook/layout.module.css`** (package `exports`).
 - **Story fixtures** live in **`packages/storybook/src/fixtures/`**. Stories use **`@ui/...`** (Vite/TS path alias); package components consumed by Next should use relative imports internally where needed so Next/Turbopack does not require duplicate `@ui` aliases.
 
+### Primitive-first design system policy
+
+- Feature components should compose existing Storybook primitives for repeated UI affordances such as actions, links, cards, chips, typography, and surfaces.
+- If a feature needs a new reusable visual treatment, extend the design-system owner first: add or update the primitive under **`packages/storybook/src/primitives/`**, include token-backed CSS, and document it with a story plus play test.
+- Avoid feature-local classes for clickable affordance treatments that belong to a primitive variant. Feature CSS should handle feature layout and one-off composition, not redefine the design language for links or CTAs.
+
 ### Foundation token policy (required)
 
 - Treat **all** presentational values as token-driven foundations/primitives (not just colors): typography, spacing, gaps, space-column, borders/outlines, radii, icon sizing, and layout constraints.
