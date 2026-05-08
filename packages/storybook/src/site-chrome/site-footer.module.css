@@ -45,13 +45,22 @@
 }
 
 .linkRow {
+  align-content: flex-start;
   align-items: center;
+  column-gap: var(--gap-md);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--gap-row-2sm) var(--space-column-lg);
+  justify-content: flex-start;
   list-style: none;
   margin: 0;
   padding: 0;
+  row-gap: var(--gap-row-2sm);
+}
+
+.linkRow > li {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
 }
 
 .link {
@@ -60,6 +69,8 @@
   display: inline-flex;
   font-size: var(--text-size-label);
   font-weight: var(--text-weight-medium);
+  line-height: var(--text-line-height-tight);
+  min-height: var(--icon-size-sm);
   text-decoration: none;
   transition: color 0.15s ease;
 }

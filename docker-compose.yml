@@ -11,6 +11,9 @@ services:
     volumes:
       - .:/workspace
       - frontend_node_modules:/workspace/apps/frontend/node_modules
+      # Keep file: workspace packages live while retaining node_modules cache.
+      - ./packages/storybook:/workspace/apps/frontend/node_modules/@portfolio/storybook
+      - ./packages/resume-content:/workspace/apps/frontend/node_modules/@portfolio/resume-content
       - e2e_node_modules:/workspace/apps/e2e/node_modules
       - storybook_node_modules:/workspace/packages/storybook/node_modules
     environment:
