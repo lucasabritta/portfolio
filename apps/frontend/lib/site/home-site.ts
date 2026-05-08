@@ -40,6 +40,24 @@ const CREDIBILITY_ITEMS = [
   },
 ] as const satisfies CredibilityStripProps["items"];
 
+const HERO_PROOF_POINTS = [
+  {
+    title: "$200M valuation",
+    metric: "Seed → Series B",
+    body: "Played a key role in growing a startup from Seed to Series A and B, contributing to its ~$200M valuation while leading engineering quality and platform excellence.",
+  },
+  {
+    title: "Platform excellence",
+    metric: "Hands-on",
+    body: "Hands-on background in software development and automation, with expertise in cloud infrastructure, CI/CD, observability, and performance.",
+  },
+  {
+    title: "Team systems",
+    metric: "360° feedback",
+    body: "Leading recruiting, onboarding, and performance development through structured 360° feedback cycles, fostering ownership, technical excellence, and cross-team collaboration.",
+  },
+] as const satisfies HomeLeadHeroProps["proofPoints"];
+
 const BUILD_TEASER: BuildStorybookTeaserProps = {
   heading: "Site & component library",
   lead: "This portfolio is a small monorepo: a Next.js app, a Storybook package for shared UI, résumé data for site content, Docker for local parity, and GitHub Actions split by package so changes stay reviewable.",
@@ -138,7 +156,7 @@ export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
       contactHintHref: contactHint ? "#contact-heading" : undefined,
       projectsHref: "/projects",
       githubHref: siteProfile.githubProfileUrl,
-      proofPoints: CREDIBILITY_ITEMS,
+      proofPoints: HERO_PROOF_POINTS,
       headshotSrc: "/headshot-lucas-192.webp",
       headshotAvifSrcSet:
         "/headshot-lucas-96.avif 96w, /headshot-lucas-192.avif 192w, /headshot-lucas-256.avif 256w",
