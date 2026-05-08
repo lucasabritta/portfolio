@@ -22,7 +22,7 @@ export function FeaturedWorkPreview({
     <section aria-labelledby={`${id}-heading`} className={styles.section} id={id}>
       <SectionHeading id={`${id}-heading`}>{heading}</SectionHeading>
       <div className={styles.grid}>
-        <Card as="article" elevated radius="lg" padding="comfortable" className={styles.flagship}>
+        <Card as="article" elevated radius="lg" padding="compact" className={styles.flagship}>
           <Title level={3} size="md">
             {flagship.title}
           </Title>
@@ -45,13 +45,7 @@ export function FeaturedWorkPreview({
           </div>
         </Card>
         {supporting.map((card, index) => (
-          <Card
-            key={`${index}-${card.title}`}
-            as="article"
-            elevated
-            radius="md"
-            padding="comfortable"
-          >
+          <Card key={`${index}-${card.title}`} as="article" elevated radius="md" padding="compact">
             <Title level={4} size="sm">
               {card.title}
             </Title>

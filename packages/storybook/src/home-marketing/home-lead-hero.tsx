@@ -69,7 +69,7 @@ export function HomeLeadHero({
           </ActionButton>
         </div>
       </div>
-      <Card as="article" elevated radius="md" padding="comfortable" className={styles.proofCard}>
+      <Card as="article" elevated radius="md" padding="compact" className={styles.proofCard}>
         <p id="home-lead-proof-points-label" className={styles.proofTitle}>
           Proof points
         </p>
