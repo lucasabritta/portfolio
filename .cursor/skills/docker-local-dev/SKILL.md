@@ -25,6 +25,22 @@ description: >-
 
 The **`frontend`** service mounts a **named volume** for `apps/frontend/.next` so Next dev/Turbopack does not write the build cache on the Windows/macOS bind mount (fewer file-lock and permission failures than a host `.next` folder).
 
+That volume **persists between `docker compose up` runs**. If the app at `http://localhost:3000` looks like it is missing recent edits (especially under **`@portfolio/storybook`** or CSS modules), clear **contents inside** that cache (do not `rm -rf .next` itself from the app tree—on Linux that path is a mount point and can report *Device or resource busy*). With **`frontend`** stopped:
+
+```bash
+docker compose stop frontend
+docker compose run --rm frontend sh -lc "find /workspace/apps/frontend/.next -mindepth 1 -delete 2>/dev/null || true"
+docker compose up frontend
+```
+
+If that still fails (files open), wipe the named volume by mounting it alone (replace the volume name with the one from `docker volume ls` that ends in `_frontend_apps_next`, often `<compose_project>_frontend_apps_next`):
+
+```bash
+docker compose down
+docker run --rm -v portfolio_frontend_apps_next:/data alpine sh -c "find /data -mindepth 1 -delete"
+docker compose up frontend
+```
+
 ## Storybook and full checks (this repo)
 
 - **`Dockerfile`** pulls Node from **`public.ecr.aws/docker/library/node:24.14.1-bookworm-slim`** by default (mirrors Docker Official Images) when Docker Hub returns TLS errors via Cloudflare R2. Override at build time: `docker compose build --build-arg NODE_IMAGE=node:24.14.1-bookworm-slim frontend` if your network can reach Docker Hub reliably.
@@ -56,6 +72,7 @@ The **`frontend`** service mounts a **named volume** for `apps/frontend/.next` s
 - **ESLint after `yarn build`**: Static Storybook output is under `apps/frontend/public/storybook/` (gitignored). Root `yarn lint` ignores that path; if lint suddenly scans huge bundles, ensure `eslint.config.mjs` still includes `apps/frontend/public/storybook/**` in `globalIgnores`.
 - **Port conflicts**: Change the host port in compose or stop the conflicting process; document the chosen port if you change it.
 - **Stale volumes**: After dependency or lockfile changes, `docker compose build --no-cache` or remove anonymous volumes per team practice.
+- **Stale Next dev output**: See the **`.next` named volume** note above; `rm -rf .next` inside the **`frontend`** container (or delete the `*_frontend_apps_next` volume) before assuming code changes are missing.
 - **ARM vs x86**: If base images fail on Apple Silicon, prefer official images with `linux/arm64` support or explicit platform flags only when the repo already uses them.
 
 ## Done when
