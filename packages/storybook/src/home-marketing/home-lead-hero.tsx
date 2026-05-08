@@ -1,4 +1,4 @@
-import { ActionLink, Card, HeroName, HeroRole } from "../primitives";
+import { ActionButton, ActionLink, Card, HeroName, HeroRole } from "../primitives";
 
 import type { HomeLeadHeroProps } from "./home-marketing-types";
 import styles from "./home-lead-hero.module.css";
@@ -55,10 +55,10 @@ export function HomeLeadHero({
           </p>
         ) : null}
         <div className={styles.ctaRow}>
-          <ActionLink variant="primary" href={projectsHref}>
+          <ActionButton variant="primary" href={projectsHref}>
             View Projects
-          </ActionLink>
-          <ActionLink
+          </ActionButton>
+          <ActionButton
             variant="secondary"
             href={githubHref}
             target="_blank"
@@ -66,7 +66,7 @@ export function HomeLeadHero({
           >
             GitHub profile
             <span className={styles.visuallyHidden}> (opens in a new tab)</span>
-          </ActionLink>
+          </ActionButton>
         </div>
       </div>
       <Card as="article" elevated radius="md" padding="comfortable" className={styles.proofCard}>

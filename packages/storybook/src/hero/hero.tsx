@@ -1,4 +1,4 @@
-import { ActionLink, HeroLead, HeroName, HeroRole } from "../primitives";
+import { ActionButton, ActionLink, HeroLead, HeroName, HeroRole } from "../primitives";
 
 import styles from "./hero.module.css";
 
@@ -61,7 +61,7 @@ export function PortfolioHero({
       </div>
       <div className={styles.actions}>
         {links.map((link, index) => (
-          <ActionLink
+          <ActionButton
             key={`${index}-${link.label}-${link.href}`}
             variant={index === 0 ? "primary" : "secondary"}
             href={link.href}
@@ -69,7 +69,7 @@ export function PortfolioHero({
             target="_blank"
           >
             {link.label}
-          </ActionLink>
+          </ActionButton>
         ))}
       </div>
     </header>

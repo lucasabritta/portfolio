@@ -1,4 +1,4 @@
-import { ActionLink, Card, SectionHeading, Title } from "../primitives";
+import { ActionButton, Card, SectionHeading, Title } from "../primitives";
 
 import type { FeaturedWorkPreviewProps } from "./home-marketing-types";
 import styles from "./featured-work-preview.module.css";
@@ -29,7 +29,7 @@ export function FeaturedWorkPreview({
           <p className={styles.desc}>{flagship.description}</p>
           <div className={styles.actions}>
             {(flagship.actions ?? fallbackFlagshipActions(flagship)).map((action) => (
-              <ActionLink
+              <ActionButton
                 key={`${action.label}-${action.href}`}
                 variant={action.variant ?? "secondary"}
                 href={action.href}
@@ -40,7 +40,7 @@ export function FeaturedWorkPreview({
                 {action.external ? (
                   <span className={styles.visuallyHidden}> (opens in a new tab)</span>
                 ) : null}
-              </ActionLink>
+              </ActionButton>
             ))}
           </div>
         </Card>
@@ -56,9 +56,9 @@ export function FeaturedWorkPreview({
               {card.title}
             </Title>
             <p className={styles.desc}>{card.description}</p>
-            <ActionLink variant="secondary" href={card.href}>
+            <ActionButton variant="secondary" href={card.href}>
               {card.ctaLabel}
-            </ActionLink>
+            </ActionButton>
           </Card>
         ))}
       </div>

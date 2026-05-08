@@ -1,3 +1,5 @@
+import type { ActionButtonVariant } from "../primitives/actions/button";
+
 /** Home Phase 3 “above the fold” and teaser blocks — presentation-only (no `@portfolio/resume-content`). */
 
 export type CredibilityItem = {
@@ -42,7 +44,7 @@ export type FeaturedWorkCard = {
 export type FeaturedWorkAction = {
   label: string;
   href: string;
-  variant?: "primary" | "secondary";
+  variant?: ActionButtonVariant;
   /** When true, link opens in a new tab with noopener. */
   external?: boolean;
 };

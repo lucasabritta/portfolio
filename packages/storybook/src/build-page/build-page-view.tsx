@@ -1,4 +1,4 @@
-import { ActionLink, Card, Title } from "../primitives";
+import { ActionButton, Card, Title, type ActionButtonVariant } from "../primitives";
 
 import styles from "./build-page-view.module.css";
 
@@ -11,7 +11,7 @@ export type BuildPageSection = {
 export type BuildPageCta = {
   label: string;
   href: string;
-  variant: "primary" | "secondary";
+  variant: ActionButtonVariant;
   external?: boolean;
 };
 
@@ -91,7 +91,7 @@ export function BuildPageView({
         </div>
         <div className={styles.ctaRow}>
           {ctas.map((cta) => (
-            <ActionLink
+            <ActionButton
               key={`${cta.label}-${cta.href}`}
               variant={cta.variant}
               href={cta.href}
@@ -102,7 +102,7 @@ export function BuildPageView({
               {cta.external ? (
                 <span className={styles.visuallyHidden}> (opens in a new tab)</span>
               ) : null}
-            </ActionLink>
+            </ActionButton>
           ))}
         </div>
       </article>

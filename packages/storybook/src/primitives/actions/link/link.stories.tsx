@@ -1,18 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ActionLink } from "./action-link";
-import {
-  actionLinkAccentUnderlinePlay,
-  actionLinkInlineAccentPlay,
-  actionLinkInlineNeutralPlay,
-  actionLinkPrimaryPlay,
-  actionLinkSecondaryPlay,
-} from "./action-link.stories.test";
+import { ActionLink } from "./link";
+import { linkAccentUnderlinePlay, linkInlineAccentPlay, linkInlineNeutralPlay } from "./link.stories.test";
 
 const demoHref = "https://example.com";
 
 const meta = {
-  title: "Components/Buttons/ActionLink",
+  title: "Components/Links/ActionLink",
   component: ActionLink,
   tags: ["autodocs"],
   args: {
@@ -23,24 +17,6 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-
-export const Primary: Story = {
-  args: {
-    variant: "primary",
-    children: "Open project",
-  },
-  play: actionLinkPrimaryPlay,
-};
-
-export const Secondary: Story = {
-  args: {
-    variant: "secondary",
-    children: "GitHub",
-    rel: "noopener noreferrer",
-    target: "_blank",
-  },
-  play: actionLinkSecondaryPlay,
-};
 
 export const InlineNeutral: Story = {
   args: {
@@ -54,7 +30,7 @@ export const InlineNeutral: Story = {
       </div>
     ),
   ],
-  play: actionLinkInlineNeutralPlay,
+  play: linkInlineNeutralPlay,
 };
 
 export const InlineAccent: Story = {
@@ -69,7 +45,7 @@ export const InlineAccent: Story = {
       </div>
     ),
   ],
-  play: actionLinkInlineAccentPlay,
+  play: linkInlineAccentPlay,
 };
 
 export const AccentUnderline: Story = {
@@ -79,5 +55,5 @@ export const AccentUnderline: Story = {
     rel: "noopener noreferrer",
     target: "_blank",
   },
-  play: actionLinkAccentUnderlinePlay,
+  play: linkAccentUnderlinePlay,
 };
