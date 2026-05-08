@@ -9,10 +9,11 @@ describe("buildHomeMarketing", () => {
     expect(m.homeLeadHero.projectsHref).toBe("/projects");
     expect(m.homeLeadHero.githubHref).toBe("https://github.com/lucasabritta");
     expect(m.homeLeadHero.name).toBe(resumeData.name);
-    expect(m.homeLeadHero.proofPoints).toHaveLength(3);
-    expect(m.homeLeadHero.proofPoints[0]?.body).toContain("$200M valuation");
-    expect(m.homeLeadHero.proofPoints[1]?.body).toContain("cloud infrastructure");
-    expect(m.homeLeadHero.proofPoints[2]?.body).toContain("360° feedback");
+    expect(m.homeLeadHero.proofPoints).toEqual([
+      "Played a key role in growing a Startup from Seed to Series A and B, contributing to its ~$200 M valuation while leading engineering quality and platform excellence.",
+      "Hands-on background in software development and automation, with expertise in cloud infrastructure, CI/CD, observability and performance.",
+      "Leading recruiting, onboarding, and performance development through structured 360° feedback cycles; Fostering a culture of ownership, technical excellence, and cross-team collaboration.",
+    ]);
     expect(m.condensedCv.resumeAnchorId).toBe(HOME_RESUME_ANCHOR_ID);
     expect(m.condensedCv.heading).toBe("Work history");
     expect(m.condensedCv.entries).toHaveLength(resumeData.workHistory.length);

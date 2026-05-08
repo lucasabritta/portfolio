@@ -41,21 +41,9 @@ const CREDIBILITY_ITEMS = [
 ] as const satisfies CredibilityStripProps["items"];
 
 const HERO_PROOF_POINTS = [
-  {
-    title: "$200M valuation",
-    metric: "Seed → Series B",
-    body: "Played a key role in growing a startup from Seed to Series A and B, contributing to its ~$200M valuation while leading engineering quality and platform excellence.",
-  },
-  {
-    title: "Platform excellence",
-    metric: "Hands-on",
-    body: "Hands-on background in software development and automation, with expertise in cloud infrastructure, CI/CD, observability, and performance.",
-  },
-  {
-    title: "Team systems",
-    metric: "360° feedback",
-    body: "Leading recruiting, onboarding, and performance development through structured 360° feedback cycles, fostering ownership, technical excellence, and cross-team collaboration.",
-  },
+  "Played a key role in growing a Startup from Seed to Series A and B, contributing to its ~$200 M valuation while leading engineering quality and platform excellence.",
+  "Hands-on background in software development and automation, with expertise in cloud infrastructure, CI/CD, observability and performance.",
+  "Leading recruiting, onboarding, and performance development through structured 360° feedback cycles; Fostering a culture of ownership, technical excellence, and cross-team collaboration.",
 ] as const satisfies HomeLeadHeroProps["proofPoints"];
 
 const BUILD_TEASER: BuildStorybookTeaserProps = {

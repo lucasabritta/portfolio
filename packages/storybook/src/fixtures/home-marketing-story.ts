@@ -29,6 +29,12 @@ export const SYNTH_CREDIBILITY_ITEMS: CredibilityStripProps["items"] = [
   },
 ];
 
+export const SYNTH_HOME_PROOF_POINTS = [
+  "Comfortable operating from early ambiguity through scale while keeping ownership clear.",
+  "Treats observability, testing, and deployment hygiene as product features.",
+  "Stays close enough to architecture and code paths to unblock teams without becoming a bottleneck.",
+] as const satisfies HomeLeadHeroProps["proofPoints"];
+
 function threeRoles(work: HomePageProps["workHistory"]): CondensedCvPreviewProps["entries"] {
   return work.map((entry) => ({
     company: entry.company,
@@ -52,7 +58,7 @@ export function homeLeadHeroFromHomePageProps(props: HomePageProps): HomeLeadHer
     contactHintHref: props.location ? "#contact-heading" : undefined,
     projectsHref: "/projects",
     githubHref: "https://github.com/example",
-    proofPoints: SYNTH_CREDIBILITY_ITEMS,
+    proofPoints: SYNTH_HOME_PROOF_POINTS,
   };
 }
 

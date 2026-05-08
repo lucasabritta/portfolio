@@ -35,6 +35,11 @@ describe("Home page", () => {
     const heroRoot = h1.closest("header");
     expect(heroRoot).toBeTruthy();
     expect(within(heroRoot as HTMLElement).getByText("Proof points")).toBeInTheDocument();
+    expect(
+      within(heroRoot as HTMLElement).getByText(
+        "Played a key role in growing a Startup from Seed to Series A and B, contributing to its ~$200 M valuation while leading engineering quality and platform excellence.",
+      ),
+    ).toBeInTheDocument();
     const projects = within(heroRoot as HTMLElement).getByRole("link", { name: "View Projects" });
     expect(projects).toHaveAttribute("href", "/projects");
     expect(

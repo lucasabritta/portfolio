@@ -10,7 +10,7 @@ export type HomeLeadHeroProps = {
   name: string;
   roleEyebrow: string;
   positioningLead: string;
-  proofPoints: readonly [CredibilityItem, CredibilityItem, CredibilityItem];
+  proofPoints: readonly [string, string, string];
   contactHint?: string;
   contactHintLabel?: string;
   contactHintHref?: string;
