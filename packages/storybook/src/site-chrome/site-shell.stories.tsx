@@ -30,7 +30,9 @@ export const Default: Story = {
         Header slot
       </header>
     ),
-    children: <div style={{ padding: "var(--space-element-xl)" }}>Page body content (flex-grown slot).</div>,
+    children: (
+      <div style={{ padding: "var(--space-element-xl)" }}>Page body content (flex-grown slot).</div>
+    ),
     footer: (
       <footer style={{ padding: "var(--space-element-md)", background: "var(--card)" }}>
         Footer slot

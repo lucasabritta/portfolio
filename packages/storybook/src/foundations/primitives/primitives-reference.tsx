@@ -107,7 +107,11 @@ export function BorderPrimitives() {
     { name: "--border-width-2", value: "2px", role: "Strong border primitive" },
     { name: "--border-width-3", value: "3px", role: "Accent border primitive" },
     { name: "--outline-offset-2", value: "2px", role: "Tight focus offset primitive" },
-    { name: "--shadow-surface-sm-raw", value: "0 1px 3px rgba(...)", role: "Surface shadow primitive" },
+    {
+      name: "--shadow-surface-sm-raw",
+      value: "0 1px 3px rgba(...)",
+      role: "Surface shadow primitive",
+    },
   ];
 
   return (

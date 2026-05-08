@@ -116,13 +116,7 @@ const SPACE_COLUMN_TOKENS = [
   },
 ] as const satisfies readonly SpacingToken[];
 
-function SpacingTokenList({
-  tokens,
-  label,
-}: {
-  tokens: readonly SpacingToken[];
-  label: string;
-}) {
+function SpacingTokenList({ tokens, label }: { tokens: readonly SpacingToken[]; label: string }) {
   return (
     <div className={styles.group}>
       <h3 className={styles.groupTitle}>{label}</h3>
