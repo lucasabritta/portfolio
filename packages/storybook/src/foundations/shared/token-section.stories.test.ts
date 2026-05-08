@@ -8,4 +8,6 @@ export const tokenSectionPlay: StoryPlayFn = async ({ canvasElement }) => {
     canvas.getByText("Raw spacing scale tokens for element spacing, gaps, and column spacing."),
   ).toBeVisible();
   expect(canvas.getByText("--space-2")).toBeVisible();
+  expect(canvas.getByText("--space-1")).toBeVisible();
+  expect(canvas.getByText("--space-3")).toBeVisible();
 };

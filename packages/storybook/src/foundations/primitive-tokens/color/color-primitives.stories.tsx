@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ColorPrimitives } from "../primitives-reference";
+import { ColorPrimitives } from "./color-primitives-section";
 import { colorPrimitivesPlay } from "./color-primitives.stories.test";
 
 const meta = {

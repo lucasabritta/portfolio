@@ -1,0 +1,61 @@
+.borderSampleRow {
+  display: grid;
+  gap: var(--gap-sm);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.borderSampleSm,
+.borderSampleMd,
+.borderSampleLg {
+  align-items: center;
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
+  display: flex;
+  justify-content: center;
+  min-height: var(--space-element-3xl);
+}
+
+.borderSampleSm {
+  border: var(--border-width-1) solid var(--border);
+}
+
+.borderSampleMd {
+  border: var(--border-width-2) solid var(--border);
+}
+
+.borderSampleLg {
+  border: var(--border-width-3) solid var(--border);
+}
+
+.outlineSampleRow {
+  display: flex;
+  gap: var(--gap-sm);
+}
+
+.outlineTight,
+.outlineDefault {
+  background: var(--card);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
+  padding: var(--space-element-sm) var(--space-element-md);
+}
+
+.outlineTight {
+  outline: var(--border-width-2) solid var(--accent);
+  outline-offset: var(--outline-offset-2);
+}
+
+.outlineDefault {
+  outline: var(--border-width-2) solid var(--accent);
+  outline-offset: var(--outline-offset-3);
+}
+
+.shadowSample {
+  background: var(--card);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-surface-sm-raw);
+  color: var(--foreground);
+  padding: var(--space-element-md);
+}

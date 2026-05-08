@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { SpacingPrimitives } from "../primitives-reference";
+import { SpacingPrimitives } from "./spacing-primitives-section";
 import { spacingPrimitivesPlay } from "./spacing-primitives.stories.test";
 
 const meta = {

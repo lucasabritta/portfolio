@@ -69,8 +69,125 @@
   font-size: var(--text-size-label-compact);
 }
 
+.demoGroup {
+  display: grid;
+  gap: var(--gap-sm);
+}
+
+.radiusDemo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+}
+
+.radiusDemo span {
+  align-items: center;
+  background: var(--card);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  color: var(--foreground);
+  display: inline-flex;
+  font-size: var(--text-size-caption);
+  height: var(--space-element-2xl);
+  justify-content: center;
+  width: var(--space-element-2xl);
+}
+
+.radiusSm {
+  border-radius: var(--radius-sm);
+}
+
+.radiusMd {
+  border-radius: var(--radius-md);
+}
+
+.radiusLg {
+  border-radius: var(--radius-lg);
+}
+
+.radiusXl {
+  border-radius: var(--radius-xl);
+}
+
+.radiusFull {
+  border-radius: var(--radius-full);
+}
+
+.gapDemoGrid {
+  display: grid;
+  gap: var(--gap-sm);
+}
+
+.gapDemoRow {
+  align-items: center;
+  display: grid;
+  gap: var(--gap-sm);
+  grid-template-columns: minmax(7rem, auto) 1fr;
+}
+
+.gapSm,
+.gapLg {
+  align-items: center;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-radius: var(--radius-sm);
+  display: flex;
+  padding: var(--space-element-sm);
+}
+
+.gapSm {
+  gap: var(--gap-sm);
+}
+
+.gapLg {
+  gap: var(--gap-lg);
+}
+
+.gapSm span,
+.gapLg span {
+  background: var(--accent);
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  height: var(--space-element-sm);
+  width: var(--space-element-sm);
+}
+
+.columnDemoGrid {
+  display: grid;
+  gap: var(--gap-sm);
+}
+
+.columnDemoMd,
+.columnDemoXl {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-radius: var(--radius-sm);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  padding: var(--space-element-sm);
+}
+
+.columnDemoMd {
+  column-gap: var(--space-column-md);
+}
+
+.columnDemoXl {
+  column-gap: var(--space-column-xl);
+}
+
+.columnDemoMd span,
+.columnDemoXl span {
+  background: var(--card);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
+  font-size: var(--text-size-caption);
+  padding: var(--space-element-xs);
+}
+
 @media (max-width: 900px) {
   .spacingRow {
+    grid-template-columns: 1fr;
+  }
+
+  .gapDemoRow {
     grid-template-columns: 1fr;
   }
 }

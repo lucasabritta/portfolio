@@ -31,3 +31,57 @@
   margin: 0;
   max-width: var(--layout-reading-max);
 }
+
+.groupTitle {
+  color: var(--foreground);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: var(--text-size-label-compact);
+  letter-spacing: var(--text-tracking-wide-2xl);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.typeScale {
+  background: var(--card);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--gap-sm);
+  padding: var(--space-element-md);
+}
+
+.typeScale p {
+  margin: 0;
+}
+
+.scaleCaption {
+  font-size: var(--text-size-caption);
+}
+
+.scaleLabel {
+  font-size: var(--text-size-label);
+}
+
+.scaleBody {
+  font-size: var(--text-size-body-md);
+}
+
+.scaleTitle {
+  font-size: var(--text-size-title-md);
+}
+
+.weightMedium {
+  font-weight: var(--text-weight-medium);
+}
+
+.weightSemibold {
+  font-weight: var(--text-weight-semibold);
+}
+
+.weightBold {
+  font-weight: var(--text-weight-bold);
+}
+
+.trackingWide {
+  letter-spacing: var(--text-tracking-wide-2xl);
+}

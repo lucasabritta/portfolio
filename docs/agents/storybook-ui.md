@@ -37,7 +37,7 @@ Both bans are enforced in **`apps/frontend/eslint.config.mjs`** via **`no-restri
 - In **`*.module.css`**, do not hardcode visual literals like `1px`, `0.875rem`, `20px`, or ad-hoc `letter-spacing`/`line-height`; use foundation token variables from `globals.css` imports.
 - In TSX and story decorators, inline styles must use **`var(--token-name)`** values rather than hardcoded numbers/colors.
 - For SVG icons in TSX, avoid hardcoded `width`, `height`, and `strokeWidth`; use classes and token-backed CSS variables.
-- Keep primitives in `packages/storybook/src/foundations/primitives/`, semantic tokens in `packages/storybook/src/foundations/tokens/`, and add/update stories when new primitive/token groups are introduced.
+- Keep primitive tokens in `packages/storybook/src/foundations/primitive-tokens/`, semantic tokens in `packages/storybook/src/foundations/tokens/`, and add/update stories when new primitive/token groups are introduced.
 
 ## Running Storybook
 

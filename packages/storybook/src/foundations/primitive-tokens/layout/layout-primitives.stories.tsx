@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { LayoutPrimitives } from "../primitives-reference";
+import { LayoutPrimitives } from "./layout-primitives-section";
 import { layoutPrimitivesPlay } from "./layout-primitives.stories.test";
 
 const meta = {

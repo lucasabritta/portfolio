@@ -1,0 +1,38 @@
+.typographyDemo {
+  background: var(--card);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-md);
+  display: grid;
+  gap: var(--gap-sm);
+  padding: var(--space-element-md);
+}
+
+.typeSizeSm {
+  font-size: var(--font-size-sm);
+  margin: 0;
+}
+
+.typeSizeLg {
+  font-size: var(--font-size-lg);
+  margin: 0;
+}
+
+.typeWeightMedium {
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+}
+
+.typeWeightSemibold {
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+}
+
+.typeTrackingWide {
+  letter-spacing: var(--tracking-wide-2xl);
+  margin: 0;
+}
+
+.typeReadingLineHeight {
+  line-height: var(--line-height-reading);
+  margin: 0;
+}

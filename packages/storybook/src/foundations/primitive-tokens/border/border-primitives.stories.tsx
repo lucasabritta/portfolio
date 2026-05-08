@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { BorderPrimitives } from "../primitives-reference";
+import { BorderPrimitives } from "./border-primitives-section";
 import { borderPrimitivesPlay } from "./border-primitives.stories.test";
 
 const meta = {

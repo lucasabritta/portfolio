@@ -55,6 +55,30 @@ export function BorderTokens() {
           </li>
         ))}
       </ul>
+      <div className={styles.demoGroup}>
+        <h3 className={styles.demoTitle}>Border width examples</h3>
+        <div className={styles.borderDemoRow}>
+          <div className={styles.borderDefault}>default</div>
+          <div className={styles.borderStrong}>strong</div>
+          <div className={styles.borderAccent}>accent</div>
+        </div>
+
+        <h3 className={styles.demoTitle}>Outline and offset examples</h3>
+        <div className={styles.outlineDemoRow}>
+          <button type="button" className={styles.outlineTight}>
+            tight offset
+          </button>
+          <button type="button" className={styles.outlineDefault}>
+            default offset
+          </button>
+        </div>
+
+        <h3 className={styles.demoTitle}>Shadow examples</h3>
+        <div className={styles.shadowDemoRow}>
+          <div className={styles.shadowSurface}>surface</div>
+          <div className={styles.shadowFloating}>floating</div>
+        </div>
+      </div>
     </TokenSection>
   );
 }

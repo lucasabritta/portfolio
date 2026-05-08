@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 /* Primitive layer: raw scales and palette values */
-@import "./foundations/primitives/border/border-primitives.css";
-@import "./foundations/primitives/color/color-primitives.css";
-@import "./foundations/primitives/spacing/spacing-primitives.css";
-@import "./foundations/primitives/typography/typography-primitives.css";
-@import "./foundations/primitives/layout/layout-primitives.css";
+@import "./foundations/primitive-tokens/border/border-primitives.css";
+@import "./foundations/primitive-tokens/color/color-primitives.css";
+@import "./foundations/primitive-tokens/spacing/spacing-primitives.css";
+@import "./foundations/primitive-tokens/typography/typography-primitives.css";
+@import "./foundations/primitive-tokens/layout/layout-primitives.css";
 
 /* Semantic layer: role tokens consumed by components */
 @import "./foundations/tokens/color/color-tokens.css";

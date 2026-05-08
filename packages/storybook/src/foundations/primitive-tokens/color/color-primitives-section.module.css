@@ -1,0 +1,28 @@
+.colorSwatchList {
+  display: grid;
+  gap: var(--gap-sm);
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.colorSwatchItem {
+  align-items: center;
+  background: var(--card);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  gap: var(--gap-sm);
+  padding: var(--space-element-sm);
+}
+
+.colorSwatch {
+  background: var(--primitive-swatch-color);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-full);
+  box-shadow: inset 0 0 0 var(--border-width-default) color-mix(in srgb, var(--foreground) 8%, transparent);
+  display: block;
+  height: var(--space-element-xl);
+  width: var(--space-element-xl);
+}

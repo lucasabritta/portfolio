@@ -141,6 +141,65 @@ function SpacingTokenList({ tokens, label }: { tokens: readonly SpacingToken[]; 
   );
 }
 
+function RadiusSpecimen() {
+  return (
+    <div className={styles.demoGroup}>
+      <h3 className={styles.groupTitle}>Radius visual demo</h3>
+      <div className={styles.radiusDemo}>
+        <span className={styles.radiusSm}>sm</span>
+        <span className={styles.radiusMd}>md</span>
+        <span className={styles.radiusLg}>lg</span>
+        <span className={styles.radiusXl}>xl</span>
+        <span className={styles.radiusFull}>full</span>
+      </div>
+    </div>
+  );
+}
+
+function GapSpecimen() {
+  return (
+    <div className={styles.demoGroup}>
+      <h3 className={styles.groupTitle}>Gap visual demo</h3>
+      <div className={styles.gapDemoGrid}>
+        <div className={styles.gapDemoRow}>
+          <code className={styles.tokenName}>--gap-sm</code>
+          <div className={styles.gapSm}>
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+        <div className={styles.gapDemoRow}>
+          <code className={styles.tokenName}>--gap-lg</code>
+          <div className={styles.gapLg}>
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ColumnSpecimen() {
+  return (
+    <div className={styles.demoGroup}>
+      <h3 className={styles.groupTitle}>Space-column visual demo</h3>
+      <div className={styles.columnDemoGrid}>
+        <div className={styles.columnDemoMd}>
+          <span>col a</span>
+          <span>col b</span>
+        </div>
+        <div className={styles.columnDemoXl}>
+          <span>col a</span>
+          <span>col b</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function SpacingTokens() {
   return (
     <TokenSection
@@ -152,6 +211,9 @@ export function SpacingTokens() {
       <SpacingTokenList tokens={GAP_TOKENS} label="Gap tokens" />
       <SpacingTokenList tokens={SPACE_COLUMN_TOKENS} label="Space-column tokens" />
       <SpacingTokenList tokens={RADIUS_TOKENS} label="Radius tokens" />
+      <RadiusSpecimen />
+      <GapSpecimen />
+      <ColumnSpecimen />
     </TokenSection>
   );
 }
