@@ -34,7 +34,6 @@ const config: StorybookConfig = {
     options: {},
   },
   // Storybook renders DOM UI only and must not reach into `apps/frontend/public`.
-  // CV fonts are a PDF-side concern consumed by `apps/frontend/lib/cv-pdf/fonts.ts`.
   viteFinal: async (viteConfig) => {
     const existingAlias = viteConfig.resolve?.alias;
     const alias = Array.isArray(existingAlias)

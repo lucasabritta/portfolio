@@ -4,11 +4,6 @@ import { buildHomeMarketing, HOME_RESUME_ANCHOR_ID, type HomeMarketingBlocks } f
 
 export type HomeResumeSectionData = {
   anchorId: string;
-  summary: {
-    summaryHighlights: ResumeData["summaryHighlights"];
-    techStack: ResumeData["techStack"];
-  };
-  workHistory: ResumeData["workHistory"];
   education: ResumeData["education"];
   certifications: ResumeData["certifications"];
   projects: ResumeData["personalProjects"];
@@ -37,11 +32,6 @@ export function buildHomePageModel(resume: ResumeData): HomePageModel {
     marketing: buildHomeMarketing(resume),
     resume: {
       anchorId: HOME_RESUME_ANCHOR_ID,
-      summary: {
-        summaryHighlights: resume.summaryHighlights,
-        techStack: resume.techStack,
-      },
-      workHistory: resume.workHistory,
       education: resume.education,
       certifications: resume.certifications,
       projects: resume.personalProjects,

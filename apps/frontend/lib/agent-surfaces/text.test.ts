@@ -36,6 +36,6 @@ describe("agent text formatters", () => {
 
     expect(text).toContain("https://portfolio.example/resume.txt");
     expect(text).toContain("https://portfolio.example/projects.txt");
-    expect(text).toContain("https://portfolio.example/api/cv");
+    expect(text).not.toContain("/api/cv");
   });
 });

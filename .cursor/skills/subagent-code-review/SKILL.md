@@ -15,21 +15,21 @@ For **plan or feature validation** before implementation, use **`subagent-plan-r
 
 ## When to use
 
-| Situation | Action |
-|-----------|--------|
-| User asks for **code review**, **PR review**, or **review these changes** | Spawn at least one readonly reviewer |
-| **Before merge** on a substantive PR or branch | Prefer a subagent pass unless the user skips it |
-| **Second opinion** or **parallel reviewers** | Two Task calls in one turn (see below) |
-| Trivial one-line change | Review in-session; subagents only if the user asks |
+| Situation                                                                 | Action                                             |
+| ------------------------------------------------------------------------- | -------------------------------------------------- |
+| User asks for **code review**, **PR review**, or **review these changes** | Spawn at least one readonly reviewer               |
+| **Before merge** on a substantive PR or branch                            | Prefer a subagent pass unless the user skips it    |
+| **Second opinion** or **parallel reviewers**                              | Two Task calls in one turn (see below)             |
+| Trivial one-line change                                                   | Review in-session; subagents only if the user asks |
 
 ## Tooling
 
 Use the **Task** tool. Subagents **do not** see the user chat — include diff summary, paths, PR body, and constraints in the **prompt**.
 
-| Need | `subagent_type` | `readonly` |
-|------|-----------------|------------|
-| Read files / trace logic / compare patterns | `explore` | `true` |
-| Run `yarn lint`, `yarn test`, or a scoped build | `generalPurpose` | `false` |
+| Need                                            | `subagent_type`  | `readonly` |
+| ----------------------------------------------- | ---------------- | ---------- |
+| Read files / trace logic / compare patterns     | `explore`        | `true`     |
+| Run `yarn lint`, `yarn test`, or a scoped build | `generalPurpose` | `false`    |
 
 Use **`model: fast`** unless the diff is huge or security-sensitive.
 
@@ -56,7 +56,7 @@ Merge non-duplicative items under one verdict in the parent reply. Do **not** ne
 - **Next.js / React**: Server vs Client boundaries, hooks rules, data fetching, metadata.
 - **Security**: secrets, XSS, unsafe HTML, auth/session assumptions, env usage.
 - **UI / a11y**: semantics, labels, focus, contrast; shared DOM only under `packages/storybook/src/**` per ESLint boundary.
-- **Styling**: view vs `.module.css`; CV PDF stays in `apps/frontend/lib/cv-pdf/**` with react-pdf `StyleSheet`.
+- **Styling**: view vs `.module.css`; shared DOM styles stay in `packages/storybook/src/**`.
 - **Tests & CI**: coverage of new behavior; cite `yarn lint`, `yarn typecheck`, `yarn test`, `yarn build` as needed.
 - **Scope creep**: unrelated refactors, noisy diffs.
 
@@ -64,17 +64,21 @@ Merge non-duplicative items under one verdict in the parent reply. Do **not** ne
 
 ```markdown
 ## Verdict
+
 One of: **Approve** | **Approve with notes** | **Block**
 
 ## Summary
+
 One short paragraph.
 
 ## Findings
+
 - **Blockers** (must fix): …
 - **Should fix**: …
 - **Nits / optional**: …
 
 ## Suggested next steps
+
 Numbered, concrete actions (file paths or commands).
 ```
 

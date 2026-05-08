@@ -1,11 +1,19 @@
-# ADR 0003 — CV is rendered via `react-pdf` inside `apps/frontend`
+# ADR 0003 — CV was rendered via `react-pdf` inside `apps/frontend`
 
-- **Status**: Accepted
+- **Status**: Superseded
 - **Date**: 2026-04-17 (recorded retroactively; decision predates this ADR)
+- **Superseded by**: 2026-05-07 CV download removal.
+
+## Supersession note
+
+The public CV download was removed from the portfolio. The `/api/cv` route,
+`apps/frontend/lib/cv-pdf/**`, PDF dump scripts, and CV filename helpers no
+longer exist. The site now presents résumé information through the home page and
+machine-readable text endpoints.
 
 ## Context
 
-The site must serve a downloadable CV that stays in sync with the data shown on `/` (and other surfaces). Options considered:
+The site previously needed to serve a downloadable CV that stayed in sync with the data shown on `/` (and other surfaces). Options considered:
 
 1. Pre-compile a PDF from a LaTeX or docx source and serve it as a static asset.
 2. Generate at request time from HTML via a headless browser (Puppeteer, Playwright print).
@@ -13,12 +21,12 @@ The site must serve a downloadable CV that stays in sync with the data shown on 
 
 ## Decision
 
-Option **3**: the CV is built at request time with `@react-pdf/renderer` from `@portfolio/resume-content`.
+Option **3** was chosen: the CV was built at request time with `@react-pdf/renderer` from `@portfolio/resume-content`.
 
 - Source of truth: `packages/resume-content/src/resumeData`.
 - Layout: `apps/frontend/lib/cv-pdf/**` (react-pdf `StyleSheet`, **not** web CSS).
-- Delivery: `GET /api/cv` streams a PDF response with a deterministic filename (`<name>_CV.pdf`) per `packages/resume-content/src/cv-filename.ts`.
-- Invariants (stable keys, pagination, URL wrapping) are covered by unit tests in `apps/frontend/lib/cv-pdf/**.test.ts` and `packages/resume-content/src/resume-invariants.test.ts` (see P2).
+- Delivery: `GET /api/cv` streamed a PDF response with a deterministic filename (`<name>_CV.pdf`) per `packages/resume-content/src/cv-filename.ts`.
+- Invariants (stable keys, pagination, URL wrapping) were covered by unit tests in `apps/frontend/lib/cv-pdf/**.test.ts` and `packages/resume-content/src/resume-invariants.test.ts`.
 
 ## Alternatives considered
 
@@ -28,4 +36,4 @@ Option **3**: the CV is built at request time with `@react-pdf/renderer` from `@
 ## Consequences
 
 - **Pros**: single data source, deterministic output, testable as plain units, cheap to run on Vercel, no binary assets in git.
-- **Cons**: react-pdf has a separate styling model from web CSS (`StyleSheet` only). Rule [`nextjs-react.mdc`](../../.cursor/rules/nextjs-react.mdc) calls this out, and `apps/frontend/lib/cv-pdf/**` is kept isolated from web styles. Fonts and line-height tuning require care; covered by the CV Docker dump tooling (see [`docs/agents/cv-pdf-docker.md`](../agents/cv-pdf-docker.md)).
+- **Cons**: react-pdf had a separate styling model from web CSS (`StyleSheet` only). Fonts and line-height tuning required dedicated dump tooling.

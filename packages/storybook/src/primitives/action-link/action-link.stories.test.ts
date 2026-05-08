@@ -3,7 +3,7 @@ import { expect, within } from "storybook/test";
 
 export const actionLinkPrimaryPlay: StoryPlayFn = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const link = canvas.getByRole("link", { name: /download cv/i });
+  const link = canvas.getByRole("link", { name: /open project/i });
   link.focus();
   expect(link).toHaveFocus();
 };

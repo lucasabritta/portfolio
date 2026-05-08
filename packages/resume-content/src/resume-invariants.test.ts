@@ -8,10 +8,7 @@ import type { ResumeExperienceEntry } from "./types";
  * Structural invariants over the shipped `resumeData`. These guard the two
  * external surfaces that consume it without type-level help:
  *
- *  1. The CV PDF pipeline (`apps/frontend/lib/cv-pdf`) — empty strings would
- *     render as blank rows; work entries missing `role`/`company`/`period`
- *     would collide under the shared stable-key algorithm.
- *  2. The home marketing presentation (`@portfolio/storybook`) — the home
+ *  1. The home marketing presentation (`@portfolio/storybook`) — the home
  *     timeline derives keys from the same algorithm (mirrored as
  *     `presentationWorkEntryKey`); duplicates break React reconciliation.
  */
@@ -39,12 +36,8 @@ describe("resumeData — top-level required fields", () => {
     expect(resumeData.linkedin).toMatch(/^https:\/\/(www\.)?linkedin\.com\//);
   });
 
-  it("has non-empty summaryHighlights and techStack lists", () => {
-    expect(resumeData.summaryHighlights.length).toBeGreaterThan(0);
+  it("has a non-empty techStack list", () => {
     expect(resumeData.techStack.length).toBeGreaterThan(0);
-    for (const highlight of resumeData.summaryHighlights) {
-      expect(highlight.trim().length).toBeGreaterThan(0);
-    }
     for (const tech of resumeData.techStack) {
       expect(tech.trim().length).toBeGreaterThan(0);
     }
@@ -75,9 +68,6 @@ describe("resumeData.workHistory — per-entry invariants", () => {
 });
 
 describe("resumeData.workHistory — stable-key uniqueness", () => {
-  // Mirrors the contract pinned in
-  // `apps/frontend/lib/cv-pdf/work-history.test.ts` — keep both suites in sync
-  // if the stable-key algorithm changes.
   it("buildWorkEntryStableKey produces a unique key per entry", () => {
     const keys = resumeData.workHistory.map((entry) => buildWorkEntryStableKey(entry));
     expect(new Set(keys).size).toBe(keys.length);
@@ -94,12 +84,12 @@ describe("resumeData — list invariants", () => {
     }
   });
 
-  it("personal projects have title and an absolute https URL", () => {
+  it("personal projects have title and a valid URL", () => {
     expect(resumeData.personalProjects.length).toBeGreaterThan(0);
     for (const project of resumeData.personalProjects) {
       expect(project.title.trim().length).toBeGreaterThan(0);
       expect(project.description.trim().length).toBeGreaterThan(0);
-      expect(project.href).toMatch(/^https:\/\//);
+      expect(project.href).toMatch(/^(https:\/\/|\/)/);
     }
   });
 

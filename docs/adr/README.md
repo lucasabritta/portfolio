@@ -15,12 +15,12 @@ The repo is a logical monorepo with intentional boundaries (see [`docs/agents/pr
 
 ## Index
 
-| ADR                                              | Title                                                         | Status   |
-| ------------------------------------------------ | ------------------------------------------------------------- | -------- |
-| [0001](0001-multi-package-with-file-protocol.md) | Multi-package repo with Yarn `file:` protocol (no workspaces) | Accepted |
-| [0002](0002-shared-dom-via-storybook-package.md) | Shared DOM UI lives in `@portfolio/storybook`                 | Accepted |
-| [0003](0003-react-pdf-for-cv.md)                 | CV is rendered via `react-pdf` inside `apps/frontend`         | Accepted |
-| [0004](0004-docker-compose-local-dev-parity.md)  | Docker Compose is the canonical local dev and CI runtime      | Accepted |
+| ADR                                              | Title                                                         | Status     |
+| ------------------------------------------------ | ------------------------------------------------------------- | ---------- |
+| [0001](0001-multi-package-with-file-protocol.md) | Multi-package repo with Yarn `file:` protocol (no workspaces) | Accepted   |
+| [0002](0002-shared-dom-via-storybook-package.md) | Shared DOM UI lives in `@portfolio/storybook`                 | Accepted   |
+| [0003](0003-react-pdf-for-cv.md)                 | CV was rendered via `react-pdf` inside `apps/frontend`        | Superseded |
+| [0004](0004-docker-compose-local-dev-parity.md)  | Docker Compose is the canonical local dev and CI runtime      | Accepted   |
 
 ## Related
 

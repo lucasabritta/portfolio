@@ -3,8 +3,6 @@
 import type { ReactNode } from "react";
 import { useEffect, useId, useRef, useState } from "react";
 
-import { ActionLink } from "../primitives";
-
 import { pathMatchesNav } from "./nav-active-path";
 import type { SiteShellLinkComponent } from "./site-link-component";
 import styles from "./site-header.module.css";
@@ -24,7 +22,6 @@ export type SiteHeaderProps = {
   wordmarkText: string;
   wordmarkHref: string;
   navItems: SiteNavItem[];
-  downloadCvHref: string;
   themeControl: ReactNode;
   mobileThemeControl: ReactNode;
   currentPath: string;
@@ -77,7 +74,6 @@ export function SiteHeader({
   wordmarkText,
   wordmarkHref,
   navItems,
-  downloadCvHref,
   themeControl,
   mobileThemeControl,
   currentPath,
@@ -169,9 +165,6 @@ export function SiteHeader({
         </div>
         <div className={styles.right}>
           <div className={styles.desktopThemeSlot}>{themeControl}</div>
-          <ActionLink variant="primary" href={downloadCvHref} className={styles.download}>
-            Download CV
-          </ActionLink>
           <button
             ref={menuButtonRef}
             type="button"
@@ -223,9 +216,6 @@ export function SiteHeader({
                 })}
               </ul>
             </nav>
-            <ActionLink variant="primary" href={downloadCvHref} className={styles.mobileDownload}>
-              Download CV
-            </ActionLink>
             <div className={styles.mobileThemeSlot}>
               <p className={styles.mobileThemeLabel}>Theme</p>
               {mobileThemeControl}

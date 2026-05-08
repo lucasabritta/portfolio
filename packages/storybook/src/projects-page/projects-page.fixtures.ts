@@ -9,19 +9,20 @@ export function projectsPageViewFixture(): ProjectsPageViewProps {
     flagship: {
       title: "Echoes of the missing cat",
       eyebrow: "Flagship",
-      role: "Creator · game direction, Godot implementation, and Android delivery",
-      stack: ["Godot 4", "Android", "Google Play", "QA tooling", "AI-assisted workflows"],
+      role: "Creator · game direction, Godot implementation, Android delivery, and agent workflow design",
+      stack: ["Godot 4", "Android", "Google Play", "Docker", "GitHub Actions", "AI agents"],
       pitch:
-        "A short mystery adventure on Android where players follow echoes to find a missing cat. The goal was to ship a polished store listing with real art direction while keeping the build pipeline honest about where AI helped versus where craft still mattered.",
+        "A short top-down Android adventure with touch controls, 13 maps, simple puzzles, light backtracking, bilingual text, and a final cat reunion shaped by family playtesting.",
       hardestProblem:
-        "Keeping tone and pacing consistent when large parts of content and tooling were AI-generated — without treating the model as an infallible co-author. The team had to establish review gates, cut scope aggressively, and validate builds on real devices early.",
+        "Keeping many AI-assisted sessions aligned required more than better prompts: Docker-first tooling, scoped tickets, validation scripts, ownership boundaries, and release checks made the work repeatable.",
       outcomes: [
-        "Shipped to Google Play with store-ready listing, screenshots, and crash reporting.",
-        "Established a repeatable pipeline from idea → playable build with clear human review checkpoints.",
-        "Learned where generative tools save weeks, and where they silently create rework if you skip design discipline.",
+        "Published on Google Play after turning a playable prototype into a store-ready Android release.",
+        "Replaced broad prompts with scoped tickets carrying dependencies and acceptance criteria.",
+        "Added checks for map topology, flags, assets, docs, logs, ownership, and Android artifacts.",
+        "Split gameplay into smaller systems so parallel agents had clearer boundaries.",
       ],
       aiPipelineNote:
-        "AI was used heavily for ideation, drafts, and asset iteration, but release engineering, store policy compliance, and player-facing quality bars stayed manual and accountable. That split is intentional: the stack is a lever, not the story.",
+        "The project showed that agents respect failing checks more than intentions. The useful work was the structure left behind: tickets, lint rules, Docker wrappers, validation scripts, and release automation.",
       imageSrc: null,
       imageAlt: "Echoes of the missing cat key art placeholder",
       links: [
@@ -31,8 +32,8 @@ export function projectsPageViewFixture(): ProjectsPageViewProps {
           variant: "primary",
         },
         {
-          label: "Example GitHub",
-          href: "https://github.com/example/echoes-missing-cat",
+          label: "Medium article",
+          href: "https://medium.com/@lucasabritta_93729/what-i-learned-building-an-android-game-with-ai-agents-5f64d23024fe",
           variant: "secondary",
         },
       ],

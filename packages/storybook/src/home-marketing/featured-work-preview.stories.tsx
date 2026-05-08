@@ -25,6 +25,20 @@ export const Default: Story = {
       href: "https://play.google.com/store/apps/details?id=com.echoes.missingcat",
       ctaLabel: "Google Play",
       external: true,
+      actions: [
+        {
+          label: "Google Play",
+          href: "https://play.google.com/store/apps/details?id=com.echoes.missingcat",
+          variant: "primary",
+          external: true,
+        },
+        {
+          label: "Medium article",
+          href: "https://medium.com/@lucasabritta_93729/what-i-learned-building-an-android-game-with-ai-agents-5f64d23024fe",
+          variant: "secondary",
+          external: true,
+        },
+      ],
     },
     supporting: [
       {

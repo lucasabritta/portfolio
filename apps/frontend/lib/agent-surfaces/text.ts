@@ -36,9 +36,6 @@ export function buildResumeText(resume: ResumeData): string {
     "## Summary",
     resume.summary,
     "",
-    "## Highlights",
-    ...bulletList(resume.summaryHighlights),
-    "",
     "## Tech Stack",
     resume.techStack.join(", "),
     "",
@@ -134,7 +131,6 @@ export function buildLlmsText({
   const textPages: Link[] = [
     { label: "Resume text", href: "/resume.txt", description: "Full text resume/CV." },
     { label: "Projects text", href: "/projects.txt", description: "Project summaries and links." },
-    { label: "CV PDF", href: siteChrome.downloadCvHref, description: "Generated PDF resume." },
   ];
 
   const contactLinks: Link[] = [

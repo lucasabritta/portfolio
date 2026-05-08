@@ -8,7 +8,6 @@ const links = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/example", external: true },
   { label: "Component library (Storybook)", href: "/storybook" },
   { label: "Site architecture", href: "/site-architecture" },
-  { label: "Download CV", href: "/api/cv" },
 ];
 
 const meta = {

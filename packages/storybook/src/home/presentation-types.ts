@@ -28,7 +28,6 @@ export type PresentationPersonalProject = {
 };
 
 export type HomePageProps = {
-  downloadHref: string;
   name: string;
   role: string;
   summary: string;
@@ -39,8 +38,6 @@ export type HomePageProps = {
   email: string;
   linkedin: string;
   contactLinks: readonly PresentationContactLink[];
-  summaryHighlights: readonly string[];
-  techStack: readonly string[];
   workHistory: readonly PresentationWorkEntry[];
   education: readonly PresentationEducationEntry[];
   certifications: readonly string[];

@@ -18,8 +18,6 @@ This repo uses **separate Yarn packages** (`apps/frontend`, `packages/storybook`
 - **Résumé data** (`packages/resume-content`): `yarn --cwd ../../packages/resume-content lint`, `typecheck`, `test:unit`.
 - **E2E** (`apps/e2e`): `yarn --cwd ../../apps/e2e test:e2e` (see `ci-e2e.yml`).
 
-For **CV PDF** edits under `apps/frontend/lib/cv-pdf/**`, run frontend **`yarn test:unit`** and consider **`sh scripts/cv/docker-dump.sh`** for a real PDF byte check.
-
 ## Preconditions
 
 - Dependencies installed: `yarn install` in each package directory you modify (or use Docker **`yarn install`** / **`yarn --cwd … install --frozen-lockfile`** as CI does).
@@ -46,10 +44,9 @@ Execute in order; **skip** any script absent from the relevant `package.json`:
 - If CI runs in Linux, avoid macOS-only assumptions in scripts or path separators.
 - Docker-first: prefer **`docker compose run --rm frontend yarn lint`** (and the **`yarn --cwd ../../packages/...`** patterns from `.github/workflows/`) so Node, Playwright, and Linux match CI (see `Dockerfile` / `docs/agents/storybook-ui.md`).
 
-## CV PDF (this repo)
+## Storybook UI
 
-- After edits under **`apps/frontend/lib/cv-pdf/**`** or **`packages/resume-content/**`** used by the résumé PDF, run **`apps/frontend`** **`yarn test:unit`** and optional **`sh scripts/cv/docker-dump.sh`**.
-- After edits under **`packages/storybook/**`**, run **`yarn build-storybook`** in that package in addition to the usual checks.
+- After edits under **`packages/storybook/**`**, run **`yarn build-storybook`\*\* in that package in addition to the usual checks.
 
 ## Done when
 

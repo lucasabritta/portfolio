@@ -9,7 +9,6 @@ const SITEMAP_ENTRIES = [
   { pathname: "/llms.txt", priority: 0.9 },
   { pathname: "/resume.txt", priority: 0.9 },
   { pathname: "/projects.txt", priority: 0.8 },
-  { pathname: "/api/cv", priority: 0.6 },
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

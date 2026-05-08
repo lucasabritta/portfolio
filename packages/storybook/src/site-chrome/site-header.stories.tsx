@@ -13,7 +13,6 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
   { label: "Site architecture", href: "/site-architecture" },
-  { label: "CV", href: "/#resume" },
 ];
 
 const meta = {
@@ -33,7 +32,6 @@ export const Default: Story = {
     wordmarkText: "Lucas Abritta",
     wordmarkHref: "/",
     navItems,
-    downloadCvHref: "/api/cv",
     currentPath: "/site-architecture",
     themeControl: <></>,
     mobileThemeControl: <></>,

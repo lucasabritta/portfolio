@@ -22,7 +22,10 @@ describe("Home page", () => {
 
   it("keeps page shell and section composition in frontend", () => {
     render(<Home />);
-    expect(screen.getByRole("heading", { name: /professional summary/i })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /professional summary/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /personal projects/i })).toBeInTheDocument();
     expect(document.getElementById("resume")).toBeTruthy();
   });
 
@@ -31,23 +34,30 @@ describe("Home page", () => {
     const h1 = screen.getByRole("heading", { level: 1, name: resumeData.name });
     const heroRoot = h1.closest("header");
     expect(heroRoot).toBeTruthy();
+    expect(within(heroRoot as HTMLElement).getByText("Proof points")).toBeInTheDocument();
+    expect(
+      within(heroRoot as HTMLElement).getByText(
+        "Played a key role in growing a Startup from Seed to Series A and B, contributing to its ~$200 M valuation while leading engineering quality and platform excellence.",
+      ),
+    ).toBeInTheDocument();
     const projects = within(heroRoot as HTMLElement).getByRole("link", { name: "View Projects" });
     expect(projects).toHaveAttribute("href", "/projects");
-    const storybookLinks = screen.getAllByRole("link", {
-      name: /Open Storybook.*opens in a new tab/i,
-    });
-    expect(storybookLinks.length).toBeGreaterThanOrEqual(1);
-    expect(storybookLinks.every((el) => el.getAttribute("href") === "/storybook")).toBe(true);
-    expect(within(heroRoot as HTMLElement).getByText("Proof points")).toBeInTheDocument();
-    expect(within(heroRoot as HTMLElement).getByRole("list")).toBeInTheDocument();
-  });
-
-  it("keeps cv download path under /api", () => {
-    render(<Home />);
-    const cvPdfLinks = screen
-      .getAllByRole("link")
-      .filter((el) => el.getAttribute("href") === "/api/cv");
-    expect(cvPdfLinks.length).toBeGreaterThanOrEqual(1);
-    expect(cvPdfLinks.some((el) => /download cv/i.test(el.textContent ?? ""))).toBe(true);
+    expect(
+      within(heroRoot as HTMLElement).queryByRole("link", { name: /Open Storybook/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(heroRoot as HTMLElement).getByRole("link", { name: /GitHub profile/i }),
+    ).toHaveAttribute("href", "https://github.com/lucasabritta");
+    expect(screen.getByRole("link", { name: /Google Play.*opens in a new tab/i })).toHaveAttribute(
+      "href",
+      "https://play.google.com/store/apps/details?id=com.echoes.missingcat",
+    );
+    expect(
+      screen.getByRole("link", { name: /Medium article.*opens in a new tab/i }),
+    ).toHaveAttribute(
+      "href",
+      "https://medium.com/@lucasabritta_93729/what-i-learned-building-an-android-game-with-ai-agents-5f64d23024fe",
+    );
+    expect(screen.queryByRole("link", { name: /download cv/i })).not.toBeInTheDocument();
   });
 });

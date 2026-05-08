@@ -17,8 +17,4 @@ export type {
 } from "./presentation-types";
 export { ProjectsSection } from "./projects-section/projects-section";
 export type { ProjectsSectionProps } from "./projects-section/projects-section";
-export { SummarySection } from "./summary-section/summary-section";
-export type { SummarySectionProps } from "./summary-section/summary-section";
-export { WorkHistorySection } from "./work-history-section/work-history-section";
-export type { WorkHistorySectionProps } from "./work-history-section/work-history-section";
 export { presentationWorkEntryKey } from "./work-entry-key";

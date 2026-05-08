@@ -6,9 +6,11 @@ import type {
   HomeLeadHeroProps,
 } from "@portfolio/storybook/home-marketing";
 
-import { GOOGLE_PLAY_HOST, type ResumeData } from "@portfolio/resume-content";
+import { GOOGLE_PLAY_HOST, PROJECT_URLS, type ResumeData } from "@portfolio/resume-content";
 
-/** Anchor for the in-page full résumé block (header CV link uses `/#resume`). */
+import { siteProfile } from "./site-profile";
+
+/** Anchor for the in-page résumé details block. */
 export const HOME_RESUME_ANCHOR_ID = "resume";
 
 type ContactHintText = string & {
@@ -38,32 +40,29 @@ const CREDIBILITY_ITEMS = [
   },
 ] as const satisfies CredibilityStripProps["items"];
 
+const HERO_PROOF_POINTS = [
+  "Played a key role in growing a Startup from Seed to Series A and B, contributing to its ~$200 M valuation while leading engineering quality and platform excellence.",
+  "Hands-on background in software development and automation, with expertise in cloud infrastructure, CI/CD, observability and performance.",
+  "Leading recruiting, onboarding, and performance development through structured 360° feedback cycles; Fostering a culture of ownership, technical excellence, and cross-team collaboration.",
+] as const satisfies HomeLeadHeroProps["proofPoints"];
+
 const BUILD_TEASER: BuildStorybookTeaserProps = {
   heading: "Site & component library",
-  lead: "This portfolio is a small monorepo: a Next.js app, a Storybook package for shared UI, résumé data reused by the PDF CV, Docker for local parity, and GitHub Actions split by package so changes stay reviewable.",
+  lead: "This portfolio is a small monorepo: a Next.js app, a Storybook package for shared UI, résumé data for site content, Docker for local parity, and GitHub Actions split by package so changes stay reviewable.",
   buildHref: "/site-architecture",
   storybookHref: "/storybook",
 };
 
-function threeProofPoints(highlights: readonly string[]): HomeLeadHeroProps["proofPoints"] {
-  const a = highlights[0] ?? "—";
-  const b = highlights[1] ?? a;
-  const c = highlights[2] ?? b;
-  return [a, b, c];
-}
-
-function threeCondensedEntries(
-  work: ResumeData["workHistory"],
-): CondensedCvPreviewProps["entries"] {
-  const pick = (i: number) => ({
-    company: work[i]?.company ?? "—",
-    role: work[i]?.role ?? "—",
-    period: work[i]?.period ?? "—",
-  });
-  return [pick(0), pick(1), pick(2)];
+function condensedEntries(work: ResumeData["workHistory"]): CondensedCvPreviewProps["entries"] {
+  return work.map((entry) => ({
+    company: entry.company,
+    role: entry.role,
+    period: entry.period,
+  }));
 }
 
 function flagshipCta(href: string): string {
+  if (href === "/projects") return "View Projects";
   if (href.includes(GOOGLE_PLAY_HOST)) return "Google Play";
   return "Open";
 }
@@ -87,6 +86,20 @@ function featuredWorkFromResume(resume: ResumeData): FeaturedWorkPreviewProps {
       href: flagship.href,
       ctaLabel: flagshipCta(flagship.href),
       external: flagshipExternal ? true : undefined,
+      actions: [
+        {
+          label: "Google Play",
+          href: PROJECT_URLS.echoesMissingCatPlayStore,
+          variant: "primary",
+          external: true,
+        },
+        {
+          label: "Medium article",
+          href: PROJECT_URLS.echoesMissingCatMediumArticle,
+          variant: "secondary",
+          external: true,
+        },
+      ],
     },
     supporting: [
       {
@@ -126,13 +139,12 @@ export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
       name: resume.name,
       roleEyebrow: resume.role,
       positioningLead: HOME_POSITIONING_LEAD,
-      proofPoints: threeProofPoints(resume.summaryHighlights),
       contactHint,
       contactHintLabel: contactHint ? "contacts" : undefined,
       contactHintHref: contactHint ? "#contact-heading" : undefined,
-      downloadHref: "/api/cv",
       projectsHref: "/projects",
-      storybookHref: "/storybook",
+      githubHref: siteProfile.githubProfileUrl,
+      proofPoints: HERO_PROOF_POINTS,
       headshotSrc: "/headshot-lucas-192.webp",
       headshotAvifSrcSet:
         "/headshot-lucas-96.avif 96w, /headshot-lucas-192.avif 192w, /headshot-lucas-256.avif 256w",
@@ -148,10 +160,9 @@ export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
     featuredWork: featuredWorkFromResume(resume),
     buildTeaser: BUILD_TEASER,
     condensedCv: {
-      heading: "Recent roles",
-      entries: threeCondensedEntries(resume.workHistory),
+      heading: "Work history",
+      entries: condensedEntries(resume.workHistory),
       resumeAnchorId: HOME_RESUME_ANCHOR_ID,
-      continueLabel: "Continue to full résumé",
     },
   };
 }

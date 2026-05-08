@@ -30,7 +30,6 @@ Both bans are enforced in **`apps/frontend/eslint.config.mjs`** via **`no-restri
 - **DOM components** (anything that renders browser JSX) belong in **`packages/storybook/src/`**. The Next app imports composition pieces like **`HomePageShell`**, **`PortfolioHero`**, and section components from granular **`@portfolio/storybook/*`** subpaths (see `packages/storybook/package.json` `exports`), with the root barrel kept for compatibility.
 - **Global web CSS** lives in **`packages/storybook/src/globals.css`**. Root layout classes use **`packages/storybook/src/layout.module.css`**, imported from **`apps/frontend/app/layout.tsx`** as **`@portfolio/storybook/globals.css`** and **`@portfolio/storybook/layout.module.css`** (package `exports`).
 - **Story fixtures** live in **`packages/storybook/src/fixtures/`**. Stories use **`@ui/...`** (Vite/TS path alias); package components consumed by Next should use relative imports internally where needed so Next/Turbopack does not require duplicate `@ui` aliases.
-- **Résumé PDF** (react-pdf) lives in **`apps/frontend/lib/cv-pdf/**`** (served via **`/api/cv`**) — not in Storybook; it uses `StyleSheet`, not web CSS. It imports data/types from `@portfolio/resume-content`.
 
 ## Running Storybook
 

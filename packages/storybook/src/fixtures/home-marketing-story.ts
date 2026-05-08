@@ -29,20 +29,18 @@ export const SYNTH_CREDIBILITY_ITEMS: CredibilityStripProps["items"] = [
   },
 ];
 
-function threeStrings(values: readonly string[]): HomeLeadHeroProps["proofPoints"] {
-  const a = values[0] ?? "—";
-  const b = values[1] ?? a;
-  const c = values[2] ?? b;
-  return [a, b, c];
-}
+export const SYNTH_HOME_PROOF_POINTS = [
+  "Comfortable operating from early ambiguity through scale while keeping ownership clear.",
+  "Treats observability, testing, and deployment hygiene as product features.",
+  "Stays close enough to architecture and code paths to unblock teams without becoming a bottleneck.",
+] as const satisfies HomeLeadHeroProps["proofPoints"];
 
 function threeRoles(work: HomePageProps["workHistory"]): CondensedCvPreviewProps["entries"] {
-  const pick = (i: number) => ({
-    company: work[i]?.company ?? "—",
-    role: work[i]?.role ?? "—",
-    period: work[i]?.period ?? "—",
-  });
-  return [pick(0), pick(1), pick(2)];
+  return work.map((entry) => ({
+    company: entry.company,
+    role: entry.role,
+    period: entry.period,
+  }));
 }
 
 function flagshipCta(href: string): string {
@@ -55,13 +53,12 @@ export function homeLeadHeroFromHomePageProps(props: HomePageProps): HomeLeadHer
     name: props.name,
     roleEyebrow: props.role,
     positioningLead: SYNTH_HOME_POSITIONING,
-    proofPoints: threeStrings(props.summaryHighlights),
     contactHint: props.location ? `${props.location} · ` : undefined,
     contactHintLabel: props.location ? "contacts" : undefined,
     contactHintHref: props.location ? "#contact-heading" : undefined,
-    downloadHref: props.downloadHref,
     projectsHref: "/projects",
-    storybookHref: "/storybook",
+    githubHref: "https://github.com/example",
+    proofPoints: SYNTH_HOME_PROOF_POINTS,
   };
 }
 
@@ -82,6 +79,20 @@ export function featuredWorkPreviewFromHomePageProps(
       href: flagship.href,
       ctaLabel: flagshipCta(flagship.href),
       external: true,
+      actions: [
+        {
+          label: "Google Play",
+          href: "https://play.google.com/store/apps/details?id=com.echoes.missingcat",
+          variant: "primary",
+          external: true,
+        },
+        {
+          label: "Medium article",
+          href: "https://medium.com/@lucasabritta_93729/what-i-learned-building-an-android-game-with-ai-agents-5f64d23024fe",
+          variant: "secondary",
+          external: true,
+        },
+      ],
     },
     supporting: [
       {
@@ -102,16 +113,15 @@ export function featuredWorkPreviewFromHomePageProps(
 
 export const SYNTH_BUILD_TEASER: BuildStorybookTeaserProps = {
   heading: "Site & component library",
-  lead: "The portfolio runs as a small monorepo: a Next.js app, a Storybook package for shared UI, résumé data shared with the PDF CV, and GitHub Actions for split CI.",
+  lead: "The portfolio runs as a small monorepo: a Next.js app, a Storybook package for shared UI, résumé data for site content, and GitHub Actions for split CI.",
   buildHref: "/site-architecture",
   storybookHref: "/storybook",
 };
 
 export function condensedCvPreviewFromHomePageProps(props: HomePageProps): CondensedCvPreviewProps {
   return {
-    heading: "Recent roles",
+    heading: "Work history",
     entries: threeRoles(props.workHistory),
     resumeAnchorId: "resume",
-    continueLabel: "Continue to full résumé",
   };
 }

@@ -20,8 +20,6 @@ import { HomePageShell } from "@ui/home/home-page-shell";
 import type { HomePageProps } from "@ui/home/presentation-types";
 import { SkipToMain } from "@ui/site-chrome/skip-to-main";
 import { ProjectsSection } from "@ui/home/projects-section/projects-section";
-import { SummarySection } from "@ui/home/summary-section/summary-section";
-import { WorkHistorySection } from "@ui/home/work-history-section/work-history-section";
 
 import { homePageDefaultPlay } from "./home-page.stories.test";
 
@@ -39,8 +37,6 @@ function HomePageStory(props: HomePageProps) {
         <BuildStorybookTeaser {...SYNTH_BUILD_TEASER} />
         <CondensedCvPreview {...condensed} />
         <div id="resume">
-          <SummarySection summaryHighlights={props.summaryHighlights} techStack={props.techStack} />
-          <WorkHistorySection workHistory={props.workHistory} />
           <EducationSection education={props.education} />
           <CertificationsSection certifications={props.certifications} />
           <ProjectsSection projects={props.personalProjects} />

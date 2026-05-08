@@ -5,7 +5,7 @@
 
 ## Context
 
-The portfolio ships a Next.js site, a shared DOM UI library, typed résumé content, and a Playwright e2e suite. These four surfaces have different release cadences, different dependency surfaces (e.g. `react-pdf` vs. Storybook tooling vs. Playwright), and different CI needs.
+The portfolio ships a Next.js site, a shared DOM UI library, typed résumé content, and a Playwright e2e suite. These four surfaces have different release cadences, different dependency surfaces (e.g. Next app runtime vs. Storybook tooling vs. Playwright), and different CI needs.
 
 Candidate layouts:
 
@@ -23,7 +23,7 @@ Adopt option **3**: the repository is a **logical multi-package repo**, not a mo
 
 ## Alternatives considered
 
-- **Monolith**: rejected — mixes unrelated dependency graphs (react-pdf, Storybook, Playwright), blocks Vercel deploy granularity, makes ESLint/CI boundaries harder.
+- **Monolith**: rejected — mixes unrelated dependency graphs (Next runtime, Storybook, Playwright), blocks Vercel deploy granularity, makes ESLint/CI boundaries harder.
 - **Yarn workspaces**: rejected for now — a single `yarn.lock` complicates Vercel's build for `apps/frontend`, and hoisted `node_modules` can leak types between packages we want strictly separated. Revisit if Vercel's workspace story improves or duplication cost grows.
 
 ## Consequences

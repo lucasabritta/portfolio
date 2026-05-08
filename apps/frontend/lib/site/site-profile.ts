@@ -1,5 +1,5 @@
 /**
- * Marketing-only site data (not imported by @portfolio/resume-content or CV PDF).
+ * Marketing-only site data (not imported by @portfolio/resume-content).
  * Update `githubProfileUrl` if it does not match your GitHub account.
  */
 export const siteProfile = {

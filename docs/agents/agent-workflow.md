@@ -22,7 +22,6 @@ Use this file for repository-specific working conventions.
 - Match nearby patterns before introducing new ones.
 - Keep frontend separation explicit: `.tsx` for views, `.ts` for logic, and `.css`/`.module.css` for web styles.
 - For **`packages/storybook/**`**, keep shared DOM components documented with Storybook; do not add ad-hoc `components/` folders for web UI (ESLint enforces this).
-- For **`apps/frontend/lib/cv-pdf/**`**, use react-pdf `StyleSheet` (`styles.ts`/`styles/\*.ts`) instead of web CSS while still extracting reusable logic into `.ts` files.
 - Do not commit secrets; use Vercel or GitHub environment configuration for deploy-time values.
 
 ## Subagent plan validation

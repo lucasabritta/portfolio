@@ -16,7 +16,7 @@ export default function NotFound() {
         { kind: "link", label: "Back to home", href: "/" },
         { kind: "link", label: "View projects", href: "/projects" },
         { kind: "link", label: "Site architecture", href: "/site-architecture" },
-        { kind: "link", label: "Jump to CV", href: "/#resume" },
+        { kind: "link", label: "Jump to resume", href: "/#resume" },
       ]}
       linkComponent={Link}
     />

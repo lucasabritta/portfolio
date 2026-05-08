@@ -1,5 +1,11 @@
 /** Home Phase 3 “above the fold” and teaser blocks — presentation-only (no `@portfolio/resume-content`). */
 
+export type CredibilityItem = {
+  title: string;
+  body: string;
+  metric?: string;
+};
+
 export type HomeLeadHeroProps = {
   name: string;
   roleEyebrow: string;
@@ -8,21 +14,14 @@ export type HomeLeadHeroProps = {
   contactHint?: string;
   contactHintLabel?: string;
   contactHintHref?: string;
-  downloadHref: string;
   projectsHref: string;
-  storybookHref: string;
+  githubHref: string;
   /** Optional public URL for the hero portrait (e.g. `/headshot-lucas.png`). */
   headshotSrc?: string;
   headshotAvifSrcSet?: string;
   headshotWebpSrcSet?: string;
   headshotSizes?: string;
   headshotAlt?: string;
-};
-
-export type CredibilityItem = {
-  title: string;
-  body: string;
-  metric?: string;
 };
 
 export type CredibilityStripProps = {
@@ -35,6 +34,15 @@ export type FeaturedWorkCard = {
   description: string;
   href: string;
   ctaLabel: string;
+  /** When true, link opens in a new tab with noopener. */
+  external?: boolean;
+  actions?: readonly FeaturedWorkAction[];
+};
+
+export type FeaturedWorkAction = {
+  label: string;
+  href: string;
+  variant?: "primary" | "secondary";
   /** When true, link opens in a new tab with noopener. */
   external?: boolean;
 };
@@ -63,7 +71,7 @@ export type CondensedTimelineEntry = {
 export type CondensedCvPreviewProps = {
   id?: string;
   heading: string;
-  entries: readonly [CondensedTimelineEntry, CondensedTimelineEntry, CondensedTimelineEntry];
+  entries: readonly CondensedTimelineEntry[];
   resumeAnchorId: string;
-  continueLabel: string;
+  continueLabel?: string;
 };

@@ -23,9 +23,15 @@ export function CondensedCvPreview({
           </li>
         ))}
       </ul>
-      <ActionLink variant="accentUnderline" href={`#${resumeAnchorId}`} className={styles.continue}>
-        {continueLabel}
-      </ActionLink>
+      {continueLabel ? (
+        <ActionLink
+          variant="accentUnderline"
+          href={`#${resumeAnchorId}`}
+          className={styles.continue}
+        >
+          {continueLabel}
+        </ActionLink>
+      ) : null}
     </section>
   );
 }

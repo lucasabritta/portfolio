@@ -8,14 +8,13 @@ Open only the document that matches the task.
 2. [`docs/agents/repository-map.md`](docs/agents/repository-map.md) - where common code and config live
 3. [`docs/agents/cursor-mcp.md`](docs/agents/cursor-mcp.md) - Cursor MCP (Vercel and user-level config)
 4. [`docs/agents/agent-workflow.md`](docs/agents/agent-workflow.md) - how to use rules, skills, and validation
-5. [`docs/agents/cv-pdf-docker.md`](docs/agents/cv-pdf-docker.md) - CV PDF dumps, previews, and docx extract via **Docker Compose** (preferred over host Node/Python)
-6. [`docs/agents/storybook-ui.md`](docs/agents/storybook-ui.md) - shared DOM UI in `packages/storybook` (`@portfolio/storybook`), fixtures, Vitest + `@storybook/addon-vitest`, Docker/CI parity
-7. [`docs/agents/portfolio-site-revamp-plan.md`](docs/agents/portfolio-site-revamp-plan.md) - **product / IA revamp** plan: Phases 1–4 and **revamp v1 success criteria** are shipped; use for v2 backlog or deeper visual polish
+5. [`docs/agents/storybook-ui.md`](docs/agents/storybook-ui.md) - shared DOM UI in `packages/storybook` (`@portfolio/storybook`), fixtures, Vitest + `@storybook/addon-vitest`, Docker/CI parity
+6. [`docs/agents/portfolio-site-revamp-plan.md`](docs/agents/portfolio-site-revamp-plan.md) - **product / IA revamp** plan: Phases 1–4 and **revamp v1 success criteria** are shipped; use for v2 backlog or deeper visual polish
 
 ## Rules
 
 - [`.cursor/rules/project-core.mdc`](.cursor/rules/project-core.mdc)
-- [`.cursor/rules/nextjs-react.mdc`](.cursor/rules/nextjs-react.mdc) - includes frontend view/logic/style separation and CV PDF styling constraints
+- [`.cursor/rules/nextjs-react.mdc`](.cursor/rules/nextjs-react.mdc) - includes frontend view/logic/style separation constraints
 - [`.cursor/rules/docker-local.mdc`](.cursor/rules/docker-local.mdc)
 - [`.cursor/rules/docker-compose.mdc`](.cursor/rules/docker-compose.mdc)
 - [`.cursor/rules/dockerignore.mdc`](.cursor/rules/dockerignore.mdc)
