@@ -23,23 +23,9 @@ description: >-
 4. **Run**: `docker compose up` (add `-d` for detached). Watch logs for the Next.js ready URL.
 5. **Verify**: Open the documented host/port (often `http://localhost:3000`). If the container binds `0.0.0.0`, that matches external access from the host.
 
-The **`frontend`** service mounts a **named volume** for `apps/frontend/.next` so Next dev/Turbopack does not write the build cache on the Windows/macOS bind mount (fewer file-lock and permission failures than a host `.next` folder).
+**`apps/frontend/.next`** is **not** overlaid by a Docker named volume: it lives on the repo bind mount (`apps/frontend/.next` on the host, gitignored). That matches how **production** gets a fresh build output each time and avoids **stale Turbopack** artifacts while `@portfolio/storybook` source changes on disk.
 
-That volume **persists between `docker compose up` runs**. If the app at `http://localhost:3000` looks like it is missing recent edits (especially under **`@portfolio/storybook`** or CSS modules), clear **contents inside** that cache (do not `rm -rf .next` itself from the app tree—on Linux that path is a mount point and can report *Device or resource busy*). With **`frontend`** stopped:
-
-```bash
-docker compose stop frontend
-docker compose run --rm frontend sh -lc "find /workspace/apps/frontend/.next -mindepth 1 -delete 2>/dev/null || true"
-docker compose up frontend
-```
-
-If that still fails (files open), wipe the named volume by mounting it alone (replace the volume name with the one from `docker volume ls` that ends in `_frontend_apps_next`, often `<compose_project>_frontend_apps_next`):
-
-```bash
-docker compose down
-docker run --rm -v portfolio_frontend_apps_next:/data alpine sh -c "find /data -mindepth 1 -delete"
-docker compose up frontend
-```
+If `http://localhost:3000` still looks wrong after edits, delete the host folder **`apps/frontend/.next`** (or run `docker compose run --rm frontend sh -lc "rm -rf /workspace/apps/frontend/.next"`) and restart **`frontend`**. On Windows, if you hit file-lock issues with `.next` on the bind mount, stop Compose first, delete the folder from the host, then `docker compose up frontend` again.
 
 ## Storybook and full checks (this repo)
 
@@ -71,8 +57,8 @@ docker compose up frontend
 
 - **ESLint after `yarn build`**: Static Storybook output is under `apps/frontend/public/storybook/` (gitignored). Root `yarn lint` ignores that path; if lint suddenly scans huge bundles, ensure `eslint.config.mjs` still includes `apps/frontend/public/storybook/**` in `globalIgnores`.
 - **Port conflicts**: Change the host port in compose or stop the conflicting process; document the chosen port if you change it.
-- **Stale volumes**: After dependency or lockfile changes, `docker compose build --no-cache` or remove anonymous volumes per team practice.
-- **Stale Next dev output**: See the **`.next` named volume** note above; `rm -rf .next` inside the **`frontend`** container (or delete the `*_frontend_apps_next` volume) before assuming code changes are missing.
+- **Orphan Docker volume**: Older clones may still have a **`_frontend_apps_next`** named volume from a previous `docker-compose.yml`. It is unused now; remove it with `docker volume rm <name>` after `docker compose down` if you want to reclaim disk.
+- **Stale Next dev output**: Delete **`apps/frontend/.next`** on the host (or `rm -rf /workspace/apps/frontend/.next` in the container) and restart **`frontend`** — see the **`.next` on bind mount** note above.
 - **ARM vs x86**: If base images fail on Apple Silicon, prefer official images with `linux/arm64` support or explicit platform flags only when the repo already uses them.
 
 ## Done when

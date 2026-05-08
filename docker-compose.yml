@@ -12,7 +12,6 @@ services:
       - .:/workspace
       - frontend_node_modules:/workspace/apps/frontend/node_modules
       - e2e_node_modules:/workspace/apps/e2e/node_modules
-      - frontend_apps_next:/workspace/apps/frontend/.next
       - storybook_node_modules:/workspace/packages/storybook/node_modules
     environment:
       NEXT_TELEMETRY_DISABLED: "1"
@@ -34,5 +33,4 @@ services:
 volumes:
   e2e_node_modules:
   frontend_node_modules:
-  frontend_apps_next:
   storybook_node_modules:
