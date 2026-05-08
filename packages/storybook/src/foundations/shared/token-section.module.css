@@ -1,0 +1,28 @@
+.section {
+  color: var(--foreground);
+  display: grid;
+  gap: var(--gap-lg);
+  max-width: var(--layout-content-max);
+  width: 100%;
+}
+
+.sectionIntro {
+  display: grid;
+  gap: var(--gap-sm);
+}
+
+.sectionTitle {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: var(--text-size-display-section);
+  letter-spacing: var(--text-tracking-tight-md);
+  line-height: var(--text-line-height-tight);
+  margin: 0;
+}
+
+.sectionDescription {
+  color: var(--muted);
+  font-size: var(--text-size-title-sm);
+  line-height: var(--text-line-height-reading-lg);
+  margin: 0;
+  max-width: var(--layout-description-max);
+}

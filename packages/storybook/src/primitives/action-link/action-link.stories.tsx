@@ -49,7 +49,7 @@ export const InlineNeutral: Story = {
   },
   decorators: [
     (Story) => (
-      <div style={{ color: "var(--muted)", fontSize: "0.875rem" }}>
+      <div style={{ color: "var(--muted)", fontSize: "var(--text-size-label)" }}>
         <Story />
       </div>
     ),
@@ -64,7 +64,7 @@ export const InlineAccent: Story = {
   },
   decorators: [
     (Story) => (
-      <div style={{ color: "var(--foreground)", fontSize: "0.875rem" }}>
+      <div style={{ color: "var(--foreground)", fontSize: "var(--text-size-label)" }}>
         <Story />
       </div>
     ),

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { SpacingTokens } from "./foundation-tokens";
-import { spacingTokensPlay } from "./foundation-tokens.stories.test";
+import { SpacingTokens } from "./spacing-tokens";
+import { spacingTokensPlay } from "./spacing-tokens.stories.test";
 
 const meta = {
   title: "Foundations/Design Tokens/Spacing",

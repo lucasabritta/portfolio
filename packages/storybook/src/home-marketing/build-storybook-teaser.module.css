@@ -1,30 +1,30 @@
 .section {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: var(--layout-scroll-offset);
 }
 
 .lead {
   color: var(--muted);
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  margin: 0.65rem 0 0;
-  max-width: 48rem;
+  font-size: var(--text-size-body-md);
+  line-height: var(--text-line-height-reading-lg);
+  margin: var(--space-element-2sm) 0 0;
+  max-width: calc(var(--layout-reading-max) + var(--space-element-lg));
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-top: 1rem;
+  gap: var(--gap-2sm);
+  margin-top: var(--space-element-md);
 }
 
 .visuallyHidden {
   clip: rect(0 0 0 0);
   border: 0;
-  height: 1px;
-  margin: -1px;
+  height: var(--a11y-visually-hidden-size);
+  margin: var(--a11y-visually-hidden-offset);
   overflow: hidden;
   padding: 0;
   position: absolute;
   white-space: nowrap;
-  width: 1px;
+  width: var(--a11y-visually-hidden-size);
 }

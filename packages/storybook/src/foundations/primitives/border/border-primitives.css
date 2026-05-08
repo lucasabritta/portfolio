@@ -1,0 +1,11 @@
+:root {
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-3: 3px;
+  --outline-offset-2: 2px;
+  --outline-offset-3: 3px;
+  --shadow-surface-sm-raw: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-floating-md-raw: 0 10px 24px rgba(0, 0, 0, 0.12);
+  --shadow-overlay-lg-raw: 0 -18px 50px rgba(0, 0, 0, 0.22);
+  --overlay-backdrop-40: rgba(0, 0, 0, 0.4);
+}

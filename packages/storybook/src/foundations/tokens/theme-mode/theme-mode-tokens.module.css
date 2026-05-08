@@ -1,0 +1,59 @@
+.themeGrid {
+  display: grid;
+  gap: var(--gap-md);
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.themeCard[data-theme="light"] {
+  --background: var(--color-neutral-50);
+  --foreground: var(--color-neutral-950);
+  --muted: var(--color-neutral-700);
+  --card: var(--color-neutral-0);
+  --border: var(--color-neutral-200);
+  --accent: var(--color-blue-600);
+}
+
+.themeCard[data-theme="dark"] {
+  --background: var(--color-neutral-950);
+  --foreground: var(--color-neutral-50);
+  --muted: var(--color-neutral-400);
+  --card: var(--color-neutral-900);
+  --border: var(--color-neutral-800);
+  --accent: var(--color-blue-400);
+}
+
+.themeCard {
+  background: var(--background);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  display: grid;
+  gap: var(--gap-sm);
+  padding: var(--space-element-md);
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: var(--text-size-caption);
+  letter-spacing: var(--text-tracking-wide-3xl);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.themeTitle {
+  font-size: var(--text-size-title-lg);
+  margin: 0;
+}
+
+.themeText {
+  color: var(--muted);
+  line-height: var(--text-line-height-reading);
+  margin: 0;
+}
+
+.themeAccent {
+  color: var(--accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: var(--text-size-label);
+}

@@ -1,0 +1,45 @@
+.tokenList {
+  display: grid;
+  gap: var(--gap-sm);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tokenRow {
+  align-items: center;
+  background: var(--card);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-md);
+  display: grid;
+  gap: var(--gap-md);
+  grid-template-columns: minmax(10rem, 1fr) minmax(5rem, auto) minmax(12rem, 2fr);
+  padding: var(--space-element-sm) var(--space-element-md);
+}
+
+.tokenName,
+.tokenValue {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.tokenName {
+  font-size: var(--text-size-label);
+  margin: 0;
+}
+
+.tokenRole {
+  color: var(--muted);
+  font-size: var(--text-size-label);
+  line-height: var(--text-line-height-reading);
+}
+
+.tokenValue {
+  color: var(--accent);
+  font-size: var(--text-size-label-compact);
+}
+
+@media (max-width: 900px) {
+  .tokenRow {
+    grid-template-columns: 1fr;
+  }
+}

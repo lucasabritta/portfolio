@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ColorTokens } from "./foundation-tokens";
-import { colorTokensPlay } from "./foundation-tokens.stories.test";
+import { ColorTokens } from "./color-tokens";
+import { colorTokensPlay } from "./color-tokens.stories.test";
 
 const meta = {
   title: "Foundations/Design Tokens/Colors",

@@ -1,14 +1,14 @@
 .emptyState {
   color: var(--muted);
-  font-size: 0.875rem;
-  margin-top: 1.5rem;
+  font-size: var(--text-size-body-sm);
+  margin-top: var(--space-element-lg);
 }
 
 .certificationList {
   display: grid;
-  gap: 1rem;
+  gap: var(--gap-md);
   list-style: none;
-  margin: 1.5rem 0 0;
+  margin: var(--space-element-lg) 0 0;
   padding: 0;
 }
 

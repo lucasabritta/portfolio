@@ -31,6 +31,14 @@ Both bans are enforced in **`apps/frontend/eslint.config.mjs`** via **`no-restri
 - **Global web CSS** lives in **`packages/storybook/src/globals.css`**. Root layout classes use **`packages/storybook/src/layout.module.css`**, imported from **`apps/frontend/app/layout.tsx`** as **`@portfolio/storybook/globals.css`** and **`@portfolio/storybook/layout.module.css`** (package `exports`).
 - **Story fixtures** live in **`packages/storybook/src/fixtures/`**. Stories use **`@ui/...`** (Vite/TS path alias); package components consumed by Next should use relative imports internally where needed so Next/Turbopack does not require duplicate `@ui` aliases.
 
+### Foundation token policy (required)
+
+- Treat **all** presentational values as token-driven foundations/primitives (not just colors): typography, spacing, gaps, space-column, borders/outlines, radii, icon sizing, and layout constraints.
+- In **`*.module.css`**, do not hardcode visual literals like `1px`, `0.875rem`, `20px`, or ad-hoc `letter-spacing`/`line-height`; use foundation token variables from `globals.css` imports.
+- In TSX and story decorators, inline styles must use **`var(--token-name)`** values rather than hardcoded numbers/colors.
+- For SVG icons in TSX, avoid hardcoded `width`, `height`, and `strokeWidth`; use classes and token-backed CSS variables.
+- Keep primitives in `packages/storybook/src/foundations/primitives/`, semantic tokens in `packages/storybook/src/foundations/tokens/`, and add/update stories when new primitive/token groups are introduced.
+
 ## Running Storybook
 
 Use **Node.js 24.14.1** (see `.nvmrc`, package `engines`, and the Docker image pin) so Storybook 10 and Vitest match CI. Storybook’s CLI enforces **20.19+ or 22.12+**.

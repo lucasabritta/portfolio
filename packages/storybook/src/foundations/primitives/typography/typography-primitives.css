@@ -1,0 +1,41 @@
+:root {
+  --font-size-2xs: 0.75rem;
+  --font-size-xs: 0.8125rem;
+  --font-size-sm: 0.875rem;
+  --font-size-sm-plus: 0.9rem;
+  --font-size-md-minus: 0.9375rem;
+  --font-size-md: 1rem;
+  --font-size-md-plus: 1.05rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-wordmark: 0.95rem;
+  --font-size-dialog-label: 0.85rem;
+  --font-size-eyebrow-xs: 0.72rem;
+  --font-size-glyph: 0.8rem;
+
+  --line-height-none: 1;
+  --line-height-tight: 1.05;
+  --line-height-display: 0.95;
+  --line-height-snug: 1.1;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.5;
+  --line-height-reading: 1.55;
+  --line-height-reading-lg: 1.6;
+  --line-height-reading-xl: 1.65;
+  --line-height-loose: 1.7;
+
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --tracking-tight-xs: -0.02em;
+  --tracking-tight-sm: -0.025em;
+  --tracking-tight-md: -0.04em;
+  --tracking-tight-lg: -0.06em;
+  --tracking-wide-sm: 0.02em;
+  --tracking-wide-md: 0.03em;
+  --tracking-wide-lg: 0.04em;
+  --tracking-wide-xl: 0.06em;
+  --tracking-wide-2xl: 0.08em;
+  --tracking-wide-3xl: 0.12em;
+}

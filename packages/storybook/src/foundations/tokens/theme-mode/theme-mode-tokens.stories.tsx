@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ThemeModeTokens } from "./foundation-tokens";
-import { themeModeTokensPlay } from "./foundation-tokens.stories.test";
+import { ThemeModeTokens } from "./theme-mode-tokens";
+import { themeModeTokensPlay } from "./theme-mode-tokens.stories.test";
 
 const meta = {
   title: "Foundations/Design Tokens/Theme Modes",

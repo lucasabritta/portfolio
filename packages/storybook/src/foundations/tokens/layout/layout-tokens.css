@@ -1,0 +1,27 @@
+:root {
+  --layout-container-max: var(--size-layout-container-max);
+  --layout-content-max: var(--size-layout-content-max);
+  --layout-reading-max: var(--size-layout-reading-max);
+  --layout-lead-max: var(--size-layout-lead-max);
+  --layout-description-max: var(--size-layout-description-max);
+  --layout-media-caption-max: var(--size-layout-media-caption-max);
+  --layout-article-max: var(--size-layout-article-max);
+  --layout-status-max: var(--size-layout-status-max);
+  --layout-theme-control-max: var(--size-layout-theme-control-max);
+  --layout-scroll-offset: var(--size-layout-scroll-offset);
+  --layout-header-height: var(--size-layout-header-height);
+  --layout-header-height-md: var(--size-layout-header-height-md);
+  --control-hit-size-sm: var(--size-control-hit-sm);
+  --control-hit-size-md: var(--size-control-hit-md);
+  --icon-size-md: var(--size-icon-md);
+  --icon-stroke-width-md: var(--size-icon-stroke-md);
+  --a11y-visually-hidden-size: var(--size-a11y-visually-hidden);
+  --a11y-visually-hidden-offset: var(--size-a11y-visually-hidden-offset);
+  --a11y-offscreen-left: var(--size-a11y-offscreen-left);
+  --layout-mobile-panel-max-height: var(--size-layout-mobile-panel-max-height);
+  --layout-nav-active-inset: var(--size-layout-nav-active-inset);
+  --layout-proof-bullet-size: var(--size-layout-proof-bullet);
+  --layout-proof-bullet-offset-top: var(--size-layout-proof-bullet-offset-top);
+  --size-avatar-md: var(--space-10);
+  --size-avatar-lg: var(--space-12);
+}

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { TypographyTokens } from "./foundation-tokens";
-import { typographyTokensPlay } from "./foundation-tokens.stories.test";
+import { TypographyTokens } from "./typography-tokens";
+import { typographyTokensPlay } from "./typography-tokens.stories.test";
 
 const meta = {
   title: "Foundations/Design Tokens/Typography",

@@ -1,30 +1,30 @@
 .footer {
-  border-top: 1px solid var(--border);
+  border-top: var(--border-width-default) var(--border-style-default) var(--border);
   color: var(--muted);
   margin-top: auto;
-  padding: 2.5rem 0 3rem;
+  padding: var(--space-element-2xl) 0 var(--space-element-3xl);
 }
 
 .inner {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--gap-lg);
   margin: 0 auto;
-  max-width: 70rem;
-  padding: 0 1.5rem;
+  max-width: var(--layout-container-max);
+  padding: 0 var(--space-element-lg);
 }
 
 @media (min-width: 768px) {
   .inner {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: var(--space-element-xl);
+    padding-right: var(--space-element-xl);
   }
 }
 
 .intro {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: var(--gap-xs);
 }
 
 .name {
@@ -32,22 +32,22 @@
   font-family:
     var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: var(--text-size-wordmark);
+  font-weight: var(--text-weight-semibold);
   margin: 0;
 }
 
 .descriptor {
-  font-size: 0.875rem;
-  line-height: 1.5;
+  font-size: var(--text-size-body-sm);
+  line-height: var(--text-line-height-relaxed);
   margin: 0;
-  max-width: 42rem;
+  max-width: var(--layout-reading-max);
 }
 
 .linkRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 1.5rem;
+  gap: var(--gap-row-2sm) var(--space-column-lg);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -55,8 +55,8 @@
 
 .link {
   color: var(--muted);
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: var(--text-size-label);
+  font-weight: var(--text-weight-medium);
   text-decoration: none;
   transition: color 0.15s ease;
 }
@@ -67,28 +67,28 @@
 }
 
 .link:focus-visible {
-  outline: 3px solid var(--focus-ring, var(--accent));
-  outline-offset: 3px;
+  outline: var(--outline-width-strong) solid var(--focus-ring, var(--accent));
+  outline-offset: var(--outline-offset-default);
 }
 
 .visuallyHidden {
   clip: rect(0 0 0 0);
   border: 0;
-  height: 1px;
-  margin: -1px;
+  height: var(--a11y-visually-hidden-size);
+  margin: var(--a11y-visually-hidden-offset);
   overflow: hidden;
   padding: 0;
   position: absolute;
   white-space: nowrap;
-  width: 1px;
+  width: var(--a11y-visually-hidden-size);
 }
 
 .colophon {
   font-family:
     var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
-  font-size: 0.75rem;
-  line-height: 1.5;
+  font-size: var(--text-size-caption);
+  line-height: var(--text-line-height-relaxed);
   margin: 0;
-  max-width: 48rem;
+  max-width: calc(var(--layout-reading-max) + var(--space-element-lg));
 }

@@ -10,22 +10,22 @@ export const globalErrorBodyStyle: CSSProperties = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "2rem 1.5rem",
+  padding: "var(--space-element-xl, 2rem) var(--space-element-lg, 1.5rem)",
   fontFamily: "system-ui, sans-serif",
-  color: "#1a202c",
-  background: "#ffffff",
+  color: "var(--foreground, #1a202c)",
+  background: "var(--background, #ffffff)",
 };
 
 const CARD_STYLE: CSSProperties = {
-  maxWidth: "32rem",
+  maxWidth: "var(--layout-status-max, 32rem)",
   textAlign: "center",
   display: "flex",
   flexDirection: "column",
-  gap: "0.75rem",
+  gap: "var(--gap-2sm, 0.75rem)",
 };
 
 const HEADING_STYLE: CSSProperties = {
-  fontSize: "1.75rem",
+  fontSize: "var(--text-size-display-status, 1.75rem)",
   margin: 0,
 };
 
@@ -35,12 +35,12 @@ const BODY_STYLE: CSSProperties = {
 
 const BUTTON_STYLE: CSSProperties = {
   alignSelf: "center",
-  padding: "0.55rem 1.1rem",
-  borderRadius: "0.5rem",
-  border: "1px solid currentColor",
+  padding: "var(--space-element-sm, 0.55rem) var(--space-element-md, 1.1rem)",
+  borderRadius: "var(--radius-sm, 0.5rem)",
+  border: "var(--border-width-default, 1px) solid currentColor",
   background: "transparent",
   color: "inherit",
-  fontWeight: 600,
+  fontWeight: "var(--text-weight-semibold, 600)",
   cursor: "pointer",
 };
 
@@ -48,8 +48,8 @@ const FOCUS_CLASS = "portfolio-global-error-button";
 
 const FOCUS_RING_STYLES = `
   .${FOCUS_CLASS}:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
+    outline: var(--outline-width-default, 2px) solid currentColor;
+    outline-offset: var(--outline-offset-tight, 2px);
   }
 
   @media (prefers-color-scheme: dark) {
