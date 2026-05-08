@@ -38,11 +38,11 @@ export function SiteFooter({
           <ul className={styles.linkRow}>
             {links.map((link) => {
               const icon = brandIconForLink({ href: link.href, label: link.label });
-              const label = (
-                <span className={styles.linkLabel}>
+              const linkLabelInner = (
+                <>
                   {icon ? <BrandIcon name={icon} size="sm" /> : null}
                   <span>{link.label}</span>
-                </span>
+                </>
               );
               return (
                 <li key={`${link.href}-${link.label}`}>
@@ -52,13 +52,15 @@ export function SiteFooter({
                       className={styles.link}
                       rel="noopener noreferrer"
                       target="_blank"
+                      aria-label={`${link.label} (opens in a new tab)`}
                     >
-                      {label}
-                      <span className={styles.visuallyHidden}> (opens in a new tab)</span>
+                      <span className={styles.linkLabel} aria-hidden="true">
+                        {linkLabelInner}
+                      </span>
                     </a>
                   ) : (
                     <NavLink href={link.href} className={styles.link}>
-                      {label}
+                      <span className={styles.linkLabel}>{linkLabelInner}</span>
                     </NavLink>
                   )}
                 </li>

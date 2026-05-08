@@ -22,7 +22,14 @@ const variantClass: Record<ActionLinkVariant, string> = {
   accentUnderline: styles.accentUnderline,
 };
 
-export function ActionLink({ variant, className, icon, iconSize, children, ...rest }: ActionLinkProps) {
+export function ActionLink({
+  variant,
+  className,
+  icon,
+  iconSize,
+  children,
+  ...rest
+}: ActionLinkProps) {
   const content: ReactNode = (
     <>
       {icon ? <BrandIcon name={icon} size={iconSize} /> : null}

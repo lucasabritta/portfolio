@@ -77,18 +77,6 @@
   outline-offset: var(--outline-offset-default);
 }
 
-.visuallyHidden {
-  clip: rect(0 0 0 0);
-  border: 0;
-  height: var(--a11y-visually-hidden-size);
-  margin: var(--a11y-visually-hidden-offset);
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: var(--a11y-visually-hidden-size);
-}
-
 .colophon {
   font-family:
     var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
