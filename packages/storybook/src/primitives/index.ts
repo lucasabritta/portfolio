@@ -1,8 +1,13 @@
 export {
-  ActionLink,
-  type ActionLinkProps,
-  type ActionLinkVariant,
-} from "./action-link/action-link";
+  brandIconForLink,
+  BrandIcon,
+  type BrandIconLinkInput,
+  type BrandIconName,
+  type BrandIconProps,
+  type BrandIconSize,
+} from "./icons";
+export { ActionButton, type ActionButtonProps, type ActionButtonVariant } from "./actions/button";
+export { ActionLink, type ActionLinkProps, type ActionLinkVariant } from "./actions/link";
 export { Card, type CardPadding, type CardProps, type CardRadius } from "./card/card";
 export { Chip, type ChipProps } from "./chip/chip";
 export {

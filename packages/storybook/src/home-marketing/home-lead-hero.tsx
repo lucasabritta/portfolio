@@ -1,4 +1,4 @@
-import { ActionLink, Card, HeroName, HeroRole } from "../primitives";
+import { ActionButton, Card, HeroName, HeroRole } from "../primitives";
 
 import type { HomeLeadHeroProps } from "./home-marketing-types";
 import styles from "./home-lead-hero.module.css";
@@ -8,9 +8,7 @@ export function HomeLeadHero({
   roleEyebrow,
   positioningLead,
   proofPoints,
-  contactHint,
-  contactHintLabel,
-  contactHintHref,
+  contactHref,
   projectsHref,
   githubHref,
   headshotSrc,
@@ -44,32 +42,26 @@ export function HomeLeadHero({
         <HeroRole>{roleEyebrow}</HeroRole>
         <HeroName>{name}</HeroName>
         <p className={styles.positioning}>{positioningLead}</p>
-        {contactHint ? (
-          <p className={styles.contactHint}>
-            {contactHint}
-            {contactHintHref && contactHintLabel ? (
-              <ActionLink variant="inlineAccent" href={contactHintHref}>
-                {contactHintLabel}
-              </ActionLink>
-            ) : null}
-          </p>
-        ) : null}
         <div className={styles.ctaRow}>
-          <ActionLink variant="primary" href={projectsHref}>
+          <ActionButton variant="primary" href={projectsHref}>
             View Projects
-          </ActionLink>
-          <ActionLink
+          </ActionButton>
+          <ActionButton
             variant="secondary"
             href={githubHref}
+            icon="github"
             target="_blank"
             rel="noopener noreferrer"
           >
             GitHub profile
             <span className={styles.visuallyHidden}> (opens in a new tab)</span>
-          </ActionLink>
+          </ActionButton>
+          <ActionButton variant="secondary" href={contactHref}>
+            Contact
+          </ActionButton>
         </div>
       </div>
-      <Card as="article" elevated radius="md" padding="comfortable" className={styles.proofCard}>
+      <Card as="article" elevated radius="md" padding="compact" className={styles.proofCard}>
         <p id="home-lead-proof-points-label" className={styles.proofTitle}>
           Proof points
         </p>

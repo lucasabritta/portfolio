@@ -1,0 +1,14 @@
+:root {
+  --border-style-default: solid;
+  --border-width-default: var(--border-width-1);
+  --border-width-strong: var(--border-width-2);
+  --border-width-accent: var(--border-width-3);
+  --outline-width-default: var(--border-width-2);
+  --outline-width-strong: var(--border-width-3);
+  --outline-offset-tight: var(--outline-offset-2);
+  --outline-offset-default: var(--outline-offset-3);
+  --shadow-surface-sm: var(--shadow-surface-sm-raw);
+  --shadow-floating-md: var(--shadow-floating-md-raw);
+  --shadow-overlay-lg: var(--shadow-overlay-lg-raw);
+  --overlay-backdrop-default: var(--overlay-backdrop-40);
+}

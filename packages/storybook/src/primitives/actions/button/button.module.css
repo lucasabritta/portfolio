@@ -1,0 +1,49 @@
+.withIcon {
+  gap: var(--gap-xs);
+}
+
+.primary {
+  align-items: center;
+  background: var(--accent);
+  border-radius: var(--radius-sm);
+  color: var(--text-inverse);
+  display: inline-flex;
+  font-size: var(--text-size-label);
+  font-weight: var(--text-weight-medium);
+  opacity: 1;
+  padding: var(--space-element-sm) var(--space-element-md);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.primary:hover {
+  opacity: 0.9;
+}
+
+.primary:focus-visible {
+  outline: var(--outline-width-default) solid var(--text-inverse);
+  outline-offset: var(--outline-offset-tight);
+}
+
+.secondary {
+  align-items: center;
+  background: var(--card);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
+  display: inline-flex;
+  font-size: var(--text-size-label);
+  font-weight: var(--text-weight-medium);
+  padding: var(--space-element-sm) var(--space-element-md);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.secondary:hover {
+  background: var(--background);
+}
+
+.secondary:focus-visible {
+  outline: var(--outline-width-default) solid var(--accent);
+  outline-offset: var(--outline-offset-tight);
+}

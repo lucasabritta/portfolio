@@ -1,24 +1,24 @@
 .emptyState {
   color: var(--muted);
-  font-size: 0.875rem;
-  margin-top: 1.5rem;
+  font-size: var(--text-size-body-sm);
+  margin-top: var(--space-element-lg);
 }
 
 .projectList {
   display: grid;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: var(--gap-md);
+  margin-top: var(--space-element-lg);
 }
 
 .projectDescription {
   color: var(--muted);
-  font-size: 0.875rem;
-  line-height: 1.7;
-  margin-top: 0.5rem;
+  font-size: var(--text-size-body-sm);
+  line-height: var(--text-line-height-loose);
+  margin-top: var(--space-element-sm);
 }
 
 .projectLink {
-  margin-top: 1rem;
+  margin-top: var(--space-element-md);
 }
 
 @media (min-width: 640px) {

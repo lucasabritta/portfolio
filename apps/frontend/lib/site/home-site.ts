@@ -13,12 +13,6 @@ import { siteProfile } from "./site-profile";
 /** Anchor for the in-page résumé details block. */
 export const HOME_RESUME_ANCHOR_ID = "resume";
 
-type ContactHintText = string & {
-  prefix?: string;
-  label?: string;
-  href?: string;
-};
-
 const HOME_POSITIONING_LEAD =
   "I lead engineering through rapid startup growth with a bias for clear ownership: reliable platforms and faster delivery that show up in revenue, retention, and teams that scale without losing accountability for quality.";
 
@@ -132,16 +126,12 @@ export type HomeMarketingBlocks = {
  * Presentation lives in `@portfolio/storybook`; strings here are site-only unless mirrored from résumé fields.
  */
 export function buildHomeMarketing(resume: ResumeData): HomeMarketingBlocks {
-  const contactHint = resume.location ? (`${resume.location} · ` as ContactHintText) : undefined;
-
   return {
     homeLeadHero: {
       name: resume.name,
       roleEyebrow: resume.role,
       positioningLead: HOME_POSITIONING_LEAD,
-      contactHint,
-      contactHintLabel: contactHint ? "contacts" : undefined,
-      contactHintHref: contactHint ? "#contact-heading" : undefined,
+      contactHref: "#contact-heading",
       projectsHref: "/projects",
       githubHref: siteProfile.githubProfileUrl,
       proofPoints: HERO_PROOF_POINTS,

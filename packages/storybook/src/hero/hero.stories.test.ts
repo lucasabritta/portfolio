@@ -9,6 +9,8 @@ export const portfolioHeroDefaultPlay: StoryPlayFn = async ({ canvasElement }) =
   expect(canvas.getByRole("link", { name: storyFixturePhone })).toHaveFocus();
   await userEvent.tab();
   expect(canvas.getByRole("link", { name: storyFixtureEmail })).toHaveFocus();
+  const linkedin = canvas.getByRole("link", { name: /LinkedIn/i });
+  expect(linkedin.querySelector("svg")).toBeTruthy();
 };
 
 export const portfolioHeroEmptyPlay: StoryPlayFn = async ({ canvasElement }) => {

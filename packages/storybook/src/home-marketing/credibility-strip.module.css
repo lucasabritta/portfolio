@@ -1,19 +1,30 @@
 .section {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: var(--layout-scroll-offset);
 }
 
 .grid {
+  align-items: stretch;
   display: grid;
-  gap: 0.85rem;
+  gap: var(--gap-2sm);
   grid-template-columns: 1fr;
   list-style: none;
-  margin: 1.25rem 0 0;
+  margin: var(--space-element-md) 0 0;
   padding: 0;
+}
+
+.cardItem {
+  display: flex;
+}
+
+.cardSurface {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 @media (min-width: 768px) {
   .grid {
-    gap: 1rem;
+    gap: var(--gap-md);
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -21,23 +32,23 @@
 .title {
   color: var(--foreground);
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin: 0 0 0.35rem;
+  font-size: var(--text-size-metric);
+  font-weight: var(--text-weight-semibold);
+  margin: 0 0 var(--space-element-xs);
 }
 
 .metric {
   color: var(--accent);
-  font-size: clamp(1.35rem, 3vw, 1.8rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.05;
-  margin: 0 0 0.7rem;
+  font-size: var(--text-size-display-metric);
+  font-weight: var(--text-weight-bold);
+  letter-spacing: var(--text-tracking-tight-md);
+  line-height: var(--text-line-height-tight);
+  margin: 0 0 var(--space-element-2sm);
 }
 
 .body {
   color: var(--muted);
-  font-size: 0.875rem;
-  line-height: 1.55;
+  font-size: var(--text-size-body-sm);
+  line-height: var(--text-line-height-reading);
   margin: 0;
 }

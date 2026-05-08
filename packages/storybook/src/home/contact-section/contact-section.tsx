@@ -51,6 +51,8 @@ export function ContactSection({
               <ActionLink
                 variant="inlineAccent"
                 href={linkedinTrim}
+                icon="linkedin"
+                iconSize="sm"
                 rel="noopener noreferrer"
                 target="_blank"
               >

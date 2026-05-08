@@ -1,0 +1,48 @@
+.colorGrid {
+  display: grid;
+  gap: var(--gap-md);
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.colorCard {
+  align-items: center;
+  background: var(--card);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--gap-md);
+  grid-template-columns: auto 1fr;
+  padding: var(--space-element-md);
+}
+
+.swatch {
+  background: var(--foundation-token-color);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-full);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--foreground) 8%, transparent);
+  display: block;
+  height: var(--space-element-3xl);
+  width: var(--space-element-3xl);
+}
+
+.tokenName,
+.tokenValue {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.tokenName {
+  font-size: var(--text-size-label);
+  margin: 0;
+}
+
+.tokenRole {
+  color: var(--muted);
+  font-size: var(--text-size-label);
+  line-height: var(--text-line-height-reading);
+  margin: var(--space-element-xs) 0;
+}
+
+.tokenValue {
+  color: var(--accent);
+  font-size: var(--text-size-label-compact);
+}

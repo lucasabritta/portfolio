@@ -1,0 +1,47 @@
+:root {
+  --background: var(--color-neutral-50);
+  --foreground: var(--color-neutral-950);
+  --muted: var(--color-neutral-700);
+  --card: var(--color-neutral-0);
+  --border: var(--color-neutral-200);
+  --accent: var(--color-blue-600);
+  --focus-ring: var(--color-blue-700);
+  --text-inverse: var(--color-neutral-0);
+  --surface-project-gradient-start: var(--color-indigo-950);
+  --surface-project-gradient-mid: var(--color-indigo-900);
+  --surface-project-gradient-end: var(--color-indigo-950-alt);
+  --text-project-primary: var(--color-slate-200);
+  --text-project-secondary: var(--color-slate-400);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--color-neutral-950);
+    --foreground: var(--color-neutral-50);
+    --muted: var(--color-neutral-400);
+    --card: var(--color-neutral-900);
+    --border: var(--color-neutral-800);
+    --accent: var(--color-blue-400);
+    --focus-ring: var(--color-blue-300);
+  }
+}
+
+html[data-theme="light"] {
+  --background: var(--color-neutral-50);
+  --foreground: var(--color-neutral-950);
+  --muted: var(--color-neutral-700);
+  --card: var(--color-neutral-0);
+  --border: var(--color-neutral-200);
+  --accent: var(--color-blue-600);
+  --focus-ring: var(--color-blue-700);
+}
+
+html[data-theme="dark"] {
+  --background: var(--color-neutral-950);
+  --foreground: var(--color-neutral-50);
+  --muted: var(--color-neutral-400);
+  --card: var(--color-neutral-900);
+  --border: var(--color-neutral-800);
+  --accent: var(--color-blue-400);
+  --focus-ring: var(--color-blue-300);
+}

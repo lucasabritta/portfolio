@@ -18,15 +18,18 @@ export const projectsPageViewDefaultPlay: StoryPlayFn = async ({ canvasElement }
   );
   expect(googlePlay).toHaveAttribute("target", "_blank");
   expect(googlePlay.getAttribute("rel") ?? "").toMatch(/noopener/);
+  expect(googlePlay.querySelector("svg")).toBeTruthy();
 
-  expect(canvas.getByRole("link", { name: /Medium article.*opens in a new tab/i })).toHaveAttribute(
+  const medium = canvas.getByRole("link", { name: /Medium article.*opens in a new tab/i });
+  expect(medium).toHaveAttribute(
     "href",
     "https://medium.com/@lucasabritta_93729/what-i-learned-building-an-android-game-with-ai-agents-5f64d23024fe",
   );
+  expect(medium.querySelector("svg")).toBeTruthy();
 
-  expect(
-    canvas.getByRole("link", {
-      name: /view on github\s*: example\/portfolio/i,
-    }),
-  ).toHaveAttribute("href", "https://github.com/example/portfolio");
+  const repoGithub = canvas.getByRole("link", {
+    name: /view on github\s*: example\/portfolio/i,
+  });
+  expect(repoGithub).toHaveAttribute("href", "https://github.com/example/portfolio");
+  expect(repoGithub.querySelector("svg")).toBeTruthy();
 };

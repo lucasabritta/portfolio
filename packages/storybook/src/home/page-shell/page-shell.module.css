@@ -7,22 +7,22 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 70rem;
+  max-width: var(--layout-container-max);
   min-height: 100%;
-  padding: 1.5rem 1.5rem 4rem;
+  padding: var(--space-element-lg) var(--space-element-lg) var(--space-element-5xl);
 }
 
 .main {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 4rem;
-  padding: 2.5rem 0 4rem;
+  gap: var(--gap-5xl);
+  padding: var(--space-element-2xl) 0 var(--space-element-5xl);
 }
 
 @media (min-width: 768px) {
   .container {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: var(--space-element-xl);
+    padding-right: var(--space-element-xl);
   }
 }

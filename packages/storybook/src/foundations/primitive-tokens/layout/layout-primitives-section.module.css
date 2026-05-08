@@ -1,0 +1,54 @@
+.layoutBars {
+  display: grid;
+  gap: var(--gap-xs);
+}
+
+.layoutBarRow {
+  align-items: center;
+  display: grid;
+  gap: var(--gap-sm);
+  grid-template-columns: minmax(13rem, auto) 1fr;
+}
+
+.layoutBarContainer {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-radius: var(--radius-full);
+  display: flex;
+  min-height: var(--space-element-md);
+  padding: var(--space-element-xs);
+}
+
+.layoutBar {
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  display: block;
+  height: var(--space-element-sm);
+}
+
+.hitTargetRow {
+  display: flex;
+  gap: var(--gap-sm);
+}
+
+.hitTargetSm,
+.hitTargetMd {
+  align-items: center;
+  background: var(--card);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
+  display: inline-flex;
+  font-size: var(--text-size-caption);
+  justify-content: center;
+  padding: 0;
+}
+
+.hitTargetSm {
+  height: var(--size-control-hit-sm);
+  width: var(--size-control-hit-sm);
+}
+
+.hitTargetMd {
+  height: var(--size-control-hit-md);
+  width: var(--size-control-hit-md);
+}

@@ -32,14 +32,12 @@ export type SiteHeaderProps = {
 function MenuIcon() {
   return (
     <svg
+      className={styles.menuIcon}
       aria-hidden
       focusable={false}
-      height={20}
-      width={20}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.75}
       strokeLinecap="round"
       strokeLinejoin="round"
     >
@@ -53,14 +51,12 @@ function MenuIcon() {
 function CloseIcon() {
   return (
     <svg
+      className={styles.menuIcon}
       aria-hidden
       focusable={false}
-      height={20}
-      width={20}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.75}
       strokeLinecap="round"
       strokeLinejoin="round"
     >

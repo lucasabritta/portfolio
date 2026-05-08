@@ -1,24 +1,24 @@
 .card {
   background: var(--card);
-  border: 1px solid var(--border);
+  border: var(--border-width-default) var(--border-style-default) var(--border);
 }
 
 .radiusMd {
-  border-radius: 0.75rem;
+  border-radius: var(--radius-md);
 }
 
 .radiusLg {
-  border-radius: 1rem;
+  border-radius: var(--radius-lg);
 }
 
 .paddingCompact {
-  padding: 1.25rem;
+  padding: var(--space-element-lg);
 }
 
 .paddingComfortable {
-  padding: 1.5rem;
+  padding: var(--space-element-xl);
 }
 
 .elevated {
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow-surface-sm);
 }

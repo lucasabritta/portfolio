@@ -1,77 +1,71 @@
 .shell {
-  border-bottom: 1px solid var(--border);
+  border-bottom: var(--border-width-default) var(--border-style-default) var(--border);
   display: grid;
-  gap: 1.75rem;
-  padding-bottom: 2.5rem;
-  padding-top: 0.75rem;
+  gap: var(--gap-lg);
+  padding-bottom: var(--space-element-2xl);
+  padding-top: var(--space-element-2sm);
 }
 
 @media (min-width: 1024px) {
   .shell {
     align-items: start;
-    gap: 2rem;
+    gap: var(--gap-xl);
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    padding-bottom: 3rem;
-    padding-top: 1rem;
+    padding-bottom: var(--space-element-3xl);
+    padding-top: var(--space-element-md);
   }
 }
 
 .leadCol {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--gap-2sm);
   min-width: 0;
 }
 
 .headshot {
   background: var(--card);
-  border: 2px solid var(--border);
-  border-radius: 999px;
+  border: var(--border-width-strong) var(--border-style-default) var(--border);
+  border-radius: var(--radius-full);
   display: block;
-  height: 5rem;
-  margin-bottom: 0.25rem;
+  height: var(--size-avatar-md);
+  margin-bottom: var(--space-element-xs);
   object-fit: cover;
-  width: 5rem;
+  width: var(--size-avatar-md);
 }
 
 @media (min-width: 768px) {
   .headshot {
-    height: 6rem;
-    width: 6rem;
+    height: var(--size-avatar-lg);
+    width: var(--size-avatar-lg);
   }
 }
 
 .positioning {
   color: var(--foreground);
-  font-size: 1.0625rem;
-  line-height: 1.65;
+  font-size: var(--text-size-body-md-plus);
+  line-height: var(--text-line-height-reading-xl);
   margin: 0;
-  max-width: 40rem;
+  max-width: var(--layout-lead-max);
 }
 
 @media (min-width: 768px) {
   .positioning {
-    font-size: 1.125rem;
+    font-size: var(--text-size-body-lg);
   }
-}
-
-.contactHint {
-  color: var(--muted);
-  font-size: 0.875rem;
-  margin: 0.25rem 0 0;
 }
 
 .ctaRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-top: 0.75rem;
+  gap: var(--gap-2sm);
+  margin-top: var(--space-element-2sm);
 }
 
 .proofCard ul {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: var(--gap-2sm);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -79,41 +73,41 @@
 
 .proofCard li {
   color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.5;
-  padding-left: 0.85rem;
+  font-size: var(--text-size-metric);
+  line-height: var(--text-line-height-relaxed);
+  padding-left: var(--space-element-2sm);
   position: relative;
 }
 
 .proofCard li::before {
   background: var(--accent);
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   content: "";
-  height: 0.35rem;
+  height: var(--layout-proof-bullet-size);
   left: 0;
   position: absolute;
-  top: 0.45rem;
-  width: 0.35rem;
+  top: var(--layout-proof-bullet-offset-top);
+  width: var(--layout-proof-bullet-size);
 }
 
 .proofTitle {
   color: var(--foreground);
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  margin: 0 0 0.5rem;
+  font-size: var(--text-size-label-compact);
+  font-weight: var(--text-weight-semibold);
+  letter-spacing: var(--text-tracking-wide-md);
+  margin: 0 0 var(--space-element-sm);
   text-transform: uppercase;
 }
 
 .visuallyHidden {
   clip: rect(0 0 0 0);
   border: 0;
-  height: 1px;
-  margin: -1px;
+  height: var(--a11y-visually-hidden-size);
+  margin: var(--a11y-visually-hidden-offset);
   overflow: hidden;
   padding: 0;
   position: absolute;
   white-space: nowrap;
-  width: 1px;
+  width: var(--a11y-visually-hidden-size);
 }

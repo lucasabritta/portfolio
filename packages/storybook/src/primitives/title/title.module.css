@@ -1,17 +1,17 @@
 .sm {
   color: var(--foreground);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--text-size-title-sm);
+  font-weight: var(--text-weight-semibold);
 }
 
 .md {
   color: var(--foreground);
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: var(--text-size-title-md);
+  font-weight: var(--text-weight-semibold);
 }
 
 .lg {
   color: var(--foreground);
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: var(--text-size-title-lg);
+  font-weight: var(--text-weight-semibold);
 }

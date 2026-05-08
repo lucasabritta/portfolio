@@ -31,6 +31,20 @@ Both bans are enforced in **`apps/frontend/eslint.config.mjs`** via **`no-restri
 - **Global web CSS** lives in **`packages/storybook/src/globals.css`**. Root layout classes use **`packages/storybook/src/layout.module.css`**, imported from **`apps/frontend/app/layout.tsx`** as **`@portfolio/storybook/globals.css`** and **`@portfolio/storybook/layout.module.css`** (package `exports`).
 - **Story fixtures** live in **`packages/storybook/src/fixtures/`**. Stories use **`@ui/...`** (Vite/TS path alias); package components consumed by Next should use relative imports internally where needed so Next/Turbopack does not require duplicate `@ui` aliases.
 
+### Primitive-first design system policy
+
+- Feature components should compose existing Storybook primitives for repeated UI affordances such as actions, links, cards, chips, typography, and surfaces.
+- If a feature needs a new reusable visual treatment, extend the design-system owner first: add or update the primitive under **`packages/storybook/src/primitives/`**, include token-backed CSS, and document it with a story plus play test.
+- Avoid feature-local classes for clickable affordance treatments that belong to a primitive variant. Feature CSS should handle feature layout and one-off composition, not redefine the design language for links or CTAs.
+
+### Foundation token policy (required)
+
+- Treat **all** presentational values as token-driven foundations/primitives (not just colors): typography, spacing, gaps, space-column, borders/outlines, radii, icon sizing, and layout constraints.
+- In **`*.module.css`**, do not hardcode visual literals like `1px`, `0.875rem`, `20px`, or ad-hoc `letter-spacing`/`line-height`; use foundation token variables from `globals.css` imports.
+- In TSX and story decorators, inline styles must use **`var(--token-name)`** values rather than hardcoded numbers/colors.
+- For SVG icons in TSX, avoid hardcoded `width`, `height`, and `strokeWidth`; use classes and token-backed CSS variables.
+- Keep primitive tokens in `packages/storybook/src/foundations/primitive-tokens/`, semantic tokens in `packages/storybook/src/foundations/tokens/`, and add/update stories when new primitive/token groups are introduced.
+
 ## Running Storybook
 
 Use **Node.js 24.14.1** (see `.nvmrc`, package `engines`, and the Docker image pin) so Storybook 10 and Vitest match CI. Storybook’s CLI enforces **20.19+ or 22.12+**.
@@ -79,7 +93,7 @@ docker compose run --rm frontend yarn build
 - Co-locate **`*.stories.tsx`** next to the component under **`packages/storybook/src/`**.
 - **Interaction tests (`play`)** live in a sibling **`*.stories.test.ts`** file (same basename prefix as the CSF file). Each named export is a **`StoryPlayFn`** (see **`packages/storybook/src/storybook-play-types.ts`**); **`*.stories.tsx`** imports them and sets **`play: somePlay`**. Every story that renders meaningful UI (sections, hero, primitives, pages) should wire a **`play`** so **`@storybook/addon-vitest`** exercises it. **Unit** tests for the app and résumé package live in **`apps/frontend`** and **`packages/resume-content`** respectively (separate Vitest configs), not in a single root Vitest workspace.
 - **Story `title` groups**: **`Foundations/Design Tokens/<Name>`** for tokens and theme documentation; **`Components/<Category>/<Component>`** for reusable primitives under **`packages/storybook/src/primitives/`** (Typography, Buttons, Surfaces); **`Patterns/Sections/<Name>`**, **`Patterns/Site Chrome/<Name>`**, **`Patterns/Home Marketing/<Name>`**, **`Patterns/Hero/<Name>`**, and **`Patterns/Status Page/<Name>`** for composed UI; **`Pages/<Route>`** for full-page stories (e.g. **`Pages/Home`**).
-- **Primitives** (`Card`, `Chip`, `ActionLink`, `SectionHeading`, `Title`, hero typography) live in **`packages/storybook/src/primitives/`** and are re-exported from **`@portfolio/storybook/primitives`** plus the compatibility root for consumers that need them; feature code inside the package typically imports via **`../primitives`** or **`../../primitives`** (the **`@ui/*`** path maps to **`./src/*`** and does not resolve **`@ui/primitives`** to the folder index).
+- **Primitives** (`Card`, `Chip`, `ActionButton`, `ActionLink`, `SectionHeading`, `Title`, hero typography) live in **`packages/storybook/src/primitives/`** (**`primitives/actions/button/`** and **`primitives/actions/link/`** each hold the component, co-located **`*.module.css`**, stories, and play tests) and are re-exported from **`@portfolio/storybook/primitives`** plus the compatibility root for consumers that need them; feature code inside the package typically imports via **`../primitives`** or **`../../primitives`** (the **`@ui/*`** path maps to **`./src/*`** and does not resolve **`@ui/primitives`** to the folder index).
 - **Full-page stories** compose page-level views from Storybook exports such as **`HomePageShell`**, **`PortfolioHero`**, and home sections.
 
 ## Testing (Vitest + Storybook)

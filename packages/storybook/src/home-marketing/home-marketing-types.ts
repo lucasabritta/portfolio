@@ -1,3 +1,6 @@
+import type { ActionButtonVariant } from "../primitives/actions/button";
+import type { BrandIconName } from "../primitives/icons";
+
 /** Home Phase 3 “above the fold” and teaser blocks — presentation-only (no `@portfolio/resume-content`). */
 
 export type CredibilityItem = {
@@ -11,9 +14,8 @@ export type HomeLeadHeroProps = {
   roleEyebrow: string;
   positioningLead: string;
   proofPoints: readonly [string, string, string];
-  contactHint?: string;
-  contactHintLabel?: string;
-  contactHintHref?: string;
+  /** In-page anchor for the contact section (e.g. `#contact-heading`). */
+  contactHref: string;
   projectsHref: string;
   githubHref: string;
   /** Optional public URL for the hero portrait (e.g. `/headshot-lucas.png`). */
@@ -42,9 +44,11 @@ export type FeaturedWorkCard = {
 export type FeaturedWorkAction = {
   label: string;
   href: string;
-  variant?: "primary" | "secondary";
+  variant?: ActionButtonVariant;
   /** When true, link opens in a new tab with noopener. */
   external?: boolean;
+  /** Optional brand icon; defaults to detection from `href` / `label`. */
+  icon?: BrandIconName;
 };
 
 export type FeaturedWorkPreviewProps = {

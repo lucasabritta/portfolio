@@ -1,9 +1,11 @@
-import { ActionLink, Card, SectionHeading, Title } from "../primitives";
+import { ActionButton, Card, SectionHeading, Title, brandIconForLink } from "../primitives";
 
-import type { FeaturedWorkPreviewProps } from "./home-marketing-types";
+import type { FeaturedWorkAction, FeaturedWorkPreviewProps } from "./home-marketing-types";
 import styles from "./featured-work-preview.module.css";
 
-const fallbackFlagshipActions = (flagship: FeaturedWorkPreviewProps["flagship"]) => [
+const fallbackFlagshipActions = (
+  flagship: FeaturedWorkPreviewProps["flagship"],
+): FeaturedWorkAction[] => [
   {
     label: flagship.ctaLabel,
     href: flagship.href,
@@ -22,17 +24,18 @@ export function FeaturedWorkPreview({
     <section aria-labelledby={`${id}-heading`} className={styles.section} id={id}>
       <SectionHeading id={`${id}-heading`}>{heading}</SectionHeading>
       <div className={styles.grid}>
-        <Card as="article" elevated radius="lg" padding="comfortable" className={styles.flagship}>
+        <Card as="article" elevated radius="lg" padding="compact" className={styles.flagship}>
           <Title level={3} size="md">
             {flagship.title}
           </Title>
           <p className={styles.desc}>{flagship.description}</p>
           <div className={styles.actions}>
             {(flagship.actions ?? fallbackFlagshipActions(flagship)).map((action) => (
-              <ActionLink
+              <ActionButton
                 key={`${action.label}-${action.href}`}
                 variant={action.variant ?? "secondary"}
                 href={action.href}
+                icon={action.icon ?? brandIconForLink({ href: action.href, label: action.label })}
                 rel={action.external ? "noopener noreferrer" : undefined}
                 target={action.external ? "_blank" : undefined}
               >
@@ -40,25 +43,19 @@ export function FeaturedWorkPreview({
                 {action.external ? (
                   <span className={styles.visuallyHidden}> (opens in a new tab)</span>
                 ) : null}
-              </ActionLink>
+              </ActionButton>
             ))}
           </div>
         </Card>
         {supporting.map((card, index) => (
-          <Card
-            key={`${index}-${card.title}`}
-            as="article"
-            elevated
-            radius="md"
-            padding="comfortable"
-          >
+          <Card key={`${index}-${card.title}`} as="article" elevated radius="md" padding="compact">
             <Title level={4} size="sm">
               {card.title}
             </Title>
             <p className={styles.desc}>{card.description}</p>
-            <ActionLink variant="secondary" href={card.href}>
+            <ActionButton variant="secondary" href={card.href}>
               {card.ctaLabel}
-            </ActionLink>
+            </ActionButton>
           </Card>
         ))}
       </div>

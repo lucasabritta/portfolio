@@ -23,7 +23,9 @@ description: >-
 4. **Run**: `docker compose up` (add `-d` for detached). Watch logs for the Next.js ready URL.
 5. **Verify**: Open the documented host/port (often `http://localhost:3000`). If the container binds `0.0.0.0`, that matches external access from the host.
 
-The **`frontend`** service mounts a **named volume** for `apps/frontend/.next` so Next dev/Turbopack does not write the build cache on the Windows/macOS bind mount (fewer file-lock and permission failures than a host `.next` folder).
+**`apps/frontend/.next`** is **not** overlaid by a Docker named volume: it lives on the repo bind mount (`apps/frontend/.next` on the host, gitignored). That matches how **production** gets a fresh build output each time and avoids **stale Turbopack** artifacts while `@portfolio/storybook` source changes on disk.
+
+If `http://localhost:3000` still looks wrong after edits, delete the host folder **`apps/frontend/.next`** (or run `docker compose run --rm frontend sh -lc "rm -rf /workspace/apps/frontend/.next"`) and restart **`frontend`**. On Windows, if you hit file-lock issues with `.next` on the bind mount, stop Compose first, delete the folder from the host, then `docker compose up frontend` again.
 
 ## Storybook and full checks (this repo)
 
@@ -55,7 +57,8 @@ The **`frontend`** service mounts a **named volume** for `apps/frontend/.next` s
 
 - **ESLint after `yarn build`**: Static Storybook output is under `apps/frontend/public/storybook/` (gitignored). Root `yarn lint` ignores that path; if lint suddenly scans huge bundles, ensure `eslint.config.mjs` still includes `apps/frontend/public/storybook/**` in `globalIgnores`.
 - **Port conflicts**: Change the host port in compose or stop the conflicting process; document the chosen port if you change it.
-- **Stale volumes**: After dependency or lockfile changes, `docker compose build --no-cache` or remove anonymous volumes per team practice.
+- **Orphan Docker volume**: Older clones may still have a **`_frontend_apps_next`** named volume from a previous `docker-compose.yml`. It is unused now; remove it with `docker volume rm <name>` after `docker compose down` if you want to reclaim disk.
+- **Stale Next dev output**: Delete **`apps/frontend/.next`** on the host (or `rm -rf /workspace/apps/frontend/.next` in the container) and restart **`frontend`** — see the **`.next` on bind mount** note above.
 - **ARM vs x86**: If base images fail on Apple Silicon, prefer official images with `linux/arm64` support or explicit platform flags only when the repo already uses them.
 
 ## Done when

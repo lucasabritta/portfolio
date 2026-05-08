@@ -1,9 +1,11 @@
+import type { ActionButtonVariant } from "../primitives/actions/button";
+
 /** Site `/projects` presentation shapes only — no `@portfolio/resume-content` imports. */
 
 export type PresentationProjectLink = {
   label: string;
   href: string;
-  variant: "primary" | "secondary" | "accentUnderline";
+  variant: ActionButtonVariant | "accentUnderline";
 };
 
 export type PresentationFlagshipProject = {

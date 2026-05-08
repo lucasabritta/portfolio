@@ -1,19 +1,19 @@
 .section {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: var(--layout-scroll-offset);
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--gap-md);
   list-style: none;
-  margin: 0.75rem 0 0;
+  margin: var(--space-element-2sm) 0 0;
   padding: 0;
 }
 
 .row {
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.85rem;
+  border-bottom: var(--border-width-default) var(--border-style-default) var(--border);
+  padding-bottom: var(--space-element-2sm);
 }
 
 .row:last-of-type {
@@ -23,17 +23,17 @@
 
 .company {
   color: var(--foreground);
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: var(--text-size-wordmark);
+  font-weight: var(--text-weight-semibold);
   margin: 0;
 }
 
 .meta {
   color: var(--muted);
-  font-size: 0.8125rem;
-  margin: 0.2rem 0 0;
+  font-size: var(--text-size-label-compact);
+  margin: var(--space-element-xs) 0 0;
 }
 
 .continue {
-  margin-top: 1rem;
+  margin-top: var(--space-element-md);
 }

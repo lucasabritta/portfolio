@@ -1,0 +1,26 @@
+:root {
+  --size-layout-container-max: 70rem;
+  --size-layout-content-max: 64rem;
+  --size-layout-reading-max: 42rem;
+  --size-layout-lead-max: 40rem;
+  --size-layout-description-max: 48rem;
+  --size-layout-media-caption-max: 22rem;
+  --size-layout-article-max: 58rem;
+  --size-layout-status-max: 32rem;
+  --size-layout-theme-control-max: 12.5rem;
+  --size-layout-scroll-offset: 5rem;
+  --size-layout-header-height: 4rem;
+  --size-layout-header-height-md: 4.5rem;
+  --size-control-hit-sm: 2.25rem;
+  --size-control-hit-md: 2.75rem;
+  --size-icon-sm: 1rem;
+  --size-icon-md: 1.25rem;
+  --size-icon-stroke-md: 1.75;
+  --size-a11y-visually-hidden: 1px;
+  --size-a11y-visually-hidden-offset: -1px;
+  --size-a11y-offscreen-left: -9999px;
+  --size-layout-mobile-panel-max-height: min(82vh, 34rem);
+  --size-layout-nav-active-inset: 0.1rem;
+  --size-layout-proof-bullet: 0.35rem;
+  --size-layout-proof-bullet-offset-top: 0.45rem;
+}

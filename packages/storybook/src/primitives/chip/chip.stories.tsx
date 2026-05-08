@@ -27,7 +27,7 @@ export const Many: Story = {
       style={{
         display: "flex",
         flexWrap: "wrap",
-        gap: "0.5rem",
+        gap: "var(--gap-sm)",
         listStyle: "none",
         margin: 0,
         padding: 0,
@@ -50,7 +50,7 @@ export const NarrowViewport: Story = {
       style={{
         display: "flex",
         flexWrap: "wrap",
-        gap: "0.5rem",
+        gap: "var(--gap-sm)",
         listStyle: "none",
         margin: 0,
         padding: 0,

@@ -1,0 +1,40 @@
+:root {
+  --space-element-none: 0;
+  --space-element-xs: var(--space-0-5);
+  --space-element-sm: var(--space-1);
+  --space-element-2sm: var(--space-1-5);
+  --space-element-md: var(--space-2);
+  --space-element-lg: var(--space-3);
+  --space-element-xl: var(--space-4);
+  --space-element-2xl: var(--space-5);
+  --space-element-3xl: var(--space-6);
+  --space-element-4xl: var(--space-7);
+  --space-element-5xl: var(--space-8);
+  --space-element-6xl: var(--space-9);
+  --space-element-7xl: var(--space-10);
+
+  --gap-xs: var(--space-element-xs);
+  --gap-sm: var(--space-element-sm);
+  --gap-2sm: var(--space-element-2sm);
+  --gap-md: var(--space-element-md);
+  --gap-lg: var(--space-element-lg);
+  --gap-xl: var(--space-element-xl);
+  --gap-2xl: var(--space-element-2xl);
+  --gap-3xl: var(--space-element-3xl);
+  --gap-5xl: var(--space-element-5xl);
+
+  --gap-row-xs: var(--space-element-xs);
+  --gap-row-sm: var(--space-element-sm);
+  --gap-row-2sm: var(--space-element-2sm);
+
+  --space-column-sm: var(--space-element-sm);
+  --space-column-md: var(--space-element-md);
+  --space-column-lg: var(--space-element-lg);
+  --space-column-xl: var(--space-element-xl);
+
+  --radius-sm: var(--space-1);
+  --radius-md: var(--space-1-5);
+  --radius-lg: var(--space-2);
+  --radius-xl: var(--space-3);
+  --radius-full: 9999px;
+}

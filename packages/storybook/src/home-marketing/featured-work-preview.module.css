@@ -1,12 +1,12 @@
 .section {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: var(--layout-scroll-offset);
 }
 
 .grid {
   display: grid;
-  gap: 1rem;
+  gap: var(--gap-md);
   grid-template-columns: 1fr;
-  margin-top: 1.25rem;
+  margin-top: var(--space-element-md);
 }
 
 @media (min-width: 768px) {
@@ -27,25 +27,25 @@
 
 .desc {
   color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.55;
-  margin: 0.5rem 0 0.75rem;
+  font-size: var(--text-size-metric);
+  line-height: var(--text-line-height-reading);
+  margin: var(--space-element-sm) 0 var(--space-element-2sm);
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--gap-sm);
 }
 
 .visuallyHidden {
   clip: rect(0 0 0 0);
   border: 0;
-  height: 1px;
-  margin: -1px;
+  height: var(--a11y-visually-hidden-size);
+  margin: var(--a11y-visually-hidden-offset);
   overflow: hidden;
   padding: 0;
   position: absolute;
   white-space: nowrap;
-  width: 1px;
+  width: var(--a11y-visually-hidden-size);
 }

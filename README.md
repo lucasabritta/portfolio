@@ -24,6 +24,8 @@ docker compose up --build frontend
 
 Open [http://localhost:3000](http://localhost:3000).
 
+Next dev cache is written to **`apps/frontend/.next`** on your machine (same bind mount as the repo). If the local site looks older than production, delete that folder and run Compose again.
+
 Storybook on port **6006** (inside the same image):
 
 ```bash

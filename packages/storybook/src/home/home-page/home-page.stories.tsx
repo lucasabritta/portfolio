@@ -21,7 +21,7 @@ import type { HomePageProps } from "@ui/home/presentation-types";
 import { SkipToMain } from "@ui/site-chrome/skip-to-main";
 import { ProjectsSection } from "@ui/home/projects-section/projects-section";
 
-import { homePageDefaultPlay } from "./home-page.stories.test";
+import { homePageDefaultPlay, homePageNarrowViewportPlay } from "./home-page.stories.test";
 
 function HomePageStory(props: HomePageProps) {
   const homeLead = homeLeadHeroFromHomePageProps(props);
@@ -76,5 +76,5 @@ export const Default: Story = {
 export const NarrowViewport: Story = {
   args: homePageArgs(),
   ...narrowMobileStory,
-  play: homePageDefaultPlay,
+  play: homePageNarrowViewportPlay,
 };

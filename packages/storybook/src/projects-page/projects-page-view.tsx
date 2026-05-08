@@ -1,6 +1,14 @@
 "use client";
 
-import { ActionLink, Card, Chip, SectionHeading, Title } from "../primitives";
+import {
+  ActionButton,
+  ActionLink,
+  Card,
+  Chip,
+  SectionHeading,
+  Title,
+  brandIconForLink,
+} from "../primitives";
 
 import { hideImageShowFallback } from "./flagship-media-fallback";
 import type { ProjectsPageViewProps } from "./presentation-types";
@@ -111,18 +119,33 @@ export function ProjectsPageView({
           </ul>
           <p className={styles.aiNote}>{flagship.aiPipelineNote}</p>
           <div className={styles.ctaRow}>
-            {flagship.links.map((link) => (
-              <ActionLink
-                key={`${link.label}-${link.href}`}
-                variant={link.variant}
-                href={link.href}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {link.label}
-                <span className={styles.visuallyHidden}> (opens in a new tab)</span>
-              </ActionLink>
-            ))}
+            {flagship.links.map((link) =>
+              link.variant === "accentUnderline" ? (
+                <ActionLink
+                  key={`${link.label}-${link.href}`}
+                  variant="accentUnderline"
+                  href={link.href}
+                  icon={brandIconForLink({ href: link.href, label: link.label })}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {link.label}
+                  <span className={styles.visuallyHidden}> (opens in a new tab)</span>
+                </ActionLink>
+              ) : (
+                <ActionButton
+                  key={`${link.label}-${link.href}`}
+                  variant={link.variant}
+                  href={link.href}
+                  icon={brandIconForLink({ href: link.href, label: link.label })}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {link.label}
+                  <span className={styles.visuallyHidden}> (opens in a new tab)</span>
+                </ActionButton>
+              ),
+            )}
           </div>
         </div>
       </section>
@@ -144,6 +167,7 @@ export function ProjectsPageView({
                   variant="accentUnderline"
                   href={repo.href}
                   className={styles.repoLink}
+                  icon={brandIconForLink({ href: repo.href, label: "View on GitHub" })}
                   rel="noopener noreferrer"
                   target="_blank"
                 >

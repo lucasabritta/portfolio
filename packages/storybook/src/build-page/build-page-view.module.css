@@ -1,49 +1,49 @@
 .main {
-  padding: 2.5rem 1.25rem 4rem;
+  padding: var(--space-element-2xl) var(--space-element-md) var(--space-element-5xl);
 }
 
 .article {
   margin: 0 auto;
-  max-width: 58rem;
+  max-width: var(--layout-article-max);
 }
 
 .lead {
   color: var(--muted);
-  font-size: 0.9375rem;
-  line-height: 1.65;
-  margin: 0.75rem 0 0;
+  font-size: var(--text-size-body-md);
+  line-height: var(--text-line-height-reading-xl);
+  margin: var(--space-element-2sm) 0 0;
 }
 
 .stack {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: var(--gap-md);
+  margin-top: var(--space-element-xl);
 }
 
 .flow {
   display: grid;
-  gap: 0.5rem;
+  gap: var(--gap-sm);
   grid-template-columns: 1fr;
   list-style: none;
-  margin: 1.5rem 0 0;
+  margin: var(--space-element-lg) 0 0;
   padding: 0;
 }
 
 .flow a {
   align-items: center;
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 999px;
+  border: var(--border-width-default) var(--border-style-default) var(--border);
+  border-radius: var(--radius-full);
   color: var(--muted);
   display: inline-flex;
   font-family:
     var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
-  font-size: 0.75rem;
-  font-weight: 600;
-  min-height: 2.75rem;
-  padding: 0.55rem 0.85rem;
+  font-size: var(--text-size-caption);
+  font-weight: var(--text-weight-semibold);
+  min-height: var(--control-hit-size-md);
+  padding: var(--space-element-sm) var(--space-element-2sm);
   text-decoration: none;
   text-transform: uppercase;
 }
@@ -61,32 +61,33 @@
 }
 
 .block {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: var(--layout-scroll-offset);
 }
 
 .blockHeader {
   align-items: flex-start;
   display: flex;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
+  gap: var(--gap-md);
+  margin-bottom: var(--space-element-2sm);
 }
 
 .blockGlyph {
   align-items: center;
   background: color-mix(in srgb, var(--accent) 8%, var(--card));
-  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
-  border-radius: 0.85rem;
+  border: var(--border-width-default) var(--border-style-default)
+    color-mix(in srgb, var(--accent) 45%, var(--border));
+  border-radius: var(--radius-md);
   color: var(--focus-ring, var(--accent));
   display: inline-flex;
   flex: 0 0 auto;
   font-family:
     var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
-  font-size: 0.8rem;
-  font-weight: 700;
-  height: 2.5rem;
+  font-size: var(--text-size-glyph);
+  font-weight: var(--text-weight-bold);
+  height: var(--space-element-2xl);
   justify-content: center;
-  width: 2.5rem;
+  width: var(--space-element-2xl);
 }
 
 .blockEyebrow {
@@ -94,42 +95,42 @@
   font-family:
     var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  margin: 0 0 0.25rem;
+  font-size: var(--text-size-eyebrow-xs);
+  font-weight: var(--text-weight-semibold);
+  letter-spacing: var(--text-tracking-wide-2xl);
+  margin: 0 0 var(--space-element-xs);
   text-transform: uppercase;
 }
 
 .blockTitle {
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin: 0 0 0.5rem;
+  font-size: var(--text-size-title-sm);
+  font-weight: var(--text-weight-semibold);
+  letter-spacing: var(--text-tracking-tight-xs);
+  margin: 0 0 var(--space-element-sm);
 }
 
 .blockBody {
   color: var(--muted);
-  font-size: 0.9375rem;
-  line-height: 1.65;
+  font-size: var(--text-size-body-md);
+  line-height: var(--text-line-height-reading-xl);
   margin: 0;
 }
 
 .ctaRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-top: 2rem;
+  gap: var(--gap-2sm);
+  margin-top: var(--space-element-xl);
 }
 
 .visuallyHidden {
   clip: rect(0 0 0 0);
   border: 0;
-  height: 1px;
-  margin: -1px;
+  height: var(--a11y-visually-hidden-size);
+  margin: var(--a11y-visually-hidden-offset);
   overflow: hidden;
   padding: 0;
   position: absolute;
   white-space: nowrap;
-  width: 1px;
+  width: var(--a11y-visually-hidden-size);
 }

@@ -1,0 +1,19 @@
+.demoGroup {
+  display: grid;
+  gap: var(--gap-sm);
+}
+
+.demoTitle {
+  color: var(--foreground);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: var(--text-size-label-compact);
+  letter-spacing: var(--text-tracking-wide-2xl);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.swatchLabel {
+  color: var(--foreground);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: var(--text-size-caption);
+}

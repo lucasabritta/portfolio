@@ -1,3 +1,5 @@
+import { BrandIcon, brandIconForLink } from "../primitives/icons";
+
 import type { SiteShellLinkComponent } from "./site-link-component";
 import styles from "./site-footer.module.css";
 
@@ -34,25 +36,36 @@ export function SiteFooter({
         </div>
         <nav aria-label="Footer">
           <ul className={styles.linkRow}>
-            {links.map((link) => (
-              <li key={`${link.href}-${link.label}`}>
-                {link.external ? (
-                  <a
-                    href={link.href}
-                    className={styles.link}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {link.label}
-                    <span className={styles.visuallyHidden}> (opens in a new tab)</span>
-                  </a>
-                ) : (
-                  <NavLink href={link.href} className={styles.link}>
-                    {link.label}
-                  </NavLink>
-                )}
-              </li>
-            ))}
+            {links.map((link) => {
+              const icon = brandIconForLink({ href: link.href, label: link.label });
+              const linkLabelInner = (
+                <>
+                  {icon ? <BrandIcon name={icon} size="sm" /> : null}
+                  <span>{link.label}</span>
+                </>
+              );
+              return (
+                <li key={`${link.href}-${link.label}`}>
+                  {link.external ? (
+                    <a
+                      href={link.href}
+                      className={styles.link}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      aria-label={`${link.label} (opens in a new tab)`}
+                    >
+                      <span className={styles.linkLabel} aria-hidden="true">
+                        {linkLabelInner}
+                      </span>
+                    </a>
+                  ) : (
+                    <NavLink href={link.href} className={styles.link}>
+                      <span className={styles.linkLabel}>{linkLabelInner}</span>
+                    </NavLink>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </nav>
         <p className={styles.colophon}>{colophon}</p>
