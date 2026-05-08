@@ -1,11 +1,7 @@
 import type { StoryPlayFn } from "@ui/storybook-play-types";
 import { expect, userEvent, within } from "storybook/test";
 
-import {
-  storyFixtureEmail,
-  storyFixturePhone,
-  SYNTH_LINKEDIN,
-} from "@ui/fixtures/cv-story-args";
+import { storyFixtureEmail, storyFixturePhone, SYNTH_LINKEDIN } from "@ui/fixtures/cv-story-args";
 
 export const contactSectionDefaultPlay: StoryPlayFn = async ({ canvasElement }) => {
   const canvas = within(canvasElement);

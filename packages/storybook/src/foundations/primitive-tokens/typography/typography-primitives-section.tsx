@@ -26,8 +26,12 @@ export function TypographyPrimitives() {
           <p className={sectionStyles.typeSizeSm}>Size sample using --font-size-sm</p>
           <p className={sectionStyles.typeSizeLg}>Size sample using --font-size-lg</p>
           <p className={sectionStyles.typeWeightMedium}>Weight sample using --font-weight-medium</p>
-          <p className={sectionStyles.typeWeightSemibold}>Weight sample using --font-weight-semibold</p>
-          <p className={sectionStyles.typeTrackingWide}>TRACKING SAMPLE USING --tracking-wide-2xl</p>
+          <p className={sectionStyles.typeWeightSemibold}>
+            Weight sample using --font-weight-semibold
+          </p>
+          <p className={sectionStyles.typeTrackingWide}>
+            TRACKING SAMPLE USING --tracking-wide-2xl
+          </p>
           <p className={sectionStyles.typeReadingLineHeight}>
             Body line-height sample using --line-height-reading for readable, multi-line copy across
             broader cards.

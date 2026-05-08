@@ -21,7 +21,8 @@
   background: var(--primitive-swatch-color);
   border: var(--border-width-default) var(--border-style-default) var(--border);
   border-radius: var(--radius-full);
-  box-shadow: inset 0 0 0 var(--border-width-default) color-mix(in srgb, var(--foreground) 8%, transparent);
+  box-shadow: inset 0 0 0 var(--border-width-default)
+    color-mix(in srgb, var(--foreground) 8%, transparent);
   display: block;
   height: var(--space-element-xl);
   width: var(--space-element-xl);

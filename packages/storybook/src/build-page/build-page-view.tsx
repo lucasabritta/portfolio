@@ -1,4 +1,10 @@
-import { ActionButton, Card, Title, brandIconForLink, type ActionButtonVariant } from "../primitives";
+import {
+  ActionButton,
+  Card,
+  Title,
+  brandIconForLink,
+  type ActionButtonVariant,
+} from "../primitives";
 
 import styles from "./build-page-view.module.css";
 

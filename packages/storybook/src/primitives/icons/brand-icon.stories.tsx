@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { BrandIcon } from "./brand-icon";
-import { brandIconGithubPlay, brandIconLinkedinPlay, brandIconMediumPlay } from "./brand-icon.stories.test";
+import {
+  brandIconGithubPlay,
+  brandIconLinkedinPlay,
+  brandIconMediumPlay,
+} from "./brand-icon.stories.test";
 
 const meta = {
   title: "Components/Icons/BrandIcon",

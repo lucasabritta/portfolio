@@ -1,4 +1,11 @@
-import { ActionButton, ActionLink, HeroLead, HeroName, HeroRole, brandIconForLink } from "../primitives";
+import {
+  ActionButton,
+  ActionLink,
+  HeroLead,
+  HeroName,
+  HeroRole,
+  brandIconForLink,
+} from "../primitives";
 
 import styles from "./hero.module.css";
 

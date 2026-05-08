@@ -34,7 +34,10 @@ export function LayoutPrimitives() {
           <div className={sectionStyles.layoutBarRow}>
             <code className={sharedStyles.swatchLabel}>--size-layout-content-max</code>
             <span className={sectionStyles.layoutBarContainer}>
-              <span className={sectionStyles.layoutBar} style={{ width: "calc(var(--size-layout-content-max) / 8)" }} />
+              <span
+                className={sectionStyles.layoutBar}
+                style={{ width: "calc(var(--size-layout-content-max) / 8)" }}
+              />
             </span>
           </div>
         </div>

@@ -1,5 +1,1 @@
-export {
-  ActionButton,
-  type ActionButtonProps,
-  type ActionButtonVariant,
-} from "./button";
+export { ActionButton, type ActionButtonProps, type ActionButtonVariant } from "./button";

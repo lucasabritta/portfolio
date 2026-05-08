@@ -6,11 +6,7 @@ import type { BrandIconName } from "../../icons/brand-icon-types";
 
 import styles from "./link.module.css";
 
-export type ActionLinkVariant =
-  | "inlineNeutral"
-  | "inlineAccent"
-  | "accentUnderline"
-  | "accentChip";
+export type ActionLinkVariant = "inlineNeutral" | "inlineAccent" | "accentUnderline" | "accentChip";
 
 export type ActionLinkProps = {
   variant: ActionLinkVariant;

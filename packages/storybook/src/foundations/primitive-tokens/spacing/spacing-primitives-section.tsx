@@ -27,7 +27,10 @@ export function SpacingPrimitives() {
             <li key={token.name} className={sectionStyles.spacingBarItem}>
               <code className={sharedStyles.swatchLabel}>{token.name}</code>
               <span className={sectionStyles.spacingBarTrack}>
-                <span className={sectionStyles.spacingBarFill} style={{ width: `var(${token.name})` }} />
+                <span
+                  className={sectionStyles.spacingBarFill}
+                  style={{ width: `var(${token.name})` }}
+                />
               </span>
             </li>
           ))}
