@@ -9,8 +9,14 @@ export function CredibilityStrip({ id = "credibility", items }: CredibilityStrip
       <SectionHeading id={`${id}-heading`}>How I work</SectionHeading>
       <ul className={styles.grid}>
         {items.map((item) => (
-          <li key={item.title}>
-            <Card as="article" elevated radius="md" padding="comfortable">
+          <li key={item.title} className={styles.cardItem}>
+            <Card
+              as="article"
+              elevated
+              radius="md"
+              padding="compact"
+              className={styles.cardSurface}
+            >
               {item.metric ? <p className={styles.metric}>{item.metric}</p> : null}
               <h3 className={styles.title}>{item.title}</h3>
               <p className={styles.body}>{item.body}</p>

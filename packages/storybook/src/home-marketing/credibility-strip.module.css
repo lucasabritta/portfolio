@@ -3,12 +3,23 @@
 }
 
 .grid {
+  align-items: stretch;
   display: grid;
   gap: var(--gap-2sm);
   grid-template-columns: 1fr;
   list-style: none;
   margin: var(--space-element-md) 0 0;
   padding: 0;
+}
+
+.cardItem {
+  display: flex;
+}
+
+.cardSurface {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 @media (min-width: 768px) {
