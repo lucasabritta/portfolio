@@ -45,6 +45,7 @@
 }
 
 .linkRow {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap-row-2sm) var(--space-column-lg);
@@ -54,7 +55,9 @@
 }
 
 .link {
+  align-items: center;
   color: var(--muted);
+  display: inline-flex;
   font-size: var(--text-size-label);
   font-weight: var(--text-weight-medium);
   text-decoration: none;
