@@ -7,6 +7,11 @@
   width: var(--icon-size-md);
 }
 
+.sizeSm {
+  height: var(--icon-size-sm);
+  width: var(--icon-size-sm);
+}
+
 .icon path {
   fill: currentcolor;
 }

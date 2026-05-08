@@ -4,6 +4,7 @@ export {
   type BrandIconLinkInput,
   type BrandIconName,
   type BrandIconProps,
+  type BrandIconSize,
 } from "./icons";
 export { ActionButton, type ActionButtonProps, type ActionButtonVariant } from "./actions/button";
 export { ActionLink, type ActionLinkProps, type ActionLinkVariant } from "./actions/link";

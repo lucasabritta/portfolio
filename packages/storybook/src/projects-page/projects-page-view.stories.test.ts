@@ -18,6 +18,7 @@ export const projectsPageViewDefaultPlay: StoryPlayFn = async ({ canvasElement }
   );
   expect(googlePlay).toHaveAttribute("target", "_blank");
   expect(googlePlay.getAttribute("rel") ?? "").toMatch(/noopener/);
+  expect(googlePlay.querySelector("svg")).toBeTruthy();
 
   const medium = canvas.getByRole("link", { name: /Medium article.*opens in a new tab/i });
   expect(medium).toHaveAttribute(

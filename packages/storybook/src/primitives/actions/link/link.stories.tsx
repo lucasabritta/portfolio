@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { ActionLink } from "./link";
 import {
-  linkAccentChipPlay,
   linkAccentUnderlineMediumPlay,
   linkAccentUnderlinePlay,
   linkInlineAccentPlay,
@@ -18,7 +17,11 @@ const meta = {
   argTypes: {
     icon: {
       control: "select",
-      options: [undefined, "github", "linkedin", "medium"] as const,
+      options: [undefined, "github", "googlePlay", "linkedin", "medium"] as const,
+    },
+    iconSize: {
+      control: "select",
+      options: [undefined, "md", "sm"] as const,
     },
   },
   args: {
@@ -80,20 +83,4 @@ export const AccentUnderlineWithMediumIcon: Story = {
     target: "_blank",
   },
   play: linkAccentUnderlineMediumPlay,
-};
-
-export const AccentChip: Story = {
-  args: {
-    variant: "accentChip",
-    href: "#contact-heading",
-    children: "contacts",
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ color: "var(--muted)", fontSize: "var(--text-size-label)" }}>
-        Based in Berlin · <Story />
-      </div>
-    ),
-  ],
-  play: linkAccentChipPlay,
 };

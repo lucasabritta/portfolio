@@ -28,11 +28,3 @@ export const linkAccentUnderlineMediumPlay: StoryPlayFn = async ({ canvasElement
   link.focus();
   expect(link).toHaveFocus();
 };
-
-export const linkAccentChipPlay: StoryPlayFn = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  const link = canvas.getByRole("link", { name: /contacts/i });
-  expect(link).toHaveAttribute("href", "#contact-heading");
-  link.focus();
-  expect(link).toHaveFocus();
-};

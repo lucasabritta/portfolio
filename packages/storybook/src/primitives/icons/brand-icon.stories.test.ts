@@ -18,3 +18,9 @@ export const brandIconMediumPlay: StoryPlayFn = async ({ canvasElement }) => {
   expect(svg).toBeTruthy();
   expect(svg?.querySelector("path")).toBeTruthy();
 };
+
+export const brandIconGooglePlayPlay: StoryPlayFn = async ({ canvasElement }) => {
+  const svg = canvasElement.querySelector("svg");
+  expect(svg).toBeTruthy();
+  expect(svg?.querySelector("path")).toBeTruthy();
+};

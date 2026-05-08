@@ -16,6 +16,7 @@ export const featuredWorkPreviewDefaultPlay: StoryPlayFn = async ({ canvasElemen
   });
   expect(openOnPlay).toHaveAttribute("target", "_blank");
   expect(openOnPlay.getAttribute("rel") ?? "").toMatch(/noopener/);
+  expect(openOnPlay.querySelector("svg")).toBeTruthy();
   const medium = within(region).getByRole("link", {
     name: /Medium article.*opens in a new tab/i,
   });

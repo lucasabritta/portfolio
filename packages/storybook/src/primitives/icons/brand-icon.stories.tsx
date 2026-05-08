@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { BrandIcon } from "./brand-icon";
 import {
   brandIconGithubPlay,
+  brandIconGooglePlayPlay,
   brandIconLinkedinPlay,
   brandIconMediumPlay,
 } from "./brand-icon.stories.test";
@@ -14,7 +15,11 @@ const meta = {
   argTypes: {
     name: {
       control: "select",
-      options: ["github", "linkedin", "medium"],
+      options: ["github", "googlePlay", "linkedin", "medium"],
+    },
+    size: {
+      control: "select",
+      options: ["md", "sm"],
     },
   },
   args: {
@@ -41,4 +46,10 @@ export const MediumIcon: Story = {
   name: "Medium",
   args: { name: "medium" },
   play: brandIconMediumPlay,
+};
+
+export const GooglePlayIcon: Story = {
+  name: "Google Play",
+  args: { name: "googlePlay" },
+  play: brandIconGooglePlayPlay,
 };

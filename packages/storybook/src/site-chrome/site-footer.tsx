@@ -40,7 +40,7 @@ export function SiteFooter({
               const icon = brandIconForLink({ href: link.href, label: link.label });
               const label = (
                 <span className={styles.linkLabel}>
-                  {icon ? <BrandIcon name={icon} /> : null}
+                  {icon ? <BrandIcon name={icon} size="sm" /> : null}
                   <span>{link.label}</span>
                 </span>
               );

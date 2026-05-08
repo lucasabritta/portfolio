@@ -13,6 +13,7 @@
   --layout-header-height-md: var(--size-layout-header-height-md);
   --control-hit-size-sm: var(--size-control-hit-sm);
   --control-hit-size-md: var(--size-control-hit-md);
+  --icon-size-sm: var(--size-icon-sm);
   --icon-size-md: var(--size-icon-md);
   --icon-stroke-width-md: var(--size-icon-stroke-md);
   --a11y-visually-hidden-size: var(--size-a11y-visually-hidden);

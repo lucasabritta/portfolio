@@ -14,9 +14,8 @@ export type HomeLeadHeroProps = {
   roleEyebrow: string;
   positioningLead: string;
   proofPoints: readonly [string, string, string];
-  contactHint?: string;
-  contactHintLabel?: string;
-  contactHintHref?: string;
+  /** In-page anchor for the contact section (e.g. `#contact-heading`). */
+  contactHref: string;
   projectsHref: string;
   githubHref: string;
   /** Optional public URL for the hero portrait (e.g. `/headshot-lucas.png`). */

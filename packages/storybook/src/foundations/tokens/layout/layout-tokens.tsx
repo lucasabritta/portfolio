@@ -12,6 +12,8 @@ const LAYOUT_TOKENS: readonly LayoutToken[] = [
   { name: "--layout-reading-max", value: "42rem", role: "Readable long-form text width" },
   { name: "--layout-scroll-offset", value: "5rem", role: "Anchor and skip-link offset" },
   { name: "--control-hit-size-md", value: "2.75rem", role: "Minimum tap target size" },
+  { name: "--icon-size-sm", value: "1rem", role: "Compact inline brand icons (footer, contact)" },
+  { name: "--icon-size-md", value: "1.25rem", role: "Default icon size in buttons and CTAs" },
   { name: "--size-avatar-md", value: "5rem", role: "Default profile/avatar size" },
 ] as const;
 

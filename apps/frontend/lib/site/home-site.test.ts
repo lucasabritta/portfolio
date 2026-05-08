@@ -7,6 +7,7 @@ describe("buildHomeMarketing", () => {
   it("wires hero CTAs and condensed résumé anchor from résumé data", () => {
     const m = buildHomeMarketing(resumeData);
     expect(m.homeLeadHero.projectsHref).toBe("/projects");
+    expect(m.homeLeadHero.contactHref).toBe("#contact-heading");
     expect(m.homeLeadHero.githubHref).toBe("https://github.com/lucasabritta");
     expect(m.homeLeadHero.name).toBe(resumeData.name);
     expect(m.homeLeadHero.proofPoints).toEqual([

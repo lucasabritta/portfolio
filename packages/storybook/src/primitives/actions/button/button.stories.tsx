@@ -17,7 +17,11 @@ const meta = {
   argTypes: {
     icon: {
       control: "select",
-      options: [undefined, "github", "linkedin", "medium"] as const,
+      options: [undefined, "github", "googlePlay", "linkedin", "medium"] as const,
+    },
+    iconSize: {
+      control: "select",
+      options: [undefined, "md", "sm"] as const,
     },
   },
   args: {

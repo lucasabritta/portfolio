@@ -26,6 +26,9 @@ export function brandIconForLink({ href, label }: BrandIconLinkInput): BrandIcon
     if (host === "medium.com" || host.endsWith(".medium.com")) {
       return "medium";
     }
+    if (host === "play.google.com" || host.endsWith(".play.google.com")) {
+      return "googlePlay";
+    }
   } catch {
     // Relative or invalid URL — try label heuristics only.
   }
@@ -38,6 +41,9 @@ export function brandIconForLink({ href, label }: BrandIconLinkInput): BrandIcon
   }
   if (/\bmedium\b/i.test(labelLower)) {
     return "medium";
+  }
+  if (/\bgoogle\s*play\b/i.test(labelLower)) {
+    return "googlePlay";
   }
 
   return undefined;

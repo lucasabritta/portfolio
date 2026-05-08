@@ -49,32 +49,3 @@
   outline: var(--outline-width-default) solid var(--accent);
   outline-offset: var(--outline-offset-tight);
 }
-
-.accentChip {
-  align-items: center;
-  background: color-mix(in srgb, var(--accent) 10%, transparent);
-  border: var(--border-width-default) var(--border-style-default)
-    color-mix(in srgb, var(--accent) 35%, transparent);
-  border-radius: var(--radius-sm);
-  /* Foreground on tinted chip background meets contrast vs accent-on-fill alone. */
-  color: var(--foreground);
-  display: inline-flex;
-  font-size: var(--text-size-label);
-  font-weight: var(--text-weight-medium);
-  gap: var(--gap-xs);
-  padding: var(--space-element-xs) var(--space-element-2sm);
-  text-decoration: none;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.accentChip:hover {
-  background: color-mix(in srgb, var(--accent) 18%, transparent);
-  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
-}
-
-.accentChip:focus-visible {
-  outline: var(--outline-width-default) solid var(--accent);
-  outline-offset: var(--outline-offset-tight);
-}

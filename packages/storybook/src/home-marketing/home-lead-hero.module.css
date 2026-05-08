@@ -55,12 +55,6 @@
   }
 }
 
-.contactHint {
-  color: var(--muted);
-  font-size: var(--text-size-label);
-  margin: var(--space-element-xs) 0 0;
-}
-
 .ctaRow {
   display: flex;
   flex-wrap: wrap;

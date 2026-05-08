@@ -1,4 +1,4 @@
-import { ActionButton, ActionLink, Card, HeroName, HeroRole } from "../primitives";
+import { ActionButton, Card, HeroName, HeroRole } from "../primitives";
 
 import type { HomeLeadHeroProps } from "./home-marketing-types";
 import styles from "./home-lead-hero.module.css";
@@ -8,9 +8,7 @@ export function HomeLeadHero({
   roleEyebrow,
   positioningLead,
   proofPoints,
-  contactHint,
-  contactHintLabel,
-  contactHintHref,
+  contactHref,
   projectsHref,
   githubHref,
   headshotSrc,
@@ -44,16 +42,6 @@ export function HomeLeadHero({
         <HeroRole>{roleEyebrow}</HeroRole>
         <HeroName>{name}</HeroName>
         <p className={styles.positioning}>{positioningLead}</p>
-        {contactHint ? (
-          <p className={styles.contactHint}>
-            {contactHint}
-            {contactHintHref && contactHintLabel ? (
-              <ActionLink variant="accentChip" href={contactHintHref}>
-                {contactHintLabel}
-              </ActionLink>
-            ) : null}
-          </p>
-        ) : null}
         <div className={styles.ctaRow}>
           <ActionButton variant="primary" href={projectsHref}>
             View Projects
@@ -67,6 +55,9 @@ export function HomeLeadHero({
           >
             GitHub profile
             <span className={styles.visuallyHidden}> (opens in a new tab)</span>
+          </ActionButton>
+          <ActionButton variant="secondary" href={contactHref}>
+            Contact
           </ActionButton>
         </div>
       </div>
