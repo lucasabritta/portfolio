@@ -95,7 +95,7 @@ export function BuildPageView({
             );
           })}
         </div>
-        <div className={styles.ctaRow}>
+        <div id="build-ctas" className={styles.ctaRow}>
           {ctas.map((cta) => (
             <ActionButton
               key={`${cta.label}-${cta.href}`}

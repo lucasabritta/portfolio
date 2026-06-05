@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { NotFoundAnalytics } from "@/app/_shell/not-found-analytics";
 import { StatusPageView } from "@portfolio/storybook/status-page";
 
 export const metadata = {
@@ -9,16 +10,19 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <StatusPageView
-      heading="Page not found"
-      body="The page you are looking for does not exist or has been moved. Try the homepage or projects."
-      actions={[
-        { kind: "link", label: "Back to home", href: "/" },
-        { kind: "link", label: "View projects", href: "/projects" },
-        { kind: "link", label: "Site architecture", href: "/site-architecture" },
-        { kind: "link", label: "Jump to resume", href: "/#resume" },
-      ]}
-      linkComponent={Link}
-    />
+    <>
+      <NotFoundAnalytics />
+      <StatusPageView
+        heading="Page not found"
+        body="The page you are looking for does not exist or has been moved. Try the homepage or projects."
+        actions={[
+          { kind: "link", label: "Back to home", href: "/" },
+          { kind: "link", label: "View projects", href: "/projects" },
+          { kind: "link", label: "Site architecture", href: "/site-architecture" },
+          { kind: "link", label: "Jump to resume", href: "/#resume" },
+        ]}
+        linkComponent={Link}
+      />
+    </>
   );
 }

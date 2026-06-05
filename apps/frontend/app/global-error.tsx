@@ -2,6 +2,9 @@
 
 import { useEffect } from "react";
 
+import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
+import { trackEvent } from "@/lib/analytics/track";
+
 import { GlobalErrorView, globalErrorBodyStyle } from "@portfolio/storybook/status-page";
 
 type GlobalErrorProps = {
@@ -12,6 +15,10 @@ type GlobalErrorProps = {
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
   useEffect(() => {
     console.error("Root error boundary caught", error);
+    trackEvent(ANALYTICS_EVENTS.errorBoundaryShown, {
+      context: "global",
+      ...(error.digest ? { digest: error.digest } : {}),
+    });
   }, [error]);
 
   return (

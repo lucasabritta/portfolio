@@ -21,6 +21,7 @@ The repo is a logical monorepo with intentional boundaries (see [`docs/agents/pr
 | [0002](0002-shared-dom-via-storybook-package.md) | Shared DOM UI lives in `@portfolio/storybook`                 | Accepted   |
 | [0003](0003-react-pdf-for-cv.md)                 | CV was rendered via `react-pdf` inside `apps/frontend`        | Superseded |
 | [0004](0004-docker-compose-local-dev-parity.md)  | Docker Compose is the canonical local dev and CI runtime      | Accepted   |
+| [0005](0005-cookieless-posthog-analytics.md)     | Cookieless PostHog analytics lives in `apps/frontend` only  | Accepted   |
 
 ## Related
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Observability } from "@/app/_shell/observability";
+import { AnalyticsProvider } from "@/app/_shell/analytics-provider";
 import { buildSiteChromeProps } from "@/lib/site/site-chrome-props";
 import { themeInlineBootstrapScript } from "@/lib/theme/theme-inline-script";
 import { siteMetadata } from "@/app/_shell/layout.metadata";
@@ -63,6 +64,7 @@ export default function RootLayout({
           <SiteChromeClient {...siteChrome}>{children}</SiteChromeClient>
         </ThemeProvider>
         <Observability />
+        <AnalyticsProvider />
       </body>
     </html>
   );
