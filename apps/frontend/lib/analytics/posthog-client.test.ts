@@ -1,20 +1,33 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const { init } = vi.hoisted(() => ({
+const { init, register } = vi.hoisted(() => ({
   init: vi.fn(),
+  register: vi.fn(),
 }));
 
 vi.mock("posthog-js", () => ({
   default: {
     __loaded: false,
     init,
+    register,
     capture: vi.fn(),
   },
 }));
 
+vi.mock("./query-params", () => ({
+  captureEntryParams: vi.fn(),
+  getAnalyticsQueryProperties: vi.fn(() => ({ utm_source: "test", entry_query: "utm_source=test" })),
+}));
+
 import posthog from "posthog-js";
 
-import { getPostHogKey, initPostHog, isAnalyticsEnabled } from "./posthog-client";
+import { captureEntryParams, getAnalyticsQueryProperties } from "./query-params";
+import {
+  getPostHogKey,
+  initPostHog,
+  isAnalyticsEnabled,
+  registerAnalyticsQueryProperties,
+} from "./posthog-client";
 
 describe("posthog-client", () => {
   beforeEach(() => {
@@ -35,6 +48,12 @@ describe("posthog-client", () => {
 
   it("initializes with cookieless contract", () => {
     initPostHog();
+    expect(captureEntryParams).toHaveBeenCalled();
+    expect(getAnalyticsQueryProperties).toHaveBeenCalled();
+    expect(register).toHaveBeenCalledWith({
+      utm_source: "test",
+      entry_query: "utm_source=test",
+    });
     expect(init).toHaveBeenCalledWith(
       "phc_test",
       expect.objectContaining({
@@ -49,5 +68,25 @@ describe("posthog-client", () => {
         persistence: "memory",
       }),
     );
+  });
+
+  it("registerAnalyticsQueryProperties captures and registers query params", () => {
+    initPostHog();
+    vi.clearAllMocks();
+    registerAnalyticsQueryProperties();
+    expect(captureEntryParams).toHaveBeenCalled();
+    expect(getAnalyticsQueryProperties).toHaveBeenCalled();
+    expect(register).toHaveBeenCalledWith({
+      utm_source: "test",
+      entry_query: "utm_source=test",
+    });
+  });
+
+  it("registerAnalyticsQueryProperties is a no-op when analytics is disabled", () => {
+    vi.stubEnv("NEXT_PUBLIC_POSTHOG_KEY", "");
+    vi.clearAllMocks();
+    registerAnalyticsQueryProperties();
+    expect(captureEntryParams).not.toHaveBeenCalled();
+    expect(register).not.toHaveBeenCalled();
   });
 });

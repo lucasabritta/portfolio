@@ -1,5 +1,7 @@
 import posthog from "posthog-js";
 
+import { captureEntryParams, getAnalyticsQueryProperties } from "./query-params";
+
 let initialized = false;
 
 export function getPostHogKey(): string | undefined {
@@ -33,8 +35,31 @@ export function initPostHog(): typeof posthog | null {
     persistence: "memory",
   });
 
+  captureEntryParams();
+  const queryProperties = getAnalyticsQueryProperties();
+  if (Object.keys(queryProperties).length > 0) {
+    posthog.register(queryProperties);
+  }
+
   initialized = true;
   return posthog;
+}
+
+export function registerAnalyticsQueryProperties(): void {
+  if (!isAnalyticsEnabled()) {
+    return;
+  }
+
+  const client = getPostHog();
+  if (!client) {
+    return;
+  }
+
+  captureEntryParams();
+  const queryProperties = getAnalyticsQueryProperties();
+  if (Object.keys(queryProperties).length > 0) {
+    client.register(queryProperties);
+  }
 }
 
 export function getPostHog(): typeof posthog | null {
