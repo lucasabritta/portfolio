@@ -1,4 +1,4 @@
-import { type Locator, type Page } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
 
 import { PAGE_COPY } from "../helpers/strings";
 
@@ -41,21 +41,35 @@ export class HomePage {
     await this.page.goto("/", options);
   }
 
+  async gotoWithQueryParams(params: Record<string, string>) {
+    const query = new URLSearchParams(params).toString();
+    await this.page.goto(`/?${query}`);
+    await expect(this.heroHeading).toBeVisible();
+  }
+
+  async viewProjectsFromHero() {
+    await Promise.all([
+      this.page.waitForURL((url) => {
+        const parsed = new URL(url);
+        return parsed.pathname === "/projects" && parsed.search.includes("utm_source=");
+      }),
+      this.leadHeader.getByRole("link", { name: "View Projects" }).click(),
+    ]);
+  }
+
+  async openPrimaryNav(label: string, urlPredicate: (url: URL) => boolean): Promise<void> {
+    await Promise.all([this.page.waitForURL(urlPredicate), this.primaryNavLink(label).click()]);
+  }
+
   async gotoResumeSection() {
     await this.page.goto("/#resume");
   }
 
   async openProjectsFromPrimaryNav() {
-    await Promise.all([
-      this.page.waitForURL(/\/projects$/),
-      this.primaryNavLink("Projects").click(),
-    ]);
+    await this.openPrimaryNav("Projects", (url) => url.pathname === "/projects");
   }
 
   async openBuildFromPrimaryNav() {
-    await Promise.all([
-      this.page.waitForURL(/\/site-architecture$/),
-      this.primaryNavLink("Site architecture").click(),
-    ]);
+    await this.openPrimaryNav("Site architecture", (url) => url.pathname === "/site-architecture");
   }
 }

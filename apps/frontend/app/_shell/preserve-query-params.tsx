@@ -3,10 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 
-import {
-  captureEntryParams,
-  shouldInterceptNavigationClick,
-} from "@/lib/analytics/query-params";
+import { captureEntryParams, shouldInterceptNavigationClick } from "@/lib/analytics/query-params";
 
 function handleDocumentClick(event: MouseEvent, push: (href: string) => void): void {
   if (!(event.target instanceof Element)) {

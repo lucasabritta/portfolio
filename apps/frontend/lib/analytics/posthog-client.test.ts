@@ -16,7 +16,10 @@ vi.mock("posthog-js", () => ({
 
 vi.mock("./query-params", () => ({
   captureEntryParams: vi.fn(),
-  getAnalyticsQueryProperties: vi.fn(() => ({ utm_source: "test", entry_query: "utm_source=test" })),
+  getAnalyticsQueryProperties: vi.fn(() => ({
+    utm_source: "test",
+    entry_query: "utm_source=test",
+  })),
 }));
 
 import posthog from "posthog-js";

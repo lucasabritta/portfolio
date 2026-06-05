@@ -142,7 +142,10 @@ export function getAnalyticsQueryProperties(): Record<string, string> {
 
 export type NavigationClickContext = {
   anchor: Pick<HTMLAnchorElement, "getAttribute" | "target" | "hasAttribute">;
-  event: Pick<MouseEvent, "metaKey" | "ctrlKey" | "shiftKey" | "altKey" | "button" | "defaultPrevented">;
+  event: Pick<
+    MouseEvent,
+    "metaKey" | "ctrlKey" | "shiftKey" | "altKey" | "button" | "defaultPrevented"
+  >;
   locationHref?: string;
   preserved?: Record<string, string>;
 };
@@ -173,7 +176,8 @@ export function shouldInterceptNavigationClick(ctx: NavigationClickContext): str
   }
 
   const locationHref =
-    ctx.locationHref ?? (typeof window !== "undefined" ? window.location.href : "http://localhost/");
+    ctx.locationHref ??
+    (typeof window !== "undefined" ? window.location.href : "http://localhost/");
   const { origin } = navigationBaseHref(locationHref);
 
   if (!isInternalNavigationHref(href, origin)) {
