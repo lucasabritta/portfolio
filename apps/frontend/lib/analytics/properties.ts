@@ -95,16 +95,22 @@ function slugifyLabel(label: string): string {
 
 /** Visible link/button label without visually-hidden suffixes; redacts mailto/tel text. */
 export function extractClickLabel(el: Element, href: string | null = null): string {
-  const resolvedHref = href ?? (el instanceof HTMLAnchorElement ? el.getAttribute("href") : el.closest("a")?.getAttribute("href") ?? null);
+  const resolvedHref =
+    href ??
+    (el instanceof HTMLAnchorElement
+      ? el.getAttribute("href")
+      : (el.closest("a")?.getAttribute("href") ?? null));
   const kind = classifyLinkKind(resolvedHref ?? undefined);
   if (kind === "mailto" || kind === "tel") {
     return kind;
   }
 
   const clone = el.cloneNode(true) as HTMLElement;
-  clone.querySelectorAll('[class*="visuallyHidden"], .visually-hidden, [aria-hidden="true"]').forEach((node) => {
-    node.remove();
-  });
+  clone
+    .querySelectorAll('[class*="visuallyHidden"], .visually-hidden, [aria-hidden="true"]')
+    .forEach((node) => {
+      node.remove();
+    });
   return clone.textContent?.trim() ?? "";
 }
 

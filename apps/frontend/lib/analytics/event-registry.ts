@@ -64,8 +64,10 @@ export function resolveClickEvent({ element, pathname, href }: ClickContext): Re
     };
   }
 
-  if (location === "contact_section" || (linkKind === "mailto" || linkKind === "tel")) {
-    const inContact = location === "contact_section" || element.closest("#contact-heading, [aria-labelledby='contact-heading']");
+  if (location === "contact_section" || linkKind === "mailto" || linkKind === "tel") {
+    const inContact =
+      location === "contact_section" ||
+      element.closest("#contact-heading, [aria-labelledby='contact-heading']");
     if (inContact && href) {
       const channel = contactChannelFromHref(href);
       if (channel) {
