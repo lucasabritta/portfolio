@@ -1,23 +1,29 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 
 import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
 import { routeNameFromPathname } from "@/lib/analytics/properties";
-import { initPostHog, isAnalyticsEnabled } from "@/lib/analytics/posthog-client";
+import {
+  initPostHog,
+  isAnalyticsEnabled,
+  registerAnalyticsQueryProperties,
+} from "@/lib/analytics/posthog-client";
 import { trackClickTarget } from "@/lib/analytics/click-tracking";
 import { trackEvent } from "@/lib/analytics/track";
 
 function PageViewTracker(): null {
   const pathname = usePathname() ?? "/";
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (!isAnalyticsEnabled()) {
       return;
     }
 
-    const syncHash = () => {
+    const trackPageView = () => {
+      registerAnalyticsQueryProperties();
       const hash = window.location.hash;
       trackEvent(ANALYTICS_EVENTS.pageViewed, {
         pathname,
@@ -26,10 +32,14 @@ function PageViewTracker(): null {
       });
     };
 
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
-    return () => window.removeEventListener("hashchange", syncHash);
-  }, [pathname]);
+    trackPageView();
+    window.addEventListener("hashchange", trackPageView);
+    window.addEventListener("popstate", registerAnalyticsQueryProperties);
+    return () => {
+      window.removeEventListener("hashchange", trackPageView);
+      window.removeEventListener("popstate", registerAnalyticsQueryProperties);
+    };
+  }, [pathname, searchParams]);
 
   return null;
 }
