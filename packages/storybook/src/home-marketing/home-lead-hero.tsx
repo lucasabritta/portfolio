@@ -18,7 +18,7 @@ export function HomeLeadHero({
   headshotAlt,
 }: HomeLeadHeroProps) {
   return (
-    <header className={styles.shell}>
+    <header id="home-hero" className={styles.shell}>
       <div className={styles.leadCol}>
         {headshotSrc ? (
           <picture>

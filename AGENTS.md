@@ -22,6 +22,7 @@ Open only the document that matches the task.
 - [`.cursor/rules/vercel-config.mdc`](.cursor/rules/vercel-config.mdc)
 - [`.cursor/rules/subagent-plan-review.mdc`](.cursor/rules/subagent-plan-review.mdc)
 - [`.cursor/rules/subagent-code-review.mdc`](.cursor/rules/subagent-code-review.mdc)
+- [`.cursor/rules/analytics-posthog.mdc`](.cursor/rules/analytics-posthog.mdc) - cookieless PostHog analytics in `apps/frontend` only
 
 ## Skills
 
@@ -31,6 +32,7 @@ Open only the document that matches the task.
 - [`.cursor/skills/nextjs-change-checklist/SKILL.md`](.cursor/skills/nextjs-change-checklist/SKILL.md)
 - [`.cursor/skills/react-nextjs/SKILL.md`](.cursor/skills/react-nextjs/SKILL.md)
 - [`.cursor/skills/storybook-ui/SKILL.md`](.cursor/skills/storybook-ui/SKILL.md)
+- [`.cursor/skills/analytics-posthog/SKILL.md`](.cursor/skills/analytics-posthog/SKILL.md) - PostHog cookieless events, registry, and validation
 - [`.cursor/skills/subagent-plan-review/SKILL.md`](.cursor/skills/subagent-plan-review/SKILL.md) — parallel subagents for plan and feature design validation
 - [`.cursor/skills/subagent-code-review/SKILL.md`](.cursor/skills/subagent-code-review/SKILL.md) — parallel subagents for code / PR / pre-merge review
 

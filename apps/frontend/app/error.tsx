@@ -3,6 +3,9 @@
 import { useEffect } from "react";
 import Link from "next/link";
 
+import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
+import { trackEvent } from "@/lib/analytics/track";
+
 import { StatusPageView } from "@portfolio/storybook/status-page";
 
 type ErrorBoundaryProps = {
@@ -13,6 +16,9 @@ type ErrorBoundaryProps = {
 export default function ErrorBoundary({ error, reset }: ErrorBoundaryProps) {
   useEffect(() => {
     console.error("App segment error boundary caught", error);
+    trackEvent(ANALYTICS_EVENTS.errorBoundaryShown, {
+      ...(error.digest ? { digest: error.digest } : {}),
+    });
   }, [error]);
 
   return (

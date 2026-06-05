@@ -13,6 +13,11 @@ import {
   ThemeModeSwitch,
 } from "@portfolio/storybook/site-chrome";
 
+import type { SiteThemePreference } from "@portfolio/storybook/site-chrome";
+
+import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
+import { trackEvent } from "@/lib/analytics/track";
+
 import { useThemeMode } from "./theme-provider";
 
 export type SiteChromeClientProps = SiteChromeStaticProps & {
@@ -29,7 +34,12 @@ export function SiteChromeClient({
 }: SiteChromeClientProps) {
   const pathname = usePathname() ?? "/";
   const [hash, setHash] = useState("");
-  const { preference, setPreference } = useThemeMode();
+  const { preference, setPreference: setThemePreference } = useThemeMode();
+
+  const setPreference = (value: SiteThemePreference) => {
+    setThemePreference(value);
+    trackEvent(ANALYTICS_EVENTS.themeChanged, { preference: value });
+  };
 
   useEffect(() => {
     const syncHash = () => setHash(window.location.hash);
