@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":dependencyDashboard"],
+  "minimumReleaseAge": "14 days",
+  "internalChecksFilter": "strict",
+  "automerge": true,
+  "automergeType": "pr",
+  "platformAutomerge": true,
+  "major": {
+    "automerge": true
+  },
+  "labels": ["dependencies"]
+}
