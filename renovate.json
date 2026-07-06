@@ -9,5 +9,41 @@
   "major": {
     "automerge": true
   },
-  "labels": ["dependencies"]
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "description": "Skip vestigial Vercel root shim; apps/frontend owns real deps",
+      "matchManagers": ["npm"],
+      "matchFileNames": ["package.json"],
+      "matchPaths": ["^package.json$"],
+      "enabled": false
+    },
+    {
+      "description": "Group shared dev tooling bumped across lockfiles",
+      "groupName": "eslint",
+      "matchPackageNames": [
+        "eslint",
+        "@eslint/js",
+        "eslint-config-next",
+        "eslint-plugin-playwright",
+        "typescript-eslint"
+      ]
+    },
+    {
+      "groupName": "prettier",
+      "matchPackageNames": ["prettier"]
+    },
+    {
+      "groupName": "typescript",
+      "matchPackageNames": ["typescript", "@types/node"]
+    },
+    {
+      "groupName": "playwright",
+      "matchPackageNames": ["playwright", "@playwright/test"]
+    },
+    {
+      "groupName": "vitest",
+      "matchPackageNames": ["vitest"]
+    }
+  ]
 }
