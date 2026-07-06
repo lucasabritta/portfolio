@@ -2,8 +2,6 @@ import path from "node:path";
 
 import { defineConfig, devices } from "@playwright/test";
 
-import { E2E_POSTHOG_KEY } from "./support/helpers/posthog-ingest";
-
 const frontendDir = path.resolve(__dirname, "../frontend");
 const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:3000";
 
@@ -29,16 +27,12 @@ export default defineConfig({
     command: [
       "node ../../tools/ensure-storybook-public.mjs",
       "rm -rf .next",
-      `NEXT_PUBLIC_POSTHOG_KEY=${process.env.NEXT_PUBLIC_POSTHOG_KEY ?? E2E_POSTHOG_KEY} node ./node_modules/next/dist/bin/next dev --hostname 0.0.0.0 --port 3000`,
+      "node ./node_modules/next/dist/bin/next dev --hostname 0.0.0.0 --port 3000",
     ].join(" && "),
     cwd: frontendDir,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     // First boot may compile `/site-architecture` and Storybook if `ensure-storybook-public` runs.
     timeout: 300_000,
-    env: {
-      ...process.env,
-      NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY ?? E2E_POSTHOG_KEY,
-    },
   },
 });

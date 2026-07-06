@@ -42,6 +42,4 @@ jobs:
         run: docker compose run --rm frontend sh -lc "node ../../tools/build-storybook-for-next.mjs"
 
       - name: Run Playwright e2e tests
-        env:
-          NEXT_PUBLIC_POSTHOG_KEY: phc_e2e012345678901234567890123456789012345
         run: docker compose run --rm frontend yarn --cwd ../../apps/e2e test:e2e
