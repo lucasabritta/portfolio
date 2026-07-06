@@ -14,30 +14,30 @@ import { siteProfile } from "./site-profile";
 export const HOME_RESUME_ANCHOR_ID = "resume";
 
 const HOME_POSITIONING_LEAD =
-  "I lead engineering through rapid startup growth with a bias for clear ownership: reliable platforms and faster delivery that show up in revenue, retention, and teams that scale without losing accountability for quality.";
+  "I build and scale engineering through startup growth—hands-on in architecture and production systems, accountable for delivery and quality—with outcomes that show up in revenue, retention, and reliable platforms.";
 
 const CREDIBILITY_ITEMS = [
   {
     title: "Startup → scale",
     metric: "Seed → Series B",
-    body: "Comfortable from seed ambiguity through Series B: hiring, delivery cadence, and engineering culture as explicit levers alongside the product roadmap.",
+    body: "Comfortable from seed ambiguity through Series B: shaping architecture, delivery cadence, and engineering standards alongside the product roadmap.",
   },
   {
     title: "Calm launches",
     metric: "Less drama",
-    body: "Builds the habits that let teams ship with confidence: clear ownership, steady follow-through, and problems surfaced early enough to fix before customers feel them.",
+    body: "Builds the habits that let engineering ship with confidence: clear ownership, steady follow-through, and problems surfaced early enough to fix before customers feel them.",
   },
   {
-    title: "Hands-on leadership",
-    metric: "Managers + ICs",
-    body: "Stays close enough to architecture and code paths to unblock teams without becoming a bottleneck; invests in managers and IC growth with structured feedback.",
+    title: "Hands-on depth",
+    metric: "Code + systems",
+    body: "Stays close to architecture, code paths, and production systems to unblock delivery and raise the quality bar—without becoming a bottleneck.",
   },
 ] as const satisfies CredibilityStripProps["items"];
 
 const HERO_PROOF_POINTS = [
   "Played a key role in growing a Startup from Seed to Series A and B, contributing to its ~$200 M valuation while leading engineering quality and platform excellence.",
   "Hands-on background in software development and automation, with expertise in cloud infrastructure, CI/CD, observability and performance.",
-  "Leading recruiting, onboarding, and performance development through structured 360° feedback cycles; Fostering a culture of ownership, technical excellence, and cross-team collaboration.",
+  "Shipped high-impact product features at startup speed—from new revenue-driving capabilities to core user-flow improvements—with measurable gains in adoption, conversion, and release velocity.",
 ] as const satisfies HomeLeadHeroProps["proofPoints"];
 
 const BUILD_TEASER: BuildStorybookTeaserProps = {
