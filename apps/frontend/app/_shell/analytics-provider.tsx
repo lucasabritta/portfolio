@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
 import { routeNameFromPathname } from "@/lib/analytics/properties";
@@ -16,6 +16,14 @@ import { trackEvent } from "@/lib/analytics/track";
 function PageViewTracker(): null {
   const pathname = usePathname() ?? "/";
   const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (!isAnalyticsEnabled()) {
+      return;
+    }
+
+    registerAnalyticsQueryProperties();
+  }, [searchParams]);
 
   useEffect(() => {
     if (!isAnalyticsEnabled()) {
@@ -39,7 +47,7 @@ function PageViewTracker(): null {
       window.removeEventListener("hashchange", trackPageView);
       window.removeEventListener("popstate", registerAnalyticsQueryProperties);
     };
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return null;
 }
@@ -53,17 +61,20 @@ function handleDocumentClick(event: MouseEvent): void {
 }
 
 export function AnalyticsProvider(): ReactNode {
+  const [analyticsReady, setAnalyticsReady] = useState(false);
+
   useEffect(() => {
     if (!isAnalyticsEnabled()) {
       return;
     }
 
     initPostHog();
+    setAnalyticsReady(true);
     document.addEventListener("click", handleDocumentClick, true);
     return () => document.removeEventListener("click", handleDocumentClick, true);
   }, []);
 
-  if (!isAnalyticsEnabled()) {
+  if (!analyticsReady) {
     return null;
   }
 

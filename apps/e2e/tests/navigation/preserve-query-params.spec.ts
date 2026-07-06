@@ -14,7 +14,7 @@ const preserved = PRESERVED_QUERY_FIXTURE;
 function urlHasPreservedParams(url: URL): boolean {
   return (
     url.searchParams.get("utm_source") === preserved.utm_source &&
-    url.searchParams.get("foo") === preserved.foo
+    url.searchParams.get("utm_medium") === preserved.utm_medium
   );
 }
 

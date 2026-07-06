@@ -30,6 +30,7 @@ import {
   initPostHog,
   isAnalyticsEnabled,
   registerAnalyticsQueryProperties,
+  resetPostHogClientForTests,
 } from "./posthog-client";
 
 describe("posthog-client", () => {
@@ -37,6 +38,7 @@ describe("posthog-client", () => {
     vi.clearAllMocks();
     vi.stubEnv("NEXT_PUBLIC_POSTHOG_KEY", "phc_test");
     (posthog as { __loaded: boolean }).__loaded = false;
+    resetPostHogClientForTests();
   });
 
   afterEach(() => {
@@ -69,6 +71,25 @@ describe("posthog-client", () => {
         disable_surveys: true,
         respect_dnt: true,
         persistence: "memory",
+      }),
+    );
+  });
+
+  it("initializes e2e keys with Playwright-friendly capture settings", () => {
+    vi.stubEnv("NEXT_PUBLIC_POSTHOG_KEY", "phc_e2e012345678901234567890123456789012345");
+    (posthog as { __loaded: boolean }).__loaded = false;
+    initPostHog();
+    expect(init).toHaveBeenCalledWith(
+      "phc_e2e012345678901234567890123456789012345",
+      expect.objectContaining({
+        cookieless_mode: "always",
+        disable_compression: true,
+        flush_at: 1,
+        flush_interval: 0,
+        opt_out_useragent_filter: true,
+        persistence: "memory",
+        request_batching: false,
+        respect_dnt: false,
       }),
     );
   });

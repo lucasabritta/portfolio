@@ -5,8 +5,10 @@ import {
   getAnalyticsQueryProperties,
   getPreservedParams,
   isInternalNavigationHref,
+  isPreservedQueryParam,
   resetPreservedParamsForTests,
   shouldInterceptNavigationClick,
+  syncPreservedParamsToCurrentUrl,
   withPreservedParams,
 } from "./query-params";
 
@@ -38,6 +40,15 @@ function mockEvent(
   };
 }
 
+describe("isPreservedQueryParam", () => {
+  it("accepts utm_* keys only", () => {
+    expect(isPreservedQueryParam("utm_source")).toBe(true);
+    expect(isPreservedQueryParam("utm_medium")).toBe(true);
+    expect(isPreservedQueryParam("foo")).toBe(false);
+    expect(isPreservedQueryParam("ref")).toBe(false);
+  });
+});
+
 describe("isInternalNavigationHref", () => {
   it("accepts same-origin relative and absolute paths", () => {
     expect(isInternalNavigationHref("/projects", ORIGIN)).toBe(true);
@@ -53,31 +64,37 @@ describe("isInternalNavigationHref", () => {
 });
 
 describe("withPreservedParams", () => {
-  const preserved = { utm_source: "test", foo: "bar" };
+  const preserved = { utm_source: "test", utm_medium: "email" };
   const homeBase = `${ORIGIN}/`;
 
   it("merges preserved params into internal hrefs", () => {
     expect(withPreservedParams("/projects", preserved, homeBase)).toBe(
-      "/projects?utm_source=test&foo=bar",
+      "/projects?utm_source=test&utm_medium=email",
     );
   });
 
   it("lets destination query params win", () => {
     expect(withPreservedParams("/projects?utm_source=override", preserved, homeBase)).toBe(
-      "/projects?utm_source=override&foo=bar",
+      "/projects?utm_source=override&utm_medium=email",
     );
   });
 
   it("preserves hash after query string", () => {
     expect(withPreservedParams("/#resume", preserved, homeBase)).toBe(
-      "/?utm_source=test&foo=bar#resume",
+      "/?utm_source=test&utm_medium=email#resume",
     );
   });
 
   it("resolves fragment-only hrefs against the current page", () => {
     expect(withPreservedParams("#main", preserved, `${ORIGIN}/projects`)).toBe(
-      "/projects?utm_source=test&foo=bar#main",
+      "/projects?utm_source=test&utm_medium=email#main",
     );
+  });
+
+  it("ignores non-utm keys in the preserved map", () => {
+    expect(
+      withPreservedParams("/projects", { utm_source: "test", foo: "bar" }, homeBase),
+    ).toBe("/projects?utm_source=test");
   });
 
   it("leaves external and mailto hrefs unchanged", () => {
@@ -134,19 +151,19 @@ describe("getPreservedParams and captureEntryParams", () => {
     expect(getPreservedParams()).toEqual({ utm_source: "landing" });
   });
 
-  it("merges new params into stored params on capture", () => {
+  it("ignores non-utm params on capture", () => {
     sessionStorage.setItem("pf:params", JSON.stringify({ utm_source: "stored" }));
     vi.stubGlobal("window", {
       location: {
-        search: "?foo=bar",
-        href: `${ORIGIN}/?foo=bar`,
+        search: "?foo=bar&utm_medium=email",
+        href: `${ORIGIN}/?foo=bar&utm_medium=email`,
         origin: ORIGIN,
         pathname: "/",
       },
     });
 
     captureEntryParams();
-    expect(getPreservedParams()).toEqual({ utm_source: "stored", foo: "bar" });
+    expect(getPreservedParams()).toEqual({ utm_source: "stored", utm_medium: "email" });
   });
 
   it("falls back to memory when sessionStorage is unavailable", () => {
@@ -179,8 +196,8 @@ describe("getAnalyticsQueryProperties", () => {
     resetPreservedParamsForTests();
     vi.stubGlobal("window", {
       location: {
-        search: "?utm_source=test&foo=bar",
-        href: `${ORIGIN}/?utm_source=test&foo=bar`,
+        search: "?utm_source=test&utm_medium=email&foo=bar",
+        href: `${ORIGIN}/?utm_source=test&utm_medium=email&foo=bar`,
         origin: ORIGIN,
         pathname: "/",
       },
@@ -192,12 +209,106 @@ describe("getAnalyticsQueryProperties", () => {
     vi.unstubAllGlobals();
   });
 
-  it("includes every param and entry_query", () => {
+  it("includes utm_* params and entry_query", () => {
     expect(getAnalyticsQueryProperties()).toEqual({
       utm_source: "test",
-      foo: "bar",
-      entry_query: "utm_source=test&foo=bar",
+      utm_medium: "email",
+      entry_query: "utm_source=test&utm_medium=email",
     });
+  });
+});
+
+describe("syncPreservedParamsToCurrentUrl", () => {
+  beforeEach(() => {
+    resetPreservedParamsForTests();
+  });
+
+  afterEach(() => {
+    resetPreservedParamsForTests();
+    vi.unstubAllGlobals();
+  });
+
+  it("returns merged href when utm params are missing from the current URL", () => {
+    sessionStorage.setItem("pf:params", JSON.stringify({ utm_source: "test", utm_medium: "email" }));
+    vi.stubGlobal("window", {
+      location: {
+        search: "",
+        href: `${ORIGIN}/projects`,
+        origin: ORIGIN,
+        pathname: "/projects",
+        hash: "",
+      },
+    });
+
+    expect(syncPreservedParamsToCurrentUrl(`${ORIGIN}/projects`)).toBe(
+      "/projects?utm_source=test&utm_medium=email",
+    );
+  });
+
+  it("returns null when the current URL already has preserved params", () => {
+    vi.stubGlobal("window", {
+      location: {
+        search: "?utm_source=test",
+        href: `${ORIGIN}/projects?utm_source=test`,
+        origin: ORIGIN,
+        pathname: "/projects",
+        hash: "",
+      },
+    });
+    sessionStorage.setItem("pf:params", JSON.stringify({ utm_source: "test" }));
+
+    expect(syncPreservedParamsToCurrentUrl(`${ORIGIN}/projects?utm_source=test`)).toBeNull();
+  });
+
+  it("returns null when there are no preserved params", () => {
+    vi.stubGlobal("window", {
+      location: {
+        search: "",
+        href: `${ORIGIN}/projects`,
+        origin: ORIGIN,
+        pathname: "/projects",
+        hash: "",
+      },
+    });
+
+    expect(syncPreservedParamsToCurrentUrl(`${ORIGIN}/projects`)).toBeNull();
+  });
+
+  it("merges missing utm params when the URL is only partially attributed", () => {
+    sessionStorage.setItem(
+      "pf:params",
+      JSON.stringify({ utm_source: "test", utm_medium: "email" }),
+    );
+    vi.stubGlobal("window", {
+      location: {
+        search: "?utm_source=test",
+        href: `${ORIGIN}/projects?utm_source=test`,
+        origin: ORIGIN,
+        pathname: "/projects",
+        hash: "",
+      },
+    });
+
+    expect(syncPreservedParamsToCurrentUrl(`${ORIGIN}/projects?utm_source=test`)).toBe(
+      "/projects?utm_source=test&utm_medium=email",
+    );
+  });
+
+  it("preserves hash when syncing params onto the current URL", () => {
+    sessionStorage.setItem("pf:params", JSON.stringify({ utm_source: "test" }));
+    vi.stubGlobal("window", {
+      location: {
+        search: "",
+        href: `${ORIGIN}/#contact-heading`,
+        origin: ORIGIN,
+        pathname: "/",
+        hash: "#contact-heading",
+      },
+    });
+
+    expect(syncPreservedParamsToCurrentUrl(`${ORIGIN}/#contact-heading`)).toBe(
+      "/?utm_source=test#contact-heading",
+    );
   });
 });
 

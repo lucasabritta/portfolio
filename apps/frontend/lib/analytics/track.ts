@@ -1,6 +1,7 @@
 import type { AnalyticsEventName } from "./events";
 import type { AnalyticsProperties } from "./properties";
 import { getPostHog, initPostHog } from "./posthog-client";
+import { getAnalyticsQueryProperties } from "./query-params";
 
 export function trackEvent(
   event: AnalyticsEventName | string,
@@ -15,5 +16,6 @@ export function trackEvent(
     return;
   }
 
-  client.capture(event, properties);
+  const queryProperties = getAnalyticsQueryProperties();
+  client.capture(event, { ...queryProperties, ...properties });
 }

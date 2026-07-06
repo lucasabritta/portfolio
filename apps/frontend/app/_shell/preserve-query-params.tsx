@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 
-import { captureEntryParams, shouldInterceptNavigationClick } from "@/lib/analytics/query-params";
+import { captureEntryParams, shouldInterceptNavigationClick, syncPreservedParamsToCurrentUrl } from "@/lib/analytics/query-params";
 
 function handleDocumentClick(event: MouseEvent, push: (href: string) => void): void {
   if (!(event.target instanceof Element)) {
@@ -31,7 +31,11 @@ export function PreserveQueryParams(): ReactNode {
 
   useEffect(() => {
     captureEntryParams();
-  }, [pathname, searchParams]);
+    const synced = syncPreservedParamsToCurrentUrl();
+    if (synced) {
+      router.replace(synced, { scroll: false });
+    }
+  }, [pathname, searchParams, router]);
 
   useEffect(() => {
     const listener = (event: MouseEvent) => {
