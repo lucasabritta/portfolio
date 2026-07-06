@@ -3,7 +3,7 @@ import { expect, type Page } from "@playwright/test";
 /** Stable query fixture for attribution preservation tests. */
 export const PRESERVED_QUERY_FIXTURE = {
   utm_source: "e2e",
-  foo: "bar",
+  utm_medium: "test",
 } as const;
 
 export type PreservedQueryFixture = typeof PRESERVED_QUERY_FIXTURE;

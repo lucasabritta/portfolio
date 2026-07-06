@@ -4,7 +4,25 @@ import { captureEntryParams, getAnalyticsQueryProperties } from "./query-params"
 
 let initialized = false;
 
+declare global {
+  interface Window {
+    /** Set in Playwright via addInitScript so e2e can enable analytics without a production key. */
+    __PF_POSTHOG_KEY__?: string;
+  }
+}
+
+function isE2ePostHogKey(key: string): boolean {
+  return key.startsWith("phc_e2e");
+}
+
 export function getPostHogKey(): string | undefined {
+  if (typeof window !== "undefined") {
+    // Playwright e2e only — production must not set this global.
+    const injected = window.__PF_POSTHOG_KEY__;
+    if (injected) {
+      return injected;
+    }
+  }
   return process.env.NEXT_PUBLIC_POSTHOG_KEY;
 }
 
@@ -25,14 +43,28 @@ export function initPostHog(): typeof posthog | null {
   posthog.init(key, {
     api_host: "/ingest",
     ui_host: "https://eu.posthog.com",
-    cookieless_mode: "always",
     capture_pageview: false,
     capture_pageleave: false,
     autocapture: false,
     disable_session_recording: true,
     disable_surveys: true,
-    respect_dnt: true,
-    persistence: "memory",
+    ...(isE2ePostHogKey(key)
+      ? {
+          advanced_disable_flags: true,
+          cookieless_mode: "always",
+          disable_compression: true,
+          flush_at: 1,
+          flush_interval: 0,
+          opt_out_useragent_filter: true,
+          persistence: "memory",
+          request_batching: false,
+          respect_dnt: false,
+        }
+      : {
+          cookieless_mode: "always",
+          persistence: "memory",
+          respect_dnt: true,
+        }),
   });
 
   captureEntryParams();
@@ -70,4 +102,9 @@ export function getPostHog(): typeof posthog | null {
     return initPostHog();
   }
   return posthog;
+}
+
+/** @internal Test-only reset of init guard. */
+export function resetPostHogClientForTests(): void {
+  initialized = false;
 }

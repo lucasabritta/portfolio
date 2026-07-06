@@ -14,7 +14,7 @@ const preserved = PRESERVED_QUERY_FIXTURE;
 function urlHasPreservedParams(url: URL): boolean {
   return (
     url.searchParams.get("utm_source") === preserved.utm_source &&
-    url.searchParams.get("foo") === preserved.foo
+    url.searchParams.get("utm_medium") === preserved.utm_medium
   );
 }
 
@@ -26,11 +26,11 @@ test.describe("Preserve URL query params", () => {
     await home.gotoWithQueryParams(preserved);
     await expectStoredPreservedParams(page, preserved);
 
-    await home.openProjectsFromPrimaryNav();
+    await home.openProjectsFromPrimaryNavWithPreservedParams();
     await expect(projects.pageHeading).toBeVisible();
     await expectPageQueryParams(page, preserved);
 
-    await home.openBuildFromPrimaryNav();
+    await home.openBuildFromPrimaryNavWithPreservedParams();
     await expect(page.getByRole("heading", { name: /site architecture/i })).toBeVisible();
     await expectPageQueryParams(page, preserved);
     await expectStoredPreservedParams(page, preserved);
@@ -65,12 +65,20 @@ test.describe("Preserve URL query params", () => {
     const query = queryStringFrom(preserved);
     await page.goto(`/does-not-exist?${query}`);
     await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
+    await expectStoredPreservedParams(page, preserved);
 
     await page.getByRole("link", { name: "Jump to resume" }).click();
-    await expect(page).toHaveURL((url) => {
-      const parsed = new URL(url);
-      return parsed.pathname === "/" && parsed.hash === "#resume" && urlHasPreservedParams(parsed);
-    });
+    await expect
+      .poll(
+        () => {
+          const parsed = new URL(page.url());
+          return (
+            parsed.pathname === "/" && parsed.hash === "#resume" && urlHasPreservedParams(parsed)
+          );
+        },
+        { timeout: 10_000 },
+      )
+      .toBe(true);
     await expectStoredPreservedParams(page, preserved);
   });
 });

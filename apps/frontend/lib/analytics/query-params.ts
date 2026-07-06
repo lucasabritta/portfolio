@@ -4,7 +4,26 @@ const STORAGE_KEY = "pf:params";
 
 let memoryParams: Record<string, string> = {};
 
+/** Only `utm_*` query keys are preserved across in-app navigation and analytics. */
+export function isPreservedQueryParam(key: string): boolean {
+  return key.startsWith("utm_");
+}
+
+function filterPreservedParams(params: Record<string, string>): Record<string, string> {
+  const filtered: Record<string, string> = {};
+  for (const [key, value] of Object.entries(params)) {
+    if (isPreservedQueryParam(key)) {
+      filtered[key] = value;
+    }
+  }
+  return filtered;
+}
+
 function paramsFromSearch(search: string): Record<string, string> {
+  return filterPreservedParams(paramsFromSearchRaw(search));
+}
+
+function paramsFromSearchRaw(search: string): Record<string, string> {
   const params: Record<string, string> = {};
   const parsed = new URLSearchParams(search);
   parsed.forEach((value, key) => {
@@ -17,25 +36,26 @@ function readStoredParams(): Record<string, string> {
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY);
     if (!raw) {
-      return { ...memoryParams };
+      return filterPreservedParams({ ...memoryParams });
     }
     const stored = JSON.parse(raw) as Record<string, string>;
-    return { ...stored, ...memoryParams };
+    return filterPreservedParams({ ...stored, ...memoryParams });
   } catch {
-    return { ...memoryParams };
+    return filterPreservedParams({ ...memoryParams });
   }
 }
 
 function writeStoredParams(params: Record<string, string>): void {
-  memoryParams = { ...params };
+  const preserved = filterPreservedParams(params);
+  memoryParams = { ...preserved };
   try {
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(params));
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(preserved));
   } catch {
     // sessionStorage unavailable — memory fallback only
   }
 }
 
-/** Persist non-empty query params for the tab session (entry + later landings). */
+/** Persist `utm_*` query params for the tab session (entry + later landings). */
 export function captureEntryParams(): void {
   if (typeof window === "undefined") {
     return;
@@ -113,12 +133,13 @@ export function withPreservedParams(
   baseHref: string = typeof window !== "undefined" ? window.location.href : "http://localhost/",
 ): string {
   const { baseHref: resolvedBase, origin } = navigationBaseHref(baseHref);
-  if (!isInternalNavigationHref(href, origin) || Object.keys(preserved).length === 0) {
+  const filtered = filterPreservedParams(preserved);
+  if (!isInternalNavigationHref(href, origin) || Object.keys(filtered).length === 0) {
     return href;
   }
 
   const url = new URL(href.trim(), resolvedBase);
-  for (const [key, value] of Object.entries(preserved)) {
+  for (const [key, value] of Object.entries(filtered)) {
     if (!url.searchParams.has(key)) {
       url.searchParams.set(key, value);
     }
@@ -128,8 +149,7 @@ export function withPreservedParams(
 }
 
 /**
- * Super properties for PostHog: every preserved param plus `entry_query`.
- * Product choice: forward all URL keys/values (including any PII that appears in the query string).
+ * Super properties for PostHog: preserved `utm_*` params plus `entry_query`.
  */
 export function getAnalyticsQueryProperties(): Record<string, string> {
   const params = getPreservedParams();
@@ -210,6 +230,27 @@ export function shouldInterceptNavigationClick(ctx: NavigationClickContext): str
   }
 
   return hrefWithParams;
+}
+
+/**
+ * When the current URL is missing session-preserved `utm_*` params, returns a merged
+ * internal href suitable for `router.replace`. Otherwise returns null.
+ */
+export function syncPreservedParamsToCurrentUrl(
+  locationHref: string = typeof window !== "undefined" ? window.location.href : "http://localhost/",
+): string | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const preserved = getPreservedParams();
+  if (Object.keys(preserved).length === 0) {
+    return null;
+  }
+
+  const currentHref = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  const synced = withPreservedParams(currentHref, preserved, locationHref);
+  return synced !== currentHref ? synced : null;
 }
 
 /** @internal Test-only reset of in-memory param store. */

@@ -37,7 +37,7 @@ describe("Home page", () => {
     expect(within(heroRoot as HTMLElement).getByText("Proof points")).toBeInTheDocument();
     expect(
       within(heroRoot as HTMLElement).getByText(
-        "Played a key role in growing a Startup from Seed to Series A and B, contributing to its ~$200 M valuation while leading engineering quality and platform excellence.",
+        "Shipped high-impact product features at startup speed—from new revenue-driving capabilities to core user-flow improvements—with measurable gains in adoption, conversion, and release velocity.",
       ),
     ).toBeInTheDocument();
     const projects = within(heroRoot as HTMLElement).getByRole("link", { name: "View Projects" });

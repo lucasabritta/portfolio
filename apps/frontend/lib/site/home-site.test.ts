@@ -13,7 +13,7 @@ describe("buildHomeMarketing", () => {
     expect(m.homeLeadHero.proofPoints).toEqual([
       "Played a key role in growing a Startup from Seed to Series A and B, contributing to its ~$200 M valuation while leading engineering quality and platform excellence.",
       "Hands-on background in software development and automation, with expertise in cloud infrastructure, CI/CD, observability and performance.",
-      "Leading recruiting, onboarding, and performance development through structured 360° feedback cycles; Fostering a culture of ownership, technical excellence, and cross-team collaboration.",
+      "Shipped high-impact product features at startup speed—from new revenue-driving capabilities to core user-flow improvements—with measurable gains in adoption, conversion, and release velocity.",
     ]);
     expect(m.condensedCv.resumeAnchorId).toBe(HOME_RESUME_ANCHOR_ID);
     expect(m.condensedCv.heading).toBe("Work history");

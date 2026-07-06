@@ -16,6 +16,7 @@ import {
 import type { SiteThemePreference } from "@portfolio/storybook/site-chrome";
 
 import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
+import { handleThemePreferenceChange } from "@/lib/analytics/theme-tracking";
 import { trackEvent } from "@/lib/analytics/track";
 
 import { useThemeMode } from "./theme-provider";
@@ -37,8 +38,10 @@ export function SiteChromeClient({
   const { preference, setPreference: setThemePreference } = useThemeMode();
 
   const setPreference = (value: SiteThemePreference) => {
-    setThemePreference(value);
-    trackEvent(ANALYTICS_EVENTS.themeChanged, { preference: value });
+    handleThemePreferenceChange(preference, value, {
+      apply: setThemePreference,
+      track: (next) => trackEvent(ANALYTICS_EVENTS.themeChanged, { preference: next }),
+    });
   };
 
   useEffect(() => {

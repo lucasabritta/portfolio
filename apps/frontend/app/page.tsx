@@ -22,7 +22,7 @@ import { buildHomePageModel } from "@/lib/site/home-page-model";
 export const metadata: Metadata = {
   title: "Home",
   description:
-    "Engineering Manager portfolio for Lucas Abritta — startup growth, platform excellence, and software delivery leadership.",
+    "Portfolio for Lucas Abritta — startup engineering, platform reliability, and hands-on delivery from seed through scale.",
 };
 
 export default function Home() {

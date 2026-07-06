@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const siteMetadata: Metadata = {
-  title: "Lucas Abritta | Engineering Manager",
+  title: "Lucas Abritta | Senior Software Engineer · Tech Lead",
   description:
-    "Engineering Manager portfolio for Lucas Abritta, covering startup growth, platform excellence, and software delivery leadership.",
+    "Portfolio for Lucas Abritta — startup engineering, platform reliability, and hands-on delivery from seed through scale.",
 };

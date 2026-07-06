@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useSyncExternalStore, type ReactNode } from "react";
 
 import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
 import { routeNameFromPathname } from "@/lib/analytics/properties";
@@ -16,6 +16,14 @@ import { trackEvent } from "@/lib/analytics/track";
 function PageViewTracker(): null {
   const pathname = usePathname() ?? "/";
   const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (!isAnalyticsEnabled()) {
+      return;
+    }
+
+    registerAnalyticsQueryProperties();
+  }, [searchParams]);
 
   useEffect(() => {
     if (!isAnalyticsEnabled()) {
@@ -39,7 +47,7 @@ function PageViewTracker(): null {
       window.removeEventListener("hashchange", trackPageView);
       window.removeEventListener("popstate", registerAnalyticsQueryProperties);
     };
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return null;
 }
@@ -52,7 +60,17 @@ function handleDocumentClick(event: MouseEvent): void {
   trackClickTarget(event.target, window.location.pathname);
 }
 
+function useIsClient(): boolean {
+  return useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+}
+
 export function AnalyticsProvider(): ReactNode {
+  const isClient = useIsClient();
+
   useEffect(() => {
     if (!isAnalyticsEnabled()) {
       return;
@@ -63,7 +81,7 @@ export function AnalyticsProvider(): ReactNode {
     return () => document.removeEventListener("click", handleDocumentClick, true);
   }, []);
 
-  if (!isAnalyticsEnabled()) {
+  if (!isClient || !isAnalyticsEnabled()) {
     return null;
   }
 
