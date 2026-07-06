@@ -92,9 +92,9 @@ describe("withPreservedParams", () => {
   });
 
   it("ignores non-utm keys in the preserved map", () => {
-    expect(
-      withPreservedParams("/projects", { utm_source: "test", foo: "bar" }, homeBase),
-    ).toBe("/projects?utm_source=test");
+    expect(withPreservedParams("/projects", { utm_source: "test", foo: "bar" }, homeBase)).toBe(
+      "/projects?utm_source=test",
+    );
   });
 
   it("leaves external and mailto hrefs unchanged", () => {
@@ -229,7 +229,10 @@ describe("syncPreservedParamsToCurrentUrl", () => {
   });
 
   it("returns merged href when utm params are missing from the current URL", () => {
-    sessionStorage.setItem("pf:params", JSON.stringify({ utm_source: "test", utm_medium: "email" }));
+    sessionStorage.setItem(
+      "pf:params",
+      JSON.stringify({ utm_source: "test", utm_medium: "email" }),
+    );
     vi.stubGlobal("window", {
       location: {
         search: "",

@@ -66,6 +66,10 @@ export class HomePage {
   }
 
   async openProjectsFromPrimaryNav() {
+    await this.openPrimaryNav("Projects", (url) => url.pathname === "/projects");
+  }
+
+  async openProjectsFromPrimaryNavWithPreservedParams() {
     await this.openPrimaryNav("Projects", (url) => {
       const parsed = new URL(url);
       return parsed.pathname === "/projects" && parsed.search.includes("utm_source=");
@@ -73,6 +77,10 @@ export class HomePage {
   }
 
   async openBuildFromPrimaryNav() {
+    await this.openPrimaryNav("Site architecture", (url) => url.pathname === "/site-architecture");
+  }
+
+  async openBuildFromPrimaryNavWithPreservedParams() {
     await this.openPrimaryNav("Site architecture", (url) => {
       const parsed = new URL(url);
       return parsed.pathname === "/site-architecture" && parsed.search.includes("utm_source=");
