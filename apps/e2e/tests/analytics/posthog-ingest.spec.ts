@@ -1,9 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import {
-  expectPageQueryParams,
-  PRESERVED_QUERY_FIXTURE,
-} from "../../support/helpers/query-params";
+import { expectPageQueryParams, PRESERVED_QUERY_FIXTURE } from "../../support/helpers/query-params";
 import {
   E2E_POSTHOG_KEY,
   countPostHogEvents,

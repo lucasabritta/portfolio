@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useSyncExternalStore, type ReactNode } from "react";
 
 import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
 import { routeNameFromPathname } from "@/lib/analytics/properties";
@@ -60,8 +60,16 @@ function handleDocumentClick(event: MouseEvent): void {
   trackClickTarget(event.target, window.location.pathname);
 }
 
+function useIsClient(): boolean {
+  return useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+}
+
 export function AnalyticsProvider(): ReactNode {
-  const [analyticsReady, setAnalyticsReady] = useState(false);
+  const isClient = useIsClient();
 
   useEffect(() => {
     if (!isAnalyticsEnabled()) {
@@ -69,12 +77,11 @@ export function AnalyticsProvider(): ReactNode {
     }
 
     initPostHog();
-    setAnalyticsReady(true);
     document.addEventListener("click", handleDocumentClick, true);
     return () => document.removeEventListener("click", handleDocumentClick, true);
   }, []);
 
-  if (!analyticsReady) {
+  if (!isClient || !isAnalyticsEnabled()) {
     return null;
   }
 

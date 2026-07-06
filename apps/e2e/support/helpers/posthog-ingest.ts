@@ -170,7 +170,10 @@ export async function installPostHogIngestCapture(page: Page): Promise<IngestCap
     Object.defineProperty(navigator, "doNotTrack", { get: () => null, configurable: true });
     Object.defineProperty(navigator, "msDoNotTrack", { get: () => null, configurable: true });
     Object.defineProperty(window, "doNotTrack", { get: () => null, configurable: true });
-    Object.defineProperty(navigator, "globalPrivacyControl", { get: () => false, configurable: true });
+    Object.defineProperty(navigator, "globalPrivacyControl", {
+      get: () => false,
+      configurable: true,
+    });
   }, E2E_POSTHOG_KEY);
 
   await page.context().route(/\/ingest\/decide/, async (route) => {
@@ -200,7 +203,9 @@ export async function installPostHogIngestCapture(page: Page): Promise<IngestCap
 
 export async function expectPostHogIngestPost(state: IngestCaptureState): Promise<void> {
   await expect
-    .poll(() => state.posts.some((post) => isPostHogCaptureIngestUrl(post.url)), { timeout: 15_000 })
+    .poll(() => state.posts.some((post) => isPostHogCaptureIngestUrl(post.url)), {
+      timeout: 15_000,
+    })
     .toBe(true);
 }
 
