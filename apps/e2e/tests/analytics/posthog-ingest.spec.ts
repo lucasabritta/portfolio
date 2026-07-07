@@ -43,9 +43,16 @@ test.describe("PostHog ingest", () => {
     });
 
     const postsBeforeNav = ingest.posts.length;
-    await home.openProjectsFromPrimaryNav();
+    await home.openProjectsFromPrimaryNavWithPreservedParams();
     await expect(projects.pageHeading).toBeVisible();
     await expectPageQueryParams(page, preserved);
+
+    await expectPostHogEvent(ingest, "nav_clicked", {
+      label: "Projects",
+      target: "/projects",
+      utm_source: preserved.utm_source,
+      utm_medium: preserved.utm_medium,
+    });
 
     await expect.poll(() => ingest.posts.length).toBeGreaterThan(postsBeforeNav);
     await expectPostHogEvent(ingest, "page_viewed", {
