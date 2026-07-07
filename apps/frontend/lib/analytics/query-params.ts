@@ -1,6 +1,7 @@
 import { classifyLinkKind } from "./properties";
+import { PRESERVED_PARAMS_STORAGE_KEY } from "./query-params-storage-key";
 
-const STORAGE_KEY = "pf:params";
+const STORAGE_KEY = PRESERVED_PARAMS_STORAGE_KEY;
 
 let memoryParams: Record<string, string> = {};
 
@@ -146,6 +147,14 @@ export function withPreservedParams(
   }
 
   return formatInternalHref(url);
+}
+
+/** Merge session `utm_*` params into an internal href for link rendering. */
+export function preserveInternalHref(href: string): string {
+  if (!isInternalNavigationHref(href)) {
+    return href;
+  }
+  return withPreservedParams(href);
 }
 
 /**

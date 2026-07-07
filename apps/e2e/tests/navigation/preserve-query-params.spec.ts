@@ -61,6 +61,21 @@ test.describe("Preserve URL query params", () => {
     });
   });
 
+  test("persists params when Projects nav is clicked immediately after landing", async ({
+    page,
+  }) => {
+    const query = queryStringFrom(preserved);
+    await page.goto(`/?${query}`, { waitUntil: "commit" });
+    await page
+      .getByRole("navigation", { name: "Primary" })
+      .getByRole("link", { name: "Projects" })
+      .click();
+    await expect
+      .poll(() => new URL(page.url()).searchParams.get("utm_source"))
+      .toBe(preserved.utm_source);
+    await expect(page.getByRole("heading", { name: "Projects" })).toBeVisible();
+  });
+
   test("merges params for cross-route hash links from not-found", async ({ page }) => {
     const query = queryStringFrom(preserved);
     await page.goto(`/does-not-exist?${query}`);

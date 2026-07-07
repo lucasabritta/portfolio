@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 
 import {
@@ -25,13 +25,13 @@ function handleDocumentClick(event: MouseEvent, push: (href: string) => void): v
   }
 
   event.preventDefault();
+  event.stopImmediatePropagation();
   push(hrefWithParams);
 }
 
 export function PreserveQueryParams(): ReactNode {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     captureEntryParams();
@@ -39,9 +39,11 @@ export function PreserveQueryParams(): ReactNode {
     if (synced) {
       router.replace(synced, { scroll: false });
     }
-  }, [pathname, searchParams, router]);
+  }, [pathname, router]);
 
   useEffect(() => {
+    captureEntryParams();
+
     const listener = (event: MouseEvent) => {
       handleDocumentClick(event, (href) => {
         router.push(href);

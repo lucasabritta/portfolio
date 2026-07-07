@@ -45,16 +45,25 @@ function applyDomTheme(preference: ThemePreference) {
   document.documentElement.dataset.themePreference = preference;
 }
 
+function readBootstrappedPreference(): ThemePreference {
+  if (typeof document === "undefined") {
+    return "system";
+  }
+
+  const fromDom = document.documentElement.dataset.themePreference;
+  if (isThemePreference(fromDom ?? null)) {
+    return fromDom as ThemePreference;
+  }
+
+  const raw = localStorage.getItem(THEME_STORAGE_KEY);
+  return isThemePreference(raw) ? raw : "system";
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [preference, setPreferenceState] = useState<ThemePreference>("system");
+  const [preference, setPreferenceState] = useState<ThemePreference>(readBootstrappedPreference);
 
   useLayoutEffect(() => {
-    const raw = localStorage.getItem(THEME_STORAGE_KEY);
-    const next = isThemePreference(raw) ? raw : "system";
-    applyDomTheme(next);
-    // One-time read of persisted preference; inline script already aligned `data-theme` for paint.
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time read from localStorage into React state before paint
-    setPreferenceState(next);
+    applyDomTheme(readBootstrappedPreference());
   }, []);
 
   const resolved = useMemo(() => resolveTheme(preference), [preference]);
