@@ -2,7 +2,9 @@
 
 import { useEffect } from "react";
 
+import { shouldTrackErrorBoundary } from "@/lib/analytics/analytics-shell-lifecycle";
 import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
+import { isAnalyticsEnabled } from "@/lib/analytics/posthog-client";
 import { trackEvent } from "@/lib/analytics/track";
 
 import { GlobalErrorView, globalErrorBodyStyle } from "@portfolio/storybook/status-page";
@@ -14,11 +16,17 @@ type GlobalErrorProps = {
 
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
   useEffect(() => {
+    if (!isAnalyticsEnabled()) {
+      return;
+    }
+
     console.error("Root error boundary caught", error);
-    trackEvent(ANALYTICS_EVENTS.errorBoundaryShown, {
-      context: "global",
-      ...(error.digest ? { digest: error.digest } : {}),
-    });
+    if (shouldTrackErrorBoundary("global", error.digest)) {
+      trackEvent(ANALYTICS_EVENTS.errorBoundaryShown, {
+        context: "global",
+        ...(error.digest ? { digest: error.digest } : {}),
+      });
+    }
   }, [error]);
 
   return (

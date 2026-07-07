@@ -14,6 +14,11 @@ export default tseslint.config(js.configs.recommended, ...tseslint.configs.recom
             message:
               "Keep Storybook presentation-only: pass props from fixtures; do not import resume-content.",
           },
+          {
+            name: "posthog-js",
+            message:
+              "Storybook stays analytics-free: never import posthog-js in packages/storybook.",
+          },
         ],
         patterns: [
           {

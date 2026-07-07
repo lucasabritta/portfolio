@@ -213,10 +213,13 @@ export async function expectPostHogEvent(
   state: IngestCaptureState,
   eventName: string,
   assertProperties?: Record<string, string>,
+  predicate?: (properties: Record<string, unknown>) => boolean,
 ): Promise<PostHogCapturedEvent> {
-  await expect.poll(() => findPostHogEvent(state, eventName), { timeout: 15_000 }).not.toBeNull();
+  await expect
+    .poll(() => findPostHogEvent(state, eventName, predicate), { timeout: 15_000 })
+    .not.toBeNull();
 
-  const captured = findPostHogEvent(state, eventName);
+  const captured = findPostHogEvent(state, eventName, predicate);
   if (!captured) {
     const seen = state.posts.flatMap((post) =>
       parsePostHogEvents(post.json).map((item) => item.event),

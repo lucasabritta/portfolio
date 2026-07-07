@@ -12,5 +12,6 @@ export {
   type AnalyticsPropertyValue,
   type LinkKind,
 } from "./properties";
-export { getPostHog, getPostHogKey, initPostHog, isAnalyticsEnabled } from "./posthog-client";
-export { trackEvent } from "./track";
+export { getPostHogKey, isAnalyticsEnabled } from "./posthog-client";
+export { trackEvent, trackImpression } from "./track";
+export { usePreservedHrefDecorator } from "./use-preserve-internal-href";

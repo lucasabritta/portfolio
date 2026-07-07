@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "playwright test",
     "test:e2e": "playwright test",
+    "test:unit": "vitest run",
     "format": "prettier --write . --ignore-path ../../.prettierignore",
     "format:check": "prettier --check . --ignore-path ../../.prettierignore"
   },
@@ -22,6 +23,7 @@
     "eslint-plugin-playwright": "^2.10.1",
     "prettier": "3.8.4",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.58.2"
+    "typescript-eslint": "^8.58.2",
+    "vitest": "^3.2.4"
   }
 }

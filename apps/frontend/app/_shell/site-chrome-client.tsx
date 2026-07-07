@@ -16,9 +16,9 @@ import {
 import type { SiteThemePreference } from "@portfolio/storybook/site-chrome";
 
 import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
-import { preserveInternalHref } from "@/lib/analytics/query-params";
 import { handleThemePreferenceChange } from "@/lib/analytics/theme-tracking";
 import { trackEvent } from "@/lib/analytics/track";
+import { usePreservedHrefDecorator } from "@/lib/analytics/use-preserve-internal-href";
 
 import { useThemeMode } from "./theme-provider";
 
@@ -37,14 +37,15 @@ export function SiteChromeClient({
   const pathname = usePathname() ?? "/";
   const [hash, setHash] = useState("");
   const { preference, setPreference: setThemePreference } = useThemeMode();
+  const decorateHref = usePreservedHrefDecorator();
 
   const navItemsWithParams = navItems.map((item) => ({
     ...item,
-    href: preserveInternalHref(item.href),
+    href: decorateHref(item.href),
   }));
 
   const footerLinksWithParams = footerLinks.map((link) =>
-    link.external ? link : { ...link, href: preserveInternalHref(link.href) },
+    link.external ? link : { ...link, href: decorateHref(link.href) },
   );
 
   const setPreference = (value: SiteThemePreference) => {
@@ -69,7 +70,7 @@ export function SiteChromeClient({
       header={
         <SiteHeader
           wordmarkText={wordmarkText}
-          wordmarkHref={preserveInternalHref("/")}
+          wordmarkHref={decorateHref("/")}
           navItems={navItemsWithParams}
           currentPath={currentPath}
           linkComponent={Link}

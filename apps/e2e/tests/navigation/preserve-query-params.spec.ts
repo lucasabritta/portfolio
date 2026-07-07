@@ -6,6 +6,7 @@ import {
   PRESERVED_QUERY_FIXTURE,
   queryStringFrom,
 } from "../../support/helpers/query-params";
+import { PRESERVED_PARAMS_STORAGE_KEY } from "../../../frontend/lib/analytics/query-params-storage-key";
 import { HomePage } from "../../support/page-objects/home.page";
 import { ProjectsPage } from "../../support/page-objects/projects.page";
 
@@ -66,17 +67,29 @@ test.describe("Preserve URL query params", () => {
   }) => {
     const projects = new ProjectsPage(page);
     const query = queryStringFrom(preserved);
-    await page.goto(`/?${query}`, { waitUntil: "commit" });
-    await page
-      .getByRole("navigation", { name: "Primary" })
-      .getByRole("link", { name: "Projects" })
-      .click();
-    await expect
-      .poll(() => {
-        const parsed = new URL(page.url());
+    await page.goto(`/?${query}`, { waitUntil: "domcontentloaded" });
+    await page.waitForFunction(
+      (key) => {
+        const raw = sessionStorage.getItem(key);
+        if (!raw) {
+          return false;
+        }
+        const parsed = JSON.parse(raw) as Record<string, string>;
+        return parsed.utm_source === "e2e" && parsed.utm_medium === "test";
+      },
+      PRESERVED_PARAMS_STORAGE_KEY,
+      { timeout: 10_000 },
+    );
+    await Promise.all([
+      page.waitForURL((url) => {
+        const parsed = new URL(url);
         return parsed.pathname === "/projects" && urlHasPreservedParams(parsed);
-      })
-      .toBe(true);
+      }),
+      page
+        .getByRole("navigation", { name: "Primary" })
+        .getByRole("link", { name: "Projects" })
+        .click(),
+    ]);
     await expect(projects.pageHeading).toBeVisible();
     await expectPageQueryParams(page, preserved);
   });

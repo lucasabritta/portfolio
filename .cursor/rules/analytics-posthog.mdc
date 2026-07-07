@@ -6,8 +6,8 @@ alwaysApply: false
 
 # PostHog analytics (frontend only)
 
-- **Location**: `apps/frontend/lib/analytics/` + `apps/frontend/app/_shell/analytics-provider.tsx`. Never import `posthog-js` or add analytics props/attributes in `packages/storybook`.
-- **Add an event**: call `trackEvent("event_name", { ... })` for non-click events, or add a row to `event-registry.ts` for link/button clicks resolved via DOM context (landmarks, section ids, pathname).
+- **Location**: `apps/frontend/lib/analytics/` + `apps/frontend/app/_shell/analytics-shell.tsx` + `analytics-click-capture.tsx` (eager clicks, outside Suspense). Never import `posthog-js` or add analytics props/attributes in `packages/storybook`.
+- **Add an event**: call `trackEvent(ANALYTICS_EVENTS.eventName, { ... })` for imperative events (theme, etc.); use `analytics-shell-lifecycle.ts` helpers (`preparePageViewTracking`, `shouldTrackNotFoundView`, `shouldTrackErrorBoundary`) + `trackEvent` for page views, 404, and error boundaries (hash-aware dedupe); use `trackImpression()` for new impression events without lifecycle helpers; add a row to `event-registry.ts` for link/button clicks.
 - **Privacy**: `cookieless_mode: "always"`; never `identify()`; never put email, phone, or raw `mailto:`/`tel:` in properties — use `channel` instead.
 - **Env**: `NEXT_PUBLIC_POSTHOG_KEY` scoped to Vercel Production only; ingest via `/ingest` rewrites.
 

@@ -1,3 +1,5 @@
+import { SECTION_ID_TO_LOCATION } from "./location-maps";
+
 export type LinkKind = "internal" | "external" | "mailto" | "tel" | "hash";
 
 export type AnalyticsPropertyValue = string | number | boolean;
@@ -116,19 +118,9 @@ export function extractClickLabel(el: Element, href: string | null = null): stri
 
 function sectionIdToLocation(sectionId: string, pathname: string): string | null {
   const id = sectionId.toLowerCase();
-  const map: Record<string, string> = {
-    "home-hero": "home_hero",
-    "featured-work": "featured_work_flagship",
-    "build-teaser": "build_teaser",
-    "cv-preview": "cv_preview",
-    "contact-heading": "contact_section",
-    "projects-heading": "resume_projects",
-    "flagship-title": "projects_flagship",
-    "repos-heading": "repos_section",
-    "build-ctas": "site_architecture",
-  };
-  if (map[id]) {
-    return map[id];
+  const mapped = SECTION_ID_TO_LOCATION[id];
+  if (mapped) {
+    return mapped;
   }
   if (id.startsWith("build-page") || pathname === "/site-architecture") {
     return "site_architecture";
@@ -196,10 +188,10 @@ export function resolveLocation(el: Element, pathname: string): string {
   const sectionLocation = locationFromSection(el, pathname);
   if (sectionLocation) {
     if (sectionLocation === "featured_work_flagship") {
+      const featuredSection = el.closest("#featured-work, section[id='featured-work']");
       const card = el.closest("article");
-      const grid = el.closest('[class*="grid"]');
-      if (grid && card) {
-        const cards = Array.from(grid.querySelectorAll(":scope > article, :scope > li > article"));
+      if (featuredSection && card) {
+        const cards = Array.from(featuredSection.querySelectorAll("article"));
         if (cards.indexOf(card) > 0) {
           return "featured_work_supporting";
         }

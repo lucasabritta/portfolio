@@ -40,6 +40,24 @@ export default defineConfig([
   ...nextTs,
   globalIgnores([".next/**", "next-env.d.ts", "public/storybook/**"]),
   {
+    files: ["**/*.{ts,tsx}"],
+    ignores: ["lib/analytics/posthog-client.ts", "lib/analytics/posthog-client.test.ts"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "posthog-js",
+              message:
+                "Import posthog-js only from apps/frontend/lib/analytics/posthog-client.ts.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     // Keep app route segments purely compositional: no visible JSX primitives,
     // no local CSS modules. Presentation (markup + classes) belongs in
     // @portfolio/storybook; the app composes components with data and slots.

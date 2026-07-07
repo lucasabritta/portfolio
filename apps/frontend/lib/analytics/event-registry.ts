@@ -1,4 +1,5 @@
-import { ANALYTICS_EVENTS } from "./events";
+import { ANALYTICS_EVENTS, type AnalyticsEventName } from "./events";
+import { CTA_LOCATIONS } from "./location-maps";
 import type { AnalyticsProperties } from "./properties";
 import {
   classifyLinkKind,
@@ -20,7 +21,7 @@ export type ClickContext = {
 };
 
 export type ResolvedClickEvent = {
-  event: string;
+  event: AnalyticsEventName;
   properties: AnalyticsProperties;
 };
 
@@ -118,16 +119,7 @@ export function resolveClickEvent({ element, pathname, href }: ClickContext): Re
     };
   }
 
-  const ctaLocations = new Set([
-    "home_hero",
-    "featured_work_flagship",
-    "featured_work_supporting",
-    "build_teaser",
-    "cv_preview",
-    "projects_flagship",
-    "site_architecture",
-    "projects_page",
-  ]);
+  const ctaLocations = CTA_LOCATIONS;
 
   if (ctaLocations.has(location)) {
     return {

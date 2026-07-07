@@ -31,6 +31,9 @@ PostHog supports **cookieless mode** (`cookieless_mode: "always"`) with **Cookie
 - **Pros**: No cookie banner for PostHog; analytics stays in the app layer; adding events is a registry row or `trackEvent` call; Storybook remains PostHog-free.
 - **Cons**: DOM-delegation location inference depends on stable section ids/landmarks; no cross-session user identity, session replay, or GeoIP (PostHog cookieless limits); production-only means preview deploys are not tracked.
 - **Ops**: Enable **Cookieless server hash mode** in PostHog project settings; verify Cloudflare does not cache `/ingest/*` POSTs after deploy.
+- **Shell consolidation (2026)**: `AnalyticsShell` owns PostHog init registration, UTM URL sync, and pageview tracking behind Suspense; `AnalyticsClickCapture` mounts eagerly outside Suspense so fast post-landing clicks still preserve UTMs and record analytics.
+- **Impression dedupe**: `analytics-shell-lifecycle.ts` helpers (`preparePageViewTracking`, `shouldTrackNotFoundView`, `shouldTrackErrorBoundary`) plus `trackEvent()` dedupe `page_viewed`, `not_found_viewed`, and `error_boundary_shown` within a navigation epoch so React Strict Mode and remounts do not inflate counts; `trackImpression()` remains available for new impression events without lifecycle helpers.
+- **Hydration-safe UTMs**: internal href decoration for nav/CTA/status links happens post-mount via `usePreservedHrefDecorator()`; the inline bootstrap script intercepts clicks before hydration (using `location.assign` as a hard-nav fallback) while React navigation uses `router.push` after mount — both paths preserve UTMs without silencing React analytics listeners.
 
 ## Related
 

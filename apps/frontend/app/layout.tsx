@@ -4,8 +4,7 @@ import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Observability } from "@/app/_shell/observability";
 import { AnalyticsClickCapture } from "@/app/_shell/analytics-click-capture";
-import { AnalyticsProvider } from "@/app/_shell/analytics-provider";
-import { PreserveQueryParams } from "@/app/_shell/preserve-query-params";
+import { AnalyticsShell } from "@/app/_shell/analytics-shell";
 import { buildSiteChromeProps } from "@/lib/site/site-chrome-props";
 import { queryParamsInlineBootstrapScript } from "@/lib/analytics/query-params-inline-script";
 import { themeInlineBootstrapScript } from "@/lib/theme/theme-inline-script";
@@ -74,9 +73,8 @@ export default function RootLayout({
         </ThemeProvider>
         <Observability />
         <AnalyticsClickCapture />
-        <PreserveQueryParams />
         <Suspense fallback={null}>
-          <AnalyticsProvider />
+          <AnalyticsShell />
         </Suspense>
       </body>
     </html>

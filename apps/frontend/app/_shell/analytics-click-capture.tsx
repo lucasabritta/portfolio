@@ -8,9 +8,8 @@ import { handleCapturedNavigationClick } from "@/lib/analytics/navigation-click"
 import { initPostHog, isAnalyticsEnabled } from "@/lib/analytics/posthog-client";
 
 /**
- * Single capture-phase document click listener: records analytics first, then
- * applies UTM preservation navigation. One listener avoids stopImmediatePropagation
- * in the UTM path from silencing a separate analytics listener.
+ * Eager capture-phase click listener mounted outside Suspense so fast post-landing
+ * clicks still record analytics and preserve UTMs before useSearchParams resolves.
  */
 export function AnalyticsClickCapture(): ReactNode {
   const router = useRouter();
