@@ -4,6 +4,7 @@
   "minimumReleaseAge": "14 days",
   "internalChecksFilter": "strict",
   "automerge": true,
+  "prConcurrentLimit": 1,
   "automergeType": "pr",
   "platformAutomerge": true,
   "major": {
