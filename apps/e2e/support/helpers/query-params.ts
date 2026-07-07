@@ -1,5 +1,7 @@
 import { expect, type Page } from "@playwright/test";
 
+import { PRESERVED_PARAMS_STORAGE_KEY } from "../../../frontend/lib/analytics/query-params-storage-key";
+
 /** Stable query fixture for attribution preservation tests. */
 export const PRESERVED_QUERY_FIXTURE = {
   utm_source: "e2e",
@@ -28,7 +30,10 @@ export async function expectStoredPreservedParams(
 ): Promise<void> {
   await expect
     .poll(async () => {
-      const raw = await page.evaluate(() => sessionStorage.getItem("pf:params"));
+      const raw = await page.evaluate(
+        (key) => sessionStorage.getItem(key),
+        PRESERVED_PARAMS_STORAGE_KEY,
+      );
       if (!raw) {
         return null;
       }

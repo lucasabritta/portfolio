@@ -213,3 +213,69 @@ describe("resolveClickEvent", () => {
     expect(extractClickLabel(link, "mailto:secret@example.com")).toBe("mailto");
   });
 });
+
+describe("cta_clicked locations", () => {
+  const cases: Array<{
+    location: string;
+    html: string;
+    pathname: string;
+  }> = [
+    {
+      location: "home_hero",
+      html: `<header id="home-hero"><a href="/target">CTA</a></header>`,
+      pathname: "/",
+    },
+    {
+      location: "featured_work_flagship",
+      html: `<section id="featured-work"><article><a href="/target">CTA</a></article></section>`,
+      pathname: "/",
+    },
+    {
+      location: "featured_work_supporting",
+      html: `<section id="featured-work"><article><a href="/a">First</a></article><article><a href="/target">Second</a></article></section>`,
+      pathname: "/",
+    },
+    {
+      location: "build_teaser",
+      html: `<section id="build-teaser"><a href="/target">CTA</a></section>`,
+      pathname: "/",
+    },
+    {
+      location: "cv_preview",
+      html: `<section id="cv-preview"><a href="/target">CTA</a></section>`,
+      pathname: "/",
+    },
+    {
+      location: "projects_flagship",
+      html: `<section aria-labelledby="flagship-title"><h2 id="flagship-title">Flagship</h2><a href="/target">CTA</a></section>`,
+      pathname: "/projects",
+    },
+    {
+      location: "site_architecture",
+      html: `<section id="build-ctas"><a href="/target">CTA</a></section>`,
+      pathname: "/site-architecture",
+    },
+    {
+      location: "projects_page",
+      html: `<main><a href="/target">CTA</a></main>`,
+      pathname: "/projects",
+    },
+  ];
+
+  it.each(cases)("maps $location to cta_clicked", ({ location, html, pathname }) => {
+    document.body.innerHTML = html;
+    const link =
+      location === "featured_work_supporting"
+        ? (document.querySelectorAll("a")[1] as HTMLAnchorElement)
+        : (document.querySelector("a") as HTMLAnchorElement);
+
+    const resolved = resolveClickEvent({
+      element: link,
+      pathname,
+      href: "/target",
+    });
+
+    expect(resolved.event).toBe("cta_clicked");
+    expect(resolved.properties.location).toBe(location);
+  });
+});

@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 import { expectPageQueryParams, PRESERVED_QUERY_FIXTURE } from "../../support/helpers/query-params";
+import { PRESERVED_PARAMS_STORAGE_KEY } from "../../../frontend/lib/analytics/query-params-storage-key";
 import {
   E2E_POSTHOG_KEY,
   countPostHogEvents,
@@ -55,10 +56,96 @@ test.describe("PostHog ingest", () => {
     });
 
     await expect.poll(() => ingest.posts.length).toBeGreaterThan(postsBeforeNav);
-    await expectPostHogEvent(ingest, "page_viewed", {
+    await expectPostHogEvent(
+      ingest,
+      "page_viewed",
+      {
+        utm_source: preserved.utm_source,
+        utm_medium: preserved.utm_medium,
+        route_name: "projects",
+      },
+      (properties) => properties.route_name === "projects",
+    );
+  });
+
+  test("emits cta_clicked from the hero CTA with preserved UTMs", async ({ page }) => {
+    const ingest = await installPostHogIngestCapture(page);
+    const home = new HomePage(page);
+    const projects = new ProjectsPage(page);
+
+    await home.gotoWithQueryParams(preserved);
+    await home.viewProjectsFromHero();
+    await expect(projects.pageHeading).toBeVisible();
+    await expectPageQueryParams(page, preserved);
+
+    await expectPostHogEvent(ingest, "cta_clicked", {
+      location: "home_hero",
+      target: "/projects",
       utm_source: preserved.utm_source,
       utm_medium: preserved.utm_medium,
-      route_name: "projects",
+    });
+  });
+
+  test("emits theme_changed once without a duplicate click event", async ({ page }) => {
+    const ingest = await installPostHogIngestCapture(page);
+    const home = new HomePage(page);
+
+    await home.gotoWithQueryParams(preserved);
+    await page.getByRole("button", { name: "Dark" }).first().click();
+
+    await expectPostHogEvent(ingest, "theme_changed", {
+      preference: "dark",
+      utm_source: preserved.utm_source,
+      utm_medium: preserved.utm_medium,
+    });
+    expect(countPostHogEvents(ingest, "cta_clicked")).toBe(0);
+  });
+
+  test("emits not_found_viewed and page_viewed for a missing route", async ({ page }) => {
+    const ingest = await installPostHogIngestCapture(page);
+
+    await page.goto(`/does-not-exist?${new URLSearchParams(preserved).toString()}`);
+    await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
+
+    await expectPostHogEvent(ingest, "not_found_viewed", {
+      pathname: "/does-not-exist",
+      utm_source: preserved.utm_source,
+      utm_medium: preserved.utm_medium,
+    });
+    await expectPostHogEvent(
+      ingest,
+      "page_viewed",
+      {
+        route_name: "other",
+        utm_source: preserved.utm_source,
+        utm_medium: preserved.utm_medium,
+      },
+      (properties) => properties.route_name === "other",
+    );
+  });
+
+  test("records nav_clicked with UTMs on an immediate post-landing click", async ({ page }) => {
+    const ingest = await installPostHogIngestCapture(page);
+    const query = new URLSearchParams(preserved).toString();
+
+    await page.goto(`/?${query}`, { waitUntil: "domcontentloaded" });
+    await page.waitForFunction((key) => {
+      const raw = sessionStorage.getItem(key);
+      return Boolean(raw && JSON.parse(raw).utm_source === "e2e");
+    }, PRESERVED_PARAMS_STORAGE_KEY);
+    await Promise.all([
+      page.waitForURL((url) => new URL(url).pathname === "/projects"),
+      page
+        .getByRole("navigation", { name: "Primary" })
+        .getByRole("link", { name: "Projects" })
+        .click(),
+    ]);
+
+    await expectPostHogEvent(ingest, "nav_clicked", {
+      label: "Projects",
+      target: "/projects",
+      utm_source: preserved.utm_source,
+      utm_medium: preserved.utm_medium,
     });
   });
 

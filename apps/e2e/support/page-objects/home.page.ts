@@ -51,7 +51,11 @@ export class HomePage {
     await Promise.all([
       this.page.waitForURL((url) => {
         const parsed = new URL(url);
-        return parsed.pathname === "/projects" && parsed.search.includes("utm_source=");
+        return (
+          parsed.pathname === "/projects" &&
+          parsed.searchParams.get("utm_source") === "e2e" &&
+          parsed.searchParams.get("utm_medium") === "test"
+        );
       }),
       this.leadHeader.getByRole("link", { name: "View Projects" }).click(),
     ]);
@@ -72,7 +76,11 @@ export class HomePage {
   async openProjectsFromPrimaryNavWithPreservedParams() {
     await this.openPrimaryNav("Projects", (url) => {
       const parsed = new URL(url);
-      return parsed.pathname === "/projects" && parsed.search.includes("utm_source=");
+      return (
+        parsed.pathname === "/projects" &&
+        parsed.searchParams.get("utm_source") === "e2e" &&
+        parsed.searchParams.get("utm_medium") === "test"
+      );
     });
   }
 
@@ -83,7 +91,11 @@ export class HomePage {
   async openBuildFromPrimaryNavWithPreservedParams() {
     await this.openPrimaryNav("Site architecture", (url) => {
       const parsed = new URL(url);
-      return parsed.pathname === "/site-architecture" && parsed.search.includes("utm_source=");
+      return (
+        parsed.pathname === "/site-architecture" &&
+        parsed.searchParams.get("utm_source") === "e2e" &&
+        parsed.searchParams.get("utm_medium") === "test"
+      );
     });
   }
 }

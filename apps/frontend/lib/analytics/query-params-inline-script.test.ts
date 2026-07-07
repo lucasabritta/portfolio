@@ -3,6 +3,42 @@ import { describe, expect, it } from "vitest";
 import { PRESERVED_PARAMS_STORAGE_KEY } from "./query-params-storage-key";
 import { queryParamsInlineBootstrapScript } from "./query-params-inline-script";
 
+type TestLocation = {
+  href: string;
+  origin: string;
+  pathname: string;
+  search: string;
+  hash: string;
+  assign: (url: string) => void;
+};
+
+type TestSessionStorage = {
+  getItem: (key: string) => string | null;
+  setItem: (key: string, value: string) => void;
+};
+
+type ClickCaptureEvent = {
+  target: {
+    closest: (selector: string) => {
+      getAttribute: (name: string) => string | null;
+      target: string;
+      hasAttribute: (name: string) => boolean;
+    } | null;
+  };
+  button: number;
+  defaultPrevented: boolean;
+  metaKey: boolean;
+  ctrlKey: boolean;
+  shiftKey: boolean;
+  altKey: boolean;
+  preventDefault: () => void;
+  stopImmediatePropagation: () => void;
+};
+
+type TestDocument = {
+  addEventListener: (_type: string, listener: (event: ClickCaptureEvent) => void) => void;
+};
+
 describe("queryParamsInlineBootstrapScript", () => {
   it("embeds the preserved params storage key", () => {
     expect(queryParamsInlineBootstrapScript()).toContain(PRESERVED_PARAMS_STORAGE_KEY);
@@ -13,6 +49,7 @@ describe("queryParamsInlineBootstrapScript", () => {
     const run = new Function(
       "location",
       "sessionStorage",
+      "document",
       `${script}; return sessionStorage.getItem(${JSON.stringify(PRESERVED_PARAMS_STORAGE_KEY)});`,
     ) as (
       location: { search: string },
@@ -20,6 +57,7 @@ describe("queryParamsInlineBootstrapScript", () => {
         getItem: (k: string) => string | null;
         setItem: (k: string, v: string) => void;
       },
+      document: { addEventListener: () => void },
     ) => string | null;
 
     const store = new Map<string, string>();
@@ -30,10 +68,81 @@ describe("queryParamsInlineBootstrapScript", () => {
       },
     };
 
-    const raw = run({ search: "?utm_source=test&utm_medium=email&foo=bar" }, sessionStorage);
+    const raw = run({ search: "?utm_source=test&utm_medium=email&foo=bar" }, sessionStorage, {
+      addEventListener: () => {},
+    });
     expect(JSON.parse(raw ?? "{}")).toEqual({
       utm_source: "test",
       utm_medium: "email",
     });
+  });
+
+  it("intercepts internal navigation before React hydrates", () => {
+    const script = queryParamsInlineBootstrapScript();
+    const store = new Map<string, string>([
+      [PRESERVED_PARAMS_STORAGE_KEY, JSON.stringify({ utm_source: "e2e", utm_medium: "test" })],
+    ]);
+    const sessionStorage = {
+      getItem: (key: string) => store.get(key) ?? null,
+      setItem: (key: string, value: string) => {
+        store.set(key, value);
+      },
+    };
+
+    let assigned: string | null = null;
+    const location: TestLocation = {
+      href: "http://localhost:3000/?utm_source=e2e&utm_medium=test",
+      origin: "http://localhost:3000",
+      pathname: "/",
+      search: "?utm_source=e2e&utm_medium=test",
+      hash: "",
+      assign: (url: string) => {
+        assigned = url;
+      },
+    };
+
+    const listeners: Array<(event: ClickCaptureEvent) => void> = [];
+
+    const document: TestDocument = {
+      addEventListener: (_type: string, listener: (event: ClickCaptureEvent) => void) => {
+        listeners.push(listener);
+      },
+    };
+
+    const run = new Function("location", "sessionStorage", "document", script) as (
+      location: TestLocation,
+      sessionStorage: TestSessionStorage,
+      document: TestDocument,
+    ) => void;
+
+    run(location, sessionStorage, document);
+
+    const anchor = {
+      getAttribute: (name: string) =>
+        name === "href" ? "/projects" : name === "rel" ? null : null,
+      target: "",
+      hasAttribute: () => false,
+    };
+    const target = {
+      closest: (selector: string) => (selector === "a" ? anchor : null),
+    };
+
+    let prevented = false;
+    listeners[0]?.({
+      target,
+      button: 0,
+      defaultPrevented: false,
+      metaKey: false,
+      ctrlKey: false,
+      shiftKey: false,
+      altKey: false,
+      preventDefault: () => {
+        prevented = true;
+      },
+      stopImmediatePropagation: () => {},
+    });
+
+    expect(prevented).toBe(true);
+    expect(assigned).toBe("/projects?utm_source=e2e&utm_medium=test");
   });
 });

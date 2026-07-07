@@ -16,7 +16,9 @@ vi.mock("./query-params", () => ({
 
 import { getPostHog, initPostHog } from "./posthog-client";
 import { getAnalyticsQueryProperties } from "./query-params";
-import { trackEvent } from "./track";
+import { ANALYTICS_EVENTS } from "./events";
+import { resetImpressionDedupeForTests } from "./impression-dedupe";
+import { trackEvent, trackImpression } from "./track";
 
 describe("trackEvent", () => {
   beforeEach(() => {
@@ -32,30 +34,75 @@ describe("trackEvent", () => {
 
   afterEach(() => {
     vi.unstubAllEnvs();
+    resetImpressionDedupeForTests();
   });
 
   it("no-ops when PostHog key is unset", () => {
     vi.stubEnv("NEXT_PUBLIC_POSTHOG_KEY", "");
     vi.mocked(getPostHog).mockReturnValue(null);
     vi.mocked(initPostHog).mockReturnValue(null);
-    trackEvent("test_event", { foo: "bar" });
+    trackEvent(ANALYTICS_EVENTS.themeChanged, { preference: "dark" });
     expect(capture).not.toHaveBeenCalled();
   });
 
   it("merges preserved query properties into capture payload", () => {
-    trackEvent("test_event", { foo: "bar" });
-    expect(capture).toHaveBeenCalledWith("test_event", {
+    trackEvent(ANALYTICS_EVENTS.themeChanged, { preference: "dark" });
+    expect(capture).toHaveBeenCalledWith(ANALYTICS_EVENTS.themeChanged, {
       utm_source: "test",
       entry_query: "utm_source=test",
-      foo: "bar",
+      preference: "dark",
     });
   });
 
-  it("lets explicit event properties override query properties", () => {
-    trackEvent("test_event", { utm_source: "override" });
-    expect(capture).toHaveBeenCalledWith("test_event", {
+  it("does not let event properties override preserved attribution props", () => {
+    trackEvent(ANALYTICS_EVENTS.themeChanged, {
       utm_source: "override",
+      entry_query: "override",
+    });
+    expect(capture).toHaveBeenCalledWith(ANALYTICS_EVENTS.themeChanged, {
+      utm_source: "test",
       entry_query: "utm_source=test",
     });
+  });
+
+  it("sanitizes contact-shaped property values", () => {
+    trackEvent(ANALYTICS_EVENTS.contactClicked, {
+      target: "mailto:secret@example.com",
+    });
+    expect(capture).toHaveBeenCalledWith(ANALYTICS_EVENTS.contactClicked, {
+      utm_source: "test",
+      entry_query: "utm_source=test",
+      target: "mailto",
+    });
+  });
+});
+
+describe("trackImpression", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    resetImpressionDedupeForTests();
+    vi.mocked(getPostHog).mockReturnValue({ capture } as never);
+  });
+
+  afterEach(() => {
+    resetImpressionDedupeForTests();
+  });
+
+  it("captures only once per dedupe key", () => {
+    trackImpression(
+      ANALYTICS_EVENTS.notFoundViewed,
+      { pathname: "/missing" },
+      {
+        pathname: "/missing",
+      },
+    );
+    trackImpression(
+      ANALYTICS_EVENTS.notFoundViewed,
+      { pathname: "/missing" },
+      {
+        pathname: "/missing",
+      },
+    );
+    expect(capture).toHaveBeenCalledTimes(1);
   });
 });

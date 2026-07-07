@@ -1,7 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { resolveClickEvent } from "./event-registry";
-import { ANALYTICS_EVENTS } from "./events";
 import { handleCapturedNavigationClick } from "./navigation-click";
 import { resetPreservedParamsForTests } from "./query-params";
 
@@ -49,23 +47,5 @@ describe("handleCapturedNavigationClick", () => {
 
     expect(track).toHaveBeenCalledWith(link, "/");
     expect(push).not.toHaveBeenCalled();
-  });
-
-  it("resolves header Projects as nav_clicked", () => {
-    document.body.innerHTML = `<header><nav><a href="/projects">Projects</a></nav></header>`;
-    sessionStorage.setItem("pf:params", JSON.stringify({ utm_source: "test" }));
-
-    const link = document.querySelector("nav a")!;
-    const resolved = resolveClickEvent({
-      element: link,
-      pathname: "/",
-      href: link.getAttribute("href"),
-    });
-
-    expect(resolved.event).toBe(ANALYTICS_EVENTS.navClicked);
-    expect(resolved.properties).toMatchObject({
-      label: "Projects",
-      target: "/projects",
-    });
   });
 });
