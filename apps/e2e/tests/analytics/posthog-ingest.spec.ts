@@ -129,13 +129,10 @@ test.describe("PostHog ingest", () => {
     const query = new URLSearchParams(preserved).toString();
 
     await page.goto(`/?${query}`, { waitUntil: "domcontentloaded" });
-    await page.waitForFunction(
-      (key) => {
-        const raw = sessionStorage.getItem(key);
-        return Boolean(raw && JSON.parse(raw).utm_source === "e2e");
-      },
-      PRESERVED_PARAMS_STORAGE_KEY,
-    );
+    await page.waitForFunction((key) => {
+      const raw = sessionStorage.getItem(key);
+      return Boolean(raw && JSON.parse(raw).utm_source === "e2e");
+    }, PRESERVED_PARAMS_STORAGE_KEY);
     await Promise.all([
       page.waitForURL((url) => new URL(url).pathname === "/projects"),
       page
