@@ -86,7 +86,7 @@
     "@types/react-dom": "^19",
     "@vitest/browser": "3.2.6",
     "eslint": "^9.39.4",
-    "next": "16.2.4",
+    "next": "16.2.9",
     "playwright": "^1.59.1",
     "prettier": "3.8.4",
     "react": "19.2.5",
