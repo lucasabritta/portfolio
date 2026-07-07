@@ -13,9 +13,7 @@ describe("parsePostHogEvents", () => {
       event: "page_viewed",
       properties: { route_name: "home" },
     });
-    expect(events).toEqual([
-      { event: "page_viewed", properties: { route_name: "home" } },
-    ]);
+    expect(events).toEqual([{ event: "page_viewed", properties: { route_name: "home" } }]);
   });
 
   it("parses base64 data field payloads", () => {

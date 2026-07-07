@@ -89,12 +89,20 @@ describe("trackImpression", () => {
   });
 
   it("captures only once per dedupe key", () => {
-    trackImpression(ANALYTICS_EVENTS.notFoundViewed, { pathname: "/missing" }, {
-      pathname: "/missing",
-    });
-    trackImpression(ANALYTICS_EVENTS.notFoundViewed, { pathname: "/missing" }, {
-      pathname: "/missing",
-    });
+    trackImpression(
+      ANALYTICS_EVENTS.notFoundViewed,
+      { pathname: "/missing" },
+      {
+        pathname: "/missing",
+      },
+    );
+    trackImpression(
+      ANALYTICS_EVENTS.notFoundViewed,
+      { pathname: "/missing" },
+      {
+        pathname: "/missing",
+      },
+    );
     expect(capture).toHaveBeenCalledTimes(1);
   });
 });

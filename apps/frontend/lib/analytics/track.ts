@@ -1,8 +1,5 @@
 import type { AnalyticsEventName } from "./events";
-import {
-  createImpressionDedupeKey,
-  shouldEmitImpression,
-} from "./impression-dedupe";
+import { createImpressionDedupeKey, shouldEmitImpression } from "./impression-dedupe";
 import type { AnalyticsProperties } from "./properties";
 import { getPostHog, initPostHog } from "./posthog-client";
 import { getAnalyticsQueryProperties } from "./query-params";
@@ -29,10 +26,7 @@ function stripAttributionOverrides(
   return Object.keys(stripped).length > 0 ? stripped : undefined;
 }
 
-export function trackEvent(
-  event: AnalyticsEventName,
-  properties?: AnalyticsProperties,
-): void {
+export function trackEvent(event: AnalyticsEventName, properties?: AnalyticsProperties): void {
   if (typeof window === "undefined") {
     return;
   }

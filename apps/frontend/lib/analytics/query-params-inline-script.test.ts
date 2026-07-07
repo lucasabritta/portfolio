@@ -109,12 +109,7 @@ describe("queryParamsInlineBootstrapScript", () => {
       },
     };
 
-    const run = new Function(
-      "location",
-      "sessionStorage",
-      "document",
-      script,
-    ) as (
+    const run = new Function("location", "sessionStorage", "document", script) as (
       location: TestLocation,
       sessionStorage: TestSessionStorage,
       document: TestDocument,
@@ -123,7 +118,8 @@ describe("queryParamsInlineBootstrapScript", () => {
     run(location, sessionStorage, document);
 
     const anchor = {
-      getAttribute: (name: string) => (name === "href" ? "/projects" : name === "rel" ? null : null),
+      getAttribute: (name: string) =>
+        name === "href" ? "/projects" : name === "rel" ? null : null,
       target: "",
       hasAttribute: () => false,
     };

@@ -18,13 +18,10 @@ function sanitizeStringValue(key: string, value: string): string {
 }
 
 /** Redacts contact-info-shaped property values before capture. */
-export function sanitizeAnalyticsProperties(
-  properties: AnalyticsProperties,
-): AnalyticsProperties {
+export function sanitizeAnalyticsProperties(properties: AnalyticsProperties): AnalyticsProperties {
   const sanitized: AnalyticsProperties = {};
   for (const [key, value] of Object.entries(properties)) {
-    sanitized[key] =
-      typeof value === "string" ? sanitizeStringValue(key, value) : value;
+    sanitized[key] = typeof value === "string" ? sanitizeStringValue(key, value) : value;
   }
   return sanitized;
 }

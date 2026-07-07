@@ -6,4 +6,17 @@ export default tseslint.config(js.configs.recommended, ...tseslint.configs.recom
   ...playwright.configs["flat/recommended"],
   files: ["**/*.ts"],
   ignores: ["node_modules/**", "playwright-report/**", "test-results/**", "blob-report/**"],
+  rules: {
+    "playwright/expect-expect": [
+      "error",
+      {
+        assertFunctionNames: [
+          "expect",
+          "expectPostHogEvent",
+          "expectPostHogIngestPost",
+          "expectPageQueryParams",
+        ],
+      },
+    ],
+  },
 });

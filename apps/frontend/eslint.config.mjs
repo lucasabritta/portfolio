@@ -49,8 +49,7 @@ export default defineConfig([
           paths: [
             {
               name: "posthog-js",
-              message:
-                "Import posthog-js only from apps/frontend/lib/analytics/posthog-client.ts.",
+              message: "Import posthog-js only from apps/frontend/lib/analytics/posthog-client.ts.",
             },
           ],
         },
