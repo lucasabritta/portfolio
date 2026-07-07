@@ -6,6 +6,7 @@ import {
   getPreservedParams,
   isInternalNavigationHref,
   isPreservedQueryParam,
+  preserveInternalHref,
   resetPreservedParamsForTests,
   shouldInterceptNavigationClick,
   syncPreservedParamsToCurrentUrl,
@@ -106,6 +107,22 @@ describe("withPreservedParams", () => {
 
   it("is a no-op when there are no preserved params", () => {
     expect(withPreservedParams("/projects", {}, homeBase)).toBe("/projects");
+  });
+});
+
+describe("preserveInternalHref", () => {
+  const preserved = { utm_source: "test" };
+
+  beforeEach(() => {
+    sessionStorage.setItem("pf:params", JSON.stringify(preserved));
+  });
+
+  it("merges preserved params into internal hrefs", () => {
+    expect(preserveInternalHref("/projects")).toBe("/projects?utm_source=test");
+  });
+
+  it("leaves external hrefs unchanged", () => {
+    expect(preserveInternalHref("https://github.com/foo")).toBe("https://github.com/foo");
   });
 });
 

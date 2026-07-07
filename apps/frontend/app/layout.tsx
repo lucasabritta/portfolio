@@ -3,9 +3,11 @@ import { Suspense } from "react";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Observability } from "@/app/_shell/observability";
+import { AnalyticsClickCapture } from "@/app/_shell/analytics-click-capture";
 import { AnalyticsProvider } from "@/app/_shell/analytics-provider";
 import { PreserveQueryParams } from "@/app/_shell/preserve-query-params";
 import { buildSiteChromeProps } from "@/lib/site/site-chrome-props";
+import { queryParamsInlineBootstrapScript } from "@/lib/analytics/query-params-inline-script";
 import { themeInlineBootstrapScript } from "@/lib/theme/theme-inline-script";
 import { siteMetadata } from "@/app/_shell/layout.metadata";
 import { SiteChromeClient } from "@/app/_shell/site-chrome-client";
@@ -62,12 +64,18 @@ export default function RootLayout({
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: themeInlineBootstrapScript() }}
         />
+        <Script
+          id="portfolio-query-params-boot"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: queryParamsInlineBootstrapScript() }}
+        />
         <ThemeProvider>
           <SiteChromeClient {...siteChrome}>{children}</SiteChromeClient>
         </ThemeProvider>
         <Observability />
+        <AnalyticsClickCapture />
+        <PreserveQueryParams />
         <Suspense fallback={null}>
-          <PreserveQueryParams />
           <AnalyticsProvider />
         </Suspense>
       </body>

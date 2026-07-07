@@ -10,7 +10,6 @@ import {
   isAnalyticsEnabled,
   registerAnalyticsQueryProperties,
 } from "@/lib/analytics/posthog-client";
-import { trackClickTarget } from "@/lib/analytics/click-tracking";
 import { trackEvent } from "@/lib/analytics/track";
 
 function PageViewTracker(): null {
@@ -52,14 +51,6 @@ function PageViewTracker(): null {
   return null;
 }
 
-function handleDocumentClick(event: MouseEvent): void {
-  if (!isAnalyticsEnabled()) {
-    return;
-  }
-
-  trackClickTarget(event.target, window.location.pathname);
-}
-
 function useIsClient(): boolean {
   return useSyncExternalStore(
     () => () => {},
@@ -77,8 +68,6 @@ export function AnalyticsProvider(): ReactNode {
     }
 
     initPostHog();
-    document.addEventListener("click", handleDocumentClick, true);
-    return () => document.removeEventListener("click", handleDocumentClick, true);
   }, []);
 
   if (!isClient || !isAnalyticsEnabled()) {
