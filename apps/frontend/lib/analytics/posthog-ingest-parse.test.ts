@@ -4,8 +4,8 @@ import {
   countPostHogEvents,
   findPostHogEvent,
   parsePostHogEvents,
-  type IngestCaptureState,
-} from "./posthog-ingest";
+  type PostHogIngestPosts,
+} from "./posthog-ingest-parse";
 
 describe("parsePostHogEvents", () => {
   it("parses plain JSON event payloads", () => {
@@ -48,10 +48,9 @@ describe("parsePostHogEvents", () => {
 });
 
 describe("findPostHogEvent", () => {
-  const state: IngestCaptureState = {
+  const state: PostHogIngestPosts = {
     posts: [
       {
-        url: "http://localhost:3000/ingest/e",
         json: {
           batch: [
             { event: "page_viewed", properties: { route_name: "home" } },
@@ -79,10 +78,9 @@ describe("findPostHogEvent", () => {
 
 describe("countPostHogEvents", () => {
   it("counts events with optional predicate", () => {
-    const state: IngestCaptureState = {
+    const state: PostHogIngestPosts = {
       posts: [
         {
-          url: "http://localhost:3000/ingest/e",
           json: {
             batch: [
               { event: "page_viewed", properties: { route_name: "home" } },

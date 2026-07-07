@@ -63,7 +63,6 @@ posthog.init(key, {
 docker compose run --rm frontend yarn --cwd apps/frontend test:unit
 docker compose run --rm frontend yarn --cwd apps/frontend lint
 docker compose run --rm frontend yarn --cwd apps/frontend typecheck
-docker compose run --rm frontend yarn --cwd ../../apps/e2e test:unit
 ```
 
 Also run `nextjs-change-checklist` for substantive app changes.
