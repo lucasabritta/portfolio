@@ -64,6 +64,7 @@ test.describe("Preserve URL query params", () => {
   test("persists params when Projects nav is clicked immediately after landing", async ({
     page,
   }) => {
+    const projects = new ProjectsPage(page);
     const query = queryStringFrom(preserved);
     await page.goto(`/?${query}`, { waitUntil: "commit" });
     await page
@@ -71,9 +72,13 @@ test.describe("Preserve URL query params", () => {
       .getByRole("link", { name: "Projects" })
       .click();
     await expect
-      .poll(() => new URL(page.url()).searchParams.get("utm_source"))
-      .toBe(preserved.utm_source);
-    await expect(page.getByRole("heading", { name: "Projects" })).toBeVisible();
+      .poll(() => {
+        const parsed = new URL(page.url());
+        return parsed.pathname === "/projects" && urlHasPreservedParams(parsed);
+      })
+      .toBe(true);
+    await expect(projects.pageHeading).toBeVisible();
+    await expectPageQueryParams(page, preserved);
   });
 
   test("merges params for cross-route hash links from not-found", async ({ page }) => {
