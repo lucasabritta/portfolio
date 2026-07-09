@@ -2,21 +2,12 @@ import type { ClickTrackingOptions } from "./click-tracking";
 import { shouldInterceptNavigationClick } from "./query-params";
 
 export type NavigationClickHandlers = {
-  track: (
-    target: EventTarget | null,
-    pathname: string,
-    options?: ClickTrackingOptions,
-  ) => void;
+  track: (target: EventTarget | null, pathname: string, options?: ClickTrackingOptions) => void;
   push: (href: string) => void;
 };
 
 function resolveOpenTarget(event: MouseEvent): ClickTrackingOptions | undefined {
-  if (
-    event.type === "auxclick" ||
-    event.metaKey ||
-    event.ctrlKey ||
-    event.shiftKey
-  ) {
+  if (event.type === "auxclick" || event.metaKey || event.ctrlKey || event.shiftKey) {
     return { openTarget: "new_tab" };
   }
   return undefined;
