@@ -239,11 +239,9 @@ test.describe("PostHog ingest", () => {
       utm_medium: preserved.utm_medium,
     });
 
-    await page
-      .getByRole("button", { name: /close navigation menu/i })
-      .evaluate((button) => {
-        button.click();
-      });
+    await page.getByRole("button", { name: /close navigation menu/i }).evaluate((button) => {
+      button.click();
+    });
 
     await expectPostHogEvent(
       ingest,
@@ -314,7 +312,9 @@ test.describe("PostHog ingest", () => {
     await expect
       .poll(() => page.evaluate(() => window.__PF_POSTHOG_KEY__ ?? null))
       .toBe(E2E_POSTHOG_KEY);
-    await expect(page.getByRole("heading", { level: 1, name: PAGE_COPY.homeHeroName })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { level: 1, name: PAGE_COPY.homeHeroName }),
+    ).toBeVisible();
     await expectPostHogEvent(ingest, "page_viewed", {
       utm_source: preserved.utm_source,
       utm_medium: preserved.utm_medium,
