@@ -1,5 +1,6 @@
 import posthog from "posthog-js";
 
+import { getClientAnalyticsContext } from "./client-context";
 import { captureEntryParams, getAnalyticsQueryProperties } from "./query-params";
 
 let initialized = false;
@@ -69,8 +70,10 @@ export function initPostHog(): typeof posthog | null {
 
   captureEntryParams();
   const queryProperties = getAnalyticsQueryProperties();
-  if (Object.keys(queryProperties).length > 0) {
-    posthog.register(queryProperties);
+  const clientContext = getClientAnalyticsContext();
+  const superProperties = { ...queryProperties, ...clientContext };
+  if (Object.keys(superProperties).length > 0) {
+    posthog.register(superProperties);
   }
 
   initialized = true;
@@ -89,8 +92,10 @@ export function registerAnalyticsQueryProperties(): void {
 
   captureEntryParams();
   const queryProperties = getAnalyticsQueryProperties();
-  if (Object.keys(queryProperties).length > 0) {
-    client.register(queryProperties);
+  const clientContext = getClientAnalyticsContext();
+  const superProperties = { ...queryProperties, ...clientContext };
+  if (Object.keys(superProperties).length > 0) {
+    client.register(superProperties);
   }
 }
 

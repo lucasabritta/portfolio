@@ -67,6 +67,14 @@ docker compose run --rm frontend yarn --cwd apps/frontend typecheck
 
 Also run `nextjs-change-checklist` for substantive app changes.
 
+## Click capture and client context
+
+- **Client context** (`client-context.ts`): per-tab `client_window_id` (sessionStorage) and per-navigation `client_page_instance_id` (rotated on pathname change in `analytics-shell.tsx`). Registered as PostHog super properties and merged into every `trackEvent` payload.
+- **New-tab intent**: middle-click (`auxclick`, button 1), ctrl/cmd+click, and shift+click set `open_target: "new_tab"` on the same event names (`cta_clicked`, `nav_clicked`, etc.). Only middle-button `auxclick` is tracked — other auxiliary buttons are ignored.
+- **Mobile menu**: header hamburger/close buttons emit `nav_menu_toggled` with `menu_state: "open" | "close"` (pre-click `aria-expanded` state).
+- **Known limitation**: right-click → “Open link in new tab” from the browser context menu fires no DOM event on the origin page and cannot produce a click event. Infer only from the destination tab’s `page_viewed` / referrer when needed.
+- **Middle-click UTMs**: new-tab opens use the link’s `href` as-is. Post-mount href decoration adds preserved UTMs for same-tab navigation; middle-click before decoration completes may open a tab without UTMs on the URL (click events still carry super properties).
+
 ## Done when
 
 - New events use `trackEvent`, `trackImpression`, or `event-registry.ts` (not Storybook edits).

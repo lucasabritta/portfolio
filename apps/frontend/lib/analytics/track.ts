@@ -1,4 +1,5 @@
 import type { AnalyticsEventName } from "./events";
+import { getClientAnalyticsContext } from "./client-context";
 import { createImpressionDedupeKey, shouldEmitImpression } from "./impression-dedupe";
 import type { AnalyticsProperties } from "./properties";
 import { getPostHog, initPostHog } from "./posthog-client";
@@ -37,9 +38,10 @@ export function trackEvent(event: AnalyticsEventName, properties?: AnalyticsProp
   }
 
   const queryProperties = getAnalyticsQueryProperties();
+  const clientContext = getClientAnalyticsContext();
   const sanitized = properties ? sanitizeAnalyticsProperties(properties) : undefined;
   const eventProperties = stripAttributionOverrides(sanitized);
-  client.capture(event, { ...queryProperties, ...eventProperties });
+  client.capture(event, { ...queryProperties, ...clientContext, ...eventProperties });
 }
 
 /** Tracks an impression-style event once per navigation epoch (page views, 404, errors). */

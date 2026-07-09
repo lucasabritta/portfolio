@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  */
-import { render, waitFor } from "@testing-library/react";
+import { cleanup, render, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
@@ -29,11 +29,16 @@ vi.mock("@/lib/analytics/query-params", () => ({
   syncPreservedParamsToCurrentUrl: vi.fn(() => null),
 }));
 
+vi.mock("@/lib/analytics/client-context", () => ({
+  rotateClientPageInstanceId: vi.fn(),
+}));
+
 vi.mock("@/lib/analytics/track", () => ({
   trackEvent: (...args: unknown[]) => capture(...args),
 }));
 
 import { AnalyticsShell } from "./analytics-shell";
+import { rotateClientPageInstanceId } from "@/lib/analytics/client-context";
 import { captureEntryParams, syncPreservedParamsToCurrentUrl } from "@/lib/analytics/query-params";
 import { initPostHog, registerAnalyticsQueryProperties } from "@/lib/analytics/posthog-client";
 
@@ -47,11 +52,12 @@ describe("AnalyticsShell", () => {
   });
 
   afterEach(() => {
+    cleanup();
     vi.unstubAllEnvs();
     resetImpressionDedupeForTests();
   });
 
-  it("initializes analytics and tracks a deduped page view on mount", async () => {
+  it("initializes analytics and tracks a deduped page view on mount without rotating the page instance", async () => {
     render(<AnalyticsShell />);
 
     await waitFor(() => {
@@ -62,8 +68,20 @@ describe("AnalyticsShell", () => {
         expect.objectContaining({ pathname: "/" }),
       );
     });
+    expect(rotateClientPageInstanceId).not.toHaveBeenCalled();
     expect(capture).toHaveBeenCalledTimes(1);
     expect(registerAnalyticsQueryProperties).toHaveBeenCalled();
+  });
+
+  it("rotates the page instance id when the pathname changes", async () => {
+    const { rerender } = render(<AnalyticsShell />);
+    await waitFor(() => expect(initPostHog).toHaveBeenCalled());
+    expect(rotateClientPageInstanceId).not.toHaveBeenCalled();
+
+    mockPathname = "/projects";
+    rerender(<AnalyticsShell />);
+
+    await waitFor(() => expect(rotateClientPageInstanceId).toHaveBeenCalled());
   });
 
   it("tracks another page view when the hash changes on the same pathname", async () => {

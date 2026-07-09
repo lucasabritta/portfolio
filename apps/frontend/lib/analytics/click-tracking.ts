@@ -1,6 +1,10 @@
 import { resolveClickEvent } from "./event-registry";
 import { trackEvent } from "./track";
 
+export type ClickTrackingOptions = {
+  openTarget?: "new_tab";
+};
+
 function getHrefFromElement(el: Element): string | null {
   if (el instanceof HTMLAnchorElement) {
     return el.getAttribute("href");
@@ -12,7 +16,11 @@ function getHrefFromElement(el: Element): string | null {
   return anchor?.getAttribute("href") ?? null;
 }
 
-export function trackClickTarget(target: EventTarget | null, pathname: string): void {
+export function trackClickTarget(
+  target: EventTarget | null,
+  pathname: string,
+  options?: ClickTrackingOptions,
+): void {
   if (!(target instanceof Element)) {
     return;
   }
@@ -28,5 +36,9 @@ export function trackClickTarget(target: EventTarget | null, pathname: string): 
 
   const href = getHrefFromElement(clickable);
   const resolved = resolveClickEvent({ element: clickable, pathname, href });
-  trackEvent(resolved.event, resolved.properties);
+  const properties = { ...resolved.properties };
+  if (options?.openTarget) {
+    properties.open_target = options.openTarget;
+  }
+  trackEvent(resolved.event, properties);
 }

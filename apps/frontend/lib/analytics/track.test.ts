@@ -14,6 +14,13 @@ vi.mock("./query-params", () => ({
   })),
 }));
 
+vi.mock("./client-context", () => ({
+  getClientAnalyticsContext: vi.fn(() => ({
+    client_window_id: "window-test",
+    client_page_instance_id: "page-test",
+  })),
+}));
+
 import { getPostHog, initPostHog } from "./posthog-client";
 import { getAnalyticsQueryProperties } from "./query-params";
 import { ANALYTICS_EVENTS } from "./events";
@@ -50,6 +57,8 @@ describe("trackEvent", () => {
     expect(capture).toHaveBeenCalledWith(ANALYTICS_EVENTS.themeChanged, {
       utm_source: "test",
       entry_query: "utm_source=test",
+      client_window_id: "window-test",
+      client_page_instance_id: "page-test",
       preference: "dark",
     });
   });
@@ -62,6 +71,8 @@ describe("trackEvent", () => {
     expect(capture).toHaveBeenCalledWith(ANALYTICS_EVENTS.themeChanged, {
       utm_source: "test",
       entry_query: "utm_source=test",
+      client_window_id: "window-test",
+      client_page_instance_id: "page-test",
     });
   });
 
@@ -72,6 +83,8 @@ describe("trackEvent", () => {
     expect(capture).toHaveBeenCalledWith(ANALYTICS_EVENTS.contactClicked, {
       utm_source: "test",
       entry_query: "utm_source=test",
+      client_window_id: "window-test",
+      client_page_instance_id: "page-test",
       target: "mailto",
     });
   });

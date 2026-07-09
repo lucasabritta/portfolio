@@ -1,9 +1,10 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useRef, useSyncExternalStore, type ReactNode } from "react";
 
 import { preparePageViewTracking } from "@/lib/analytics/analytics-shell-lifecycle";
+import { rotateClientPageInstanceId } from "@/lib/analytics/client-context";
 import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
 import {
   initPostHog,
@@ -25,6 +26,7 @@ function AnalyticsShellEffects(): null {
   const pathname = usePathname() ?? "/";
   const searchParams = useSearchParams();
   const router = useRouter();
+  const previousPathnameRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!isAnalyticsEnabled()) {
@@ -33,6 +35,11 @@ function AnalyticsShellEffects(): null {
 
     initPostHog();
     captureEntryParams();
+    if (previousPathnameRef.current !== null && previousPathnameRef.current !== pathname) {
+      rotateClientPageInstanceId();
+    }
+    previousPathnameRef.current = pathname;
+    registerAnalyticsQueryProperties();
     const synced = syncPreservedParamsToCurrentUrl();
     if (synced) {
       router.replace(synced, { scroll: false });

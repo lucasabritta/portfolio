@@ -46,4 +46,34 @@ describe("trackClickTarget", () => {
       expect.objectContaining({ location: "home_hero", label: "View Projects" }),
     );
   });
+
+  it("tracks CTA clicks with open_target new_tab when requested", () => {
+    document.body.innerHTML = `<header id="home-hero"><a href="/projects">View Projects</a></header>`;
+    const link = document.querySelector("#home-hero a")!;
+    trackClickTarget(link, "/", { openTarget: "new_tab" });
+    expect(capture).toHaveBeenCalledWith(
+      ANALYTICS_EVENTS.ctaClicked,
+      expect.objectContaining({
+        location: "home_hero",
+        label: "View Projects",
+        open_target: "new_tab",
+      }),
+    );
+  });
+
+  it("tracks mobile nav menu toggles", () => {
+    document.body.innerHTML = `
+      <header>
+        <button type="button" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open navigation menu">
+          Menu
+        </button>
+      </header>
+    `;
+    const button = document.querySelector("button")!;
+    trackClickTarget(button, "/");
+    expect(capture).toHaveBeenCalledWith(
+      ANALYTICS_EVENTS.navMenuToggled,
+      expect.objectContaining({ menu_state: "open" }),
+    );
+  });
 });

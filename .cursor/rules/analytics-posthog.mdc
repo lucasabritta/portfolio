@@ -7,6 +7,9 @@ alwaysApply: false
 # PostHog analytics (frontend only)
 
 - **Location**: `apps/frontend/lib/analytics/` + `apps/frontend/app/_shell/analytics-shell.tsx` + `analytics-click-capture.tsx` (eager clicks, outside Suspense). Never import `posthog-js` or add analytics props/attributes in `packages/storybook`.
+- **Client context**: per-tab `client_window_id` and per-navigation `client_page_instance_id` (rotated on pathname change, not initial mount). Registered as super properties and merged into every `trackEvent`.
+- **New-tab clicks**: middle-click (`auxclick`, button 1), ctrl/cmd+click, and shift+click set `open_target: "new_tab"` on existing click event names. Right-click “open in new tab” is not capturable on the origin page.
+- **Mobile menu**: `nav_menu_toggled` with `menu_state: "open" | "close"` for the header hamburger/close buttons.
 - **Add an event**: call `trackEvent(ANALYTICS_EVENTS.eventName, { ... })` for imperative events (theme, etc.); use `analytics-shell-lifecycle.ts` helpers (`preparePageViewTracking`, `shouldTrackNotFoundView`, `shouldTrackErrorBoundary`) + `trackEvent` for page views, 404, and error boundaries (hash-aware dedupe); use `trackImpression()` for new impression events without lifecycle helpers; add a row to `event-registry.ts` for link/button clicks.
 - **Privacy**: `cookieless_mode: "always"`; never `identify()`; never put email, phone, or raw `mailto:`/`tel:` in properties — use `channel` instead.
 - **Env**: `NEXT_PUBLIC_POSTHOG_KEY` scoped to Vercel Production only; ingest via `/ingest` rewrites.

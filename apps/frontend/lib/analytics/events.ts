@@ -2,6 +2,7 @@
 export const ANALYTICS_EVENTS = {
   pageViewed: "page_viewed",
   navClicked: "nav_clicked",
+  navMenuToggled: "nav_menu_toggled",
   wordmarkClicked: "wordmark_clicked",
   footerLinkClicked: "footer_link_clicked",
   themeChanged: "theme_changed",

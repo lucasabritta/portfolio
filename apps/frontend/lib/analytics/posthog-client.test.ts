@@ -22,6 +22,13 @@ vi.mock("./query-params", () => ({
   })),
 }));
 
+vi.mock("./client-context", () => ({
+  getClientAnalyticsContext: vi.fn(() => ({
+    client_window_id: "window-test",
+    client_page_instance_id: "page-test",
+  })),
+}));
+
 import posthog from "posthog-js";
 
 import { captureEntryParams, getAnalyticsQueryProperties } from "./query-params";
@@ -58,6 +65,8 @@ describe("posthog-client", () => {
     expect(register).toHaveBeenCalledWith({
       utm_source: "test",
       entry_query: "utm_source=test",
+      client_window_id: "window-test",
+      client_page_instance_id: "page-test",
     });
     expect(init).toHaveBeenCalledWith(
       "phc_test",
@@ -103,6 +112,8 @@ describe("posthog-client", () => {
     expect(register).toHaveBeenCalledWith({
       utm_source: "test",
       entry_query: "utm_source=test",
+      client_window_id: "window-test",
+      client_page_instance_id: "page-test",
     });
   });
 
