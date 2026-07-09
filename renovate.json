@@ -15,8 +15,7 @@
     {
       "description": "Skip vestigial Vercel root shim; apps/frontend owns real deps",
       "matchManagers": ["npm"],
-      "matchFileNames": ["package.json"],
-      "matchPaths": ["^package.json$"],
+      "matchFileNames": ["^package.json$"],
       "enabled": false
     },
     {
