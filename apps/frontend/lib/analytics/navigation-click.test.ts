@@ -33,6 +33,106 @@ describe("handleCapturedNavigationClick", () => {
     expect(order).toEqual(["track", "push"]);
   });
 
+  it("tracks auxclick with open_target new_tab without intercepting navigation", () => {
+    const track = vi.fn();
+    const push = vi.fn();
+
+    document.body.innerHTML = `<header id="home-hero"><a href="/projects">View Projects</a></header>`;
+    const link = document.querySelector("#home-hero a")!;
+    const event = new MouseEvent("auxclick", {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      button: 1,
+    });
+    Object.defineProperty(event, "target", { value: link, enumerable: true });
+
+    handleCapturedNavigationClick(event, { track, push }, "/");
+
+    expect(track).toHaveBeenCalledWith(link, "/", { openTarget: "new_tab" });
+    expect(push).not.toHaveBeenCalled();
+  });
+
+  it("ignores right-click auxclick without tracking", () => {
+    const track = vi.fn();
+    const push = vi.fn();
+
+    document.body.innerHTML = `<header id="home-hero"><a href="/projects">View Projects</a></header>`;
+    const link = document.querySelector("#home-hero a")!;
+    const event = new MouseEvent("auxclick", {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      button: 2,
+    });
+    Object.defineProperty(event, "target", { value: link, enumerable: true });
+
+    handleCapturedNavigationClick(event, { track, push }, "/");
+
+    expect(track).not.toHaveBeenCalled();
+    expect(push).not.toHaveBeenCalled();
+  });
+
+  it("tracks shift+click with open_target new_tab", () => {
+    const track = vi.fn();
+    const push = vi.fn();
+
+    document.body.innerHTML = `<header id="home-hero"><a href="/projects">View Projects</a></header>`;
+    const link = document.querySelector("#home-hero a")!;
+    const event = new MouseEvent("click", {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      shiftKey: true,
+    });
+    Object.defineProperty(event, "target", { value: link, enumerable: true });
+
+    handleCapturedNavigationClick(event, { track, push }, "/");
+
+    expect(track).toHaveBeenCalledWith(link, "/", { openTarget: "new_tab" });
+    expect(push).not.toHaveBeenCalled();
+  });
+
+  it("tracks ctrl+click with open_target new_tab", () => {
+    const track = vi.fn();
+    const push = vi.fn();
+
+    document.body.innerHTML = `<header id="home-hero"><a href="/projects">View Projects</a></header>`;
+    const link = document.querySelector("#home-hero a")!;
+    const event = new MouseEvent("click", {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      ctrlKey: true,
+    });
+    Object.defineProperty(event, "target", { value: link, enumerable: true });
+
+    handleCapturedNavigationClick(event, { track, push }, "/");
+
+    expect(track).toHaveBeenCalledWith(link, "/", { openTarget: "new_tab" });
+    expect(push).not.toHaveBeenCalled();
+  });
+
+  it("tracks modifier left-clicks with open_target new_tab", () => {
+    const track = vi.fn();
+    const push = vi.fn();
+
+    document.body.innerHTML = `<header id="home-hero"><a href="/projects">View Projects</a></header>`;
+    const link = document.querySelector("#home-hero a")!;
+    const event = new MouseEvent("click", {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      metaKey: true,
+    });
+    Object.defineProperty(event, "target", { value: link, enumerable: true });
+
+    handleCapturedNavigationClick(event, { track, push }, "/");
+
+    expect(track).toHaveBeenCalledWith(link, "/", { openTarget: "new_tab" });
+    expect(push).not.toHaveBeenCalled();
+  });
+
   it("tracks CTA clicks without intercepting when there are no preserved params", () => {
     const track = vi.fn();
     const push = vi.fn();

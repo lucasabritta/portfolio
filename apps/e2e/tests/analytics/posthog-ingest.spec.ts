@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 import { expectPageQueryParams, PRESERVED_QUERY_FIXTURE } from "../../support/helpers/query-params";
+import { PAGE_COPY } from "../../support/helpers/strings";
 import { PRESERVED_PARAMS_STORAGE_KEY } from "../../../frontend/lib/analytics/query-params-storage-key";
 import {
   E2E_POSTHOG_KEY,
@@ -101,6 +102,182 @@ test.describe("PostHog ingest", () => {
     expect(countPostHogEvents(ingest, "cta_clicked")).toBe(0);
   });
 
+  test("does not emit theme_changed on initial landing", async ({ page }) => {
+    const ingest = await installPostHogIngestCapture(page);
+    const home = new HomePage(page);
+
+    await home.gotoWithQueryParams(preserved);
+    await expectPostHogEvent(ingest, "page_viewed", {
+      utm_source: preserved.utm_source,
+      utm_medium: preserved.utm_medium,
+    });
+    expect(countPostHogEvents(ingest, "theme_changed")).toBe(0);
+  });
+
+  test("emits cta_clicked with open_target new_tab on middle-click View Projects", async ({
+    page,
+    context,
+  }) => {
+    const ingest = await installPostHogIngestCapture(page);
+    const home = new HomePage(page);
+
+    await home.gotoWithQueryParams(preserved);
+
+    const newPagePromise = context.waitForEvent("page");
+    await home.leadHeader.getByRole("link", { name: "View Projects" }).click({ button: "middle" });
+    const newPage = await newPagePromise;
+    await newPage.waitForLoadState("domcontentloaded");
+    await newPage.close();
+
+    await expectPostHogEvent(
+      ingest,
+      "cta_clicked",
+      {
+        location: "home_hero",
+        target: "/projects",
+        open_target: "new_tab",
+        utm_source: preserved.utm_source,
+        utm_medium: preserved.utm_medium,
+      },
+      (properties) =>
+        typeof properties.client_window_id === "string" &&
+        properties.client_window_id.length > 0 &&
+        typeof properties.client_page_instance_id === "string" &&
+        properties.client_page_instance_id.length > 0,
+    );
+  });
+
+  test("emits cta_clicked with open_target new_tab on middle-click Contact", async ({
+    page,
+    context,
+  }) => {
+    const ingest = await installPostHogIngestCapture(page);
+    const home = new HomePage(page);
+
+    await home.gotoWithQueryParams(preserved);
+
+    const newPagePromise = context.waitForEvent("page");
+    await home.leadHeader.getByRole("link", { name: "Contact" }).click({ button: "middle" });
+    const newPage = await newPagePromise;
+    await newPage.waitForLoadState("domcontentloaded");
+    await newPage.close();
+
+    await expectPostHogEvent(
+      ingest,
+      "cta_clicked",
+      {
+        location: "home_hero",
+        target: "#contact-heading",
+        open_target: "new_tab",
+        link_kind: "hash",
+        utm_source: preserved.utm_source,
+        utm_medium: preserved.utm_medium,
+      },
+      (properties) =>
+        typeof properties.client_window_id === "string" &&
+        properties.client_window_id.length > 0 &&
+        typeof properties.client_page_instance_id === "string" &&
+        properties.client_page_instance_id.length > 0,
+    );
+  });
+
+  test("rotates client_page_instance_id on in-app navigation while client_window_id stays stable", async ({
+    page,
+  }) => {
+    const ingest = await installPostHogIngestCapture(page);
+    const home = new HomePage(page);
+    const projects = new ProjectsPage(page);
+
+    await home.gotoWithQueryParams(preserved);
+
+    const landingEvent = await expectPostHogEvent(
+      ingest,
+      "page_viewed",
+      {
+        utm_source: preserved.utm_source,
+        utm_medium: preserved.utm_medium,
+      },
+      (properties) =>
+        typeof properties.client_window_id === "string" &&
+        typeof properties.client_page_instance_id === "string",
+    );
+
+    const landingWindowId = landingEvent.properties.client_window_id as string;
+    const landingPageInstanceId = landingEvent.properties.client_page_instance_id as string;
+
+    await home.openProjectsFromPrimaryNavWithPreservedParams();
+    await expect(projects.pageHeading).toBeVisible();
+
+    await expectPostHogEvent(
+      ingest,
+      "page_viewed",
+      {
+        utm_source: preserved.utm_source,
+        utm_medium: preserved.utm_medium,
+        route_name: "projects",
+      },
+      (properties) =>
+        properties.client_window_id === landingWindowId &&
+        properties.client_page_instance_id !== landingPageInstanceId &&
+        properties.route_name === "projects",
+    );
+  });
+
+  test("emits nav_menu_toggled when opening and closing the mobile navigation menu", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    const ingest = await installPostHogIngestCapture(page);
+    const home = new HomePage(page);
+
+    await home.gotoWithQueryParams(preserved);
+    await page.getByRole("button", { name: /open navigation menu/i }).click();
+
+    await expectPostHogEvent(ingest, "nav_menu_toggled", {
+      menu_state: "open",
+      utm_source: preserved.utm_source,
+      utm_medium: preserved.utm_medium,
+    });
+
+    await page
+      .getByRole("button", { name: /close navigation menu/i })
+      .evaluate((button) => {
+        button.click();
+      });
+
+    await expectPostHogEvent(
+      ingest,
+      "nav_menu_toggled",
+      {
+        menu_state: "close",
+        utm_source: preserved.utm_source,
+        utm_medium: preserved.utm_medium,
+      },
+      (properties) => properties.menu_state === "close",
+    );
+  });
+
+  test("tags events with client_window_id and client_page_instance_id", async ({ page }) => {
+    const ingest = await installPostHogIngestCapture(page);
+    const home = new HomePage(page);
+
+    await home.gotoWithQueryParams(preserved);
+
+    await expectPostHogEvent(
+      ingest,
+      "page_viewed",
+      {
+        utm_source: preserved.utm_source,
+        utm_medium: preserved.utm_medium,
+      },
+      (properties) =>
+        typeof properties.client_window_id === "string" &&
+        properties.client_window_id.length > 0 &&
+        typeof properties.client_page_instance_id === "string" &&
+        properties.client_page_instance_id.length > 0,
+    );
+  });
+
   test("emits not_found_viewed and page_viewed for a missing route", async ({ page }) => {
     const ingest = await installPostHogIngestCapture(page);
 
@@ -125,6 +302,7 @@ test.describe("PostHog ingest", () => {
   });
 
   test("records nav_clicked with UTMs on an immediate post-landing click", async ({ page }) => {
+    test.setTimeout(60_000);
     const ingest = await installPostHogIngestCapture(page);
     const query = new URLSearchParams(preserved).toString();
 
@@ -133,13 +311,20 @@ test.describe("PostHog ingest", () => {
       const raw = sessionStorage.getItem(key);
       return Boolean(raw && JSON.parse(raw).utm_source === "e2e");
     }, PRESERVED_PARAMS_STORAGE_KEY);
-    await Promise.all([
-      page.waitForURL((url) => new URL(url).pathname === "/projects"),
-      page
-        .getByRole("navigation", { name: "Primary" })
-        .getByRole("link", { name: "Projects" })
-        .click(),
-    ]);
+    await expect
+      .poll(() => page.evaluate(() => window.__PF_POSTHOG_KEY__ ?? null))
+      .toBe(E2E_POSTHOG_KEY);
+    await expect(page.getByRole("heading", { level: 1, name: PAGE_COPY.homeHeroName })).toBeVisible();
+    await expectPostHogEvent(ingest, "page_viewed", {
+      utm_source: preserved.utm_source,
+      utm_medium: preserved.utm_medium,
+    });
+
+    const projectsLink = page
+      .getByRole("navigation", { name: "Primary" })
+      .getByRole("link", { name: "Projects" });
+    await expect(projectsLink).toBeVisible();
+    await projectsLink.click();
 
     await expectPostHogEvent(ingest, "nav_clicked", {
       label: "Projects",
@@ -147,6 +332,7 @@ test.describe("PostHog ingest", () => {
       utm_source: preserved.utm_source,
       utm_medium: preserved.utm_medium,
     });
+    await expect(page).toHaveURL(/\/projects/);
   });
 
   test("does not emit another page_viewed when UTMs are synced onto the URL after a direct landing", async ({

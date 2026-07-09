@@ -254,3 +254,24 @@ export function statusPageContext(): "not_found" | "error" | null {
   }
   return null;
 }
+
+/** Mobile header menu toggle button (hamburger / close). */
+export function resolveNavMenuToggle(element: Element): { menu_state: "open" | "close" } | null {
+  const button = element.closest("button");
+  if (!button) {
+    return null;
+  }
+
+  const label = button.getAttribute("aria-label") ?? "";
+  if (!/navigation menu/i.test(label)) {
+    return null;
+  }
+
+  if (!button.hasAttribute("aria-controls")) {
+    return null;
+  }
+
+  // Pre-click aria-expanded: false means the click will open the menu.
+  const expanded = button.getAttribute("aria-expanded") === "true";
+  return { menu_state: expanded ? "close" : "open" };
+}

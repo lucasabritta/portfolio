@@ -10,6 +10,7 @@ import {
   projectTitleSlugFromCard,
   repoNameFromHref,
   resolveLocation,
+  resolveNavMenuToggle,
   sanitizeTarget,
   statusPageContext,
 } from "./properties";
@@ -35,6 +36,14 @@ export function resolveClickEvent({ element, pathname, href }: ClickContext): Re
     return {
       event: ANALYTICS_EVENTS.wordmarkClicked,
       properties: { target: "/" },
+    };
+  }
+
+  const navMenuToggle = resolveNavMenuToggle(element);
+  if (navMenuToggle) {
+    return {
+      event: ANALYTICS_EVENTS.navMenuToggled,
+      properties: navMenuToggle,
     };
   }
 

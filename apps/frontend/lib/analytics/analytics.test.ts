@@ -147,6 +147,24 @@ describe("resolveClickEvent", () => {
     expect(resolved.properties.surface).toBe("header_desktop");
   });
 
+  it("maps mobile nav menu toggle buttons", () => {
+    document.body.innerHTML = `
+      <header>
+        <button type="button" aria-controls="mobile-nav" aria-expanded="true" aria-label="Close navigation menu">
+          Close
+        </button>
+      </header>
+    `;
+    const button = document.querySelector("button")!;
+    const resolved = resolveClickEvent({
+      element: button,
+      pathname: "/",
+      href: null,
+    });
+    expect(resolved.event).toBe("nav_menu_toggled");
+    expect(resolved.properties.menu_state).toBe("close");
+  });
+
   it("maps repo clicks on the projects page", () => {
     document.body.innerHTML = `
       <section aria-labelledby="repos-heading">

@@ -21,19 +21,21 @@ export function AnalyticsClickCapture(): ReactNode {
 
     initPostHog();
 
-    const listener = (event: MouseEvent) => {
-      handleCapturedNavigationClick(
-        event,
-        {
-          track: trackClickTarget,
-          push: (href) => router.push(href),
-        },
-        window.location.pathname,
-      );
+    const handlers = {
+      track: trackClickTarget,
+      push: (href: string) => router.push(href),
     };
 
-    document.addEventListener("click", listener, true);
-    return () => document.removeEventListener("click", listener, true);
+    const onPointerActivation = (event: MouseEvent) => {
+      handleCapturedNavigationClick(event, handlers, window.location.pathname);
+    };
+
+    document.addEventListener("click", onPointerActivation, true);
+    document.addEventListener("auxclick", onPointerActivation, true);
+    return () => {
+      document.removeEventListener("click", onPointerActivation, true);
+      document.removeEventListener("auxclick", onPointerActivation, true);
+    };
   }, [router]);
 
   return null;

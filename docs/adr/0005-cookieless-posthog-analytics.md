@@ -34,6 +34,8 @@ PostHog supports **cookieless mode** (`cookieless_mode: "always"`) with **Cookie
 - **Shell consolidation (2026)**: `AnalyticsShell` owns PostHog init registration, UTM URL sync, and pageview tracking behind Suspense; `AnalyticsClickCapture` mounts eagerly outside Suspense so fast post-landing clicks still preserve UTMs and record analytics.
 - **Impression dedupe**: `analytics-shell-lifecycle.ts` helpers (`preparePageViewTracking`, `shouldTrackNotFoundView`, `shouldTrackErrorBoundary`) plus `trackEvent()` dedupe `page_viewed`, `not_found_viewed`, and `error_boundary_shown` within a navigation epoch so React Strict Mode and remounts do not inflate counts; `trackImpression()` remains available for new impression events without lifecycle helpers.
 - **Hydration-safe UTMs**: internal href decoration for nav/CTA/status links happens post-mount via `usePreservedHrefDecorator()`; the inline bootstrap script intercepts clicks before hydration (using `location.assign` as a hard-nav fallback) while React navigation uses `router.push` after mount — both paths preserve UTMs without silencing React analytics listeners.
+- **Client context (2026)**: per-tab `client_window_id` and per-navigation `client_page_instance_id` super properties disambiguate concurrent tabs in cookieless sessions.
+- **New-tab click coverage**: middle-click (`auxclick`, button 1) and modifier clicks tag `open_target: "new_tab"` on existing click event names. Right-click “open in new tab” from the context menu is not capturable on the origin page (no DOM event).
 
 ## Related
 
