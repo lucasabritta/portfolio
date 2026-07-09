@@ -239,9 +239,11 @@ test.describe("PostHog ingest", () => {
       utm_medium: preserved.utm_medium,
     });
 
-    await page.getByRole("button", { name: /close navigation menu/i }).evaluate((button) => {
-      button.click();
-    });
+    await page
+      .getByRole("button", { name: /close navigation menu/i })
+      .evaluate((button: HTMLButtonElement) => {
+        button.click();
+      });
 
     await expectPostHogEvent(
       ingest,
