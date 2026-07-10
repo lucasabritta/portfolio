@@ -11,6 +11,7 @@ import {
   isAnalyticsEnabled,
   registerAnalyticsQueryProperties,
 } from "@/lib/analytics/posthog-client";
+import { consumePendingClickIntent } from "@/lib/analytics/pending-click-intent";
 import { captureEntryParams, syncPreservedParamsToCurrentUrl } from "@/lib/analytics/query-params";
 import { trackEvent } from "@/lib/analytics/track";
 
@@ -40,6 +41,10 @@ function AnalyticsShellEffects(): null {
     }
     previousPathnameRef.current = pathname;
     registerAnalyticsQueryProperties();
+    const pendingClickIntent = consumePendingClickIntent();
+    if (pendingClickIntent) {
+      trackEvent(pendingClickIntent.event, pendingClickIntent.properties);
+    }
     const synced = syncPreservedParamsToCurrentUrl();
     if (synced) {
       router.replace(synced, { scroll: false });

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { PENDING_CLICK_INTENT_STORAGE_KEY } from "./pending-click-intent";
 import { PRESERVED_PARAMS_STORAGE_KEY } from "./query-params-storage-key";
 import { queryParamsInlineBootstrapScript } from "./query-params-inline-script";
 
@@ -17,13 +18,17 @@ type TestSessionStorage = {
   setItem: (key: string, value: string) => void;
 };
 
+type TestAnchor = {
+  getAttribute: (name: string) => string | null;
+  target: string;
+  hasAttribute: (name: string) => boolean;
+  textContent: string;
+  closest: (selector: string) => TestAnchor | { id: string } | null;
+};
+
 type ClickCaptureEvent = {
   target: {
-    closest: (selector: string) => {
-      getAttribute: (name: string) => string | null;
-      target: string;
-      hasAttribute: (name: string) => boolean;
-    } | null;
+    closest: (selector: string) => TestAnchor | null;
   };
   button: number;
   defaultPrevented: boolean;
@@ -40,8 +45,9 @@ type TestDocument = {
 };
 
 describe("queryParamsInlineBootstrapScript", () => {
-  it("embeds the preserved params storage key", () => {
+  it("embeds the analytics storage keys", () => {
     expect(queryParamsInlineBootstrapScript()).toContain(PRESERVED_PARAMS_STORAGE_KEY);
+    expect(queryParamsInlineBootstrapScript()).toContain(PENDING_CLICK_INTENT_STORAGE_KEY);
   });
 
   it("persists only utm_* keys from the landing URL", () => {
@@ -117,11 +123,14 @@ describe("queryParamsInlineBootstrapScript", () => {
 
     run(location, sessionStorage, document);
 
-    const anchor = {
+    const hero = { id: "home-hero" };
+    const anchor: TestAnchor = {
       getAttribute: (name: string) =>
         name === "href" ? "/projects" : name === "rel" ? null : null,
       target: "",
       hasAttribute: () => false,
+      textContent: "View Projects",
+      closest: (selector: string) => (selector === "#home-hero" ? hero : null),
     };
     const target = {
       closest: (selector: string) => (selector === "a" ? anchor : null),
@@ -144,5 +153,17 @@ describe("queryParamsInlineBootstrapScript", () => {
 
     expect(prevented).toBe(true);
     expect(assigned).toBe("/projects?utm_source=e2e&utm_medium=test");
+    expect(JSON.parse(store.get(PENDING_CLICK_INTENT_STORAGE_KEY) ?? "{}")).toEqual({
+      event: "cta_clicked",
+      properties: {
+        label: "View Projects",
+        link_kind: "internal",
+        location: "home_hero",
+        source: "pre_hydration",
+        source_pathname: "/",
+        target: "/projects",
+      },
+      created_at: expect.any(Number),
+    });
   });
 });
