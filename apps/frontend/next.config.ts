@@ -9,12 +9,6 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return {
       beforeFiles: [
-        {
-          source: "/ingest/static/:path*",
-          destination: "https://eu-assets.i.posthog.com/static/:path*",
-        },
-        { source: "/ingest/decide", destination: "https://eu.i.posthog.com/decide" },
-        { source: "/ingest/:path*", destination: "https://eu.i.posthog.com/:path*" },
         { source: "/storybook", destination: "/storybook/index.html" },
         { source: "/storybook/", destination: "/storybook/index.html" },
       ],
