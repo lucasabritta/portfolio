@@ -20,7 +20,7 @@
     "@types/node": "^24",
     "eslint": "^9.39.4",
     "eslint-plugin-playwright": "^2.10.1",
-    "prettier": "3.9.1",
+    "prettier": "3.9.3",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.58.2"
   }
