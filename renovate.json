@@ -43,7 +43,7 @@
     },
     {
       "groupName": "vitest",
-      "matchPackageNames": ["vitest"]
+      "matchPackageNames": ["vitest", "/^@vitest//"]
     }
   ]
 }
