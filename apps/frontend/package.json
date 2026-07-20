@@ -30,7 +30,7 @@
     "@portfolio/storybook": "file:../../packages/storybook",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
-    "next": "16.2.9",
+    "next": "16.2.10",
     "posthog-js": "^1.379.0",
     "react": "19.2.7",
     "react-dom": "19.2.7"
@@ -43,7 +43,7 @@
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^10.0.0",
+    "eslint": "^9.39.4",
     "eslint-config-next": "16.2.10",
     "jsdom": "^24.1.3",
     "playwright": "^1.59.1",
