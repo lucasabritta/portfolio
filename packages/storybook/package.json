@@ -89,7 +89,7 @@
     "eslint": "^10.0.0",
     "next": "16.2.10",
     "playwright": "^1.59.1",
-    "prettier": "3.9.4",
+    "prettier": "3.9.5",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "storybook": "^10.3.5",
