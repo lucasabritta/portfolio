@@ -49,7 +49,6 @@
       "description": "Block TypeScript 7 until eslint + Next support it without experimental flags",
       "matchManagers": ["npm"],
       "matchPackageNames": ["typescript"],
-      "matchUpdateTypes": ["major"],
       "allowedVersions": "<7",
       "prBodyNotes": [
         "Deferred until TypeScript 7.1 ships a stable programmatic API, typescript-eslint widens its peer range, and Next.js supports TS7 on the default build path (no experimental flags). See renovate.json packageRules."
