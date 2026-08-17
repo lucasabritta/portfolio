@@ -1042,15 +1042,15 @@
     "@storybook/global" "^5.0.0"
     axe-core "^4.2.0"
 
-"@storybook/addon-docs@10.5.5":
-  version "10.5.5"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-docs/-/addon-docs-10.5.5.tgz#c679e9e68b19559bc5dee74c5a4670e95677c26f"
-  integrity sha512-0YpKlimS4XE0kQ8Maa5coeefQxdyDrBHg1wOP3WTPuBe4FolFSCDveR0ge2+vuUBk+fZfn2+l+3Q2jmAWaRGDg==
+"@storybook/addon-docs@10.5.6":
+  version "10.5.6"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-docs/-/addon-docs-10.5.6.tgz#445d4e0992a0862a22bffcea321ee2cb034846b5"
+  integrity sha512-zyUJBrrpC9NTrmsREaVFNr+9WW6pikJtmRvo7GgZGqthEyhjQKSarHrW0aNWkwae2ep3jp1CZi8vIUVG1Dnp0w==
   dependencies:
     "@mdx-js/react" "^3.0.0"
-    "@storybook/csf-plugin" "10.5.5"
+    "@storybook/csf-plugin" "10.5.6"
     "@storybook/icons" "^2.0.2"
-    "@storybook/react-dom-shim" "10.5.5"
+    "@storybook/react-dom-shim" "10.5.6"
     react "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
     react-dom "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
     ts-dedent "^2.0.0"
@@ -1070,13 +1070,6 @@
   dependencies:
     "@storybook/csf-plugin" "10.5.6"
     ts-dedent "^2.0.0"
-
-"@storybook/csf-plugin@10.5.5":
-  version "10.5.5"
-  resolved "https://registry.yarnpkg.com/@storybook/csf-plugin/-/csf-plugin-10.5.5.tgz#bae774f81987a0114f525d7e90a2b1e6ddf535ba"
-  integrity sha512-/euibhRFqklYCZqUseokojmfYcQpXshVY2QmA1qCuxMz9SzVFD3iSTw+aFLTxpsJGGdcZJk8fnm/rEthLzZ9jA==
-  dependencies:
-    unplugin "^2.3.5"
 
 "@storybook/csf-plugin@10.5.6":
   version "10.5.6"
@@ -1106,11 +1099,6 @@
     styled-jsx "5.1.6"
     vite-plugin-storybook-nextjs "^3.3.0"
 
-"@storybook/react-dom-shim@10.5.5":
-  version "10.5.5"
-  resolved "https://registry.yarnpkg.com/@storybook/react-dom-shim/-/react-dom-shim-10.5.5.tgz#d60aa45a1174b2b404305c0d932cb43854afadf7"
-  integrity sha512-PIk7N3LLrZIxfNxmkvmQN1d5UQ70XEedT8n0GhBiXnM6XL09xPGB8n8TZXeJBRYluKhDQcAyQeT0/OZmcDVQJg==
-
 "@storybook/react-dom-shim@10.5.6":
   version "10.5.6"
   resolved "https://registry.yarnpkg.com/@storybook/react-dom-shim/-/react-dom-shim-10.5.6.tgz#3685605c9dd27298fada7fef264801b2e7d62cbb"
@@ -1130,16 +1118,6 @@
     react-docgen "^8.0.2"
     resolve "^1.22.8"
     tsconfig-paths "^4.2.0"
-
-"@storybook/react@10.5.5":
-  version "10.5.5"
-  resolved "https://registry.yarnpkg.com/@storybook/react/-/react-10.5.5.tgz#ef97b5d12db03a4b9dcb1e178c3d6f1f8ed55401"
-  integrity sha512-T2Xj0ey7a9RHU6coYLC0L5lhjcdyhLCs9wNv15FvHvgmrRobkynEV72kq5vGW8tFkahNWI1X9+GZPQ6r8Nm38w==
-  dependencies:
-    "@storybook/global" "^5.0.0"
-    "@storybook/react-dom-shim" "10.5.5"
-    react-docgen "^8.0.2"
-    react-docgen-typescript "^2.2.2"
 
 "@storybook/react@10.5.6":
   version "10.5.6"
