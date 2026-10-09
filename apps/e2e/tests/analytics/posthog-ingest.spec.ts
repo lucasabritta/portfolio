@@ -9,11 +9,23 @@ import {
   expectPostHogEvent,
   expectPostHogIngestPost,
   installPostHogIngestCapture,
+  type IngestCaptureState,
 } from "../../support/helpers/posthog-ingest";
 import { HomePage } from "../../support/page-objects/home.page";
 import { ProjectsPage } from "../../support/page-objects/projects.page";
 
 const preserved = PRESERVED_QUERY_FIXTURE;
+
+/**
+ * The hero heading is server-rendered, so it is visible before hydration attaches the
+ * capture-phase click/auxclick listeners. The landing page_viewed fires after they exist.
+ */
+async function waitForAnalyticsHydration(ingest: IngestCaptureState): Promise<void> {
+  await expectPostHogEvent(ingest, "page_viewed", {
+    utm_source: preserved.utm_source,
+    utm_medium: preserved.utm_medium,
+  });
+}
 
 test.describe("PostHog ingest", () => {
   test("initializes with the e2e project key and POSTs to /ingest", async ({ page }) => {
@@ -75,6 +87,7 @@ test.describe("PostHog ingest", () => {
     const projects = new ProjectsPage(page);
 
     await home.gotoWithQueryParams(preserved);
+    await waitForAnalyticsHydration(ingest);
     await home.viewProjectsFromHero();
     await expect(projects.pageHeading).toBeVisible();
     await expectPageQueryParams(page, preserved);
@@ -92,6 +105,7 @@ test.describe("PostHog ingest", () => {
     const home = new HomePage(page);
 
     await home.gotoWithQueryParams(preserved);
+    await waitForAnalyticsHydration(ingest);
     await page.getByRole("button", { name: "Dark" }).first().click();
 
     await expectPostHogEvent(ingest, "theme_changed", {
@@ -122,6 +136,7 @@ test.describe("PostHog ingest", () => {
     const home = new HomePage(page);
 
     await home.gotoWithQueryParams(preserved);
+    await waitForAnalyticsHydration(ingest);
 
     const newPagePromise = context.waitForEvent("page");
     await home.leadHeader.getByRole("link", { name: "View Projects" }).click({ button: "middle" });
@@ -155,6 +170,7 @@ test.describe("PostHog ingest", () => {
     const home = new HomePage(page);
 
     await home.gotoWithQueryParams(preserved);
+    await waitForAnalyticsHydration(ingest);
 
     const newPagePromise = context.waitForEvent("page");
     await home.leadHeader.getByRole("link", { name: "Contact" }).click({ button: "middle" });
@@ -231,6 +247,7 @@ test.describe("PostHog ingest", () => {
     const home = new HomePage(page);
 
     await home.gotoWithQueryParams(preserved);
+    await waitForAnalyticsHydration(ingest);
     await page.getByRole("button", { name: /open navigation menu/i }).click();
 
     await expectPostHogEvent(ingest, "nav_menu_toggled", {
