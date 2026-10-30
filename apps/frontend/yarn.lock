@@ -1074,25 +1074,26 @@
   dependencies:
     clsx "^2.1.1"
 
-"@posthog/browser-common@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@posthog/browser-common/-/browser-common-0.2.0.tgz#2a7d16065c6c6daed1e98c54bf8d98d721824e18"
-  integrity sha512-w+/0/Be/x48uNM7d/M37ZimSGwhuh8WBSvx61xzKzFnuoV5HqmH7GNDhaM3E3exXoBZmWNPS8hM/Ufy8zoOQSg==
+"@posthog/browser-common@^0.10.2":
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/@posthog/browser-common/-/browser-common-0.10.2.tgz#e26ab8e768c638b18d9a32ac63fb1e5a19bf3b8b"
+  integrity sha512-ieHSMmY4xG+HfkMTrT9yZoG0NMBWyA4aXMFPCuOOV+xRe706+zoPuwqmNHXv7LGXfi6CvOv4qksEoPNWfP359Q==
   dependencies:
-    "@posthog/core" "^1.44.0"
-    "@posthog/types" "^1.397.1"
+    "@posthog/core" "^1.61.2"
+    "@posthog/types" "^1.418.0"
+    preact "^10.29.3"
 
-"@posthog/core@^1.44.0":
-  version "1.44.0"
-  resolved "https://registry.yarnpkg.com/@posthog/core/-/core-1.44.0.tgz#c6d247f35a0b5b999dfbb294f25fb3006d64d3a3"
-  integrity sha512-uE+mdKvetxNQC6gWQf4MHIH8bGt+JN6z7ho0A4G3t9G1VGQTx9wHYHNwkKf3gzi+1oAXS9ej2VVY4pjWUU2PWg==
+"@posthog/core@^1.61.2", "@posthog/core@^1.62.0":
+  version "1.62.0"
+  resolved "https://registry.yarnpkg.com/@posthog/core/-/core-1.62.0.tgz#5a2acaac901c8360bdda1e73d5703d4c07953aac"
+  integrity sha512-KjNwGC7s0141wnWWHubNMdg1lOhZjqKRw2OTNstuzdVvNDfvv2RbFJQSSvvABmbCmTXwlMpdnbb/M/aAigDnNQ==
   dependencies:
-    "@posthog/types" "^1.397.0"
+    "@posthog/types" "^1.418.0"
 
-"@posthog/types@^1.397.0", "@posthog/types@^1.397.1":
-  version "1.397.1"
-  resolved "https://registry.yarnpkg.com/@posthog/types/-/types-1.397.1.tgz#5b6217b3c24dce51e5512c6d2b3f32dd01cf9e20"
-  integrity sha512-W/LpWbKVaaUnfZKuFuHa+Dg03D+fC87cM+PQbG+59JcSPW8F0JcBtSoXmpfrqbpuxUToMo+gktutrUkAb/KQBw==
+"@posthog/types@^1.418.0", "@posthog/types@^1.419.0":
+  version "1.419.0"
+  resolved "https://registry.yarnpkg.com/@posthog/types/-/types-1.419.0.tgz#285d54a635584b38d800004e90fb18b439170fa8"
+  integrity sha512-XX7zRYt/vK8AzaD6V+oDquAzacZf5exJv971dja9En8Qf6g84Qvc3rpT0w6hDYYLWrjaSSkdjFfvvoXI0ouJDg==
 
 "@rolldown/binding-android-arm64@1.1.5":
   version "1.1.5"
@@ -2055,9 +2056,9 @@ convert-source-map@^2.0.0:
   integrity sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==
 
 core-js@^3.49.0:
-  version "3.49.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.49.0.tgz#8b4d520ac034311fa21aa616f017ada0e0dbbddd"
-  integrity sha512-es1U2+YTtzpwkxVLwAFdSpaIMyQaq0PBgm3YD1W3Qpsn1NAmO3KSgZfu+oGSWVu6NvLHoHCV/aYcsE5wiB7ALg==
+  version "3.51.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.51.0.tgz#9a7b197159ab83173b50efbe0c4846bec94b3abb"
+  integrity sha512-7bDKx/5jm5MxzsXxc93g6Z2+4ZsuT/MddrfRmTDJNAkWsYWHU8EVNEsBiIEWnMAMCHMmRfUEjkuo3jeNBOIHRw==
 
 cross-spawn@^7.0.6:
   version "7.0.6"
@@ -2218,10 +2219,10 @@ dom-accessibility-api@^0.6.3:
   resolved "https://registry.yarnpkg.com/dom-accessibility-api/-/dom-accessibility-api-0.6.3.tgz#993e925cc1d73f2c662e7d75dd5a5445259a8fd8"
   integrity sha512-7ZgogeTnjuHbo+ct10G9Ffp0mif17idi0IyWNVA/wcwcm7NPOD/WEHVP3n7n3MhXqxoIYm8d6MuZohYWIZ4T3w==
 
-dompurify@^3.3.2:
-  version "3.4.12"
-  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-3.4.12.tgz#6fa2265e9bbdce882c4ace4107626051b448ffa8"
-  integrity sha512-zQvGet8Z2sWbQhCmfFz/T5QWH2oBmjnqK3qvOjaqaNLrLEF912WamU+ohnTp0TCep/MFVHpdJuCZEdFOdTnEFg==
+dompurify@^3.4.13:
+  version "3.4.17"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-3.4.17.tgz#074bbb24eaa419535ac19ffe7f663104b0e1543d"
+  integrity sha512-B/pSlYVHQ58kqISD/yDjuJ1yfzI34m1gF4lAod2bwSRhiN4K5Cl3H8Af7hqB2PmTL911tdEudnnXn5FnhRoz0w==
   optionalDependencies:
     "@types/trusted-types" "^2.0.7"
 
@@ -3880,24 +3881,25 @@ postcss@^8.5.17:
     source-map-js "^1.2.1"
 
 posthog-js@^1.379.0:
-  version "1.406.2"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.406.2.tgz#1e24cce3d564610864e19aa76666012753b007d2"
-  integrity sha512-HNJO6Llro79s3x/ScxGY7i+Tf/o+ctJkOc79vrnS6R1I3TzucfzfwgAip1JVnQHnkBPV4JE8hI6nUXMJdU113Q==
+  version "1.444.0"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.444.0.tgz#4dee86d10aa3424a627b97770c219891f604b991"
+  integrity sha512-4m+QsAFi1h5Zt8eFq6ciJGD8bcLMt1P/O1cLlo26RrX5F4oMOIKZsNIlf1SIMZWlRNNCFemSpzn6HhwtkZMrnA==
   dependencies:
-    "@posthog/browser-common" "^0.2.0"
-    "@posthog/core" "^1.44.0"
-    "@posthog/types" "^1.397.1"
+    "@posthog/browser-common" "^0.10.2"
+    "@posthog/core" "^1.62.0"
+    "@posthog/types" "^1.419.0"
     core-js "^3.49.0"
-    dompurify "^3.3.2"
+    dompurify "^3.4.13"
     fflate "^0.4.8"
     preact "^10.29.3"
     query-selector-shadow-dom "^1.0.1"
-    web-vitals "^5.3.0"
+    web-vitals "^6.2.1"
+    web-vitals-soft-navs "npm:web-vitals@6.2.1"
 
 preact@^10.29.3:
-  version "10.29.7"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.29.7.tgz#b70df2eb06e982c7ac65b6df1541e5846ac0f6ba"
-  integrity sha512-DCHYrK/B10yUD3ZjLfhZ3WIE/9Vf9VFUODcRE2dRomTYDpJk6z6L9wecSfhfE6M9ZTHUdyQkoC46arIDhEV84Q==
+  version "10.29.8"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.29.8.tgz#fc85b82dc2474e245b1430b51781d417361f5fc3"
+  integrity sha512-ej2aVZ+vZ8WO7tvlQWRM9N63A0KzF9q4mWJfDUHgYaIofWY9hu74QdnQrjoPMmZi2/nZ5gN0bJCQF49xQqx09Q==
 
 prelude-ls@^1.2.1:
   version "1.2.1"
@@ -4698,10 +4700,15 @@ w3c-xmlserializer@^5.0.0:
   dependencies:
     xml-name-validator "^5.0.0"
 
-web-vitals@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-5.3.0.tgz#a67f57f229fdf68be99eb99d3725946def284ff3"
-  integrity sha512-q6LWsLatGYZp5VGBIOvbTj6JBV2nOmC8KvWztXBmwJcfFAzhwKwbOxhUH306XY3CcaZDUlSmSuNPBsCn0bFu+g==
+"web-vitals-soft-navs@npm:web-vitals@6.2.1":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-6.2.1.tgz#1a5c857ceffc8cc25d3977f91b05f2a37505353c"
+  integrity sha512-rLcLXA2sx6+9dE88NHFubwTtGxpK4yYBLj6qHPdFoCaLr0cXGb4efOqtKLlm4loGA4OEKHIQKMKzZkKyOh5ctw==
+
+web-vitals@^6.2.1:
+  version "6.2.3"
+  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-6.2.3.tgz#8581188b2a46875d04b9536ab06b352e3a0468b8"
+  integrity sha512-Dmy+vdO1UPMqXiAtZSNayhl4f794Bxfd94W4HIj2HlYtczEQfEOon969memlcpcHrTuOKLa5baFjX7WbgmOq+A==
 
 webidl-conversions@^8.0.1:
   version "8.0.1"
