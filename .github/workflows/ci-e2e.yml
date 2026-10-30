@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Build frontend docker image
-        run: docker compose build frontend
+        run: docker compose build --build-arg NODE_IMAGE=node:24.14.1-bookworm-slim frontend
 
       # Compose mounts empty named volumes over `apps/frontend/node_modules` and
       # `packages/storybook/node_modules`; populate them before any step that needs the Storybook CLI.
