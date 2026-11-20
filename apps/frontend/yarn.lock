@@ -712,7 +712,7 @@
   resolved "https://registry.yarnpkg.com/@keyv/serialize/-/serialize-1.1.1.tgz#0c01dd3a3483882af7cf3878d4e71d505c81fc4a"
   integrity sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==
 
-"@napi-rs/wasm-runtime@1.2.6", "@napi-rs/wasm-runtime@^1.1.4", "@napi-rs/wasm-runtime@^1.1.5":
+"@napi-rs/wasm-runtime@1.2.6":
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/@napi-rs/wasm-runtime/-/wasm-runtime-1.2.6.tgz#bc856c4ab60cd9c6c8e4432b5d6f50ceba0ca8f4"
   integrity sha512-mRyDmEw9/fCDXCGfL1sbgIw/GUK0PVxRW4YwgPN61F3LQ+fSyoBFarJVzgGyhF6kRzEQZ0FejDqm4WLXSeqQmw==
@@ -727,6 +727,13 @@
     "@emnapi/core" "^1.4.3"
     "@emnapi/runtime" "^1.4.3"
     "@tybys/wasm-util" "^0.10.0"
+
+"@napi-rs/wasm-runtime@^1.1.4", "@napi-rs/wasm-runtime@^1.1.5":
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/@napi-rs/wasm-runtime/-/wasm-runtime-1.2.7.tgz#8af2f08d9c9ef4fbbee90060dc6b5c1ca19e4739"
+  integrity sha512-zJccwplOAbgfZju95IUHazLnx9RAPtPN2YGJXI6UbrgeaR9QfPjGrQL6ERkSAtnVCA4Q+83ApGyaX5zdpCaKkQ==
+  dependencies:
+    "@tybys/wasm-util" "^0.10.3"
 
 "@next/env@16.4.2":
   version "16.4.2"
@@ -1315,9 +1322,9 @@
     "@babel/runtime" "^7.12.5"
 
 "@testing-library/user-event@^14.6.3":
-  version "14.6.8"
-  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-14.6.8.tgz#9433b5008d8aff4cdf60c177f5789ce32062b763"
-  integrity sha512-vgSSqnANMnkcYR/vUNDbwS7aM3OErRLNUG8vCVVlj4oc6cKffUrccX7UAS5AmJQQNZTSibi9z5GvvRZ0aYgUCQ==
+  version "14.6.13"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-14.6.13.tgz#00a33d2a57730090336f0d7cbd11aa72968c2a5a"
+  integrity sha512-2LVZGptuB5un1Cu/u31o9adkCwbsUTMp4B4p04xupI7uobvTIpgKidSdShqZiReo/mQmvR9xjgdgTgge4oAbYA==
 
 "@tybys/wasm-util@^0.10.0":
   version "0.10.1"
@@ -1334,9 +1341,9 @@
     tslib "^2.4.0"
 
 "@tybys/wasm-util@^0.10.3":
-  version "0.10.4"
-  resolved "https://registry.yarnpkg.com/@tybys/wasm-util/-/wasm-util-0.10.4.tgz#3e85ecb266f9d1722250e89bc69528615720b154"
-  integrity sha512-W3c4gRigFS0T/Ma4qIYF3GDAc5AQdHb1yL5znJT1Zv1YaD9Kitx656wBjvr19qbiosmZT8lWDM5BEMynUqX65A==
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/@tybys/wasm-util/-/wasm-util-0.10.5.tgz#b3404a492dfbd65ba1c41c6f0a21f5e2d19b9053"
+  integrity sha512-dOGOPxlaNV+G046mZzN+9C0dAcQZeSKcXiVaM0TYy/LM4ttTmgSBDxYfovcYI8Em3+eAbiAYpvWLOv8+ZVRJKA==
   dependencies:
     tslib "^2.4.0"
 
@@ -4061,7 +4068,12 @@ semver@^7.7.1:
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.7.4.tgz#28464e36060e991fa7a11d0279d2d3f3b57a7e8a"
   integrity sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA==
 
-semver@^7.7.3, semver@^7.8.5:
+semver@^7.7.3:
+  version "7.8.6"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.8.6.tgz#67c0cda133a3ceb6f70b803e67625bf969000424"
+  integrity sha512-9lpSSU4Mly3mrtruwLs1eLK6+gzbzqeBFwRNjIjE+9LuDpWdYctrQlQ3ej1Ilgi7gknpsTRnPoLP8DpCHqHIJw==
+
+semver@^7.8.5:
   version "7.8.5"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.8.5.tgz#39b646037dd50c14fb451e7e4cac58ed8b863f69"
   integrity sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==
@@ -4218,9 +4230,9 @@ stop-iteration-iterator@^1.1.0:
     internal-slot "^1.1.0"
 
 storybook@^10.3.5:
-  version "10.6.5"
-  resolved "https://registry.yarnpkg.com/storybook/-/storybook-10.6.5.tgz#9fc7e7de1275156f84d9055f6be98ade10c55b92"
-  integrity sha512-qurC38Nx4PDF9YIq6GO95dpUx8a3B9AZwlcHBo4cOI9At09ifjQRsqcwcdOf2YX0cpVhFKmHkI20SWCrxqYQrg==
+  version "10.6.8"
+  resolved "https://registry.yarnpkg.com/storybook/-/storybook-10.6.8.tgz#75c0de01b1a8c11037038e6bcd155b8268818290"
+  integrity sha512-evtpCo87LwamL5oMQJmtD0kaQNOBePOAbhW9WlM2zW5nItbtDHeXVBLJR4d3Wld9++XhPntaGJKE3RUw6c0VVg==
   dependencies:
     "@storybook/global" "^5.0.0"
     "@storybook/icons" "^2.0.2"
@@ -4714,9 +4726,9 @@ word-wrap@^1.2.5:
   integrity sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==
 
 ws@^8.21.1:
-  version "8.22.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.22.0.tgz#40f16e1d7588ac0575041be5c49b8eb261c28e73"
-  integrity sha512-Ydggc987+RO0AnWtZ/7Wq9FtNvcrL1b/RO0ud9mWjUPgDrsAAwQSF51sm2hm1XofbU/4jkpGEsLFsZZxU+1DOg==
+  version "8.23.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.23.0.tgz#e1af4314ad9d4cfde4684d08a9f09b322830e84e"
+  integrity sha512-wCkmX8QMOrKjgO8HW2WyDbTSGeqkocxgDzS9iR79rEAexty6/2qzilx3Ag8Tqf9ykop3irLKle0MtVn5qjVnoQ==
 
 wsl-utils@^0.1.0:
   version "0.1.0"
