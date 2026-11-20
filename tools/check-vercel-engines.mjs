@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 /** Vercel only honors major line in `engines.node`; patch pin: `.nvmrc` + Dockerfile. */
-const expectedVercelEngine = "24.x";
+const expectedVercelEngine = "26.x";
 const packagePaths = [
   "package.json",
   "apps/frontend/package.json",
@@ -30,10 +30,10 @@ for (const packagePath of packagePaths) {
 
 if (failures.length > 0) {
   console.error(
-    'Package engines.node must be "24.x" for Vercel (major line only, not patch).',
+    'Package engines.node must be "26.x" for Vercel (major line only, not patch).',
   );
   console.error(
-    "Keep patch alignment across .nvmrc and apps/frontend/Dockerfile; engines stay 24.x.",
+    "Keep patch alignment across .nvmrc and apps/frontend/Dockerfile; engines stay 26.x.",
   );
   for (const failure of failures) {
     console.error(`- ${failure}`);

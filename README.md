@@ -34,7 +34,7 @@ docker compose run --rm --service-ports frontend sh -lc "cd ../../packages/story
 
 ## Requirements
 
-- **Node.js** 24.22.3 (see `.nvmrc`, package `engines`, and the Docker image pin).
+- **Node.js** 26.13.1 (see `.nvmrc`, package `engines`, and the Docker image pin).
 - **Yarn** classic (v1) per package directory.
 
 ## Host install (without Docker)
