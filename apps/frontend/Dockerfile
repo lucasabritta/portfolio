@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG NODE_IMAGE=public.ecr.aws/docker/library/node:24.22.3-bookworm-slim
+ARG NODE_IMAGE=public.ecr.aws/docker/library/node:26.13.1-bookworm-slim
 
 FROM ${NODE_IMAGE} AS deps
 WORKDIR /workspace
@@ -8,7 +8,8 @@ ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 RUN apt-get update \
   && apt-get install -y --no-install-recommends ca-certificates \
   && rm -rf /var/lib/apt/lists/*
-RUN corepack enable && corepack prepare yarn@1.22.22 --activate
+# Node 25+ no longer bundles corepack; install it from npm.
+RUN npm install -g corepack@0.36.0 && corepack enable && corepack prepare yarn@1.22.22 --activate
 COPY apps/frontend/package.json ./apps/frontend/package.json
 COPY apps/frontend/yarn.lock ./apps/frontend/yarn.lock
 COPY packages/resume-content ./packages/resume-content
@@ -42,7 +43,8 @@ ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 RUN apt-get update \
   && apt-get install -y --no-install-recommends ca-certificates \
   && rm -rf /var/lib/apt/lists/*
-RUN corepack enable && corepack prepare yarn@1.22.22 --activate
+# Node 25+ no longer bundles corepack; install it from npm.
+RUN npm install -g corepack@0.36.0 && corepack enable && corepack prepare yarn@1.22.22 --activate
 COPY --from=deps /workspace/apps/frontend/node_modules ./apps/frontend/node_modules
 COPY . .
 COPY --from=deps /workspace/packages/storybook/node_modules ./packages/storybook/node_modules
